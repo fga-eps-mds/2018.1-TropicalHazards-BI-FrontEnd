@@ -10,7 +10,7 @@
 
 #### 2 - Garanta que o _network_ "20181tropicalhazardsbi_default" ja exista usando o comando:
 ``` bash
-$ 20181tropicalhazardsbi_default
+$ docker network ls 
 ```
 #### 2.1 - Caso o _network_ "20181tropicalhazardsbi_default" não apareça nessa lista siga o tutorial para instalar o [back-end](https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI)
 
