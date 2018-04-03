@@ -4,7 +4,6 @@
 
 ## Build Setup
 
-
 #### 1- Garanta que os seguintes programas ja estão instalados em seu computador
 [docker](https://docs.docker.com/install/) e [docker-compose](https://docs.docker.com/compose/install/#install-compose)
 
@@ -18,7 +17,7 @@ $ docker network ls
 ``` bash
 $ docker-compose up
 ```
-#### 3.1 - Derrube o serviço precionando "ctrl+c"
+##### 3.1 - Derrube o serviço precionando "ctrl+c"
 
 #### 4 - Altere a linha 211 do arquivo "node_modules/webpack-dev-server/bin/webpack-dev-server.js" para:
 ``` bash
