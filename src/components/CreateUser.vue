@@ -1,13 +1,17 @@
 <template>
   <div class="CreateUser">
-      <input type="text" v-model="input.username" placeholder="Username" />
-      <input type="text" v-model="input.password" placeholder="Password" />
-      <input type="text" v-model="input.email" placeholder="Email" />
+      <input type="text" v-model="input.firstname" placeholder="Username" />
+      <input type="text" v-model="input.lastname" placeholder="Password" />
+      <!-- <input type="text" v-model="input.email" placeholder="Email" /> -->
       <button v-on:click="sendData()">Send</button>
+      <button v-on:click="getData()">Get</button>
+
       <br />
       <br />
-      <textarea>{{ response }}</textarea>
-      <textarea>{{ users }} </textarea>
+
+      <textarea>{{ response_get }}</textarea>
+      <textarea>{{ response_post }}</textarea>
+      
   </div>
 </template>
 
@@ -17,32 +21,28 @@
         data () {
             return {
                 user: "",
-                users: [],
+                users:[],
                 input: {
-                    username: "",
-                    password: "",
-                    email: ""
+                    firstname: "",
+                    lastname: "",
+                    // email: ""
                 },
-                response: ""
+                response_get: "",
+                response_post:""  
             }
         },
-        mounted() {
-            this.$http.get("http://localhost:8000/users/2/", {headers: {
-              "Access-Control-Allow-Origin": "*"}}).then(response => {
-                this.user = response.text();
-            }, error => {
-                console.error(error);
-            });
-        },
-        created(){
-            this.$http.get('http://localhost:8000/users/2').then(res => {
-              this.users = res.body;
-            });
-        },
+        
         methods: {
             sendData() {
-              this.$http.post("https://localhost:8000/users", this.input, { headers: { "content-type": "application/json" } }).then(result => {
-                  this.response = result.data;
+              this.$http.post('https://httpbin.org/post', this.input, { headers: { "content-type": "application/json" } }).then(result => {
+                  this.response_post = result.data;
+                }, error => {
+                    console.error(error);
+                });
+            },
+              getData() {
+              this.$http.get('https://httpbin.org/ip', this.input, { headers: { "content-type": "application/json" } }).then(result => {
+                  this.response_get = result.data;
                 }, error => {
                     console.error(error);
                 });
