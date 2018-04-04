@@ -3,7 +3,7 @@ version: '2'
 services:
   th_bi-front:
     container_name: tropical-hazards-front
-    build: .
+    image: arthur0496/tropical-hazards-front:firsttry
     command: /bin/bash -lc "npm install && npm run dev"
     volumes:
       - .:/TropicalHazards-BI-FrontEnd

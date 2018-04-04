@@ -8,3 +8,5 @@ WORKDIR /TropicalHazards-BI-FrontEnd
 COPY . /TropicalHazards-BI-FrontEnd
 
 COPY package.json /package.json
+
+RUN npm install
