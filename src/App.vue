@@ -13,12 +13,12 @@
       </div>
 
       <div id="LocationMap">
-
-      <LocationMap></LocationMap>
-
+        <LocationMap></LocationMap>
       </div>
 
-    <h1>TROPICAL HAZARDS</h1>
+      <div id="Footer">
+        <Footer></Footer>
+      </div>
     <router-view/>
   </div>
 </template>
@@ -28,13 +28,15 @@ import Navbar from './components/Utils/Navbar'
 import Banner from './components/Utils/Banner'
 import CardsContent from './components/Utils/CardsContent'
 import LocationMap from './components/Utils/LocationMap'
+import Footer from './components/Utils/Footer'
 export default {
   name: 'App',
   components: {
     Navbar,
     Banner,
     CardsContent,
-    LocationMap
+    LocationMap,
+    Footer
   }
 }
 </script>
