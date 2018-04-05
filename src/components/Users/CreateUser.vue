@@ -5,23 +5,25 @@
       <input type="text" v-model="input.email" placeholder="Email" />
       <button v-on:click="sendData()">Send</button>
       <button v-on:click="getData()">Get</button>
+      <button v-on:click="deleteData()">delete</button>
 
       <br />
       <br />
 
-      <textarea>{{ response_get }}</textarea>
-      <textarea>{{ response_post }}</textarea>
-
+      <textarea >{{ response_get }}</textarea>
+      
   </div>
 </template>
 
 <script>
+
     export default {
         name: 'CreateUser',
+        components:{
+        },
         data () {
             return {
-                user: "",
-                users:[],
+
                 input: {
                     username: "",
                     password: "",
@@ -31,7 +33,6 @@
                 response_post:""
             }
         },
-
         methods: {
             sendData() {
               this.$http.post('http://localhost:8000/users/', this.input, { headers: { "content-type": "application/json" } }).then(result => {
@@ -46,10 +47,19 @@
                 }, error => {
                     console.error(error);
                 });
+            },
+              deleteData() {
+              this.$http.delete('http://localhost:8000/users/26', { headers: { "content-type": "application/json" } }).then(result => {
+                  this.response_get = result.data;
+                }, error => {
+                    console.error(error);
+                });
             }
+            
         }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 </style>
