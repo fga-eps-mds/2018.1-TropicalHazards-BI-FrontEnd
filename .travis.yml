@@ -1,0 +1,24 @@
+sudo: required
+
+group: deprecated-2017Q3
+
+services:
+  - docker
+
+language: node_js
+ 
+node_js:
+  - 9.11.1
+
+env:
+  global:
+    - CC_TEST_REPORTER_ID=f9a7cc51d41f847d9b5c91f469606222755355ec9ea001c6bd7a16d20f45941f
+
+before_script:
+  - docker-compose -f docker-compose.test.yml up -d
+
+script:
+  - docker exec -it tropical-hazards-front npm test
+
+after_script:
+  - docker-compose down --remove-orphans
