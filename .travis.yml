@@ -15,10 +15,12 @@ env:
     - CC_TEST_REPORTER_ID=f9a7cc51d41f847d9b5c91f469606222755355ec9ea001c6bd7a16d20f45941f
 
 before_script:
+  - npm install coveralls
   - docker-compose -f docker-compose.test.yml up -d
 
 script:
   - docker exec -it tropical-hazards-front npm test
 
 after_script:
+  - "./node_modules/coveralls/bin/coveralls.js < ./test/unit/coverage/lcov.info"
   - docker-compose down --remove-orphans
