@@ -7,14 +7,8 @@ services:
     command: /bin/bash -lc "npm install && npm run dev"
     volumes:
       - .:/TropicalHazards-BI-FrontEnd
-    external_links:
-      - 20181tropicalhazardsbi_default
     ports:
       - "8080:8080"
     networks:
       - default
-      - 20181tropicalhazardsbi_default
 
-networks:
-  20181tropicalhazardsbi_default:
-    external: true
