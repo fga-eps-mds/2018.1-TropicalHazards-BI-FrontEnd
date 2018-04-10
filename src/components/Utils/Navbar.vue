@@ -56,29 +56,6 @@
           </button>
         </form>
       </div>
-      <div class="row" id="linha">
-    <div class="col s12 m4">
-      <div class="card-panel light-green darken-4">
-        <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-        </span>
-      </div>
-    </div>
-    <div class="col s12 m4">
-      <div class="card-panel light-green darken-4">
-        <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-        </span>
-      </div>
-    </div>
-    <div class="col s12 m4">
-      <div class="card-panel light-green darken-4">
-        <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-        </span>
-      </div>
-    </div>
-  </div>
 </div>
   </header>
 </template>
@@ -103,15 +80,10 @@ p {
   letter-spacing: .1em;
   font-size: 1.1em;
 }
-.white-text{
-  font-size: 20px;
-}
+
 header .navbar,
 header {
   color: #efefef;
-}
-#linha{
-  margin-top: 25px;
 }
 
 header .container {
