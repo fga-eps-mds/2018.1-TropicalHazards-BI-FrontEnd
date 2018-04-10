@@ -1,43 +1,181 @@
 <template>
-  <nav class="navbarTropical">
-    <div class="nav-wrapper">
-      <a href="#/" class="brand-logo"><img src="../../assets/navImage.png"
-      id="navicon" alt="img"></a>
-      <ul id="nav-mobile" class="left">
-      <li class="black-text">Tropical Hazards</li>
+  <header class="parallax">
+    <div class="filter">
+      
+      <!-- 
+        navbar e o header aqui estão juntos por conta do efeito desejado
+      -->
+      <nav class="navbar">
+        <div class="nav-wrapper">
+          <a href="#/" class="brand-logo">
+            <span class="fa fa-eye"></span> OBSERV
+          </a>
+          <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <a href="#/login">
+              <li class="navbar-item">
+                <span class="fa fa-sign-in"></span> Login
+              </li>
+            </a>
+          </ul>
+        </div>
+      </nav>
+      <ul class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
+        <a href="#">
+          <li class="collection-item">
+            <span class="fa fa-sign-in"></span> Login
+          </li>
+        </a>
       </ul>
-      <ul id="nav-mobile" class="right">
-        <li><a href="#" class="black-text">Sobre</a></li>
-        <li><a href="#" class="black-text">Dashboard</a></li>
-        <li><a href="#" class="black-text">Contato</a></li>
-        <li><a href="#/projetos" class="black-text">Projetos</a></li>
-        <li><a href="#/login" class="black-text">Login</a></li>
-      </ul>
+      
+      
+      <div class="container center-align">
+        <h2>
+          Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito
+        </h2>
+        <p>
+          lorem ipsum dolor sit amet
+        </p>
+        <form action="" method="post">
+          <input type="text" placeholder="Procurar...">
+          <button type="submit" class="waves-effect waves-light btn-large cyan darken-2">
+            <span class="fa fa-search"></span>
+            Buscar
+          </button>
+        </form>
+      </div>
     </div>
-  </nav>
+  </header>
 </template>
 
 <script>
-
+$(document).ready(function () {
+  $('.sidenav').sidenav();
+});
 
 </script>
 
 <style>
-.navbarTropical{
-  background-color: #ffffff;
-  padding-bottom:none;
+body {
+  font-family: 'Oxygen', Arial, Helvetica, sans-serif;
 }
 
-#navicon{
- max-height: 60px;
+header {
+  height: 100vh;
 }
 
-#nav-mobile{
-  padding-left: 60px;
-  font-size:20px;
+p {
+  letter-spacing: .1em;
+  font-size: 1.1em;
 }
 
-.black{
-  font color:black;
+header .navbar,
+header {
+  color: #efefef;
+}
+
+header .container {
+  margin-top: 20vh;
+  margin-bottom: auto;
+}
+
+form,
+button[type='submit'] {
+  margin-top: 1em;
+}
+
+section {
+  padding-top: 6em;
+  padding-bottom: 6em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: .101em;
+  font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+
+footer .row {
+  margin-bottom: 0;
+}
+
+.parallax {
+  background-image: url('../../assets/laptop.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.filter {
+  background-color: rgba(10, 10, 10, .6);
+  height: 100%;
+}
+
+.card-content {
+  font-size: 1.5em;
+}
+
+.card-content .metric {
+  color: #42a5f5;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+#to-page-top-btn {
+  position: fixed;
+  right: .6em;
+  bottom: .6em;
+  padding: .7em 1em;
+  text-decoration: none;
+  background-color: rgba(10, 10, 10, .6);
+}
+
+#stats {
+  background-color: #ddd;
+}
+
+.navbar {
+  background-color: #2b4a6ef1;
+}
+
+#mobile-menu a,
+.collection-item {
+  font-size: 1.1em;
+  background-color: inherit !important;
+  color: inherit !important;
+}
+
+@media (min-width: 993px) {
+  .navbar {
+    padding: 1em;
+    background-color: transparent !important;
+    box-shadow: none;
+    color: black;
+  }
+
+  .navbar-item {
+    font-size: 1.2em;
+    padding-left: .7em;
+    padding-right:.7em;
+  }
+  
+  .navbar-item:hover {
+    background-color: rgba(200, 200, 200, .5);
+  }
+  
+  .navbar a {
+    color: inherit !important;
+  }
+
+  .parallax {
+    background-attachment: fixed;
+  }
+  
 }
 </style>

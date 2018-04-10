@@ -3,8 +3,8 @@
  <div id="app">
 
 
-      <div id="banner">
-        <banner></banner>
+      <div id="about">
+        <About></About>
         
       </div>   
        <router-view />
@@ -22,14 +22,14 @@
 </template>
 
 <script>
-import Banner from '@/components/Utils/Banner'
+import About from '@/components/Utils/About'
 import CardsContent from '@/components/Utils/CardsContent'
 import LocationMap from '@/components/Utils/LocationMap'
 export default {
   name: 'Homepage',
   components: {
     
-    Banner,
+    About,
     CardsContent,
     LocationMap
     
