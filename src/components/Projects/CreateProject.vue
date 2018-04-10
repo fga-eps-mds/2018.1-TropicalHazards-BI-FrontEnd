@@ -2,7 +2,6 @@
 <div class = "CreateProject">
   <div class="row">
     <div class ="col s12">    
-      <div class="row">      
           <div class="container center-align">
           <h1> Criar Projeto </h1>
           <input type="text" v-model="project.name" placeholder="Nome do projeto" />
@@ -11,7 +10,6 @@
          </div>         
         <br />
      </div>
-    </div>
   </div>
 </div>
 </template>
@@ -47,7 +45,7 @@
 <style>
 
 ::placeholder { /* Most modern browsers support this now. */
-   color:    #00C583;
+   color:    #132a71;
 }
 
 </style>

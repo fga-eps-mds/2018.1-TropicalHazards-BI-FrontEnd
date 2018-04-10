@@ -1,7 +1,6 @@
 <template>
   <header class="parallax">
-    <div class="filter">
-      
+    <div class="filter">    
       <!-- 
         navbar e o header aqui estão juntos por conta do efeito desejado
       -->
@@ -14,22 +13,33 @@
             <i class="material-icons">menu</i>
           </a>
           <ul class="right hide-on-med-and-down">
-            <a href="#/login">
+            <a href="#/login/">
               <li class="navbar-item">
                 <span class="fa fa-sign-in"></span> Login
+              </li>
+            </a>
+          </ul>
+          <ul class="right hide-on-med-and-down">
+            <a href="#/projetos/">
+              <li class="navbar-item">
+                <span class="fa fa-sign-in"></span> Projetos
               </li>
             </a>
           </ul>
         </div>
       </nav>
       <ul class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
-        <a href="#">
+        <a href="#/projetos/">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Login
           </li>
         </a>
-      </ul>
-      
+          <a href="#/projetos/">
+          <li class="collection-item">
+            <span class="fa fa-sign-in"></span> Projetos
+          </li>
+          </a>
+      </ul>     
       
       <div class="container center-align">
         <h2>
@@ -38,15 +48,38 @@
         <p>
           lorem ipsum dolor sit amet
         </p>
-        <form action="" method="post">
+        <form action="" method="">
           <input type="text" placeholder="Procurar...">
-          <button type="submit" class="waves-effect waves-light btn-large cyan darken-2">
+          <button type="submit" class="waves-effect waves-light btn-large indigo darken-4">
             <span class="fa fa-search"></span>
             Buscar
           </button>
         </form>
       </div>
+      <div class="row" id="linha">
+    <div class="col s12 m4">
+      <div class="card-panel light-green darken-4">
+        <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+        </span>
+      </div>
     </div>
+    <div class="col s12 m4">
+      <div class="card-panel light-green darken-4">
+        <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+        </span>
+      </div>
+    </div>
+    <div class="col s12 m4">
+      <div class="card-panel light-green darken-4">
+        <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
   </header>
 </template>
 
@@ -70,10 +103,15 @@ p {
   letter-spacing: .1em;
   font-size: 1.1em;
 }
-
+.white-text{
+  font-size: 20px;
+}
 header .navbar,
 header {
   color: #efefef;
+}
+#linha{
+  margin-top: 25px;
 }
 
 header .container {
@@ -101,12 +139,8 @@ h6 {
   font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
 }
 
-footer .row {
-  margin-bottom: 0;
-}
-
 .parallax {
-  background-image: url('../../assets/laptop.jpg');
+  background-image: url('../../assets/hands.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -166,7 +200,7 @@ footer .row {
   }
   
   .navbar-item:hover {
-    background-color: rgba(200, 200, 200, .5);
+    background-color: rgb(19, 42, 113);
   }
   
   .navbar a {
