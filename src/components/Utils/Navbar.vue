@@ -21,8 +21,17 @@
             </a>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
-            <p>Bem vindo {{ currentUser.name }}</p>
+            <li class="navbar-item">
+              Bem Vindo {{ currentUser.name }}
+            </li>
           </ul>
+          <ul class="right hide-on-med-and-down">
+            <a href="#/projetos/">
+              <li class="navbar-item">
+                <span class="fa fa-sign-in"></span> Projetos
+              </li>
+            </a>
+        </ul>
         </div>
       </nav>
       <ul class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">

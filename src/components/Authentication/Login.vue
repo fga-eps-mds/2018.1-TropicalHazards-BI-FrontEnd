@@ -1,5 +1,5 @@
 <template>
-<div class = "Login">
+<div class = "Login" id="#ancora">
 
   <div class="row">
     <div class ="col s12">
