@@ -10,11 +10,11 @@ export default class User {
     }
   }
 
-  constructor ({ userId, name, email, isStaff }) {
-    this.id = userId // eslint-disable-line camelcase
-    this.name = name
-    this.email = email
-    this.isStaff = isStaff
+  constructor (obj) {
+    this.id = obj.userId
+    this.name = obj.username
+    this.email = obj.email
+    this.Staff = obj.isStaff
   }
 
   get isStaff () {

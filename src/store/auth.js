@@ -1,15 +1,16 @@
 import User from './User.js'
-import * as MutationTypes from './MutationTypes'
+const LOGIN = 'LOGIN'
+const LOGOUT = 'LOGOUT'
 
 const state = {
   user: User.from(localStorage.token)
 }
 
 const mutations = {
-  [MutationTypes.LOGIN] (state) {
+  [LOGIN] (state) {
     state.user = User.from(localStorage.token)
   },
-  [MutationTypes.LOGOUT] (state) {
+  [LOGOUT] (state) {
     state.user = null
   }
 }
@@ -22,11 +23,11 @@ const getters = {
 
 const actions = {
   login ({ commit }) {
-    commit(MutationTypes.LOGIN)
+    commit(LOGIN)
   },
 
   logout ({ commit }) {
-    commit(MutationTypes.LOGOUT)
+    commit(LOGOUT)
   }
 }
 

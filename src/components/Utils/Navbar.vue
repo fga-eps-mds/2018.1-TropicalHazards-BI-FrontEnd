@@ -1,8 +1,8 @@
 <template>
   <header class="parallax">
     <div class="filter">
-      
-      <!-- 
+
+      <!--
         navbar e o header aqui estão juntos por conta do efeito desejado
       -->
       <nav class="navbar">
@@ -13,12 +13,15 @@
           <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
-          <ul class="right hide-on-med-and-down">
+          <ul v-if="!currentUser" class="right hide-on-med-and-down">
             <a href="#/login">
               <li class="navbar-item">
                 <span class="fa fa-sign-in"></span> Login
               </li>
             </a>
+          </ul>
+          <ul v-if="currentUser" class="right hide-on-med-and-down">
+            <p>Bem vindo {{ currentUser.name }}</p>
           </ul>
         </div>
       </nav>
@@ -29,8 +32,8 @@
           </li>
         </a>
       </ul>
-      
-      
+
+
       <div class="container center-align">
         <h2>
           Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito
@@ -54,6 +57,15 @@
 $(document).ready(function () {
   $('.sidenav').sidenav();
 });
+
+import {mapGetters} from 'vuex'
+
+export default {
+  name: 'Navbar',
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  }
+}
 
 </script>
 
@@ -164,11 +176,11 @@ footer .row {
     padding-left: .7em;
     padding-right:.7em;
   }
-  
+
   .navbar-item:hover {
     background-color: rgba(200, 200, 200, .5);
   }
-  
+
   .navbar a {
     color: inherit !important;
   }
@@ -176,6 +188,6 @@ footer .row {
   .parallax {
     background-attachment: fixed;
   }
-  
+
 }
 </style>
