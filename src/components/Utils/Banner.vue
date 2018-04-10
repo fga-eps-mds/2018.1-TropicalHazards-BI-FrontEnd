@@ -10,7 +10,7 @@
          </div>
        </div>
      </div>
-     <div class="parallax"><img src="https://i.imgur.com/fCGAJLg.png" style="transform: translate3d(-50%, 203.424px, 0px); opacity: 1;"></div>
+     <div class="parallax"><img src="https://images.clipartlogo.com/files/istock/previews/8762/87624571-geometric-blue-ice-texture-background.jpg" style="transform: translate3d(-50%, 203.424px, 0px); opacity: 1;"></div>
    </div>
 
 </template>
@@ -21,8 +21,5 @@
 </script>
 
 <style>
-
-
-
 
 </style>

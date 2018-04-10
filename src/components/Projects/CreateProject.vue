@@ -1,77 +1,53 @@
 <template>
 <div class = "CreateProject">
-
   <div class="row">
-    <div class ="col s12">
-    
-      <div class="row">
-      
-        <div class="col s12">
+    <div class ="col s12">    
+      <div class="row">      
+          <div class="container center-align">
           <h1> Criar Projeto </h1>
-            <h2> {{ token }}</h2>      
           <input type="text" v-model="project.name" placeholder="Nome do projeto" />
           <input type="text" v-model="project.description" placeholder="Descrição" />
-          <button v-on:click="PostProject()">Criar projeto</button>
-        </div>    
-          
-        <br />
+          <a v-on:click="PostProject()" class="waves-effect waves-light btn-large">Criar projeto</a>
+         </div>         
         <br />
      </div>
     </div>
   </div>
-
-  
 </div>
 </template>
 
 <script>
-export default {
+  export default {
   data(){
     name: 'CreateProject'
     return {
       project: {
         name: "",
         description: ""
-       
+        
       },
       projetos: "",
- 
+
     }
   },
   methods: {
     PostProject(){
       console.log("chegou aqui")
-      this.$http.post("http://localhost:8000/projects", this.project, { headers: { "content-type": "application/json" } }).then(result => {
-      this.token = result.data;
+      this.$http.post("http://localhost:8000/projects/", this.project, { headers: { "content-type": "application/json" } }).then(result => {
+      this.project = result.data;
       },
       error => {
           console.error(error);
       });
-      
-
-    },
-
-    GetProject(){
-      console.log("chegou aqui")
-      this.$http.get("http://localhost:8000/projects", this.project, { headers: { "content-type": "application/json" } }).then(result => {
-      this.token = result.data;
-      },
-      error => {
-          console.error(error);
-      });
-      
-    }
+    },     
   }
 }
-
-
 </script>
 
 <style>
 
-.row{
-  text-align: center;
+::placeholder { /* Most modern browsers support this now. */
+   color:    #00C583;
 }
-
 
 </style>
