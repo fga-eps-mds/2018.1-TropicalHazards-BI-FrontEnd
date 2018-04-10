@@ -11,7 +11,6 @@
 
           <input type="text" v-model="user.username" placeholder="Username" />
           <input type="password" v-model="user.password" placeholder="Password" />
-          <input type="text" v-model="user.email" placeholder="Email" />
           <a v-on:click="Login()" class="waves-effect  btn-large">Login</a>
           <b><p> Ainda não possui uma conta ? </p></b>
           <a class="waves-effect waves-light btn-large" href="#/register">Registrar</a>
@@ -34,7 +33,6 @@ export default {
     return {
       user: {
         username: "",
-        email: "",
         password: ""
       },
       token: "",
@@ -54,8 +52,9 @@ export default {
   methods: {
     // redireciona o user caso esteja logado
     CheckLogin(){
-      if(this.$store.currentUser) {
-        this.$router.replace(this.$route.query.redirect || '/')
+      console.log(this.currentUser)
+      if(this.currentUser) {
+        this.$router.replace('/')
       }
     },
     Login(){
@@ -77,6 +76,7 @@ export default {
       this.error = false
       localStorage.token = response.data.token
       this.$store.dispatch('login')//trigger da ação de login implementado em store/auth.js
+      this.$router.replace('/')
     },
     LoginFail(){
       this.error = 'Falha no Login!'
