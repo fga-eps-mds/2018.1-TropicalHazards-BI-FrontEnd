@@ -1,15 +1,37 @@
 <template>
-<div>
-    <div class="Login">
-        <h1> {{ token }}</h1>
-        <input type="text" v-model="user.username" placeholder="Username" />
-        <input type="text" v-model="user.password" placeholder="Password" />
-        <input type="text" v-model="user.email" placeholder="Email" />
-        <button v-on:click="Login()">Login</button>
-        <h1> {{ response }} </h1>
+<div class = "Login">
+
+  <div class="row">
+    <div class ="col s12">
+    
+      <div class="row">
+      
+        <div class="col s6">
+          <h1> LOGIN </h1>
+          <input type="text" v-model="user.username" placeholder="Username" />
+          <input type="text" v-model="user.password" placeholder="Password" />
+          <input type="text" v-model="user.email" placeholder="Email" />
+          <button v-on:click="Login()">Login</button>
+        </div>    
+
+          <div class="col s6">
+          <h1> REGISTRAR </h1>      
+          <input type="text" v-model="user.username" placeholder="Username" />
+          <input type="text" v-model="user.password" placeholder="Password" />
+          <input type="text" v-model="user.email" placeholder="Email" />
+          <button v-on:click="Register()">Registrar</button>
+        </div>  
+          
         <br />
         <br />
+
+        <p> {{ token }}</p>      
+
+     </div>
     </div>
+  </div>
+
+  
 </div>
 </template>
 
@@ -24,12 +46,6 @@ export default {
         password: ""
       },
       token: "",
-      response: "",
-      userget: {
-        username: "batata",
-        first_name: "",
-        last_name: ""
-      }
     }
   },
   methods: {
@@ -41,13 +57,24 @@ export default {
       error => {
           console.error(error);
       });
-      this.$http.get("http://localhost:8000/rest-auth/user/", this.userget, { headers: {"content-type": "application/json" } }).then(result =>{
+      this.$http.get("http://localhost:8000/rest-auth/user/", this.token, { headers: {"content-type": "application/json" } }).then(result =>{
       this.response = result.data;
       },
       error => {
           console.error(error);
       });
 
+    },
+
+    Register(){
+      console.log("chegou aqui")
+      this.$http.post("http://localhost:8000/users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.user = result.data;
+      },
+      error => {
+          console.error(error);
+      });
+      
     }
   }
 }
@@ -56,5 +83,20 @@ export default {
 </script>
 
 <style>
+
+input{
+  text-align:center;
+  display: block;
+}
+
+.Login{
+  text-align:center;
+}
+
+#opa{
+  text-align:center;
+}
+
+
 
 </style>

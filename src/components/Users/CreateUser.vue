@@ -47,15 +47,7 @@
                 }, error => {
                     console.error(error);
                 });
-            },
-              deleteData() {
-              this.$http.delete('http://localhost:8000/users/26', { headers: { "content-type": "application/json" } }).then(result => {
-                  this.response_get = result.data;
-                }, error => {
-                    console.error(error);
-                });
-            }
-            
+            },            
         }
     }
 </script>

@@ -10,7 +10,7 @@
         <li><a href="#">Sobre</a></li>
         <li><a href="#">Dashboard</a></li>
         <li><a href="#">Contato</a></li>
-        <li><a href="#">Projetos</a></li>
+        <li><a href="#/projetos">Projetos</a></li>
         <li><a href="#/login">Login</a></li>
       </ul>
 
