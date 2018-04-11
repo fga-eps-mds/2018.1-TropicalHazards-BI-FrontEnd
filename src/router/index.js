@@ -8,7 +8,7 @@ import Register from '@/components/Authentication/Register'
 import CreateProject from '@/components/Projects/CreateProject'
 import ListProject from '@/components/Projects/ListProject'
 import ProjectDetail from '@/components/Projects/ProjectDetail'
-
+import EditUser from '@/components/Users/EditUser'
 
 Vue.use(Router)
 
@@ -53,7 +53,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/edituser',
+      name: 'EditUser',
+      component: EditUser
     }
-
   ]
 })
