@@ -26,22 +26,33 @@
             </li>
           </ul>
           <ul class="right hide-on-med-and-down">
-            <a href="#/projetos/">
+            <a href="#/listprojet/">
               <li class="navbar-item">
-                <span class="fa fa-sign-in"></span> Projetos
+                <span class="fa fa-sign-in"></span> Ver Observatórios
               </li>
             </a>
         </ul>
         </div>
       </nav>
-      <ul class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
+      <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
         <a href="#">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Login
           </li>
         </a>
       </ul>
-
+      <ul v-if="currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
+        <a href="#">
+          <li class="collection-item">
+            <span class="fa fa-sign-in"></span> Bem vindo {{currentUser.name}}
+          </li>
+        </a>
+        <a href="#/projetos">
+          <li class="collection-item">
+            <span class="fa fa-sign-in"></span> Criar observatório
+          </li>
+        </a>
+      </ul>
 
       <div class="container center-align">
         <h2>
@@ -178,6 +189,7 @@ footer .row {
     background-color: transparent !important;
     box-shadow: none;
     color: black;
+    position: static;
   }
 
   .navbar-item {
@@ -195,7 +207,7 @@ footer .row {
   }
 
   .parallax {
-    background-attachment: fixed;
+    background-attachment: static;
   }
 
 }

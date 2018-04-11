@@ -25,7 +25,7 @@ import About from '@/components/Utils/About'
 import CardsContent from '@/components/Utils/CardsContent'
 import LocationMap from '@/components/Utils/LocationMap'
 export default {
-  name: 'Homepage',
+  name: 'LandingPage',
   components: {
     Navbar,
     About,
