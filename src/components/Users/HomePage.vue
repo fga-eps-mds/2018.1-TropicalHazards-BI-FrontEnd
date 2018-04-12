@@ -2,44 +2,9 @@
  <div id="app">
 
      <div class="row">
-    <div id="sidebar" class="hide-on-small-only col m1 center-align grey lighten-4">
-      <ul class="">
-        <a href="" class="">
-          <img src="https://via.placeholder.com/60x60" alt="" class="responsive-img" />
-        </a>
-        <a href="" class="sidebar-icon">
-          <li class="tooltipped" data-position="right" data-tooltip="Home">
-            <span class="fa fa-home"></span>
-          </li>
-        </a>
-        <a href="" class="sidebar-icon">
-          <li class="tooltipped" data-position="right" data-tooltip="Projetos">
-            <span class="fa fa-th"></span>
-          </li>
-        </a>
-        <a href="" class="sidebar-icon">
-          <li class="tooltipped"  data-position="right" data-tooltip="Observatórios">
-            <span class="fa fa-area-chart"></span>
-          </li>
-        </a>
-        <a href="" class="sidebar-icon">
-          <li class="tooltipped"  data-position="right" data-tooltip="Dados">
-            <span class="fa fa-cubes"></span>
-          </li>
-        </a>
-        <a href="" class="sidebar-icon">
-          <li class="tooltipped"  data-position="right" data-tooltip="Gerenciar perfil">
-            <span class="fa fa-gear"></span>
-          </li>
-        </a>
-        <a href="" class="sidebar-icon">
-          <li class="tooltipped" data-position="right" data-tooltip="Sair">
-            <span class="fa fa-sign-out"></span>
-          </li>
-        </a>
-      </ul>
-    </div>
-
+  <div id="SideBar">s
+    <side-bar></side-bar>
+  </div>
     <div id="content" class="col m11">
       <div class="header center-align white">
         <h3>
@@ -120,8 +85,13 @@
 </template>
 
 <script>
-export default {
 
+import SideBar from '../../components/Utils/SideBar'
+
+export default {
+  components: {
+    'side-bar': SideBar,
+  },
   data(){
     name: 'ListProject'
     return {
@@ -137,6 +107,7 @@ export default {
   },
 
   methods: {
+    
     getProject(){
       console.log("chegou aqui")
       this.$http.get("http://localhost:8000/projects/",  { headers: { "content-type": "application/json" } }).then(result => {
@@ -198,6 +169,9 @@ h6 {
 
 #content {
   padding: 0;
+  padding: 0;
+  float: right;
+  position: relative;
 }
 
 #content .header h3 {
@@ -208,8 +182,11 @@ h6 {
 #sidebar {
   height: 100vh;
   border-right: 1px solid #999;
-  position: static;
+  position: fixed;
   color: #333;
+  z-index: 9999;
+  top: 0;
+  left: 0;
 }
 
 </style>

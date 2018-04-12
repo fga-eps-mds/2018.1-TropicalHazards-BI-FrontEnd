@@ -32,6 +32,13 @@
               </li>
             </a>
         </ul>
+          <ul class="right hide-on-med-and-down">
+            <a href="#/home/">
+              <li class="navbar-item">
+                <span class="fa fa-sign-in"></span> Dashboard
+              </li>
+            </a>
+        </ul>
         </div>
       </nav>
       <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
@@ -50,6 +57,11 @@
         <a href="#/projetos">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Criar observatório
+          </li>
+        </a>
+        <a href="#/home">
+          <li class="collection-item">
+            <span class="fa fa-sign-in"></span> Dashboard
           </li>
         </a>
       </ul>

@@ -1,28 +1,19 @@
 <template>
-<div class = "ListProject">
-  <div class="row">     
+  <div class = "ListProject">
+    <div class="row">     
        <h1 style="text-align:center"> Projetos </h1>
-    <div class ="col s6">    
-            <ul class="collection">
-                <li v-for="projeto in projetos" class="collection-item avatar">
-                <span class="title"><a href="#/project/detail">{{ projeto.name }}</a></span>
-                <p>Descrição do projeto </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
+      <div class ="col s12">    
+        <ul class="collection">
+          <li v-for="projeto in projetos" class="collection-item avatar">
+            <span class="title"><a href="#/project/detail">{{ projeto.name }}</a></span>
+            <p>Descrição do projeto </p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
         </ul>
+      </div>
+     </div>         
     </div>
-    <div class ="col s6">    
-            <ul class="collection">
-                <li v-for="projeto in projetos" class="collection-item avatar">
-                <span class="title"><a href="#/project/detail">{{ projeto.name }}</a></span>
-                <p>Descrição do projeto </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
-        </ul>
-    </div>         
-        <br />
   </div>
-</div>
 </template>
 
 <script>

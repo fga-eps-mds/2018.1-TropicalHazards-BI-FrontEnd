@@ -37,7 +37,7 @@
 .page-footer{
   background-color:#1b1b1b;
   display: flex;
-  min-height: 50vh;
+  min-height: 30vh;
   flex-direction: column;
   flex: 1 0 auto;
 

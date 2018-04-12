@@ -19,6 +19,10 @@
      </div>
     </div>
   </div>
+
+
+
+
 </div>
 </template>
 
@@ -26,6 +30,7 @@
 
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
+
 
 export default {
   data(){
