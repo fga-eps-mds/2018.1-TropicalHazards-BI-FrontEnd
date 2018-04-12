@@ -128,7 +128,7 @@ export default {
       projects: {
         name: "",
         description: ""
-        
+
       },
       projetos: "",
       frase: '',
@@ -145,10 +145,10 @@ export default {
       error => {
           console.error(error);
       });
-    },  
+    },
 
-  },   
-  
+  },
+
   beforeMount(){
     this.getProject()
  },
@@ -181,6 +181,10 @@ h6 {
   margin-bottom: .5em;
 }
 
+.sidebar-icon a :hover {
+  background:rgba(0,0,0,0.5);
+}
+
 .card-title {
   font-weight: bold !important;
   color: #5252ff;
@@ -197,7 +201,10 @@ h6 {
 }
 
 #content {
+  height: 850px;
   padding: 0;
+  float: right;
+  position: relative;
 }
 
 #content .header h3 {
@@ -207,9 +214,19 @@ h6 {
 
 #sidebar {
   height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
   border-right: 1px solid #999;
-  position: static;
-  color: #333;
+  color:#333;
 }
+
+#footer {
+  height: 10vh;
+  position: relative;
+  bottom: 0;
+}
+
 
 </style>
