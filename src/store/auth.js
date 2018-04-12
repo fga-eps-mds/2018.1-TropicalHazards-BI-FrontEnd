@@ -1,6 +1,7 @@
 import User from './User.js'
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
+const UPDATE = 'UPDATE'
 
 const state = {
   user: User.from(localStorage.token)
@@ -12,6 +13,9 @@ const mutations = {
   },
   [LOGOUT] (state) {
     state.user = null
+  },
+  [UPDATE] (state) {
+    state.user = User.from(localStorage.token)
   }
 }
 
@@ -28,6 +32,9 @@ const actions = {
 
   logout ({ commit }) {
     commit(LOGOUT)
+  },
+  update ({ commit }) {
+    commit(UPDATE)
   }
 }
 

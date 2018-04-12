@@ -39,9 +39,6 @@ export default {
           password: "",
           email: ""
       },
-      headers: {
-        Authorization: 'JWT' + localStorage.token
-      },
       response_get: "",
       response_put:""
 
@@ -60,10 +57,30 @@ export default {
     },
     sendData (){
         console.log("chegou aqui carai")
-        this.$http.put('http://localhost:8000/rest-auth/user/', this.user, this.headers).then(result => {
-          response_put = result.data
-          console.log("porra")
-        })
+        this.$http.put('http://localhost:8000/users/' + this.currentUser.id + '/',
+                       this.user,
+                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+                         this.updateSucess(result)
+        },error => {
+          this.updateFail()
+        });
+    },
+    updateSucess(response){
+      if(!response.data){
+        this.updateFail()
+        return
+      }
+      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+        localStorage.token = result.data.token
+      })
+      window.confirm("USER ATUALIZADO")
+      this.$store.dispatch('update')
+      this.$router.push('/')
+
+    },
+    updateFail() {
+      window.confirm("Falha no Update")
+      this.$router.replace('/edituser')
     }
   },
   beforeMount(){
