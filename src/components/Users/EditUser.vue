@@ -77,10 +77,16 @@ export default {
     updateFail() {
       window.confirm("Falha no Update")
       this.$router.replace('/edituser')
+    },
+    testToken(){
+      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+      localStorage.token = result.data.token
+      })
     }
   },
   beforeMount(){
     this.loadUserInfo()
+    this.testToken()
   }
 }
 </script>
