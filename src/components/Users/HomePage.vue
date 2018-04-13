@@ -7,6 +7,11 @@
         <a href="" class="">
           <img src="https://via.placeholder.com/60x60" alt="" class="responsive-img" />
         </a>
+        <a href="#/home" class="">
+          <li class="">
+            <p> {{currentUser.name}}</p>
+          </li>
+        </a>
         <a href="" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Home">
             <span class="fa fa-home"></span>
@@ -35,6 +40,11 @@
         <a href="" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Sair">
             <span class="fa fa-sign-out"></span>
+          </li>
+        </a>
+        <a href="#/edituser" class="">
+          <li class="">
+            <p> Editar Perfil</p>
           </li>
         </a>
       </ul>
@@ -120,6 +130,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
 
   data(){
@@ -135,6 +147,9 @@ export default {
 
     }
   },
+   computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
 
   methods: {
     getProject(){
@@ -145,12 +160,18 @@ export default {
       error => {
           console.error(error);
       });
+    },
+    loadUserInfo (){
+      this.user.id = this.currentUser.id
+      this.user.username = this.currentUser.name
+      this.user.email = this.currentUser.email
     },  
 
   },   
   
   beforeMount(){
     this.getProject()
+    this.loadUserInfo()
  },
 
 }

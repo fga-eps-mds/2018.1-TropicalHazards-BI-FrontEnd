@@ -13,10 +13,6 @@
           <a v-on:click="sendData ()" class="waves-effect waves-light btn-large">Editar</a>
         </div>
 
-        <br />
-        <br />
-
-        <p> {{ response_put }}</p>
 
      </div>
     </div>
@@ -40,7 +36,6 @@ export default {
           email: ""
       },
       response_get: "",
-      response_put:""
 
     }
   },
@@ -75,7 +70,8 @@ export default {
       })
       window.confirm("USER ATUALIZADO")
       this.$store.dispatch('update')
-      this.$router.push('/')
+      this.$router.push('/home')
+      location.reload();
 
     },
     updateFail() {
