@@ -21,9 +21,11 @@
             </a>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
+            <a href="#/home">
             <li class="navbar-item">
               Bem Vindo {{ currentUser.name }}
             </li>
+            </a>
           </ul>
           <ul class="right hide-on-med-and-down">
             <a href="#/listprojet/">

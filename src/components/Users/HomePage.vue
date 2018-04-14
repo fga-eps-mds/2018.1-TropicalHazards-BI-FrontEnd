@@ -232,7 +232,7 @@ h6 {
 }
 
 #sidebar {
-  height: 100vh;
+  height: 150vh;
   border-right: 1px solid #999;
   position: static;
   color: #333;
