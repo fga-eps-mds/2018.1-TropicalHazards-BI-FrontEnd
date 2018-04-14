@@ -101,7 +101,7 @@
           <h5>
             Meus projetos
           </h5>
-          <a href="#" class="btn-flat blue lighten-1 grey-text text-lighten-2">
+          <a href="#/projetos" class="btn-flat blue lighten-1 grey-text text-lighten-2">
             Novo projeto <span class="fa fa-plus"></span>
           </a>
           <div class="row">
@@ -145,7 +145,7 @@ export default {
       projects: {
         name: "",
         description: ""
-        
+
       },
       projetos: "",
       frase: '',
@@ -170,10 +170,10 @@ export default {
       this.user.id = this.currentUser.id
       this.user.username = this.currentUser.name
       this.user.email = this.currentUser.email
-    },  
+    },
 
-  },   
-  
+  },
+
   beforeMount(){
     this.getProject()
     this.loadUserInfo()
