@@ -1,23 +1,27 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+    <router-view />
+      <div id="Footer">
+      <Footer></Footer>
+      </div>
+</div>
 </template>
 
 <script>
+import Navbar from '@/components/Utils/Navbar'
+import Footer from '@/components/Utils/Footer'
+import LocationMap from '@/components/Utils/LocationMap'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Navbar,
+    Footer,
+    LocationMap,
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
