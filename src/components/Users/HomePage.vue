@@ -47,6 +47,11 @@
             <p> Editar Perfil</p>
           </li>
         </a>
+        <a href="#/deleteuser" class="">
+          <li class="">
+            <p> Deletar Perfil</p>
+          </li>
+        </a>
       </ul>
     </div>
 

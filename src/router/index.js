@@ -4,11 +4,13 @@ import CreateUser from '@/components/Users/CreateUser'
 import HomePage from '@/components/Users/HomePage'
 import LandingPage from '@/components/Utils/LandingPage'
 import Login from '@/components/Authentication/Login'
+import Logout from '@/components/Authentication/Logout'
 import Register from '@/components/Authentication/Register'
 import CreateProject from '@/components/Projects/CreateProject'
 import ListProject from '@/components/Projects/ListProject'
 import ProjectDetail from '@/components/Projects/ProjectDetail'
 import EditUser from '@/components/Users/EditUser'
+import DeleteUser from '@/components/Users/DeleteUser'
 
 Vue.use(Router)
 
@@ -45,6 +47,11 @@ export default new Router({
       component: Login
     },
     {
+      path: '/logout',
+      name: 'Logout',
+      component: Logout
+    },
+    {
       path: '/projeto/detail',
       name: 'ProjectDetail',
       component: ProjectDetail
@@ -58,6 +65,11 @@ export default new Router({
       path: '/edituser',
       name: 'EditUser',
       component: EditUser
+    },
+    {
+      path: '/deleteUser',
+      name: 'DeleteUser',
+      component: DeleteUser
     }
   ]
 })
