@@ -13,8 +13,9 @@
           <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
+
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
-            <a href="#/login">
+            <a href="#login" class="modal-trigger">
               <li class="navbar-item">
                 <span class="fa fa-sign-in"></span> Login
               </li>
@@ -84,6 +85,7 @@
           </button>
         </form>
       </div>
+      <modal-login></modal-login>
     </div>
   </header>
 </template>
@@ -93,10 +95,22 @@ $(document).ready(function () {
   $('.sidenav').sidenav();
 });
 
+$(document).ready(function(){
+    $('.modal').modal();
+});
+
+$(document).ready(function(){
+    $('select').formSelect();
+});
+
+import modalLogin from '@/components/Modals/modalLogin'
 import {mapGetters} from 'vuex'
 
 export default {
   name: 'Navbar',
+  components: {
+    'modal-login': modalLogin
+  },
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   }
