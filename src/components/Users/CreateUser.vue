@@ -1,5 +1,6 @@
 <template>
-  <div class="CreateUser">
+  <div class="app">
+    <secondnav></secondnav>>
       <input type="text" v-model="input.username" placeholder="Username" />
       <input type="password" v-model="input.password" placeholder="Password" />
       <input type="text" v-model="input.email" placeholder="Email" />
@@ -8,14 +9,17 @@
       <button v-on:click="deleteData()">delete</button>
       <br />
       <br />
-      <textarea >{{ response_get }}</textarea>      
+      <textarea >{{ response_get }}</textarea>
   </div>
 </template>
 
 <script>
+import SecondNavBar from '@/components/Utils/SecondNavBar'
+
 export default {
 name: 'CreateUser',
-components:{
+components: {
+  'secondnav': SecondNavBar
 },
 data () {
     return {
@@ -43,7 +47,7 @@ methods: {
         }, error => {
             console.error(error);
         });
-    },            
+    },
     }
 }
 </script>

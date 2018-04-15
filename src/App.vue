@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <router-view />
-      <div id="Footer">
-      <Footer></Footer>
-      </div>
 </div>
 </template>
 
@@ -20,4 +17,75 @@ export default {
 
 <style>
 
+
+
+.page-footer{
+  background-color:#1b1b1b;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  position: absolute;
+  width: 100%;
+
+
+}
+.footer-copyright{
+  background-color:#242424;
+}
+
+a {
+  color: inherit !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: .5em;
+  margin: 0 !important;
+}
+
+.row {
+  max-width: 100%;
+}
+
+.sidebar-icon li {
+  font-size: 2em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.card-title {
+  font-weight: bold !important;
+  color: #5252ff;
+}
+
+.header {
+  border-bottom: 1px solid #999;
+}
+
+.custom-container {
+  max-width: 100%;
+  padding-right: 5%;
+  padding-left: 5%;
+}
+
+#content {
+  padding: 0;
+
+}
+
+#content .header h3 {
+  margin: 0;
+  padding: .3em;
+}
+
+#sidebar {
+  height: 100%;
+  border-right: 1px solid #999;
+  position: static;
+  color: #333;
+}
 </style>

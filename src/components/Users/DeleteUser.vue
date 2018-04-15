@@ -1,30 +1,29 @@
 <template>
-  <div class = "EditUser">
-
-  <div class="row">
-    <div class ="col s12">
-
-      <div class="row">
-          <div class="container center-align">
-          <h1> DELETAR USUÁRIO ? </h1>
-          <a v-on:click="sendData ()" class="waves-effect red btn-large">Deletar</a>
-        </div>
-
-
-     </div>
+  <div class = "app">
+  <secondnav></secondnav>
+    <div class="row">
+      <div class ="col s12">
+        <div class="row">
+            <div class="container center-align">
+            <h1> DELETAR USUÁRIO ? </h1>
+            <a v-on:click="sendData ()" class="waves-effect red btn-large">Deletar</a>
+          </div>
+      </div>
+      </div>
     </div>
-  </div>
-
-
 </div>
 
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import SecondNavBar from '@/components/Utils/SecondNavBar'
 
 export default {
-  name: 'EditUser',
+  name: 'DeleteUser',
+  components: {
+  'secondnav': SecondNavBar
+  },
   data () {
     return {
       user: {
@@ -36,8 +35,7 @@ export default {
 
     }
   },
-  components: {
-  },
+
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },

@@ -12,10 +12,7 @@
       <div id="cardsContent">
         <CardsContent> </CardsContent>
       </div>
-
-      <div id="LocationMap">
-        <LocationMap></LocationMap>
-      </div>
+      <landingfooter></landingfooter>
   </div>
 </template>
 
@@ -23,12 +20,14 @@
 import Navbar from '@/components/Utils/Navbar'
 import About from '@/components/Utils/About'
 import CardsContent from '@/components/Utils/CardsContent'
+import Footer from '@/components/Utils/Footer'
 export default {
   name: 'LandingPage',
   components: {
     Navbar,
     About,
-    CardsContent
+    CardsContent,
+    'landingfooter': Footer
   }
 }
 </script>
