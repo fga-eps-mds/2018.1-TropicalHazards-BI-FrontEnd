@@ -19,4 +19,4 @@ EXPOSE 8080
 
 RUN chmod +x start-prod.sh
 
-ENTRYPOINT ["./start-prod.sh"]
+CMD ["./start-prod.sh"]
