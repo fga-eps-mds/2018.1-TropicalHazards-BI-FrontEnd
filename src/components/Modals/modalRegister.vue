@@ -18,8 +18,10 @@
 
          <p style="color:black; text-align:center; line-height:20px;">
           Como visitante você tem acesso a funcionalidade de pesquisa de observatórios
-          e pode navegar entre estes observatórios.</p>
+          e pode navegar entre estes observatórios.
+        </p>
               <section class="modal-form">
+
               <form>
             <div class="input-field col s12">
             <input type="text" v-model="user.username" placeholder="Username" />
@@ -27,12 +29,14 @@
             <div class="input-field col s12">
             <input type="password" v-model="user.password" placeholder="Password" />
             </div>
-            <button v-on:click="Login()" id="entrar" type="submit" class="col s12 btn-large blue lighten-1 waves-effect waves-green">
+            <button v-on:click="Login()" type="submit" class="col s12 btn-large blue lighten-1 waves-effect waves-green">
               <span class="fa fa-sign-in"></span> Entrar
             </button>
           </form>
         </section>
-          <a class="waves-effect waves-light btn-large col s12" id="registrar" target="_blank" href="#/signup/">Registrar</a>
+        <button v-on:click="Login()" type="submit" class="col s12 btn-large green lighten-1 waves-effect waves-green">
+              <span class="fa fa-sign-in"></span> Registrar
+            </button>
         </div>
       </div>
     </div>
@@ -40,69 +44,30 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import JwtDecode from 'jwt-decode'
-
 export default {
-
-  data() {
-    name: 'modal'
+  data(){
+    name: 'Register'
     return {
       user: {
         username: "",
+        email: "",
         password: ""
       },
-      token: "",
-      name: "",
-      error: false
+      response: "",
     }
   },
-  computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
-  },
-  created () {
-    this.CheckLogin()
-  },
-  update () {
-    this.CheckLogin()
-  },
   methods: {
-    // redireciona o user caso esteja logado
-    CheckLogin(){
-      console.log(this.currentUser)
-      if(this.currentUser) {
-        this.$router.replace('/')
-      }
-    },
-    Login(){
-      this.$http.post("http://localhost:8000/rest-auth/login/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.token = JwtDecode(result.data.token)
-      this.name = this.token.isStaff
-      this.LoginSucess(result)
+    // metodo pra registrar usuário
+    Register(){
+      this.$http.post("http://localhost:8000/users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.user = result.data;
+      this.response = response.data;
       },
       error => {
-          this.LoginFail()
-          console.error(error)
+          console.error(error);
       });
-    },
-    LoginSucess(response){
-      if(!response.data.token){
-        this.loginFail()
-        return
-      }
-      this.error = false
-      localStorage.token = response.data.token
-      this.$store.dispatch('login')//trigger da ação de login implementado em store/auth.js
-      this.$router.replace('/home')
-    },
-    LoginFail(){
-      this.error = 'Falha no Login!'
-      this.$store.dispatch('logout')//trigger da ação de logout
-      delete localStorage.token
-    },
-    close() {
-        this.$emit('close');
-      }
+
+    }
   }
 }
 </script>
@@ -119,14 +84,7 @@ export default {
     z-index: 9999;
 
   }
-#registrar{
-  margin-top: 10px;
-  border-radius: 10px;
-}
-#entrar{
-  margin-bottom: 10px;
-  border-radius: 10px;
-}
+
   .modal {
     background: #FFFFFF;
     /* box-shadow: 2px 2px 20px 1px; */

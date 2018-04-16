@@ -35,7 +35,7 @@ import JwtDecode from 'jwt-decode'
       this.$http.post("http://localhost:8000/projects/",this.project, { headers: { 'Authorization': 'JWT ' + localStorage.token, "content-type": "application/json", "Authorization": "JWT" + localStorage.Token } }
                      ).then(result => {
       this.project = result.data;
-      window.confirm("Projeto criado com Sucesso")
+      window.alert("Projeto criado com Sucesso")
       this.$router.push('/home')
       CreateSucess (result)
       },

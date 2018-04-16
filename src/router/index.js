@@ -52,7 +52,7 @@ export default new Router({
       component: Logout
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'ProjectDetail',
       component: ProjectDetail
     },

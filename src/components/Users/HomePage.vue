@@ -54,11 +54,11 @@
                 <div class="card-content grey-text text-darken-2">
                   <span style="font-size:20px" class="card-title">{{ projeto.name }}</span>
                   <p>
-                    {{projeto.id}}
+                    {{projeto.description }}
                   </p>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                <router-link v-bind:to="'/detail/'+projeto.id">
+                <router-link v-bind:to="'/detail/'+projeto.id" >
                     <span class="fa fa-search"></span>
                 </router-link>
                   <a href="#" class="btn  blue lighten-1">

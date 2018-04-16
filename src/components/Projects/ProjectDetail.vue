@@ -90,9 +90,9 @@
             <div class="col s12 m4 l3">
               <div class="card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
-                  <span class="card-title">{{project.name}}</span>
+                  <span class="card-title">titulo</span>
                   <p>
-                    Observátório sobre os dados da dengue no ano de 2011
+                    {{projeto.id}}
                   </p>
                   <small>Criado por: Cleiton Jr.</small>
                 </div>
@@ -126,12 +126,14 @@ export default {
 
   data () {
     return {
-      project: {
-          id: "",
-          name: "",
-          description: ""
-      },
-      projetos: ""
+      project: {},
+      projeto: "",
+      user: {
+
+        name: "",
+        id: "",
+        email: ""
+      }
 
     }
   },
@@ -146,23 +148,21 @@ export default {
       this.user.email = this.currentUser.email
     },
     getProjectDetail (){
-        this.$http.get('http://localhost:8000/projects/' + this.project.id + '/',
-                       this.project,
+        this.$http.get('http://localhost:8000/projects/4/',
                        { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+        this.projeto = result.data
         },error => {
         });
     },
     getProject(){
       this.$http.get("http://localhost:8000/projects/",  { headers:
                     { "content-type": "application/json" } }).then(result => {
-      this.projetos = result.data;
+      this.project = result.data;
       },
       error => {
           console.error(error);
       });
     },
-
-
     testToken(){
       this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
       localStorage.token = result.data.token
@@ -184,8 +184,10 @@ export default {
     this.loadUserInfo()
     this.testToken()
     this.modalScript()
+  },
+  created () {
     this.getProject()
-
+    this.getProjectDetail ()
   }
 }
 </script>
