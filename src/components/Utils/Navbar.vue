@@ -14,12 +14,13 @@
             <i class="material-icons">menu</i>
           </a>
 
+
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
-            <a href="#login" class="modal-trigger">
-              <li class="navbar-item">
-                <span class="fa fa-sign-in"></span> Login
-              </li>
-            </a>
+                 <button type="button" class="btn" @click="showModal">
+      Login!
+    </button>
+
+    <modal v-show="isModalVisible" @close="closeModal"/>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <a href="#/logout/">
@@ -85,7 +86,6 @@
           </button>
         </form>
       </div>
-      <modal-login></modal-login>
     </div>
   </header>
 </template>
@@ -95,24 +95,34 @@ $(document).ready(function () {
   $('.sidenav').sidenav();
 });
 
-$(document).ready(function(){
-    $('.modal').modal();
-});
 
-$(document).ready(function(){
-    $('select').formSelect();
-});
 
-import modalLogin from '@/components/Modals/modalLogin'
 import {mapGetters} from 'vuex'
+import modal from '@/components/Modals/modal'
 
 export default {
   name: 'Navbar',
   components: {
-    'modal-login': modalLogin
+    modal
   },
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
+  },
+
+  data () {
+    return {
+
+    isModalVisible: false,
+
+    }
+  },
+  methods: {
+    showModal() {
+        this.isModalVisible = true;
+      },
+    closeModal() {
+        this.isModalVisible = false;
+      }
   }
 }
 

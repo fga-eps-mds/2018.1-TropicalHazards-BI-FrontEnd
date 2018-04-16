@@ -10,7 +10,20 @@
                 <p>Descrição do projeto </p>
             </li>
         </ul>
+        <button
+      type="button"
+      class="btn"
+      @click="showModal"
+    >
+      Open Modal!
+    </button>
+
+    <modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
     </div>
+
   </div>
 </div>
 </template>
@@ -19,11 +32,12 @@
 import ProjectDetail from '@/components/Projects/ProjectDetail'
 import SecondNavBar from '@/components/Utils/SecondNavBar'
 import {mapGetters} from 'vuex'
-
+import modal from '@/components/Modals/modal.vue';
   export default {
     components: {
     ProjectDetail,
-    'secondnav': SecondNavBar
+    'secondnav': SecondNavBar,
+     modal
   },
      computed: {
     ...mapGetters({ currentUser: 'currentUser' })
@@ -36,6 +50,7 @@ import {mapGetters} from 'vuex'
         description: ""
 
       },
+      isModalVisible: false,
       projetos: "",
       frase: '',
 
@@ -52,6 +67,12 @@ import {mapGetters} from 'vuex'
           console.error(error);
       });
     },
+    showModal() {
+        this.isModalVisible = true;
+      },
+    closeModal() {
+        this.isModalVisible = false;
+      }
 
   },
 
