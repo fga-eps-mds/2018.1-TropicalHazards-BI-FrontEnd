@@ -64,7 +64,6 @@ export default {
       }
   }
 }
-
 </script>
 <template>
   <transition name="modal-fade">

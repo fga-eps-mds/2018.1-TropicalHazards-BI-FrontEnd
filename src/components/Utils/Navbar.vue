@@ -23,7 +23,7 @@
     <modal v-show="isModalVisible" @close="closeModal"/>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
-            <a href="#/logout/">
+            <a v-on:click="Logout()">
               <li class="navbar-item">
                 <span class="fa fa-sign-out"></span> Logout
               </li>
@@ -71,14 +71,14 @@
         </a>
       </ul>
 
-      <div class="container center-align">
+      <div class="container center-align" id="teste">
         <h2>
           Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito
         </h2>
         <p>
           lorem ipsum dolor sit amet
         </p>
-        <form action="" method="post">
+        <form action="" method="post" class=" hide-on-med-and-down" >
           <input type="text" placeholder="Procurar...">
           <button type="submit" class="waves-effect waves-light btn-large cyan darken-2">
             <span class="fa fa-search"></span>
@@ -91,11 +91,6 @@
 </template>
 
 <script>
-$(document).ready(function () {
-  $('.sidenav').sidenav();
-});
-
-
 
 import {mapGetters} from 'vuex'
 import modal from '@/components/Modals/modal'
@@ -122,7 +117,31 @@ export default {
       },
     closeModal() {
         this.isModalVisible = false;
-      }
+      },
+
+      menuMobile (){
+        $(document).ready(function () {
+         $('.sidenav').sidenav();
+        });
+      },
+      Logout(){
+      this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.LogoutSucess(result)
+      },
+      error => {
+          this.LoginFail()
+          console.error(error)
+      });
+    },
+      LogoutSucess(response){
+        this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
+        delete localStorage.token
+        this.$router.replace('/')
+        },
+  },
+
+  beforeMount(){
+    this.menuMobile()
   }
 }
 
@@ -207,6 +226,7 @@ footer .row {
   background-color: rgba(10, 10, 10, .6);
 }
 
+
 #stats {
   background-color: #ddd;
 }
@@ -248,6 +268,7 @@ footer .row {
   .parallax {
     background-attachment: static;
   }
+
 
 }
 </style>
