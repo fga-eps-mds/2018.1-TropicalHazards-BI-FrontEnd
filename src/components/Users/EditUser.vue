@@ -1,24 +1,18 @@
 <template>
-  <div class = "EditUser">
-
+<div class = "EditUser">
   <div class="row">
     <div class ="col s12">
-
       <div class="row">
           <div class="container center-align">
           <h1> EDITAR USUÁRIO </h1>
           <input type="text" v-model="user.username" />
           <input type="password" v-model="user.password"   />
           <input type="text" v-model="user.email" placeholder="Email" />
-          <a v-on:click="sendData ()" class="waves-effect waves-light btn-large">Editar</a>
+          <a v-on:click="sendData ()" class="model-close waves-effect waves-light btn-large">Editar</a>
         </div>
-
-
      </div>
     </div>
   </div>
-
-
 </div>
 
 </template>
@@ -68,14 +62,15 @@ export default {
       this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
         localStorage.token = result.data.token
       })
-      window.confirm("USER ATUALIZADO")
+
+      window.confirm("Usuário atualizado")
       this.$store.dispatch('update')
       this.$router.push('/home')
       location.reload();
 
     },
     updateFail() {
-      window.confirm("Falha no Update")
+      window.alert("Falha no Update")
       this.$router.replace('/edituser')
     },
     testToken(){

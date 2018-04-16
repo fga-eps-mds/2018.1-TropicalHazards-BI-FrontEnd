@@ -1,7 +1,7 @@
 <template>
  <div id="app ">
   <div class="row grey lighten-4">
-      <sidebar></sidebar>
+    <sidebar></sidebar>
     <div id="content" class="col m11" >
       <div class="header center-align white">
         <h3>
@@ -54,13 +54,13 @@
                 <div class="card-content grey-text text-darken-2">
                   <span style="font-size:20px" class="card-title">{{ projeto.name }}</span>
                   <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    {{projeto.id}}
                   </p>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="#" class="btn  blue lighten-1">
+                <router-link v-bind:to="'/detail/'+projeto.id">
                     <span class="fa fa-search"></span>
-                  </a>
+                </router-link>
                   <a href="#" class="btn  blue lighten-1">
                     <span class="fa fa-edit"></span>
                   </a>

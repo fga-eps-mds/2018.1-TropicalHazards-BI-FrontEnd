@@ -73,7 +73,7 @@ export default {
       this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
         localStorage.token = result.data.token
       })
-      window.confirm("USER ATUALIZADO")
+      window.alert("Usuário atualizado")
       this.$store.dispatch('update')
       this.$router.push('/home')
       location.reload();

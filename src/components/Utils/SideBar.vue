@@ -57,7 +57,8 @@
 
         <hr>
       </ul>
-<modal2></modal2>
+<modal-edit-user></modal-edit-user>
+<modal-new-proj></modal-new-proj>
    </div>
 
 
@@ -71,8 +72,8 @@ import modalEditUser from '@/components/Modals/modalEditUser'
 
 export default {
     components: {
-    'modal': modalNewProject,
-    'modal2': modalEditUser
+    'modal-new-proj': modalNewProject,
+    'modal-edit-user': modalEditUser
 },
     data () {
       return {
