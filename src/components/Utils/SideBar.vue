@@ -44,7 +44,7 @@
             <p> Editar Perfil</p>
           </li>
         </a>
-        <a href="#/deleteuser" class="">
+        <a href="#delete-user" class="modal-trigger">
           <li class="">
             <p> Deletar Perfil</p>
           </li>
@@ -58,6 +58,7 @@
         <hr>
       </ul>
 <modal-edit-user></modal-edit-user>
+<modal-delete-user></modal-delete-user>
 <modal-new-proj></modal-new-proj>
    </div>
 
@@ -69,11 +70,13 @@
 import {mapGetters} from 'vuex'
 import modalNewProject from '@/components/Modals/modalNewProject'
 import modalEditUser from '@/components/Modals/modalEditUser'
+import DeleteUser from '@/components/Users/DeleteUser'
 
 export default {
     components: {
     'modal-new-proj': modalNewProject,
-    'modal-edit-user': modalEditUser
+    'modal-edit-user': modalEditUser,
+    'modal-delete-user': DeleteUser
 },
     data () {
       return {

@@ -56,9 +56,9 @@
                   <a href="observatory.html" class="btn  blue lighten-1">
                     <span class="fa fa-search"></span>
                   </a>
-                  <!-- <a href="#" class="btn  blue lighten-1">
-                    <span class="fa fa-edit"></span>
-                  </a> -->
+                  <a href="#" class="btn red">
+                    <span class="fa fa-remove"></span>
+                  </a>
                   <!-- <a href="#" class="btn  blue lighten-1">
                     <span class="fa fa-user-plus"></span>
                   </a> -->
@@ -78,12 +78,12 @@
                   <a href="observatory.html" class="btn  blue lighten-1">
                     <span class="fa fa-search"></span>
                   </a>
-                  <!-- <a href="#" class="btn  blue lighten-1">
-                    <span class="fa fa-edit"></span>
+                 <a href="#" class="btn red">
+                    <span class="fa fa-remove"></span>
                   </a>
-                  <a href="#" class="btn  blue lighten-1">
-                    <span class="fa fa-user-plus"></span>
-                  </a> -->
+                  <!-- <a href="#" class="btn  blue lighten-1"> -->
+                    <!-- <span class="fa fa-user-plus"></span> -->
+                  <!-- </a> -->
                 </div>
               </div>
             </div>
@@ -92,7 +92,7 @@
                 <div class="card-content grey-text text-darken-2">
                   <span class="card-title">titulo</span>
                   <p>
-                    {{projeto.id}}
+                    Lorem impsum Lorem impsum Lorem impsum
                   </p>
                   <small>Criado por: Cleiton Jr.</small>
                 </div>
@@ -100,9 +100,9 @@
                   <a href="observatory.html" class="btn  blue lighten-1">
                     <span class="fa fa-search"></span>
                   </a>
-                  <!-- <a href="#" class="btn  blue lighten-1">
-                    <span class="fa fa-user-plus"></span>
-                  </a> -->
+                  <a href="#delete-user" class="modal-trigger btn red">
+                    <span class="fa fa-remove"></span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -111,17 +111,20 @@
       </div>
     </div>
   </div>
+  <modal-delete-project></modal-delete-project>
 </div>
 </template>
 
 <script>
 import SideBar from '@/components/Utils/SideBar'
+import modalDeleteProject from '@/components/Modals/modalDeleteProject'
 import {mapGetters} from 'vuex'
 
 export default {
   name: 'ProjectDetail',
   components: {
-    'sidebar': SideBar
+    'sidebar': SideBar,
+    'modal-delete-project': modalDeleteProject
   },
 
   data () {

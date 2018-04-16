@@ -134,6 +134,7 @@ export default {
     display: flex;
     flex-direction: column;
     position: fixed;
+    border-radius: 20px;
   }
 
   .modal-header,

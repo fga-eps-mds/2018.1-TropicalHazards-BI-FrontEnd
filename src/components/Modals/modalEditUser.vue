@@ -1,32 +1,32 @@
 <template>
 <div id="edit-user" class="modal grey lighten-4">
-              <div class="modal-content container center-align">
-                <div class="row">
-                  <img src="../../assets/v3_rect.png" class="img-responsive">
-                  <h4>
-                    Editar Perfil
-                  </h4>
-                  <section class="modal-form">
-                    <form>
-                      <div class="input-field col s12">
-                        <input v-model="user.username" type="text" id="name" class="validate">
-                      </div>
-                      <div class="input-field col s12">
-                        <input v-model="user.email"  type="email" id="email" class="validate">
-                        <label for="email">E-mail</label>
-                      </div>
-                      <div class="input-field col s12">
-                        <input v-model="user.password" type="password" id="password" class="validate">
-                        <label for="password">Nova senha</label>
-                      </div>
-                      <button v-on:click="sendData ()" type="submit" class="model-close col s12 btn-large blue lighten-1 waves-effect waves-green">
-                        <span class="fa fa-sign-in"></span> Enviar
-                      </button>
-                    </form>
-                  </section>
-                </div>
-              </div>
-            </div>
+  <div class="modal-content container center-align">
+    <div class="row">
+      <img src="../../assets/v3_rect.png" class="img-responsive">
+      <h4>
+        Editar Perfil
+      </h4>
+      <section class="modal-form">
+        <form>
+          <div class="input-field col s12">
+            <input v-model="user.username" type="text" id="name" class="validate">
+          </div>
+          <div class="input-field col s12">
+            <input v-model="user.email"  type="email" id="email" class="validate">
+            <label for="email">E-mail</label>
+          </div>
+          <div class="input-field col s12">
+            <input v-model="user.password" type="password" id="password" class="validate">
+            <label for="password">Nova senha</label>
+          </div>
+          <button v-on:click="sendData ()" type="submit" class="model-close col s12 btn-large blue lighten-1 waves-effect waves-green">
+            <span class="fa fa-sign-in"></span> Enviar
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>

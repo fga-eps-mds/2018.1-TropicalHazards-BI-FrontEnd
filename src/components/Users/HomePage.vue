@@ -46,26 +46,26 @@
         </div>
         <div class="custom-container">
           <h5>
-            Meus projetos
+            Projetos
           </h5>
           <div class="row">
             <div v-for="projeto in projetos" class="col s12 m4 l3">
               <div class="card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
                   <span style="font-size:20px" class="card-title">{{ projeto.name }}</span>
-                  <p>
-                    {{projeto.description }}
-                  </p>
+                    <p> Descrição: {{projeto.description }} </p>
+                    <p> IdProjeto: {{projeto.id }} </p>
+                    <p> IdUser: {{projeto.user }} </p>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                <router-link v-bind:to="'/detail/'+projeto.id" >
+                <router-link class="btn  blue lighten-1" v-bind:to="'/detail/'+projeto.id" >
                     <span class="fa fa-search"></span>
                 </router-link>
                   <a href="#" class="btn  blue lighten-1">
                     <span class="fa fa-edit"></span>
                   </a>
-                  <a href="#" class="btn  blue lighten-1">
-                    <span class="fa fa-user-plus"></span>
+                  <a href="#delete-user" class="modal-trigger btn red">
+                    <span class="fa fa-remove"></span>
                   </a>
                 </div>
               </div>
@@ -74,6 +74,25 @@
         </div>
       </div>
     </div>
+  </div>
+<div id="delete-user" class="modal grey lighten-4">
+  <div class="modal-content container center-align">
+    <div class="row">
+      <h4>
+        Deletar Projeto ?
+      </h4>
+        <div class="col s6">
+          <button v-on:click="deleteProject()" type="submit" class="model-close col s12 btn-large red lighten-1 waves-effect waves-green">
+            <span class="fa fa-trash"></span> Sim
+          </button>
+        </div>
+        <div class="col s6">
+          <button v-on:click="modalScript()" type="submit" class="model-close col s12 btn-large blue lighten-1 waves-effect waves-green">
+            <span class="fa fa-cancel"></span> Não
+          </button>
+        </div>
+      </div>
+   </div>
   </div>
 </div>
 </template>
@@ -87,11 +106,9 @@ export default {
   components: {
     'sidebar': SideBar,
   },
-
   data(){
-    name: 'ListProject'
+    name: 'HomePage'
     return {
-
       projetos: "",
       user: {
           username: "",
@@ -99,21 +116,33 @@ export default {
           email: ""
       },
       isModalVisible: false,
-
     }
   },
-   computed: {
+  computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },
-
   methods: {
+
+
+     deleteProject (){
+      if(currentUser.id == projeto.user){
+        this.$http.delete('http://localhost:8000/project/' + this.projeto.id + '/',
+                        { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+                          window.alert("projeto deletado")
+                          console.log("deu merda")
+
+      },error => {
+       console.log("deu merda")
+    });
+  }
+},
     getProject(){
       this.$http.get("http://localhost:8000/projects/",  { headers:
                     { "content-type": "application/json" } }).then(result => {
       this.projetos = result.data;
       },
       error => {
-          console.error(error);
+          window.alert("Não foi possivel verifcar os projetos")
       });
     },
     loadUserInfo (){
@@ -121,27 +150,36 @@ export default {
       this.user.username = this.currentUser.name
       this.user.email = this.currentUser.email
     },
-
     showModal() {
       this.isModalVisible = true;
     },
     closeModal() {
      this.isModalVisible = false;
     },
+    modalScript() {
 
+      $(document).ready(function(){
+      $('.modal').modal();
+    });
+
+
+    $(document).ready(function(){
+      $('select').formSelect();
+      });
+    }
   },
     beforeMount(){
       this.getProject()
       this.loadUserInfo()
+      this.modalScript()
  },
-
 }
 </script>
 
 <style>
-p{
+
+p {
   font-size: 15px;
 }
-
 
 </style>

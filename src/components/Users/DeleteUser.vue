@@ -1,28 +1,33 @@
 <template>
-  <div class = "app">
-  <secondnav></secondnav>
+<div id="delete-user" class="modal grey lighten-4">
+  <div class="modal-content container center-align">
     <div class="row">
-      <div class ="col s12">
-        <div class="row">
-            <div class="container center-align">
-            <h1> DELETAR USUÁRIO ? </h1>
-            <a v-on:click="sendData ()" class="waves-effect red btn-large">Deletar</a>
-          </div>
-      </div>
-      </div>
+      <h4>
+        Deletar Usuário ?
+      </h4>
+        <div class="col s6">
+          <button v-on:click="sendData()" type="submit" class="model-close col s12 btn-large red lighten-1 waves-effect waves-green">
+            <span class="fa fa-trash"></span> Sim
+          </button>
+        </div>
+        <div class="col s6">
+          <button v-on:click="modalScript()" type="submit" class="model-close col s12 btn-large blue lighten-1 waves-effect waves-green">
+            <span class="fa fa-cancel"></span> Não
+          </button>
+        </div>
     </div>
+  </div>
 </div>
+
 
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
-import SecondNavBar from '@/components/Utils/SecondNavBar'
 
 export default {
   name: 'DeleteUser',
   components: {
-  'secondnav': SecondNavBar
   },
   data () {
     return {
@@ -62,7 +67,7 @@ export default {
       this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
         localStorage.token = result.data.token
       })
-      this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
+      this.$store.dispatch('logout')//trigger da ação de logout implementado em store/auth.js
       delete localStorage.token
       window.confirm("USER DELETADO")
       this.$router.push('/')
@@ -77,11 +82,23 @@ export default {
       this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
       localStorage.token = result.data.token
       })
+    },
+    modalScript () {
+        $(document).ready(function(){
+        $('.modal').modal();
+      });
+
+
+      $(document).ready(function(){
+        $('select').formSelect();
+      });
     }
+
   },
   beforeMount(){
     this.loadUserInfo()
     this.testToken()
+    this.modalScript()
   }
 }
 </script>
