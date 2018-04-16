@@ -13,14 +13,9 @@
           <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
-
-
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
-                 <button type="button" class="btn" @click="showModal">
-      Login!
-    </button>
-
-    <modal v-show="isModalVisible" @close="closeModal"/>
+             <button type="button" class="btn" @click="showModal">Login!</button>
+              <modal v-show="isModalVisible" @close="closeModal"/>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <a v-on:click="Logout()">

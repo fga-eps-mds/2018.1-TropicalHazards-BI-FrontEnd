@@ -2,7 +2,7 @@
    <div id="sidebar" class="hide-on-small-only col m1 center-align grey lighten-4">
       <ul class="">
         <a href="" class="">
-          <img src="https://via.placeholder.com/60x60" alt="" class="responsive-img circle center" />
+          <img src="../../assets/v3_round.png" alt="" class="responsive-img circle center" />
         </a>
         <a href="#/home" class="">
           <li class="">
@@ -39,7 +39,7 @@
             <span class="fa fa-sign-out"></span>
           </li>
         </a>
-        <a href="#/edituser" class="">
+        <a href="#edit-user" class="modal-trigger">
           <li class="">
             <p> Editar Perfil</p>
           </li>
@@ -49,9 +49,15 @@
             <p> Deletar Perfil</p>
           </li>
         </a>
+        <a href="#new-proj" class="modal-trigger">
+          <li class="">
+            <p> Criar Projeto</p>
+          </li>
+        </a>
+
         <hr>
       </ul>
-
+<modal2></modal2>
    </div>
 
 
@@ -60,12 +66,43 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import modalNewProject from '@/components/Modals/modalNewProject'
+import modalEditUser from '@/components/Modals/modalEditUser'
 
 export default {
+    components: {
+    'modal': modalNewProject,
+    'modal2': modalEditUser
+},
+    data () {
+      return {
+        isModalVisible: false,
+      }
+    },
 
    computed: {
     ...mapGetters({ currentUser: 'currentUser' })
-  }
+  },
+
+  methods: {
+
+    modalScript () {
+        $(document).ready(function(){
+        $('.modal').modal();
+      });
+
+
+      $(document).ready(function(){
+        $('select').formSelect();
+      });
+    }
+
+  },
+      beforeMount(){
+      this.getProject()
+      this.loadUserInfo()
+      this.modalScript ()
+ },
 
 }
 

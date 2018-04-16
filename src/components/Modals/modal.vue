@@ -1,9 +1,9 @@
 <script>
-
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
 
 export default {
+
   data() {
     name: 'modal'
     return {

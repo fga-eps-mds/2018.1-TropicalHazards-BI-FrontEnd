@@ -48,9 +48,6 @@
           <h5>
             Meus projetos
           </h5>
-          <a href="#" class="btn-flat blue lighten-1 grey-text text-lighten-2">
-            Novo projeto <span class="fa fa-plus"></span>
-          </a>
           <div class="row">
             <div v-for="projeto in projetos" class="col s12 m4 l3">
               <div class="card grey lighten-5">
@@ -88,7 +85,7 @@ import SideBar from '@/components/Utils/SideBar'
 export default {
 
   components: {
-    'sidebar': SideBar
+    'sidebar': SideBar,
   },
 
   data(){
@@ -96,6 +93,12 @@ export default {
     return {
 
       projetos: "",
+      user: {
+          username: "",
+          password: "",
+          email: ""
+      },
+      isModalVisible: false,
 
     }
   },
@@ -119,10 +122,17 @@ export default {
       this.user.email = this.currentUser.email
     },
 
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+     this.isModalVisible = false;
+    },
+
   },
-  beforeMount(){
-    this.getProject()
-    this.loadUserInfo()
+    beforeMount(){
+      this.getProject()
+      this.loadUserInfo()
  },
 
 }
