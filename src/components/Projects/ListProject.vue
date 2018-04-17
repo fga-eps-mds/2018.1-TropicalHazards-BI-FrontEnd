@@ -1,33 +1,37 @@
 <template>
 <div class = "ListProject">
-  <div class="row">     
+  <div class="row">
        <h1 style="text-align:center"> Projetos </h1>
-    <div class ="col s6">    
+    <div class ="col s6">
             <ul class="collection">
-                <li v-for="projeto in projetos" class="collection-item avatar">
-                <span class="title"><a href="#/project/detail">{{ projeto.name }}</a></span>
-                <p>Descrição do projeto </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                <li v-for="project in projects" :key="project.id" class="collection-item avatar">
+                  <router-link :to="{ name: 'ProjectDetail', params: { id: project.id } }">
+                    <span class="title">{{project.id}}{{ project.name }}</span>
+                    <p>Descrição do projeto </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                  </router-link>
             </li>
         </ul>
     </div>
-    <div class ="col s6">    
+    <!-- <div class ="col s6">
             <ul class="collection">
-                <li v-for="projeto in projetos" class="collection-item avatar">
-                <span class="title"><a href="#/project/detail">{{ projeto.name }}</a></span>
-                <p>Descrição do projeto </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
+                  <li v-for="project in projects" :key="project.id" class="collection-item avatar">
+                    <router-link :to="{ name: 'PŕojectDetail', params: { id: project.id } }">
+                      <span class="title">{{ project.name }}</span>
+                      <p>Descrição do projeto </p>
+                      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </router-link>
+                  </li>
         </ul>
-    </div>         
-        <br />
+    </div> -->
+    <br />
   </div>
 </div>
 </template>
 
 <script>
 import ProjectDetail from '@/components/Projects/ProjectDetail'
- 
+
   export default {
     components: {
     ProjectDetail,
@@ -35,34 +39,26 @@ import ProjectDetail from '@/components/Projects/ProjectDetail'
   data(){
     name: 'ListProject'
     return {
-      projects: {
-        name: "",
-        description: ""
-        
-      },
-      projetos: "",
-      frase: '',
-
+      projects: []
     }
   },
 
   methods: {
     getProject(){
-      console.log("chegou aqui")
       this.$http.get("http://localhost:8000/projects/",  { headers: { "content-type": "application/json" } }).then(result => {
-      this.projetos = result.data;
+        this.projects = result.data;
       },
       error => {
           console.error(error);
       });
-    },  
+    },
 
-  },   
-  
+  },
+
   beforeMount(){
     this.getProject()
  },
-  
+
 }
 </script>
 

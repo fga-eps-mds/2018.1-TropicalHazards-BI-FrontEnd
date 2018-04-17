@@ -105,18 +105,18 @@
             Novo projeto <span class="fa fa-plus"></span>
           </a>
           <div class="row">
-            <div v-for="projeto in projetos" class="col s12 m4 l3">
+            <div v-for="project in projects" :key="project.id" class="col s12 m4 l3">
               <div class="card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
-                  <span class="card-title">{{ projeto.name }}</span>
+                  <span class="card-title">{{ project.name }}</span>
                   <p>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                   </p>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="#" class="btn  blue lighten-1">
+                  <router-link :to="{ name: 'ProjectDetail', params: { id: project.id } }" class="btn  blue lighten-1">
                     <span class="fa fa-search"></span>
-                  </a>
+                  </router-link>
                   <a href="#" class="btn  blue lighten-1">
                     <span class="fa fa-edit"></span>
                   </a>
@@ -142,14 +142,7 @@ export default {
   data(){
     name: 'ListProject'
     return {
-      projects: {
-        name: "",
-        description: ""
-
-      },
-      projetos: "",
-      frase: '',
-
+      projects: []
     }
   },
    computed: {
@@ -158,9 +151,8 @@ export default {
 
   methods: {
     getProject(){
-      console.log("chegou aqui")
       this.$http.get("http://localhost:8000/projects/",  { headers: { "content-type": "application/json" } }).then(result => {
-      this.projetos = result.data;
+        this.projects = result.data;
       },
       error => {
           console.error(error);

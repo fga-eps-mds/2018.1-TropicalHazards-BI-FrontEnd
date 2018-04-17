@@ -1,14 +1,11 @@
 <template>
 <div class = "ProjectDetail">
   <div class="row">
-    <div class ="col s12">    
-        <button v-on:click.stop="chamarListProject">callist</button>
-
-          <h1 style="text-align:center"> {{projeto.name}} </h1>
-          <br />    
-        <p style="text-align:center"> {{projeto.description}}</p>
-        
-    </div>         
+    <div class ="col s12">
+      <h1 style="text-align:center"> {{project.name}}</h1>
+      <br />
+      <p style="text-align:center"> {{project.description}}</p>
+    </div>
         <br />
   </div>
 </div>
@@ -19,28 +16,25 @@
   data(){
     name: 'ProjectDetail'
     return {
-      projects: {
+      project: {
+        id: "",
+        user: "",
         name: "",
-        description: ""
-        
+        description: "",
       },
-      projetos: "",
-
+      linkid: ""
     }
   },
-  methods: {
-    getProject(){
-      console.log("chegou aqui")
-      this.$http.get("http://localhost:8000/projects/${projetos.id}",  { headers: { "content-type": "application/json" } }).then(result => {
-      this.projetos = result.data;
+  created () {
+    this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
+      this.project = result.data;
       },
       error => {
           console.error(error);
       });
-    }, 
-    chamarListProject(){
-      this.$emit('getId')
-    }    
+
+  },
+  methods:{
   },
 
 }
