@@ -3,7 +3,7 @@
   <div class="modal-content container center-align">
     <div class="row">
       <h4>
-        Deletar Projeto ?
+        Deletar Observatorio ?
       </h4>
         <div class="col s6">
           <button type="submit" class="model-close col s12 btn-large red lighten-1 waves-effect waves-green">
@@ -24,28 +24,12 @@
 import {mapGetters} from 'vuex'
 
 export default {
-  name: 'modalDeleteProject',
+  name: 'modalDeleteObservatorio',
 
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },
     methods: {
-
-    getProjectDetail (){
-        this.$http.get('http://localhost:8000/projects/4/',
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-        this.projeto = result.data
-        },error => {
-        });
-    },
-    deleteProject (){
-        this.$http.delete('http://localhost:8000/project/' + this.currentUser.id + '/',
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-                         this.DeleteSucess(result)
-        },error => {
-          this.updateFail()
-        });
-    },
 
     modalScript () {
         $(document).ready(function(){
@@ -60,7 +44,6 @@ export default {
 
   },
       beforeMount(){
-      this.getProject()
       this.loadUserInfo()
       this.modalScript ()
  }

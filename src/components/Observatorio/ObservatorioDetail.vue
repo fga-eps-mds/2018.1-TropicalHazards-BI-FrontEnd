@@ -2,22 +2,28 @@
  <div id="app ">
   <div class="row grey lighten-4">
     <sidebar></sidebar>
-    <div id="content" class="col m11" >
+
+  <div id="content" class="col m11">
+
       <div class="header center-align white">
+
+        <small>Projeto: Mapa da Dengue no DF</small>
         <h3>
-          Home
+          Ceilandia
         </h3>
       </div>
       <div class="grey lighten-4">
         <div class="custom-container">
-          <h5>Estatísticas de perfil</h5>
+          <h5>Dados do Observatório</h5>
           <div class="row">
             <div class="col s12 m4">
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title">8</span>
+                  <span class="card-title">
+                    Cleiton Jr.
+                  </span>
                   <p>
-                    Projetos ativos
+                    Criador
                   </p>
                 </div>
               </div>
@@ -25,19 +31,9 @@
             <div class="col s12 m4">
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title">37</span>
+                  <span class="card-title">1.3 Gb</span>
                   <p>
-                    Observatórios
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">162</span>
-                  <p>
-                    Contribuidores
+                    De dados
                   </p>
                 </div>
               </div>
@@ -45,53 +41,85 @@
           </div>
         </div>
         <div class="custom-container">
-          <h5>
-            Projetos
-          </h5>
           <div class="row">
-            <div v-for="projeto in projetos" class="col s12 m4 l3">
-              <div class="card grey lighten-5">
-                <div class="card-content grey-text text-darken-2">
-                  <span style="font-size:20px" class="card-title">{{ projeto.name }}</span>
-                    <p> Descrição: {{projeto.description }} </p>
-                    <p> IdProjeto: {{projeto.id }} </p>
-                    <p> IdUser: {{projeto.user }} </p>
-                </div>
-                <div class="card-action center-align grey-text text-lighten-2">
-                <router-link class="btn  blue lighten-1" v-bind:to="'/detail/'+projeto.id" >
-                    <span class="fa fa-search"></span>
-                </router-link>
-                  <a href="#" class="btn  blue lighten-1">
-                    <span class="fa fa-edit"></span>
-                  </a>
-                  <a href="#delete-proj" class="modal-trigger btn red">
-                    <span class="fa fa-remove"></span>
-                  </a>
-                </div>
-              </div>
+            <div class="col s12">
+              <!-- vai ser iframe então lembrar de colocar tag de iframe com a classe de reixar IFRAME RESPONSIVO -->
+              <img src="https://s3-us-west-2.amazonaws.com/i.cdpn.io/250639.eZENxO.12a72d88-e8ed-4403-b737-dfcbde7f008d.png" class="responsive-img">
+            </div>
+          </div>
+          <div class="row white darken-1">
+            <div class="col s12">
+              <table class="table-responsive stripped">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Frequência (%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>A</b></td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td><b>B</b></td>
+                    <td>1.5</td>
+                  </tr>
+                  <tr>
+                    <td><b>C</b></td>
+                    <td>2.75</td>
+                  </tr>
+                  <tr>
+                    <td><b>D</b></td>
+                    <td>4.1</td>
+                  </tr>
+                  <tr>
+                    <td><b>E</b></td>
+                    <td>13</td>
+                  </tr>
+                  <tr>
+                    <td><b>F</b></td>
+                    <td>2.06</td>
+                  </tr>
+                  <tr>
+                    <td><b>G</b></td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td><b>H</b></td>
+                    <td>6</td>
+                  </tr>
+                  <tr>
+                    <td><b>I</b></td>
+                    <td>7</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col s12">
+              <a href="#" class="btn-large waves-effect waves-light blue lighten-1 white-text">
+                <span class="fa fa-download"></span> Baixar dados usados
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-<modal-delete-proj></modal-delete-proj>
 </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
 import SideBar from '@/components/Utils/SideBar'
-import modalDeleteProject from '@/components/Modals/modalDeleteProject'
 
 export default {
 
   components: {
     'sidebar': SideBar,
-    'modal-delete-proj': modalDeleteProject
   },
   data(){
-    name: 'HomePage'
+    name: 'ObservatorioDetail'
     return {
       projetos: "",
       user: {

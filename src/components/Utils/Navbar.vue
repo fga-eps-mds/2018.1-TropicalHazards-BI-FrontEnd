@@ -1,4 +1,5 @@
 <template>
+ <div id="app">
   <header class="parallax">
     <div class="filter">
 
@@ -28,18 +29,18 @@
               </li>
             </a>
         </ul>
+          <ul v-if="!currentUser" class="right hide-on-med-and-down">
+            <a href="#/listprojet">
+              <li class="navbar-item">
+                <span class="fa fa-sign-char"></span> Observatórios
+              </li>
+            </a>
+        </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <li class="navbar-item">
               Bem Vindo {{ currentUser.name }}
             </li>
           </ul>
-          <ul class="right hide-on-med-and-down">
-            <a href="#/listprojet/">
-              <li class="navbar-item">
-                <span class="fa fa-bar-chart"></span> Observatórios
-              </li>
-            </a>
-        </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <a href="#/home/">
               <li class="navbar-item">
@@ -47,7 +48,6 @@
               </li>
             </a>
         </ul>
-
         </div>
       </nav>
       <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
@@ -87,6 +87,7 @@
       </div>
     </div>
   </header>
+  </div>
 </template>
 
 <script>
@@ -99,6 +100,7 @@ export default {
   components: {
     modal
   },
+
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },
@@ -106,6 +108,11 @@ export default {
   data () {
     return {
 
+    user: {
+      username: "",
+      email: "",
+      id:""
+    },
     isModalVisible: false,
 
     }
@@ -137,10 +144,17 @@ export default {
         delete localStorage.token
         this.$router.replace('/')
         },
+        loadUserInfo (){
+      this.user.id = this.currentUser.id
+      this.user.username = this.currentUser.name
+      this.user.email = this.currentUser.email
+    }
   },
+
 
   beforeMount(){
     this.menuMobile()
+    this.loadUserInfo()
   }
 }
 

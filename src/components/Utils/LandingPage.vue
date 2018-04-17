@@ -21,6 +21,8 @@ import Navbar from '@/components/Utils/Navbar'
 import About from '@/components/Utils/About'
 import CardsContent from '@/components/Utils/CardsContent'
 import Footer from '@/components/Utils/Footer'
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'LandingPage',
   components: {
@@ -28,6 +30,10 @@ export default {
     About,
     CardsContent,
     'landingfooter': Footer
+  },
+
+   computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
   }
 }
 </script>

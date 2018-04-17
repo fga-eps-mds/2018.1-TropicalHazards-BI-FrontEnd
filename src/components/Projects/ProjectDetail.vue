@@ -53,7 +53,7 @@
                   <small>Criado por: João do Caminhão</small>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="observatory.html" class="btn  blue lighten-1">
+                  <a href="#/observer-detail" class="btn  blue lighten-1">
                     <span class="fa fa-search"></span>
                   </a>
                   <a href="#" class="btn red">
@@ -75,7 +75,7 @@
                   <small>Criado por: Sérgio Capixaba</small>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="observatory.html" class="btn  blue lighten-1">
+                  <a href="#/observer-detail" class="btn  blue lighten-1">
                     <span class="fa fa-search"></span>
                   </a>
                  <a href="#" class="btn red">
@@ -97,10 +97,10 @@
                   <small>Criado por: Cleiton Jr.</small>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="observatory.html" class="btn  blue lighten-1">
+                  <a href="#/observer-detail" class="btn  blue lighten-1">
                     <span class="fa fa-search"></span>
                   </a>
-                  <a href="#delete-user" class="modal-trigger btn red">
+                  <a href="#delete-proj" class="modal-trigger btn red">
                     <span class="fa fa-remove"></span>
                   </a>
                 </div>
@@ -111,20 +111,20 @@
       </div>
     </div>
   </div>
-  <modal-delete-project></modal-delete-project>
+  <modal-delete-observatorio></modal-delete-observatorio>
 </div>
 </template>
 
 <script>
 import SideBar from '@/components/Utils/SideBar'
-import modalDeleteProject from '@/components/Modals/modalDeleteProject'
+import modalDeleteObservatorio from '@/components/Modals/modalDeleteObservatorio'
 import {mapGetters} from 'vuex'
 
 export default {
   name: 'ProjectDetail',
   components: {
     'sidebar': SideBar,
-    'modal-delete-project': modalDeleteProject
+    'modal-delete-observatorio': modalDeleteObservatorio
   },
 
   data () {

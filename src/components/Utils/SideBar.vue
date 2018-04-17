@@ -103,8 +103,6 @@ export default {
 
   },
       beforeMount(){
-      this.getProject()
-      this.loadUserInfo()
       this.modalScript ()
  },
 
