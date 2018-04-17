@@ -49,16 +49,17 @@
             Projetos
           </h5>
           <div class="row">
-            <div v-for="projeto in projetos" class="col s12 m4 l3">
+            <div v-for="project in projects" :key="project.id" class="col s12 m4 l3">
               <div class="card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
-                  <span style="font-size:20px" class="card-title">{{ projeto.name }}</span>
-                    <p> Descrição: {{projeto.description }} </p>
-                    <p> IdProjeto: {{projeto.id }} </p>
-                    <p> IdUser: {{projeto.user }} </p>
+                  <span style="font-size:20px" class="card-title">{{ project.name }}</span>
+                    <p> Descrição: {{project.description }} </p>
+                    <p> IdProjeto: {{project.id }} </p>
+                    <p> IdUser: {{project.user }} </p>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                <router-link class="btn  blue lighten-1" v-bind:to="'/detail/'+projeto.id" >
+                <router-link :to="{ name: 'ProjectDetail', params: { id: project.id } }"
+                                    class="btn blue lighten-1" >
                     <span class="fa fa-search"></span>
                 </router-link>
                   <a href="#" class="btn  blue lighten-1">
@@ -93,7 +94,7 @@ export default {
   data(){
     name: 'HomePage'
     return {
-      projetos: "",
+      projects: [],
       user: {
           username: "",
           password: "",
@@ -123,7 +124,7 @@ export default {
     getProject(){
       console.log("chegou aqui")
       this.$http.get("http://localhost:8000/projects/",  { headers: { "content-type": "application/json" } }).then(result => {
-      this.projetos = result.data;
+      this.projects = result.data;
       },
       error => {
           console.error(error);

@@ -5,13 +5,23 @@
     <div id="content" class="col m11">
       <div class="header center-align white">
         <h3>
-          Mapa da dengue em brasília
+          {{project.name}}
         </h3>
       </div>
       <div class="grey lighten-4">
         <div class="custom-container">
           <h5>Estatísticas do projeto</h5>
           <div class="row">
+            <div class="col s12 m4">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">Descrição</span>
+                  <p>
+                    <span class="fa fa-line-chart"></span> {{project.description}}
+                  </p>
+                </div>
+              </div>
+            </div>
             <div class="col s12 m4">
               <div class="card">
                 <div class="card-content">
@@ -46,7 +56,7 @@
             <div class="col s12 m4 l3">
               <div class="card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
-                  <span class="card-title">Lago Norte</span>
+                  <span class="card-title">Observatório x</span>
                   <p>
                     Observátório sobre os dados da dengue no ano de 2010
                   </p>
@@ -129,8 +139,12 @@ export default {
 
   data () {
     return {
-      project: {},
-      projeto: "",
+      project: {
+        id: "",
+        user: "",
+        name: "",
+        description: ""
+      },
       user: {
 
         name: "",
@@ -151,12 +165,14 @@ export default {
       this.user.email = this.currentUser.email
     },
     getProjectDetail (){
-        this.$http.get('http://localhost:8000/projects/4/',
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-        this.projeto = result.data
-        },error => {
+        this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
+        this.project = result.data;
+        },
+        error => {
+            console.error(error);
         });
-    },
+
+  },
     getProject(){
       this.$http.get("http://localhost:8000/projects/",  { headers:
                     { "content-type": "application/json" } }).then(result => {
