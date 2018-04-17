@@ -1,24 +1,23 @@
 <template>
   <header class="parallax">
     <div class="filter">
-
       <!--
         navbar e o header aqui estão juntos por conta do efeito desejado
       -->
       <nav class="navbar">
         <div class="nav-wrapper">
-          <a href="#/" class="brand-logo">
+          <router-link :to="{ name: 'LandingPage' }" class="brand-logo">
             <span class="fa fa-eye"></span> OBSERV
-          </a>
-          <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
+          </router-link>
+          <router-link :to="{ name: 'LandingPage' }" data-target="mobile-menu" class="sidenav-trigger">
             <i class="material-icons">menu</i>
-          </a>
+          </router-link>
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
-            <a href="#/login">
+            <router-link :to="{ name: 'Login' }">
               <li class="navbar-item">
                 <span class="fa fa-sign-in"></span> Login
               </li>
-            </a>
+            </router-link>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <li class="navbar-item">
@@ -26,48 +25,45 @@
             </li>
           </ul>
           <ul class="right hide-on-med-and-down">
-            <a href="#/listprojet/">
+            <router-link :to="{ name: 'ListProject' }">
               <li class="navbar-item">
                 <span class="fa fa-sign-in"></span> Ver Observatórios
               </li>
-            </a>
+            </router-link>
         </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
-            <a href="#/home/">
+            <router-link :to="{ name: 'HomePage'}">
               <li class="navbar-item">
                 <span class="fa fa-sign-in"></span> Dashboard
               </li>
-            </a>
+            </router-link>
         </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
-            <a href="#/logout/">
+            <router-link :to="{ name: 'Logout' }">
               <li class="navbar-item">
                 <span class="fa fa-sign-out"></span> Logout
               </li>
-            </a>
+            </router-link>
         </ul>
         </div>
       </nav>
       <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
-        <a href="#">
+        <router-link :to="{ name: 'Login' }">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Login
           </li>
-        </a>
+        </router-link>
       </ul>
       <ul v-if="currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
-        <a href="#">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Bem vindo {{currentUser.name}}
           </li>
-        </a>
-        <a href="#/projetos">
+        <router-link :to="{ name: 'ProjectDetail' }">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Criar observatório
           </li>
-        </a>
+        </router-link>
       </ul>
-
       <div class="container center-align">
         <h2>
           Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito
@@ -90,7 +86,7 @@
 <script>
 $(document).ready(function () {
   $('.sidenav').sidenav();
-});
+})
 
 import {mapGetters} from 'vuex'
 

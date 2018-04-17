@@ -37,7 +37,7 @@ export default new Router({
       component: CreateProject
     },
     {
-      path: '/listprojet',
+      path: '/listproject',
       name: 'ListProject',
       component: ListProject
     },
@@ -67,7 +67,7 @@ export default new Router({
       component: EditUser
     },
     {
-      path: '/deleteUser',
+      path: '/deleteuser',
       name: 'DeleteUser',
       component: DeleteUser
     }
