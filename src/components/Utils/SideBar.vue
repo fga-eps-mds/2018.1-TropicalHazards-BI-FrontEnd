@@ -54,6 +54,11 @@
             <p> Criar Projeto</p>
           </li>
         </a>
+        <a v-on:click="Logout()" class="modal-trigger">
+          <li class="">
+            <p> Sair</p>
+          </li>
+        </a>
 
         <hr>
       </ul>
@@ -99,6 +104,25 @@ export default {
       $(document).ready(function(){
         $('select').formSelect();
       });
+    },
+    Logout(){
+      this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.LogoutSucess(result)
+      },
+      error => {
+          this.LoginFail()
+          console.error(error)
+      });
+    },
+      LogoutSucess(response){
+        this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
+        delete localStorage.token
+        this.$router.replace('/')
+        },
+    loadUserInfo (){
+      this.user.id = this.currentUser.id
+      this.user.username = this.currentUser.name
+      this.user.email = this.currentUser.email
     }
 
   },

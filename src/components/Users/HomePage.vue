@@ -15,7 +15,7 @@
             <div class="col s12 m4">
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title">8</span>
+                  <span class="card-title">{{projects.length}}</span>
                   <p>
                     Projetos ativos
                   </p>
