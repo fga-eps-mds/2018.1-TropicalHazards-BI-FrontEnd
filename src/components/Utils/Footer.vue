@@ -1,4 +1,6 @@
 <template>
+
+<div id="Footer">
  <footer class="page-footer">
           <div class="container">
             <div class="row">
@@ -24,7 +26,7 @@
             </div>
           </div>
         </footer>
-  </footer>
+  </div>
 </template>
 
 <script>
@@ -34,16 +36,6 @@
 
 <style>
 
-.page-footer{
-  background-color:#1b1b1b;
-  display: flex;
-  min-height: 50vh;
-  flex-direction: column;
-  flex: 1 0 auto;
 
-}
-.footer-copyright{
-  background-color:#242424;
-}
 
 </style>

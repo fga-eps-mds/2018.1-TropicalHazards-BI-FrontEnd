@@ -1,17 +1,12 @@
 <template>
-<div class = "Logout" >
-
+<div class = "app" >
+  <secondnav></secondnav>
   <div class="row">
     <div class ="col s12">
-
       <div class="row">
-
         <div class="container center-align">
           <h1> Logout </h1>
-
           <a v-on:click="Logout()" class="waves-effect  btn-large">Logout</a>
-        
-
         </div>
      </div>
     </div>
@@ -23,8 +18,13 @@
 
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
+import SecondNavBar from '@/components/Utils/SecondNavBar'
 
 export default {
+  components: {
+    'secondnav': SecondNavBar,
+  },
+
   data(){
     name: 'Logout'
     return {
@@ -64,7 +64,7 @@ export default {
       });
     },
     LogoutSucess(response){
-  
+
         this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
         delete localStorage.token
         this.$router.replace('/')

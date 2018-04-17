@@ -5,17 +5,14 @@
       </div>
 
       <div id="about">
-        <About></About>      
-      </div>   
+        <About></About>
+      </div>
        <router-view />
 
       <div id="cardsContent">
         <CardsContent> </CardsContent>
       </div>
-
-      <div id="LocationMap">
-        <LocationMap></LocationMap>
-      </div>
+      <landingfooter></landingfooter>
   </div>
 </template>
 
@@ -23,14 +20,20 @@
 import Navbar from '@/components/Utils/Navbar'
 import About from '@/components/Utils/About'
 import CardsContent from '@/components/Utils/CardsContent'
-import LocationMap from '@/components/Utils/LocationMap'
+import Footer from '@/components/Utils/Footer'
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'LandingPage',
   components: {
     Navbar,
     About,
     CardsContent,
-    LocationMap    
+    'landingfooter': Footer
+  },
+
+   computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
   }
 }
 </script>

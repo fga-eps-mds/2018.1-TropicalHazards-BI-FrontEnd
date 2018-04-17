@@ -12,6 +12,18 @@
                   </router-link>
             </li>
         </ul>
+        <button
+      type="button"
+      class="btn"
+      @click="showModal"
+    >
+      Open Modal!
+    </button>
+
+    <modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
     </div>
     <!-- <div class ="col s6">
             <ul class="collection">
@@ -31,15 +43,30 @@
 
 <script>
 import ProjectDetail from '@/components/Projects/ProjectDetail'
-
+import SecondNavBar from '@/components/Utils/SecondNavBar'
+import {mapGetters} from 'vuex'
+import modal from '@/components/Modals/modal.vue';
   export default {
     components: {
     ProjectDetail,
+    'secondnav': SecondNavBar,
+     modal
+  },
+     computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
   },
   data(){
     name: 'ListProject'
     return {
-      projects: []
+      projects: {
+        name: "",
+        description: ""
+
+      },
+      isModalVisible: false,
+      projetos: "",
+      frase: '',
+
     }
   },
 

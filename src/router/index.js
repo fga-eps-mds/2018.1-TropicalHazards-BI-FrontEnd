@@ -11,6 +11,7 @@ import ListProject from '@/components/Projects/ListProject'
 import ProjectDetail from '@/components/Projects/ProjectDetail'
 import EditUser from '@/components/Users/EditUser'
 import DeleteUser from '@/components/Users/DeleteUser'
+import ObservatorioDetail from '@/components/Observatorio/ObservatorioDetail'
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ export default new Router({
       path: '/deleteUser',
       name: 'DeleteUser',
       component: DeleteUser
+    },
+    {
+      path: '/observer-detail',
+      name: 'ObservatorioDetail',
+      component: ObservatorioDetail
     }
   ]
 })
