@@ -38,7 +38,7 @@ export default new Router({
     },
     {
       path: '/listproject',
-      name: 'ListProject',
+      name: 'ListProjects',
       component: ListProject
     },
     {
