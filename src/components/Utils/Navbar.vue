@@ -32,7 +32,7 @@
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
             <router-link :to="{name: 'ListProjects'}">
               <li class="navbar-item">
-                <span class="fa fa-sign-char"></span> Observatórios
+                <span class="fa fa-chart"></span> Projetos
               </li>
             </router-link>
           </ul>
