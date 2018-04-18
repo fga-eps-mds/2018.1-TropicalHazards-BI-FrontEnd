@@ -1,9 +1,8 @@
 
 <template>
   <transition name="modal-fade">
-    <div class="modal-mask" @click="close" v-show="show">
-
-      <div class="modal-container" @click.stop>
+    <div class="modal-backdrop">
+      <div class="modal"role="dialog">
         <div class="row">
                 <button
               type="button"
@@ -15,7 +14,7 @@
             </button>
             <h4 style="color:black">
             <span style="color:black" class="fa fa-eye"></span> OBSERV</h4>
-            <h4 style="text-align:center; color:black;">Fazer login</h4>
+            <h4 style="text-align:center">Fazer login</h4>
 
          <p style="color:black; text-align:center; line-height:20px;">
           Como visitante você tem acesso a funcionalidade de pesquisa de observatórios
@@ -108,55 +107,6 @@ export default {
 }
 </script>
 <style>
-* {
-    box-sizing: border-box;
-}
-
-.modal-mask {
-    position: fixed;
-    z-index: 9998;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .5);
-    transition: opacity .3s ease;
-}
-
-.modal-container {
-    width: 50%;
-    margin: 40px auto 0;
-    padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-    transition: all .3s ease;
-    font-family: Helvetica, Arial, sans-serif;
-}
-
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
   .modal-backdrop {
     position: fixed;
     top: 0;
@@ -177,7 +127,21 @@ export default {
   margin-bottom: 10px;
   border-radius: 10px;
 }
+  .modal {
+    background: #FFFFFF;
+    /* box-shadow: 2px 2px 20px 1px; */
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    border-radius: 20px;
+  }
 
+  .modal-header,
+  .modal-footer {
+    padding-top: 15px;
+    display: flex;
+  }
 
 .modal-form{
   padding: 0;
@@ -185,12 +149,38 @@ export default {
 .brand-logo{
   color:black;
 }
+body {
+  font-family: 'Oxygen', Arial, Helvetica, sans-serif;
+}
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: .101em;
+  font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+
+}
+
+hr {
+  border-style: dashed;
+  border-color: #888888;
+  margin-bottom: .5em;
+}
+
+.modal h4 {
+  color: #42a5f5;
+}
+
+#login,
+#new-proj {
+  padding-top: 0 !important;
+  max-height: 90% !important;
+}
 ::placeholder { /* Most modern browsers support this now. */
    color:    #132a71;
 }
-@media (min-width: 993px) {
 
-
-}
 </style>

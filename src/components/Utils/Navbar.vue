@@ -18,7 +18,7 @@
               <modal v-show="isModalVisible" @close="closeModal"/>
                <a @click="showModal">
                 <li class="navbar-item">
-                  <span class="fa fa-sign-out"></span> Login
+                  <span class="fa fa-sign-in"></span> Login
                 </li>
               </a>
           </ul>
@@ -51,11 +51,11 @@
         </div>
       </nav>
       <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
-        <a href="#">
+        <router-link :to="{name: 'Login'}">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Login
           </li>
-        </a>
+        </router-link>
       </ul>
       <ul v-if="currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
         <a href="#">

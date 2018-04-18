@@ -24,47 +24,34 @@
             <span class="fa fa-area-chart"></span>
           </li>
         </a>
-        <a href="" class="sidebar-icon">
-          <li class="tooltipped"  data-position="right" data-tooltip="Dados">
-            <span class="fa fa-cubes"></span>
-          </li>
-        </a>
-        <a href="" class="sidebar-icon">
-          <li class="tooltipped"  data-position="right" data-tooltip="Gerenciar perfil">
+
+
+        <a href="#edit-user" class="modal-trigger sidebar-icon">
+          <li class="tooltipped" data-position="right" data-tooltip="Edit">
             <span class="fa fa-gear"></span>
           </li>
         </a>
-        <a href="" class="sidebar-icon">
+        <a href="#new-proj" class="modal-trigger sidebar-icon">
+          <li class="tooltipped" data-position="right" data-tooltip="Edit">
+            <span class="fa fa-plus"></span>
+          </li>
+        </a>
+        <a href="#delete-user" class="modal-trigger sidebar-icon">
+          <li class="tooltipped" data-position="right" data-tooltip="Edit">
+            <span class="fa fa-trash"></span>
+          </li>
+        </a>
+        <a v-on:click="Logout()" class="sidebar-icon modal-trigger">
           <li class="tooltipped" data-position="right" data-tooltip="Sair">
             <span class="fa fa-sign-out"></span>
-          </li>
-        </a>
-        <a href="#edit-user" class="modal-trigger">
-          <li class="">
-            <p> Editar Perfil</p>
-          </li>
-        </a>
-        <a href="#delete-user" class="modal-trigger">
-          <li class="">
-            <p> Deletar Perfil</p>
-          </li>
-        </a>
-        <a href="#new-proj" class="modal-trigger">
-          <li class="">
-            <p> Criar Projeto</p>
-          </li>
-        </a>
-        <a v-on:click="Logout()" class="modal-trigger">
-          <li class="">
-            <p> Sair</p>
           </li>
         </a>
 
         <hr>
       </ul>
-<modal-edit-user></modal-edit-user>
 <modal-delete-user></modal-delete-user>
 <modal-new-proj></modal-new-proj>
+<modal-edit-user></modal-edit-user>
    </div>
 
 
@@ -95,16 +82,12 @@ export default {
 
   methods: {
 
-    modalScript () {
-        $(document).ready(function(){
-        $('.modal').modal();
-      });
-
-
-      $(document).ready(function(){
-        $('select').formSelect();
-      });
-    },
+showModal() {
+        this.isModalVisible = true;
+      },
+    closeModal() {
+        this.isModalVisible = false;
+      },
     Logout(){
       this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
       this.LogoutSucess(result)
