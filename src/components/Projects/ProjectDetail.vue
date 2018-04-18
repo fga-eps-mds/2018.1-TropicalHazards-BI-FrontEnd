@@ -20,7 +20,6 @@
                   <p>
                     <span class="fa fa-line-chart"></span> {{project.description}}
                   </p>
-                  <p>{{project.id}}</p>
                 </div>
               </div>
             </div>
@@ -65,7 +64,7 @@
           </a>
           <br>
           <br>
-          <div class="row">
+          <div class="row" id="detail">
             <div class="col s12 m4 l3">
               <div class="card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
@@ -140,7 +139,6 @@
 
 <script>
 /* eslint-disable */
-
 import SideBar from '@/components/Utils/SideBar'
 import modalDeleteObservatorio from '@/components/Modals/modalDeleteObservatorio'
 import {mapGetters} from 'vuex'
@@ -187,14 +185,17 @@ export default {
       })
     },
     deleteProject () {
-      this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-        window.confirm('Projeto deletado')
-        this.$router.replace('/home')
+      if (window.confirm("Deseja realmente deletar o projeto ?")){
+        this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+          window.alert('Projeto deletado')
+          this.$router.replace('/home')
+
       },
       error => {
         window.alert('Erro ao deletar o projeto')
         console.error(error)
-      })
+        })
+      }
     },
     getProject () {
       this.$http.get('http://localhost:8000/projects/', { headers:

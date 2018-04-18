@@ -91,4 +91,8 @@ h6 {
   font-size:10px;
 }
 
+#detail {
+  font-size:10px;
+}
+
 </style>

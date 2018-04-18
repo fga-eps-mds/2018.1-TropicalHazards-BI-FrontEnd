@@ -1,7 +1,7 @@
 <template>
   <transition name="modal-fade">
     <div class= "modal-backdrop">
-      <div class="modal"role="dialog">
+      <div class="modal" role="dialog">
         <div class="row">
                 <button
               type="button"
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
 

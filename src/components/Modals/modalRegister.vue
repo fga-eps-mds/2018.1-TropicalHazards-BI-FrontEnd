@@ -44,6 +44,8 @@
 </template>
 
 <script>
+/* eslint-disable */
+
 export default {
   data(){
     name: 'Register'

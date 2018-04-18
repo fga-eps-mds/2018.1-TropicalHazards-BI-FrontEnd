@@ -18,7 +18,6 @@
 
 <script>
 /* eslint-disable */
-
 import SecondNavBar from '@/components/Utils/SecondNavBar'
   export default {
     components: {
