@@ -139,12 +139,13 @@
 </template>
 
 <script>
+/* eslint-disable */
+
 import SideBar from '@/components/Utils/SideBar'
 import modalDeleteObservatorio from '@/components/Modals/modalDeleteObservatorio'
 import {mapGetters} from 'vuex'
 
 export default {
-  name: 'ProjectDetail',
   components: {
     'sidebar': SideBar,
     'modal-delete-observatorio': modalDeleteObservatorio
@@ -153,16 +154,16 @@ export default {
   data () {
     return {
       project: {
-        id: "",
-        user: "",
-        name: "",
-        description: ""
+        id: '',
+        user: '',
+        name: '',
+        description: ''
       },
       user: {
 
-        name: "",
-        id: "",
-        email: ""
+        name: '',
+        id: '',
+        email: ''
       }
 
     }
@@ -172,64 +173,56 @@ export default {
     ...mapGetters({ currentUser: 'currentUser' })
   },
   methods: {
-    loadUserInfo (){
+    loadUserInfo () {
       this.user.id = this.currentUser.id
       this.user.username = this.currentUser.name
       this.user.email = this.currentUser.email
     },
-    getProjectDetail (){
-        this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
-        this.project = result.data;
-        },
-        error => {
-            console.error(error);
-        });
-
-  },
-    deleteProject (){
-        this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
-        window.confirm("projeto deletado")
-        this.$router.replace('/home')
-
-        },
-        error => {
-            window.alert("Erro ao deletar o projeto")
-            console.error(error);
-        });
-
-  },
-    getProject(){
-      this.$http.get("http://localhost:8000/projects/",  { headers:
-                    { "content-type": "application/json" } }).then(result => {
-      this.project = result.data;
+    getProjectDetail () {
+      this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+        this.project = result.data
       },
       error => {
-          console.error(error);
-      });
-
-    },
-    testToken(){
-      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
-      localStorage.token = result.data.token
+        console.error(error)
       })
     },
-        modalScript() {
-
-        $(document).ready(function(){
-        $('.modal').modal();
-      });
-
-
-      $(document).ready(function(){
-        $('select').formSelect();
-      });
-     }
+    deleteProject () {
+      this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+        window.confirm('Projeto deletado')
+        this.$router.replace('/home')
+      },
+      error => {
+        window.alert('Erro ao deletar o projeto')
+        console.error(error)
+      })
+    },
+    getProject () {
+      this.$http.get('http://localhost:8000/projects/', { headers:
+                    { 'content-type': 'application/json' } }).then(result => {
+        this.project = result.data
+      },
+      error => {
+        console.error(error)
+      })
+    },
+    testToken () {
+      this.$http.post('http://localhost:8000/obtain-token/', {'username': this.user.username, 'password': this.user.password}).then(result => {
+        localStorage.token = result.data.token
+      })
+    },
+    modalScript () {
+      (document).ready(function () {
+        ('.modal').modal()
+      })
+      (document).ready(function () {
+        ('select').formSelect()
+      })
+    }
   },
-  beforeMount(){
+  beforeMount () {
     this.loadUserInfo()
     this.testToken()
     this.modalScript()
-
   },
   created () {
     this.getProjectDetail()

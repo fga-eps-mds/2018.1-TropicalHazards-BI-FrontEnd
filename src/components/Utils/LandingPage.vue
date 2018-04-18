@@ -17,6 +17,8 @@
 </template>
 
 <script>
+/* eslint-disable */
+
 import Navbar from '@/components/Utils/Navbar'
 import About from '@/components/Utils/About'
 import CardsContent from '@/components/Utils/CardsContent'

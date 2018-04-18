@@ -15,7 +15,9 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+/* eslint-disable */
+
+import {mapGetters} from 'vuex'
 import CreateUserVue from '../Users/CreateUser.vue';
 
   export default {

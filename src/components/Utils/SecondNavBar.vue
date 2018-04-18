@@ -6,15 +6,15 @@
       </a>
 
       <ul v-if="currentUser" id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#/">Inicio</a></li>
-        <li><a href="#/home">Dashboard</a></li>
-        <li ><a href="#/logout">Logout</a></li>
+        <li><router-link :to="{name: 'LandingPage'}"></router-link></li>
+        <li><router-link :to="{name: 'HomePage'}">Dashboard</router-link></li>
+        <li ><a v-on:click="Logout()" href="#">Logout</a></li>
       </ul>
 
       <ul v-if="!currentUser" id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#/home">Inicio</a></li>
-        <li><a href="#/home">Dashboard</a></li>
-        <li><a href="#/login">Login</a></li>
+        <li><router-link :to="{name: 'LandingPage'}">Inicio</router-link></li>
+        <li><router-link :to="{name: 'Login'}">Login</router-link></li>
+
       </ul>
     </div>
   </nav>
@@ -23,15 +23,38 @@
 
 
 <script>
+/* eslint-disable */
 
 import {mapGetters} from 'vuex'
 
 export default {
 
-   computed: {
+  computed: {
     ...mapGetters({ currentUser: 'currentUser' })
+  },
+
+  methods: {
+// redireciona o user caso esteja logado
+/* eslint-disable */
+    Logout(){
+      this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.LogoutSucess(result)
+      },
+      error => {
+          this.LoginFail()
+          console.error(error)
+      });
+    },
+    LogoutSucess(response){
+
+        this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
+        delete localStorage.token
+        this.$router.replace('/')
+        },
+
   }
 }
+
 </script>
 
 <style>

@@ -56,6 +56,7 @@
 
 
 <script>
+/* eslint-disable */
 import {mapGetters} from 'vuex'
 import modalNewProject from '@/components/Modals/modalNewProject'
 import modalEditUser from '@/components/Modals/modalEditUser'
@@ -78,42 +79,34 @@ export default {
   },
 
   methods: {
-
-showModal() {
+    showModal () {
         this.isModalVisible = true;
       },
     closeModal() {
         this.isModalVisible = false;
       },
-    Logout(){
-      this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+    Logout () {
+      this.$http.post('http://localhost:8000/rest-auth/logout/', this.user, { headers: { 'content-type': 'application/json'} }).then(result => {
       this.LogoutSucess(result)
       },
       error => {
           this.LoginFail()
           console.error(error)
-      });
+      })
     },
-      LogoutSucess(response){
+    LogoutSucess (response) {
         this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
         delete localStorage.token
         this.$router.replace('/')
-        },
-    loadUserInfo (){
-      this.user.id = this.currentUser.id
-      this.user.username = this.currentUser.name
-      this.user.email = this.currentUser.email
+    },
+    loadUserInfo () {
+      this.user.id = this.currentUser.id;
+      this.user.username = this.currentUser.name;
+      this.user.email = this.currentUser.email;
     }
-
-  },
-
-
-}
-
-
+  }
+};
 </script>
-
-
 
 <style>
 

@@ -1,4 +1,5 @@
 <script>
+/* eslint-disable */
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
   export default {

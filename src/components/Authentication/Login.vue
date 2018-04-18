@@ -1,42 +1,39 @@
 <template>
-<div class = "Login" id="#ancora">
-
-  <div class="row">
-    <div class ="col s12">
-
-      <div class="row">
-
-        <div class="container center-align">
-          <h1> LOGIN </h1>
-
-          <input type="text" v-model="user.username" placeholder="Username" />
-          <input type="password" v-model="user.password" placeholder="Password" />
-          <a v-on:click="Login()" class="waves-effect  btn-large">Login</a>
-          <b><p> Ainda não possui uma conta ? </p></b>
-          <a class="waves-effect waves-light btn-large" href="#/register">Registrar</a>
-
+  <div class = "Login" id="#ancora">
+    <div class="row">
+      <div class ="col s12">
+        <div class="row">
+          <div class="container center-align">
+            <h1> LOGIN </h1>
+            <input type="text" v-model="user.username" placeholder="Username" />
+            <input type="password" v-model="user.password" placeholder="Password" />
+            <a v-on:keyup.enter="Login()" v-on:click="Login()"  class="waves-effect  btn-large">Login</a>
+            <b><p> Ainda não possui uma conta ? </p></b>
+            <router-link :to="{name: 'CreateUser'}"
+                              class="waves-effect waves-light btn-large">
+            Registrar</router-link>
         </div>
+      </div>
      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
+/* eslint-disable */
 
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
 
 export default {
-  data(){
-    name: 'Login'
+  data () {
     return {
       user: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       },
-      token: "",
-      name: "",
+      token: '',
+      name: '',
       error: false
     }
   },
@@ -51,41 +48,40 @@ export default {
   },
   methods: {
     // redireciona o user caso esteja logado
-    CheckLogin(){
+    CheckLogin () {
       console.log(this.currentUser)
-      if(this.currentUser) {
+      if (this.currentUser) {
         this.$router.replace('/')
       }
     },
-    Login(){
-      this.$http.post("http://localhost:8000/rest-auth/login/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.token = JwtDecode(result.data.token)
-      this.name = this.token.isStaff
-      this.LoginSucess(result)
+    Login () {
+      this.$http.post('http://localhost:8000/rest-auth/login/', this.user, { headers: { 'content-type': 'application/json' } }).then(result => {
+        this.token = JwtDecode(result.data.token)
+        this.name = this.token.isStaff
+        this.LoginSucess(result)
       },
       error => {
-          this.LoginFail()
-          console.error(error)
-      });
+        this.LoginFail()
+        console.error(error)
+      })
     },
-    LoginSucess(response){
-      if(!response.data.token){
+    LoginSucess (response) {
+      if (!response.data.token) {
         this.loginFail()
         return
       }
       this.error = false
       localStorage.token = response.data.token
-      this.$store.dispatch('login')//trigger da ação de login implementado em store/auth.js
+      this.$store.dispatch('login') // trigger da ação de login implementado em store/auth.js
       this.$router.replace('/home')
     },
-    LoginFail(){
+    LoginFail () {
       this.error = 'Falha no Login!'
-      this.$store.dispatch('logout')//trigger da ação de logout
+      this.$store.dispatch('logout') // trigger da ação de logout
       delete localStorage.token
     }
   }
 }
-
 
 </script>
 

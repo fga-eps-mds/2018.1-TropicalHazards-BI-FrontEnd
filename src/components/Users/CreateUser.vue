@@ -4,12 +4,11 @@
     <secondnav></secondnav>
     <div id="usuario" class ="container  col s12">
                 <h2> Registrar </h2>
-
           <div class="container center-align">
           <input type="text" v-model="user.username" placeholder="Username" />
           <input type="text" v-model="user.email" placeholder="Email" />
           <input type="password" v-model="user.password" placeholder="password" />
-          <a v-on:click="PostUser()" class="waves-effect waves-light btn-small">Criar Usuario</a>
+          <a v-on:click="registerUser()" v-on:keyup.enter="registerUser()" class="waves-effect waves-light btn-small">Criar Usuario</a>
          </div>
      </div>
   </div>
@@ -17,6 +16,8 @@
 </template>
 
 <script>
+/* eslint-disable */
+
 import SecondNavBar from '@/components/Utils/SecondNavBar'
   export default {
     components: {
@@ -34,7 +35,7 @@ import SecondNavBar from '@/components/Utils/SecondNavBar'
     }
   },
   methods: {
-    PostUser(){
+    registerUser(){
       this.$http.post("http://localhost:8000/users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
       this.user = result.data;
       window.alert("Usuario criado")

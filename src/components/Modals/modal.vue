@@ -41,20 +41,21 @@
 </template>
 
 <script>
+/* eslint-disable */
+
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
 
 export default {
 
-  data() {
-    name: 'modal'
+  data () {
     return {
       user: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       },
-      token: "",
-      name: "",
+      token: '',
+      name: '',
       error: false
     }
   },
@@ -69,41 +70,41 @@ export default {
   },
   methods: {
     // redireciona o user caso esteja logado
-    CheckLogin(){
+    CheckLogin () {
       console.log(this.currentUser)
-      if(this.currentUser) {
+      if (this.currentUser) {
         this.$router.replace('/')
       }
     },
-    Login(){
-      this.$http.post("http://localhost:8000/rest-auth/login/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.token = JwtDecode(result.data.token)
-      this.name = this.token.isStaff
-      this.LoginSucess(result)
+    Login () {
+      this.$http.post('http://localhost:8000/rest-auth/login/', this.user, { headers: { 'content-type': 'application/json' } }).then(result => {
+        this.token = JwtDecode(result.data.token)
+        this.name = this.token.isStaff
+        this.LoginSucess(result)
       },
       error => {
-          this.LoginFail()
-          console.error(error)
-      });
+        this.LoginFail()
+        console.error(error)
+      })
     },
-    LoginSucess(response){
-      if(!response.data.token){
+    LoginSucess (response) {
+      if (!response.data.token) {
         this.loginFail()
         return
       }
       this.error = false
       localStorage.token = response.data.token
-      this.$store.dispatch('login')//trigger da ação de login implementado em store/auth.js
+      this.$store.dispatch('login') // trigger da ação de login implementado em store/auth.js
       this.$router.replace('/home')
     },
-    LoginFail(){
+    LoginFail () {
       this.error = 'Falha no Login!'
-      this.$store.dispatch('logout')//trigger da ação de logout
+      this.$store.dispatch('logout') // trigger da ação de logout
       delete localStorage.token
     },
-    close() {
-        this.$emit('close');
-      }
+    close () {
+      this.$emit('close')
+    }
   }
 }
 </script>
@@ -133,7 +134,6 @@ export default {
     transition: all .3s ease;
     font-family: Helvetica, Arial, sans-serif;
 }
-
 
 /*
  * The following styles are auto-applied to elements with
@@ -178,7 +178,6 @@ export default {
   border-radius: 10px;
 }
 
-
 .modal-form{
   padding: 0;
 }
@@ -190,7 +189,6 @@ export default {
    color:    #132a71;
 }
 @media (min-width: 993px) {
-
 
 }
 </style>

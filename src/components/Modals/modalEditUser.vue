@@ -30,8 +30,9 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+/* eslint-disable */
 
+import {mapGetters} from 'vuex'
 export default {
   name: 'modalEditUser',
   data () {

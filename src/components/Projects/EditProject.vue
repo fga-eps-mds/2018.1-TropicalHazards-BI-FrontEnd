@@ -50,6 +50,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import {mapGetters} from 'vuex'
 import SideBar from '@/components/Utils/SideBar'
 export default {

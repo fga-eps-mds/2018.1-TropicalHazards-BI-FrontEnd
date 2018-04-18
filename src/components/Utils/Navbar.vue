@@ -2,15 +2,14 @@
  <div id="app">
   <header class="parallax">
     <div class="filter">
-
       <!--
         navbar e o header aqui estão juntos por conta do efeito desejado
       -->
       <nav class="navbar">
         <div class="nav-wrapper">
-          <a href="#/" class="brand-logo">
-            <span class="fa fa-eye"></span> OBSERV
-          </a>
+          <router-link :to="{name: 'LandingPage'}" class="brand-logo">
+            <span  class="fa fa-eye"></span> OBSERV
+          </router-link>
           <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
@@ -35,63 +34,59 @@
                 <span class="fa fa-sign-char"></span> Observatórios
               </li>
             </a>
-        </ul>
+          </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <li class="navbar-item">
               Bem Vindo {{ currentUser.name }}
             </li>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
-        <router-link :to="{name: 'HomePage'}">
+              <router-link :to="{name: 'HomePage'}">
               <li class="navbar-item">
                 <span class="fa fa-dashboard"></span> Dashboard
               </li>
-        </router-link>
-        </ul>
+              </router-link>
+          </ul>
         </div>
       </nav>
-      <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
+      <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text
+                                     text-lighten-4 collection" id="mobile-menu">
         <router-link :to="{name: 'Login'}">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Login
           </li>
         </router-link>
       </ul>
-      <ul v-if="currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
-        <a href="#">
+      <ul v-if="currentUser" class="sidenav grey darken-4 grey-text
+                                    text-lighten-4 collection" id="mobile-menu">
+          <router-link :to="{name: 'HomePage'}">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Bem vindo {{currentUser.name}}
           </li>
-        </a>
+          </router-link>
         <a href="#/projetos">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Criar observatório
           </li>
         </a>
       </ul>
-
       <div class="container center-align" id="teste">
-        <h2>
-          Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito
-        </h2>
-        <p>
-          lorem ipsum dolor sit amet
-        </p>
-        <form action="" method="post" class=" hide-on-med-and-down" >
-          <input type="text" placeholder="Procurar...">
-          <button type="submit" class="waves-effect waves-light btn-large cyan darken-2">
-            <span class="fa fa-search"></span>
-            Buscar
-          </button>
-        </form>
+          <h2>Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito</h2>
+          <p>Cadastre-se e gerencie sua pesquisa</p>
+          <form action="" method="post" class=" hide-on-med-and-down" >
+            <input type="text" placeholder="Procurar...">
+              <button type="submit" class="waves-effect waves-light btn-large cyan darken-2">
+              <span class="fa fa-search">Buscar</span>
+              </button>
+          </form>
       </div>
     </div>
   </header>
-  </div>
+</div>
 </template>
 
 <script>
-
+/* eslint-disable */
 import {mapGetters} from 'vuex'
 import modal from '@/components/Modals/modal'
 
@@ -108,7 +103,7 @@ export default {
   data () {
     return {
 
-    user: {
+    user: { //Get currentUser information
       username: "",
       email: "",
       id:""
@@ -130,6 +125,7 @@ export default {
          $('.sidenav').sidenav();
         });
       },
+
       Logout(){
       this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
       this.LogoutSucess(result)
@@ -139,15 +135,17 @@ export default {
           console.error(error)
       });
     },
+
       LogoutSucess(response){
         this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
         delete localStorage.token
         this.$router.replace('/')
         },
-        loadUserInfo (){
-      this.user.id = this.currentUser.id
-      this.user.username = this.currentUser.name
-      this.user.email = this.currentUser.email
+
+      loadUserInfo (){
+        this.user.id = this.currentUser.id
+        this.user.username = this.currentUser.name
+        this.user.email = this.currentUser.email
     }
   },
 
@@ -253,6 +251,10 @@ footer .row {
   font-size: 1.1em;
   background-color: inherit !important;
   color: inherit !important;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:    #ffffff;
 }
 
 @media (min-width: 993px) {

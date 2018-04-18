@@ -1,5 +1,6 @@
-import JwtDecode from 'jwt-decode'
+/* eslint-disable */
 
+import JwtDecode from 'jwt-decode'
 export default class User {
   static from (token) {
     try {

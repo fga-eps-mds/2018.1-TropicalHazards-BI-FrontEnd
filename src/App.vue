@@ -5,19 +5,16 @@
 </template>
 
 <script>
-import Footer from '@/components/Utils/Footer'
+/* eslint-disable */
 
 export default {
   name: 'App',
   components: {
-    Footer,
   }
 }
 </script>
 
 <style>
-
-
 
 .page-footer{
   background-color:#1b1b1b;
@@ -87,6 +84,10 @@ h6 {
   border-right: 1px solid #999;
   position: static;
   color: #333;
+}
+
+#projects {
+  font-size:10px;
 }
 
 </style>
