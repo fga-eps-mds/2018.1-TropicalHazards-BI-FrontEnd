@@ -4,54 +4,54 @@
      <div class="row">
     <div id="sidebar" class="hide-on-small-only col m1 center-align grey lighten-4">
       <ul class="">
-        <a href="" class="">
+        <router-link :to="{ name: 'Login' }">
           <img src="https://via.placeholder.com/60x60" alt="" class="responsive-img" />
-        </a>
-        <a href="#/home" class="">
+        </router-link>
+        <router-link :to="{ name: 'HomePage' }">
           <li class="">
             <p> {{currentUser.name}}</p>
           </li>
-        </a>
-        <a href="" class="sidebar-icon">
+        </router-link>
+        <router-link :to="{ name: 'LandingPage' }" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Home">
             <span class="fa fa-home"></span>
           </li>
-        </a>
-        <a href="" class="sidebar-icon">
+        </router-link>
+        <router-link :to="{ name: 'ListProjects' }" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Projetos">
             <span class="fa fa-th"></span>
           </li>
-        </a>
-        <a href="" class="sidebar-icon">
+        </router-link>
+        <router-link :to="{ name: '' }" class="sidebar-icon">
           <li class="tooltipped"  data-position="right" data-tooltip="Observatórios">
             <span class="fa fa-area-chart"></span>
           </li>
-        </a>
-        <a href="" class="sidebar-icon">
+        </router-link>
+        <router-link :to="{ name: 'HomePage' }" class="sidebar-icon">
           <li class="tooltipped"  data-position="right" data-tooltip="Dados">
             <span class="fa fa-cubes"></span>
           </li>
-        </a>
-        <a href="" class="sidebar-icon">
+        </router-link>
+        <router-link :to="{ name: 'EditUser' }" class="sidebar-icon">
           <li class="tooltipped"  data-position="right" data-tooltip="Gerenciar perfil">
             <span class="fa fa-gear"></span>
           </li>
-        </a>
-        <a href="" class="sidebar-icon">
+        </router-link>
+        <router-link :to="{ name: 'Logout' }" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Sair">
             <span class="fa fa-sign-out"></span>
           </li>
-        </a>
-        <a href="#/edituser" class="">
+        </router-link>
+        <router-link :to="{ name: 'EditUser' }" class="">
           <li class="">
             <p> Editar Perfil</p>
           </li>
-        </a>
-        <a href="#/deleteuser" class="">
+        </router-link>
+        <router-link :to="{ name: 'DeleteUser' }" class="">
           <li class="">
             <p> Deletar Perfil</p>
           </li>
-        </a>
+        </router-link>
       </ul>
     </div>
 
@@ -101,9 +101,9 @@
           <h5>
             Meus projetos
           </h5>
-          <a href="#" class="btn-flat blue lighten-1 grey-text text-lighten-2">
+          <router-link :to="{ name: 'CreateProject' }" class="btn-flat blue lighten-1 grey-text text-lighten-2">
             Novo projeto <span class="fa fa-plus"></span>
-          </a>
+          </router-link>
           <div class="row">
             <div v-for="projeto in projetos" class="col s12 m4 l3">
               <div class="card grey lighten-5">
@@ -114,15 +114,15 @@
                   </p>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="#" class="btn  blue lighten-1">
+                  <router-link :to="{ name: '' }" class="btn  blue lighten-1">
                     <span class="fa fa-search"></span>
-                  </a>
-                  <a href="#" class="btn  blue lighten-1">
+                  </router-link>
+                  <router-link :to="{ name: 'HomePage' }" class="btn  blue lighten-1">
                     <span class="fa fa-edit"></span>
-                  </a>
-                  <a href="#" class="btn  blue lighten-1">
+                  </router-link>
+                  <router-link :to="{ name: 'HomePage' }" class="btn  blue lighten-1">
                     <span class="fa fa-user-plus"></span>
-                  </a>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default {
       projects: {
         name: "",
         description: ""
-        
+
       },
       projetos: "",
       frase: '',
@@ -170,10 +170,10 @@ export default {
       this.user.id = this.currentUser.id
       this.user.username = this.currentUser.name
       this.user.email = this.currentUser.email
-    },  
+    },
 
-  },   
-  
+  },
+
   beforeMount(){
     this.getProject()
     this.loadUserInfo()

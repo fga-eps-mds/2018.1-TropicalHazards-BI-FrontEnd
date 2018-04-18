@@ -1,33 +1,33 @@
 <template>
 <div class = "ListProject">
-  <div class="row">     
+  <div class="row">
        <h1 style="text-align:center"> Projetos </h1>
-    <div class ="col s6">    
+    <div class ="col s6">
             <ul class="collection">
-                <li v-for="projeto in projetos" class="collection-item avatar">
-                <span class="title"><a href="#/project/detail">{{ projeto.name }}</a></span>
-                <p>Descrição do projeto </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              <li v-for="projeto in projetos" class="collection-item avatar">
+              <span class="title"><router-link :to="{ name: 'ProjectDetail' }">{{ projeto.name }}</router-link></span>
+              <p>Descrição do projeto </p>
+              <router-link :to="{ name: '' }" class="secondary-content"><i class="material-icons">grade</i></router-link>
             </li>
         </ul>
     </div>
-    <div class ="col s6">    
+    <div class ="col s6">
             <ul class="collection">
-                <li v-for="projeto in projetos" class="collection-item avatar">
-                <span class="title"><a href="#/project/detail">{{ projeto.name }}</a></span>
-                <p>Descrição do projeto </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              <li v-for="projeto in projetos" class="collection-item avatar">
+              <span class="title"><router-link :to="{ name: 'ProjectDetail' }">{{ projeto.name }}</router-link></span>
+              <p>Descrição do projeto </p>
+              <router-link :to="{ name: 'HomePage' }" class="secondary-content"><i class="material-icons">grade</i></router-link>
             </li>
         </ul>
-    </div>         
-        <br />
+    </div>
+    <br />
   </div>
 </div>
 </template>
 
 <script>
 import ProjectDetail from '@/components/Projects/ProjectDetail'
- 
+
   export default {
     components: {
     ProjectDetail,
@@ -38,7 +38,7 @@ import ProjectDetail from '@/components/Projects/ProjectDetail'
       projects: {
         name: "",
         description: ""
-        
+
       },
       projetos: "",
       frase: '',
@@ -55,14 +55,14 @@ import ProjectDetail from '@/components/Projects/ProjectDetail'
       error => {
           console.error(error);
       });
-    },  
+    },
 
-  },   
-  
+  },
+
   beforeMount(){
     this.getProject()
  },
-  
+
 }
 </script>
 
