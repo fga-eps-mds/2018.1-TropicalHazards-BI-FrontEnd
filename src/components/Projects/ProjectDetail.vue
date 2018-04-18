@@ -53,6 +53,10 @@
             Novo Observatório
             <span class="fa fa-plus"></span>
           </a>
+          <a  v-on:click="deleteProject()" class="btn-flat red lighten-1 grey-text text-lighten-2">
+            Deletar Projeto
+            <span class="fa fa-trash"></span>
+          </a>
           <div class="row">
             <div class="col s12 m4 l3">
               <div class="card grey lighten-5">
@@ -174,6 +178,18 @@ export default {
         });
 
   },
+    deleteProject (){
+        this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
+        window.confirm("projeto deletado")
+        this.$router.replace('/home')
+
+        },
+        error => {
+            window.alert("Erro ao deletar o projeto")
+            console.error(error);
+        });
+
+  },
     getProject(){
       this.$http.get("http://localhost:8000/projects/",  { headers:
                     { "content-type": "application/json" } }).then(result => {
@@ -208,7 +224,6 @@ export default {
   },
   created () {
     this.getProject()
-    this.getProjectDetail ()
   }
 }
 </script>

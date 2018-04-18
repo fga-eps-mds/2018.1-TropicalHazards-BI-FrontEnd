@@ -153,10 +153,12 @@ export default {
     }
   },
     beforeMount(){
-      this.getProject()
       this.loadUserInfo()
+      this.getProject()
+
       this.modalScript()
  },
+
 }
 </script>
 

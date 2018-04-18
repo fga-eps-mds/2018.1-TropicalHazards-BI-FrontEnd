@@ -3,15 +3,15 @@
   <div class="modal-content container center-align">
     <div class="row">
       <h4>
-        Deletar Projeto ?
+        Deletar {{project.name}} ?
       </h4>
         <div class="col s6">
-          <button type="submit" class="model-close col s12 btn-large red lighten-1 waves-effect waves-green">
+          <button v-on:click="deleteProject()" type="submit" class="modal-close col s12 btn-large red lighten-1 waves-effect waves-green">
             <span class="fa fa-trash"></span> Sim
           </button>
         </div>
         <div class="col s6">
-          <button v-on:click="modalScript()" type="submit" class="model-close col s12 btn-large blue lighten-1 waves-effect waves-green">
+          <button v-on:click="modalScript()" type="submit" class="modal-close col s12 btn-large blue lighten-1 waves-effect waves-green">
             <span class="fa fa-cancel"></span> Não
           </button>
         </div>
@@ -29,24 +29,33 @@ export default {
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },
+  data(){
+    return{
+      project: ""
+    }
+  },
     methods: {
 
     getProjectDetail (){
-        this.$http.get('http://localhost:8000/projects/4/',
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-        this.projeto = result.data
-        },error => {
+        this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
+        this.project = result.data;
+        },
+        error => {
+            console.error(error);
         });
+
     },
     deleteProject (){
-        this.$http.delete('http://localhost:8000/project/' + this.currentUser.id + '/',
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-                         this.DeleteSucess(result)
-        },error => {
-          this.updateFail()
-        });
-    },
+        this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
+        window.confirm("projeto deletado")
+        this.$router.replace('/home')
 
+        },
+        error => {
+            window.alert("Erro ao deletar o projeto")
+            console.error(error);
+        });
+  },
     modalScript () {
         $(document).ready(function(){
         $('.modal').modal();
@@ -60,7 +69,6 @@ export default {
 
   },
       beforeMount(){
-      this.getProject()
       this.loadUserInfo()
       this.modalScript ()
  }

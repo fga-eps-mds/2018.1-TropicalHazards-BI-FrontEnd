@@ -24,8 +24,6 @@
             <span class="fa fa-area-chart"></span>
           </li>
         </a>
-
-
         <a href="#edit-user" class="modal-trigger sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Edit">
             <span class="fa fa-gear"></span>
@@ -46,7 +44,6 @@
             <span class="fa fa-sign-out"></span>
           </li>
         </a>
-
         <hr>
       </ul>
 <modal-delete-user></modal-delete-user>
@@ -110,7 +107,6 @@ showModal() {
 
   },
       beforeMount(){
-      this.modalScript ()
  },
 
 }

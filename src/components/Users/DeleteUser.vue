@@ -69,13 +69,13 @@ export default {
       })
       this.$store.dispatch('logout')//trigger da ação de logout implementado em store/auth.js
       delete localStorage.token
-      window.confirm("USER DELETADO")
+      window.alert("Usuário Deletado")
       this.$router.push('/')
       location.reload();
 
     },
     updateFail() {
-      window.confirm("Falha no DELETE")
+      window.alert("Falha ao deletar usuário")
       this.$router.replace('/')
     },
     testToken(){

@@ -31,25 +31,20 @@ import JwtDecode from 'jwt-decode'
       this.project.user = this.currentUser.id
     },
     PostProject (){
-      console.log("chegou aqui")
       this.$http.post("http://localhost:8000/projects/",this.project, { headers: { 'Authorization': 'JWT ' + localStorage.token, "content-type": "application/json", "Authorization": "JWT" + localStorage.Token } }
                      ).then(result => {
-      this.project = result.data;
-      window.alert("Projeto criado com Sucesso")
-      this.$router.push('/home')
-      CreateSucess (result)
-      },
+      this.projeto = result.data;
+      this.postSucess(result)
+    },
       error => {
           console.error(error);
       });
     },
-    CreateSucess (response){
-      if(!response.data){
-        this.CreateFail()
-        return
-      }
-      location.reload();
+
+    postSucess(response){
+      window.alert("Projeto criado com Sucesso")
     },
+
     CreateFail (){
       window.confirm("Falha na criação do projeto")
     },
@@ -75,7 +70,8 @@ import JwtDecode from 'jwt-decode'
     this.loadUserInfo()
     this.loadProject()
     this.testToken()
-  }
+  },
+
 }
 </script>
 <template>
