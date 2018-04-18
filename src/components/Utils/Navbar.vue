@@ -42,11 +42,11 @@
             </li>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
-            <a href="#/home/">
+        <router-link :to="{name: 'HomePage'}">
               <li class="navbar-item">
                 <span class="fa fa-dashboard"></span> Dashboard
               </li>
-            </a>
+        </router-link>
         </ul>
         </div>
       </nav>
