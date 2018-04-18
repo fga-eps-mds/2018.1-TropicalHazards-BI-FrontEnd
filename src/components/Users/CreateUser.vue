@@ -11,6 +11,7 @@
           <a v-on:click="registerUser()" v-on:keyup.enter="registerUser()" class="waves-effect waves-light btn-small">Criar Usuario</a>
          </div>
      </div>
+
   </div>
 </div>
 </template>
@@ -45,6 +46,7 @@ import SecondNavBar from '@/components/Utils/SecondNavBar'
       });
     },
   }
+
 }
 </script>
 

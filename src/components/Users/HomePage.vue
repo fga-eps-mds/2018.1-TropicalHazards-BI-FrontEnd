@@ -1,8 +1,11 @@
 <template>
+
  <div id="app ">
   <div class="row grey lighten-4">
     <sidebar></sidebar>
     <div id="content" class="col m11" >
+
+
       <div class="header center-align white">
         <h3>Home</h3>
       </div>
@@ -63,6 +66,7 @@
                   <!-- <a href="#delete-proj" class="modal-trigger btn red">
                     <span class="fa fa-remove"></span>
                   </a> -->
+
                 </div>
               </div>
             </div>

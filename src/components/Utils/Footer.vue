@@ -11,10 +11,10 @@
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Links</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                  <li><router-link :to="{name: ' '} "  class="grey-text text-lighten-3">Link 1</router-link> </li>
+                  <li><router-link :to="{name: ' '} "  class="grey-text text-lighten-3">Link 2</router-link> </li>
+                  <li><router-link :to="{name: ' '} "  class="grey-text text-lighten-3">Link 3</router-link> </li>
+                  <li><router-link :to="{name: ' '} "  class="grey-text text-lighten-3">Link 4</router-link> </li>
                 </ul>
               </div>
             </div>
@@ -22,7 +22,7 @@
           <div class="footer-copyright">
             <div class="container">
             © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <router-link :to="{name: ' '} "  class="grey-text text-lighten-4 right">More Links</router-link>
             </div>
           </div>
         </footer>

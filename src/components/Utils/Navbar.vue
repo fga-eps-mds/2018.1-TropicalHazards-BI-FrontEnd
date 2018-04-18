@@ -14,6 +14,7 @@
             <i class="material-icons">menu</i>
           </a>
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
+
               <modal v-show="isModalVisible" @close="closeModal"/>
                <a @click="showModal">
                 <li class="navbar-item">
@@ -52,6 +53,7 @@
       <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text
                                      text-lighten-4 collection" id="mobile-menu">
         <router-link :to="{name: 'Login'}">
+
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Login
           </li>

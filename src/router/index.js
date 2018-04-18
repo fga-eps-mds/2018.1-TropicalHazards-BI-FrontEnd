@@ -40,8 +40,8 @@ export default new Router({
       component: CreateProject
     },
     {
-      path: '/listprojet',
-      name: 'ListProject',
+      path: '/listproject',
+      name: 'ListProjects',
       component: ListProject
     },
     {
@@ -66,7 +66,7 @@ export default new Router({
       component: EditUser
     },
     {
-      path: '/deleteUser',
+      path: '/deleteuser',
       name: 'DeleteUser',
       component: DeleteUser
     },
