@@ -30,11 +30,11 @@
             </a>
         </ul>
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
-            <a href="#/listprojet">
+            <router-link :to="{name: 'ListProjects'}">
               <li class="navbar-item">
-                <span class="fa fa-sign-char"></span> Observatórios
+                <span class="fa fa-chart"></span> Projetos
               </li>
-            </a>
+            </router-link>
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <li class="navbar-item">
