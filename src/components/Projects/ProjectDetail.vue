@@ -65,8 +65,8 @@
           <br>
           <br>
           <div class="row" id="detail">
-            <div class="col s12 m4 l3">
-              <div class="card grey lighten-5">
+            <div class=" col s12 m4 l3">
+              <div class="truncate card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
                   <span class="card-title">Observatório x</span>
                   <p>
@@ -87,8 +87,8 @@
                 </div>
               </div>
             </div>
-            <div class="col s12 m4 l3">
-              <div class="card grey lighten-5">
+            <div class=" col s12 m4 l3">
+              <div class="truncate card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
                   <span class="card-title">Lago Sul</span>
                   <p>
@@ -109,8 +109,8 @@
                 </div>
               </div>
             </div>
-            <div class="col s12 m4 l3">
-              <div class="card grey lighten-5">
+            <div class=" col s12 m4 l3">
+              <div class="truncate card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
                   <span class="card-title">titulo</span>
                   <p>

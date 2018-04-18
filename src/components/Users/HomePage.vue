@@ -45,7 +45,7 @@
           </h5>
           <div class="row" id="projects">
             <div v-for="project in projects" :key="project.id" class="col s12 m4 l3">
-              <div class="card grey lighten-5">
+              <div class="truncate card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
                   <span style="font-size:20px" class="card-title">{{ project.name }}</span>
                     <p> Descrição: {{project.description }} </p>
