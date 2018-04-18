@@ -3,7 +3,7 @@ version: '2'
 services:
   th_bi-front:
     container_name: tropical-hazards-front
-    build: .
+    image: arthur0496/tropical-hazards-front:dev
     command: /bin/bash -lc "npm install && npm run dev"
     volumes:
       - .:/TropicalHazards-BI-FrontEnd
@@ -14,7 +14,6 @@ services:
     networks:
       - default
       - 20181tropicalhazardsbi_default
-    ipc: host # <---- Exempts explict call, remove if you want.
 
 networks:
   20181tropicalhazardsbi_default:
