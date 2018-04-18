@@ -1,8 +1,8 @@
+/* eslint-disable */
 import User from './User.js'
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const UPDATE = 'UPDATE'
-
 const state = {
   user: User.from(localStorage.token)
 }

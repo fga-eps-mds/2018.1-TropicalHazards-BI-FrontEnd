@@ -1,97 +1,39 @@
 <template>
- <div id="app">
 
-     <div class="row">
-    <div id="sidebar" class="hide-on-small-only col m1 center-align grey lighten-4">
-      <ul class="">
-        <router-link :to="{ name: 'Login' }">
-          <img src="https://via.placeholder.com/60x60" alt="" class="responsive-img" />
-        </router-link>
-        <router-link :to="{ name: 'HomePage' }">
-          <li class="">
-            <p> {{currentUser.name}}</p>
-          </li>
-        </router-link>
-        <router-link :to="{ name: 'LandingPage' }" class="sidebar-icon">
-          <li class="tooltipped" data-position="right" data-tooltip="Home">
-            <span class="fa fa-home"></span>
-          </li>
-        </router-link>
-        <router-link :to="{ name: 'ListProjects' }" class="sidebar-icon">
-          <li class="tooltipped" data-position="right" data-tooltip="Projetos">
-            <span class="fa fa-th"></span>
-          </li>
-        </router-link>
-        <router-link :to="{ name: '' }" class="sidebar-icon">
-          <li class="tooltipped"  data-position="right" data-tooltip="Observatórios">
-            <span class="fa fa-area-chart"></span>
-          </li>
-        </router-link>
-        <router-link :to="{ name: 'HomePage' }" class="sidebar-icon">
-          <li class="tooltipped"  data-position="right" data-tooltip="Dados">
-            <span class="fa fa-cubes"></span>
-          </li>
-        </router-link>
-        <router-link :to="{ name: 'EditUser' }" class="sidebar-icon">
-          <li class="tooltipped"  data-position="right" data-tooltip="Gerenciar perfil">
-            <span class="fa fa-gear"></span>
-          </li>
-        </router-link>
-        <router-link :to="{ name: 'Logout' }" class="sidebar-icon">
-          <li class="tooltipped" data-position="right" data-tooltip="Sair">
-            <span class="fa fa-sign-out"></span>
-          </li>
-        </router-link>
-        <router-link :to="{ name: 'EditUser' }" class="">
-          <li class="">
-            <p> Editar Perfil</p>
-          </li>
-        </router-link>
-        <router-link :to="{ name: 'DeleteUser' }" class="">
-          <li class="">
-            <p> Deletar Perfil</p>
-          </li>
-        </router-link>
-      </ul>
-    </div>
+ <div id="app ">
+  <div class="row grey lighten-4">
+    <sidebar></sidebar>
+    <div id="content" class="col m11" >
 
-    <div id="content" class="col m11">
+
       <div class="header center-align white">
-        <h3>
-          Home
-        </h3>
+        <h3>Home</h3>
       </div>
       <div class="grey lighten-4">
         <div class="custom-container">
-          <h5>Estatísticas de perfil</h5>
+          <h5> <span class="fa fa-line-chart"></span>Estatísticas de perfil</h5>
           <div class="row">
             <div class="col s12 m4">
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title">8</span>
-                  <p>
-                    Projetos ativos
-                  </p>
+                  <span class="card-title">{{projects.length}}</span>
+                  <p>Projetos ativos</p>
                 </div>
               </div>
             </div>
             <div class="col s12 m4">
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title">37</span>
-                  <p>
-                    Observatórios
-                  </p>
+                  <span class="card-title">1</span>
+                  <p>Observatórios</p>
                 </div>
               </div>
             </div>
             <div class="col s12 m4">
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title">162</span>
-                  <p>
-                    Contribuidores
-                  </p>
+                  <span class="card-title">1</span>
+                  <p>Contribuidor(es)</p>
                 </div>
               </div>
             </div>
@@ -99,30 +41,32 @@
         </div>
         <div class="custom-container">
           <h5>
-            Meus projetos
+            Projetos
           </h5>
-          <router-link :to="{ name: 'CreateProject' }" class="btn-flat blue lighten-1 grey-text text-lighten-2">
-            Novo projeto <span class="fa fa-plus"></span>
-          </router-link>
-          <div class="row">
-            <div v-for="projeto in projetos" class="col s12 m4 l3">
-              <div class="card grey lighten-5">
+          <div class="row" id="projects">
+            <div v-for="project in projects" :key="project.id" class="col s12 m4 l3">
+              <div class="truncate card grey lighten-5">
                 <div class="card-content grey-text text-darken-2">
-                  <span class="card-title">{{ projeto.name }}</span>
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </p>
+                  <span style="font-size:20px" class="card-title">{{ project.name }}</span>
+                    <p> Descrição: {{project.description }} </p>
+                    <p> IdProjeto: {{project.id }} </p>
+                    <p> IdUser: {{project.user }} </p>
                 </div>
                 <div class="card-action center-align grey-text text-lighten-2">
-                  <router-link :to="{ name: '' }" class="btn  blue lighten-1">
+                <router-link :to="{ name: 'ProjectDetail', params: { id: project.id } }"
+                                    class="btn blue lighten-1" >
                     <span class="fa fa-search"></span>
-                  </router-link>
-                  <router-link :to="{ name: 'HomePage' }" class="btn  blue lighten-1">
+                </router-link>
+
+                <router-link :to="{ name: 'EditProject', params: { id: project.id } }"
+                                    class="btn blue lighten-1" >
                     <span class="fa fa-edit"></span>
-                  </router-link>
-                  <router-link :to="{ name: 'HomePage' }" class="btn  blue lighten-1">
-                    <span class="fa fa-user-plus"></span>
-                  </router-link>
+                </router-link>
+
+                  <!-- <a href="#delete-proj" class="modal-trigger btn red">
+                    <span class="fa fa-remove"></span>
+                  </a> -->
+
                 </div>
               </div>
             </div>
@@ -131,111 +75,87 @@
       </div>
     </div>
   </div>
+<modal-delete-proj></modal-delete-proj>
 </div>
 </template>
 
 <script>
+/* eslint-disable */
 import {mapGetters} from 'vuex'
+import SideBar from '@/components/Utils/SideBar'
+import modalDeleteProject from '@/components/Modals/modalDeleteProject'
 
 export default {
 
-  data(){
-    name: 'ListProject'
+  components: {
+    'sidebar': SideBar,
+    'modal-delete-proj': modalDeleteProject
+  },
+  data () {
     return {
-      projects: {
-        name: "",
-        description: ""
-
+      projects: [],
+      user: {
+        username: '',
+        password: '',
+        email: ''
       },
-      projetos: "",
-      frase: '',
-
+      isModalVisible: false
     }
   },
-   computed: {
+  computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },
-
   methods: {
-    getProject(){
-      console.log("chegou aqui")
-      this.$http.get("http://localhost:8000/projects/",  { headers: { "content-type": "application/json" } }).then(result => {
-      this.projetos = result.data;
+
+    deleteProject () {
+      this.$http.delete('http://localhost:8000/project/' + this.projeto.id + '/',
+        { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+        window.alert('projeto deletado')
       },
       error => {
-          console.error(error);
-      });
+        console.error(error)
+      })
     },
-    loadUserInfo (){
+    getProject () {
+      this.$http.get('http://localhost:8000/projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
+        this.projects = result.data
+      },
+      error => {
+        console.error(error)
+      })
+    },
+    loadUserInfo () {
       this.user.id = this.currentUser.id
       this.user.username = this.currentUser.name
       this.user.email = this.currentUser.email
     },
-
+    showModal () {
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
+    },
+    modalScript () {
+      (document).ready(function () {
+        ('.modal').modal()
+      })
+      (document).ready(function () {
+        ('select').formSelect()
+      })
+    }
   },
-
-  beforeMount(){
-    this.getProject()
+  beforeMount () {
     this.loadUserInfo()
- },
+    this.getProject()
+  }
 
 }
 </script>
 
 <style>
-a {
-  color: inherit !important;
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  padding: .5em;
-  margin: 0 !important;
-}
-
-.row {
-  max-width: 100%;
-}
-
-.sidebar-icon li {
-  font-size: 2em;
-  margin-top: .5em;
-  margin-bottom: .5em;
-}
-
-.card-title {
-  font-weight: bold !important;
-  color: #5252ff;
-}
-
-.header {
-  border-bottom: 1px solid #999;
-}
-
-.custom-container {
-  max-width: 100%;
-  padding-right: 5%;
-  padding-left: 5%;
-}
-
-#content {
-  padding: 0;
-}
-
-#content .header h3 {
-  margin: 0;
-  padding: .3em;
-}
-
-#sidebar {
-  height: 100vh;
-  border-right: 1px solid #999;
-  position: static;
-  color: #333;
+p {
+  font-size: 15px;
 }
 
 </style>

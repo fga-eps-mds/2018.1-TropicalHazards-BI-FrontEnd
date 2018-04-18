@@ -1,67 +1,99 @@
 <template>
 <div class = "ListProject">
-  <div class="row">
-       <h1 style="text-align:center"> Projetos </h1>
-    <div class ="col s6">
-            <ul class="collection">
-              <li v-for="projeto in projetos" class="collection-item avatar">
-              <span class="title"><router-link :to="{ name: 'ProjectDetail' }">{{ projeto.name }}</router-link></span>
-              <p>Descrição do projeto </p>
-              <router-link :to="{ name: '' }" class="secondary-content"><i class="material-icons">grade</i></router-link>
-            </li>
-        </ul>
+    <div id="content" class="col m12" >
+    <secondnav></secondnav>
+      <div class="grey lighten-4">
+        <div class="center-align">
+          <h5> <span class="fa fa-line-chart"></span>Estatísticas</h5>
+          <div class="row">
+            <div class="col s12   ">
+              <div class="card ">
+                <div class="card-content ">
+                  <span class="card-title">{{projects.length}}</span>
+                  <p>Projetos ativos</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="custom-container">
+          <h5>Projetos</h5>
+          <div class="row" id="projects">
+            <div v-for="project in projects" :key="project.id" class="col s12 m4 l3">
+              <div class="card grey lighten-5">
+                <div class="card-content grey-text text-darken-2">
+                  <span style="font-size:20px" class="card-title">{{ project.name }}</span>
+                    <p> Descrição: {{project.description }} </p>
+                    <p> IdProjeto: {{project.id }} </p>
+                    <p> IdUser: {{project.user }} </p>
+                </div>
+                <div class="card-action center-align grey-text text-lighten-2">
+                <router-link :to="{ name: 'ProjectDetail', params: { id: project.id } }"
+                                    class="btn blue lighten-1" >
+                    <span class="fa fa-search"></span>
+                </router-link>
+
+                <router-link :to="{ name: 'EditProject', params: { id: project.id } }"
+                                    class="btn blue lighten-1" >
+                    <span class="fa fa-edit"></span>
+                </router-link>
+
+                  <!-- <a href="#delete-proj" class="modal-trigger btn red">
+                    <span class="fa fa-remove"></span>
+                  </a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class ="col s6">
-            <ul class="collection">
-              <li v-for="projeto in projetos" class="collection-item avatar">
-              <span class="title"><router-link :to="{ name: 'ProjectDetail' }">{{ projeto.name }}</router-link></span>
-              <p>Descrição do projeto </p>
-              <router-link :to="{ name: 'HomePage' }" class="secondary-content"><i class="material-icons">grade</i></router-link>
-            </li>
-        </ul>
-    </div>
-    <br />
-  </div>
-</div>
 </template>
 
 <script>
-import ProjectDetail from '@/components/Projects/ProjectDetail'
+/* eslint-disable */
 
-  export default {
-    components: {
+import ProjectDetail from '@/components/Projects/ProjectDetail'
+import SecondNavBar from '@/components/Utils/SecondNavBar'
+import {mapGetters} from 'vuex'
+import modal from '@/components/Modals/modal.vue'
+export default {
+  components: {
     ProjectDetail,
+    'secondnav': SecondNavBar,
+    modal
   },
-  data(){
-    name: 'ListProject'
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
+  data () {
     return {
       projects: {
-        name: "",
-        description: ""
+        name: '',
+        description: ''
 
       },
-      projetos: "",
-      frase: '',
+      isModalVisible: false,
+      projetos: ''
 
     }
   },
 
   methods: {
-    getProject(){
-      console.log("chegou aqui")
-      this.$http.get("http://localhost:8000/projects/",  { headers: { "content-type": "application/json" } }).then(result => {
-      this.projetos = result.data;
+    getProject () {
+      this.$http.get('http://localhost:8000/projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
+        this.projects = result.data
       },
       error => {
-          console.error(error);
-      });
-    },
-
+        console.error(error)
+      })
+    }
   },
 
-  beforeMount(){
+  beforeMount () {
     this.getProject()
- },
+  }
 
 }
 </script>
