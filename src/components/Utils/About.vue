@@ -1,5 +1,4 @@
 <template>
-
  <section id="about">
     <div class="container center-align">
       <h2>Sobre</h2>
@@ -15,11 +14,9 @@
       </p>
     </div>
   </section>
-
 </template>
 
 <script>
-
 
 </script>
 

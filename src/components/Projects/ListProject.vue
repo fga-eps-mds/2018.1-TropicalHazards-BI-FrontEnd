@@ -10,6 +10,7 @@
                     <p>Descrição do projeto </p>
                     <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                   </router-link>
+
             </li>
         </ul>
         <button
@@ -36,6 +37,7 @@
                   </li>
         </ul>
     </div> -->
+
     <br />
   </div>
 </div>
@@ -46,6 +48,7 @@ import ProjectDetail from '@/components/Projects/ProjectDetail'
 import SecondNavBar from '@/components/Utils/SecondNavBar'
 import {mapGetters} from 'vuex'
 import modal from '@/components/Modals/modal.vue';
+
   export default {
     components: {
     ProjectDetail,

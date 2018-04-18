@@ -12,6 +12,7 @@
           <a v-on:click="PostUser()" class="waves-effect waves-light btn-small">Criar Usuario</a>
          </div>
      </div>
+
   </div>
 </div>
 </template>
@@ -44,6 +45,7 @@ import SecondNavBar from '@/components/Utils/SecondNavBar'
       });
     },
   }
+
 }
 </script>
 

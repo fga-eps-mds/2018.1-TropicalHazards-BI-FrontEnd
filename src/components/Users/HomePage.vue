@@ -1,8 +1,11 @@
 <template>
+
  <div id="app ">
   <div class="row grey lighten-4">
     <sidebar></sidebar>
     <div id="content" class="col m11" >
+
+ 
       <div class="header center-align white">
         <h3>
           Home
@@ -48,6 +51,7 @@
           <h5>
             Projetos
           </h5>
+
           <div class="row">
             <div v-for="project in projects" :key="project.id" class="col s12 m4 l3">
               <div class="card grey lighten-5">
@@ -71,6 +75,7 @@
                   <!-- <a href="#delete-proj" class="modal-trigger btn red">
                     <span class="fa fa-remove"></span>
                   </a> -->
+
                 </div>
               </div>
             </div>
@@ -102,6 +107,7 @@ export default {
           username: "",
           password: "",
           email: ""
+
       },
       isModalVisible: false,
     }
@@ -159,6 +165,7 @@ export default {
       this.loadUserInfo()
       this.getProject()
       this.modalScript()
+
  },
 
 }

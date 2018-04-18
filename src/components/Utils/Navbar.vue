@@ -2,19 +2,19 @@
  <div id="app">
   <header class="parallax">
     <div class="filter">
-
       <!--
         navbar e o header aqui estão juntos por conta do efeito desejado
       -->
       <nav class="navbar">
         <div class="nav-wrapper">
-          <a href="#/" class="brand-logo">
+          <router-link :to="{ name: 'LandingPage' }" class="brand-logo">
             <span class="fa fa-eye"></span> OBSERV
-          </a>
-          <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
+          </router-link>
+          <router-link :to="{ name: 'LandingPage' }" data-target="mobile-menu" class="sidenav-trigger">
             <i class="material-icons">menu</i>
-          </a>
+          </router-link>
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
+
               <modal v-show="isModalVisible" @close="closeModal"/>
                <a @click="showModal">
                 <li class="navbar-item">
@@ -24,17 +24,20 @@
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <a v-on:click="Logout()">
+
               <li class="navbar-item">
                 <span class="fa fa-sign-out"></span> Logout
               </li>
-            </a>
+            </router-link>
         </ul>
+     issue_8_delete_project
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
             <a href="#/listprojet">
+
               <li class="navbar-item">
                 <span class="fa fa-sign-char"></span> Observatórios
               </li>
-            </a>
+            </router-link>
         </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
             <li class="navbar-item">
@@ -43,34 +46,36 @@
           </ul>
           <ul v-if="currentUser" class="right hide-on-med-and-down">
         <router-link :to="{name: 'HomePage'}">
+
               <li class="navbar-item">
                 <span class="fa fa-dashboard"></span> Dashboard
               </li>
         </router-link>
+
         </ul>
         </div>
       </nav>
       <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
         <router-link :to="{name: 'Login'}">
+
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Login
           </li>
         </router-link>
       </ul>
       <ul v-if="currentUser" class="sidenav grey darken-4 grey-text text-lighten-4 collection" id="mobile-menu">
-        <a href="#">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Bem vindo {{currentUser.name}}
           </li>
-        </a>
-        <a href="#/projetos">
+        <router-link :to="{ name: 'ProjectDetail' }">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Criar observatório
           </li>
-        </a>
+        </router-link>
       </ul>
 
       <div class="container center-align" id="teste">
+
         <h2>
           Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito
         </h2>
