@@ -1,19 +1,19 @@
 <template>
    <div id="sidebar" class="hide-on-small-only col m1 center-align grey lighten-4">
       <ul class="">
-        <a href="" class="">
+        <router-link :to="{ name: 'LandingPage'}">
           <img src="../../assets/v3_round.png" alt="" class="responsive-img circle center" />
-        </a>
+        </router-link>
         <a href="#/home" class="">
           <li class="">
             <p> {{currentUser.name}}</p>
           </li>
         </a>
-        <a href="" class="sidebar-icon">
+        <router-link :to="{ name: 'HomePage'}" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Home">
             <span class="fa fa-home"></span>
           </li>
-        </a>
+        </router-link>
         <a href="" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Projetos">
             <span class="fa fa-th"></span>

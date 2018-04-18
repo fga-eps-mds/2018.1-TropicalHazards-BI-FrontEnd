@@ -33,11 +33,12 @@
             <textarea  v-model="project.description" id="deion" class="materialize-textarea"></textarea>
           </div>
         </div>
-        <a class="modal-close btn-large grey lighten-1 white-text waves-effect waves-light">
-          <span class="fa fa-trash"></span> Cancelar
-        </a>
-        <a v-on:click="updateProject()" class="modal-close btn-large blue lighten-1 white-text waves-effect waves-light">
-          <span class="fa fa-trash"></span> Atualizar
+        <router-link :to="{ name: 'ProjectDetail' , params: { id: project.id }}"
+                            class=" btn-large grey lighten-1 white-text waves-effect waves-light">
+           Cancelar
+        </router-link>
+        <a v-on:click="updateProject()" class=" btn-large blue lighten-1 white-text waves-effect waves-light">
+           Atualizar
         </a>
     </div>
   </form>

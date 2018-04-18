@@ -62,12 +62,15 @@
                                     class="btn blue lighten-1" >
                     <span class="fa fa-search"></span>
                 </router-link>
-                  <a href="#" class="btn  blue lighten-1">
+
+                <router-link :to="{ name: 'EditProject', params: { id: project.id } }"
+                                    class="btn blue lighten-1" >
                     <span class="fa fa-edit"></span>
-                  </a>
-                  <a href="#delete-proj" class="modal-trigger btn red">
+                </router-link>
+
+                  <!-- <a href="#delete-proj" class="modal-trigger btn red">
                     <span class="fa fa-remove"></span>
-                  </a>
+                  </a> -->
                 </div>
               </div>
             </div>
