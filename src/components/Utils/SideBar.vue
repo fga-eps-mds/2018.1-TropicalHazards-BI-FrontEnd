@@ -106,8 +106,7 @@ showModal() {
     }
 
   },
-      beforeMount(){
- },
+
 
 }
 

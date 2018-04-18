@@ -155,7 +155,6 @@ export default {
     beforeMount(){
       this.loadUserInfo()
       this.getProject()
-
       this.modalScript()
  },
 

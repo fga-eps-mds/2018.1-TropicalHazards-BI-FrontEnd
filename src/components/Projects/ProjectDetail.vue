@@ -20,6 +20,7 @@
                   <p>
                     <span class="fa fa-line-chart"></span> {{project.description}}
                   </p>
+                  <p>{{project.id}}</p>
                 </div>
               </div>
             </div>
@@ -53,10 +54,17 @@
             Novo Observatório
             <span class="fa fa-plus"></span>
           </a>
+            <router-link :to="{ name: 'EditProject', params: { id: project.id } }"
+                                class="btn green lighten-1" >
+            Editar Projeto
+            <span class="fa fa-plus"></span>
+            </router-link>
           <a  v-on:click="deleteProject()" class="btn-flat red lighten-1 grey-text text-lighten-2">
             Deletar Projeto
             <span class="fa fa-trash"></span>
           </a>
+          <br>
+          <br>
           <div class="row">
             <div class="col s12 m4 l3">
               <div class="card grey lighten-5">
@@ -221,9 +229,10 @@ export default {
     this.loadUserInfo()
     this.testToken()
     this.modalScript()
+
   },
   created () {
-    this.getProject()
+    this.getProjectDetail()
   }
 }
 </script>
