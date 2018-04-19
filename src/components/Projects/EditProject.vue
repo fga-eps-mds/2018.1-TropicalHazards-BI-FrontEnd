@@ -33,7 +33,7 @@
             <textarea  v-model="project.description" id="deion" class="materialize-textarea"></textarea>
           </div>
         </div>
-        <router-link :to="{ name: 'ProjectDetail' , params: { id: project.id }}"
+        <router-link :to="{ name: 'HomePage'}"
                             class=" btn-large grey lighten-1 white-text waves-effect waves-light">
            Cancelar
         </router-link>
