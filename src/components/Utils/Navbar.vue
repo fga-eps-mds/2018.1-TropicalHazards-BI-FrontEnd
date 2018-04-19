@@ -88,7 +88,6 @@
           <router-link :to="{name: 'ProjectDetail'}">
             <span class="fa fa-sign-in"></span> Criar observatório
           </router-link>
-        </a>
       </ul>
       <div class="container center-align" id="teste">
           <h2>Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito</h2>
