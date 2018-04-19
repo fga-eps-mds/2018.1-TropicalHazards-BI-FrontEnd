@@ -61,12 +61,12 @@ export default {
   methods: {
     // metodo pra registrar usuário
     Register(){
-      this.$http.post("http://localhost:8000/users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.user = result.data;
-      this.response = response.data;
+      this.$http.post("users/", this.user).then(result => {
+        this.user = result.data;
+        this.response = response.data;
       },
       error => {
-          console.error(error);
+        console.error(error);
       });
 
     }

@@ -45,26 +45,24 @@ export default {
       this.user.email = this.currentUser.email
     },
     editUser (){
-        this.$http.put('http://localhost:8000/users/' + this.currentUser.id + '/',
-                       this.user,
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-                       this.updateSucess(result)
+        this.$http.put('users/' + this.currentUser.id + '/', this.user, { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+          this.updateSucess(result)
         },error => {
           this.updateFail()
-        });
+        })
     },
     updateSucess(response){
       if(!result){
         this.updateFail()
         return
       }
-        this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+        this.$http.post('obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
         localStorage.token = result.data.token
       })
 
       window.confirm("Usuário atualizado")
       this.$store.dispatch('update')
-      this.$router.push('/home')
+      this.$router.replace('/home')
       location.reload();
 
     },
@@ -73,7 +71,7 @@ export default {
       this.$router.replace('/home')
     },
     testToken(){
-      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+      this.$http.post('obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
       localStorage.token = result.data.token
       })
     }

@@ -4,26 +4,26 @@
         <router-link :to="{ name: 'LandingPage'}">
           <img src="../../assets/v3_round.png" alt="" class="responsive-img circle center" />
         </router-link>
-        <a href="#/home" class="">
+        <router-link :to="{name: 'HomePage'}" class="">
           <li class="">
             <p> {{currentUser.name}}</p>
           </li>
-        </a>
+        </router-link>
         <router-link :to="{ name: 'HomePage'}" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Home">
             <span class="fa fa-home"></span>
           </li>
         </router-link>
-        <a href="" class="sidebar-icon">
+        <router-link :to="{name: 'HomePage'}" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Projetos">
             <span class="fa fa-th"></span>
           </li>
-        </a>
-        <a href="" class="sidebar-icon">
+        </router-link>
+        <router-link :to="{name: 'HomePage'}" class="sidebar-icon">
           <li class="tooltipped"  data-position="right" data-tooltip="Observatórios">
             <span class="fa fa-area-chart"></span>
           </li>
-        </a>
+        </router-link>
         <a href="#edit-user" class="modal-trigger sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Edit">
             <span class="fa fa-gear"></span>
@@ -95,8 +95,8 @@ export default {
         this.isModalVisible = false;
       },
     Logout () {
-      this.$http.post('http://localhost:8000/rest-auth/logout/', this.user, { headers: { 'content-type': 'application/json'} }).then(result => {
-      this.LogoutSucess(result)
+      this.$http.post('rest-auth/logout/', this.user).then(result => {
+        this.LogoutSucess(result)
       },
       error => {
           this.LoginFail()

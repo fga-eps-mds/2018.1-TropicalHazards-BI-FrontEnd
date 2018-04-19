@@ -10,9 +10,9 @@
           <router-link :to="{name: 'LandingPage'}" class="brand-logo">
             <span  class="fa fa-eye"></span> OBSERV
           </router-link>
-          <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
+          <router-link :to="{name: ' ' }" data-target="mobile-menu" class="sidenav-trigger">
             <i class="material-icons">menu</i>
-          </a>
+          </router-link>
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
 
               <modal v-show="isModalVisible" @close="closeModal"/>
@@ -66,11 +66,11 @@
             <span class="fa fa-sign-in"></span> Bem vindo {{currentUser.name}}
           </li>
           </router-link>
-        <a href="#/projetos">
+        <router-link :to="{name: 'Projects'}">
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Criar observatório
           </li>
-        </a>
+        </router-link>
       </ul>
       <div class="container center-align" id="teste">
           <h2>Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito</h2>
@@ -134,7 +134,7 @@ export default {
       },
 
       Logout(){
-      this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.$http.post("rest-auth/logout/", this.user).then(result => {
       this.LogoutSucess(result)
       },
       error => {

@@ -153,8 +153,7 @@ export default {
   methods: {
 
     deleteProject () {
-      this.$http.delete('http://localhost:8000/project/' + this.projeto.id + '/',
-        { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+      this.$http.delete('project/' + this.projeto.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
         window.alert('projeto deletado')
       },
       error => {
@@ -162,7 +161,7 @@ export default {
       })
     },
     getProject () {
-      this.$http.get('http://localhost:8000/projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
+      this.$http.get('projects/').then(result => {
         this.projects = result.data
       },
       error => {

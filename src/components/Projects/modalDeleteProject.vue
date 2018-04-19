@@ -38,7 +38,7 @@ export default {
     methods: {
 
     getProjectDetail (){
-        this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
+        this.$http.get('projects/' + this.$route.params.id + '/').then(result => {
         this.project = result.data;
         },
         error => {
@@ -47,10 +47,9 @@ export default {
 
     },
     deleteProject (){
-        this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
-        window.confirm("projeto deletado")
-        this.$router.replace('/home')
-
+        this.$http.delete('projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+          window.confirm("projeto deletado")
+          this.$router.replace('/home')
         },
         error => {
             window.alert("Erro ao deletar o projeto")

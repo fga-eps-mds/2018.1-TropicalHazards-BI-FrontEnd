@@ -75,10 +75,10 @@ export default {
       }
     },
     Login(){
-      this.$http.post("http://localhost:8000/rest-auth/login/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.token = JwtDecode(result.data.token)
-      this.name = this.token.isStaff
-      this.LoginSucess(result)
+      this.$http.post("rest-auth/login/", this.user).then(result => {
+        this.token = JwtDecode(result.data.token)
+        this.name = this.token.isStaff
+        this.LoginSucess(result)
       },
       error => {
           this.LoginFail()

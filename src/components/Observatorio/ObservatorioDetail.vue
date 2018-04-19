@@ -1,6 +1,6 @@
 <template>
  <div id="app ">
-  <div class="row grey lighten-4">
+    <navbar></navbar>
     <sidebar></sidebar>
 
   <div id="content" class="col m11">
@@ -106,18 +106,19 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 /* eslint-disable */
 import {mapGetters} from 'vuex'
 import SideBar from '@/components/Utils/SideBar'
+import SecondNavBar from '@/components/Utils/SecondNavBar'
 
 export default {
 
   components: {
     'sidebar': SideBar,
+    'navbar': SecondNavBar
   },
   data(){
     name: 'ObservatorioDetail'
@@ -139,19 +140,14 @@ export default {
 
      deleteProject (){
       if(currentUser.id == projeto.user){
-        this.$http.delete('http://localhost:8000/project/' + this.projeto.id + '/',
-                        { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-                          window.alert("projeto deletado")
-                          console.log("deu merda")
-
+        this.$http.delete('project/' + this.projeto.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+          window.alert("projeto deletado")
       },error => {
-       console.log("deu merda")
     });
   }
 },
     getProject(){
-      console.log("chegou aqui")
-      this.$http.get("http://localhost:8000/projects/",  { headers: { "content-type": "application/json" } }).then(result => {
+      this.$http.get("projects/").then(result => {
       this.projetos = result.data;
       },
       error => {
