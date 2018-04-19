@@ -1,42 +1,40 @@
 
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop">
-      <div class="modal"role="dialog">
+    <div class="modal-mask" @click="closed" v-show="show">
+      <div class="modal-container" @click.stop>
         <div class="row">
-                <button
+            <button
               type="button"
               class="btn-close"
-              @click="close"
+              @click="closed"
               aria-label="Close modal"
               style="float: right">
              x
             </button>
             <h4 style="color:black">
             <span style="color:black" class="fa fa-eye"></span> OBSERV</h4>
-            <h4 style="text-align:center">Fazer login</h4>
+            <h4 style="text-align:center; color:black;">Registrar</h4>
 
          <p style="color:black; text-align:center; line-height:20px;">
           Como visitante você tem acesso a funcionalidade de pesquisa de observatórios
-          e pode navegar entre estes observatórios.
-        </p>
+          e pode navegar entre estes observatórios.</p>
               <section class="modal-form">
-
               <form>
             <div class="input-field col s12">
-            <input type="text" v-model="user.username" placeholder="Username" />
+            <input type="text" v-required v-model="user.username" placeholder="Username" />
+            </div>
+            <div class="input-field col s12">
+            <input type="email" v-model="user.email" placeholder="Email" />
             </div>
             <div class="input-field col s12">
             <input type="password" v-model="user.password" placeholder="Password" />
             </div>
-            <button v-on:click="Login()" type="submit" class="col s12 btn-large blue lighten-1 waves-effect waves-green">
-              <span class="fa fa-sign-in"></span> Entrar
+            <button v-on:click="registerUser()" id="entrar" type="submit" class="col s12 btn-large blue lighten-1 waves-effect waves-green">
+              <span class="fa fa-sign-in"></span> Registrar
             </button>
           </form>
         </section>
-        <button v-on:click="Login()" type="submit" class="col s12 btn-large green lighten-1 waves-effect waves-green">
-              <span class="fa fa-sign-in"></span> Registrar
-            </button>
         </div>
       </div>
     </div>
@@ -46,34 +44,134 @@
 <script>
 /* eslint-disable */
 
+import {mapGetters} from 'vuex'
+import JwtDecode from 'jwt-decode'
+
 export default {
-  data(){
-    name: 'Register'
+
+
+  data () {
     return {
       user: {
-        username: "",
-        email: "",
-        password: ""
+        username: '',
+        email: '',
+        password: ''
       },
-      response: "",
-    }
-  },
-  methods: {
-    // metodo pra registrar usuário
-    Register(){
-      this.$http.post("http://localhost:8000/users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.user = result.data;
-      this.response = response.data;
-      },
-      error => {
-          console.error(error);
-      });
+      token: '',
+      name: '',
+      error: false,
+      isModalVisibleRegister: false,
 
     }
+  },
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
+  created () {
+    this.CheckLogin()
+  },
+  update () {
+    this.CheckLogin()
+  },
+  methods: {
+    // redireciona o user caso esteja logado
+    CheckLogin () {
+      console.log(this.currentUser)
+      if (this.currentUser) {
+        this.$router.replace('/')
+      }
+    },
+    Login () {
+      this.$http.post('rest-auth/login/', this.user, { headers: { 'content-type': 'application/json' } }).then(result => {
+        this.token = JwtDecode(result.data.token)
+        this.name = this.token.isStaff
+        this.LoginSucess(result)
+      },
+      error => {
+        this.LoginFail()
+        console.error(error)
+      })
+    },
+    LoginSucess (response) {
+      if (!response.data.token) {
+        this.loginFail()
+        return
+      }
+      this.error = false
+      localStorage.token = response.data.token
+      this.$store.dispatch('login') // trigger da ação de login implementado em store/auth.js
+      this.$router.replace('/')
+    },
+    LoginFail () {
+      this.error = 'Falha no Login!'
+      this.$store.dispatch('logout') // trigger da ação de logout
+      delete localStorage.token
+    },
+    closed () {
+      this.$emit('closed')
+    },
+
+    registerUser(){
+      this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.name = result.data;
+      window.alert("Usuario registrado com sucesso!")
+      },
+      error => {
+      window.alert("Erro")
+      });
+    },
   }
 }
 </script>
 <style>
+* {
+    box-sizing: border-box;
+}
+
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    transition: opacity .3s ease;
+}
+
+.modal-container {
+    width: 50%;
+    margin: 40px auto 0;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
   .modal-backdrop {
     position: fixed;
     top: 0;
@@ -86,21 +184,14 @@ export default {
     z-index: 9999;
 
   }
-
-  .modal {
-    background: #FFFFFF;
-    /* box-shadow: 2px 2px 20px 1px; */
-    overflow-x: auto;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-  }
-
-  .modal-header,
-  .modal-footer {
-    padding-top: 15px;
-    display: flex;
-  }
+#registrar{
+  margin-top: 10px;
+  border-radius: 10px;
+}
+#entrar{
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
 
 .modal-form{
   padding: 0;
@@ -108,38 +199,11 @@ export default {
 .brand-logo{
   color:black;
 }
-body {
-  font-family: 'Oxygen', Arial, Helvetica, sans-serif;
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  letter-spacing: .101em;
-  font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-
-}
-
-hr {
-  border-style: dashed;
-  border-color: #888888;
-  margin-bottom: .5em;
-}
-
-.modal h4 {
-  color: #42a5f5;
-}
-
-#login,
-#new-proj {
-  padding-top: 0 !important;
-  max-height: 90% !important;
-}
 ::placeholder { /* Most modern browsers support this now. */
    color:    #132a71;
 }
+@media (min-width: 993px) {
 
+}
 </style>

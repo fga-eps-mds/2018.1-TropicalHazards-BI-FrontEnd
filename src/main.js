@@ -5,13 +5,18 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import materialize from '../node_modules/materialize-css/dist/css/materialize.css'
 import VueResource from 'vue-resource'
 import store from './store'
 
+import './../node_modules/jquery/dist/jquery.min.js'
+import './../node_modules/materialize-css/dist/css/materialize.min.css'
+import './../node_modules/materialize-css/dist/js/materialize.min.js'
+
 Vue.use(VueResource)
-Vue.use(materialize)
 Vue.config.productionTip = false
+
+
+Vue.http.options.root = 'http://localhost:8000'
 
 /* eslint-disable no-new */
 new Vue({

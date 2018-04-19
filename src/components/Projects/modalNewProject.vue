@@ -32,7 +32,7 @@ import JwtDecode from 'jwt-decode'
       this.project.user = this.currentUser.id
     },
     PostProject (){
-      this.$http.post("http://localhost:8000/projects/",this.project, { headers: { 'Authorization': 'JWT ' + localStorage.token, "content-type": "application/json", "Authorization": "JWT" + localStorage.Token } }
+      this.$http.post("projects/",this.project, { headers: { 'Authorization': 'JWT ' + localStorage.token, "content-type": "application/json", "Authorization": "JWT" + localStorage.Token } }
                      ).then(result => {
       this.projeto = result.data;
       this.postSucess(result)
@@ -50,7 +50,7 @@ import JwtDecode from 'jwt-decode'
       window.confirm("Falha na criação do projeto")
     },
     testToken(){
-    this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': 'senhabanda'}).then(result => {
+    this.$http.post('obtain-token/', { 'username': this.user.username, 'password': 'senhabanda'}).then(result => {
     localStorage.token = result.data.token
     })
   },
@@ -91,12 +91,11 @@ import JwtDecode from 'jwt-decode'
                       <textarea v-model="project.description" id="deion" class="materialize-textarea"></textarea>
                       <label for="deion">Descrição do projeto</label>
                     </div>
-
                   </div>
-                  <a class="modal-close btn-large grey lighten-1 white-text waves-effect waves-light">
+                  <button type="submit" class="model-close col s12 btn-large grey lighten-1 waves-effect waves-green">
                     <span class="fa fa-trash"></span> Cancelar
-                  </a>
-                  <button v-on:click="PostProject()" type="submit" class="modal-close btn-large blue lighten-1 white-text waves-effect waves-light">
+                  </button>
+                  <button v-on:click="()" type="submit" class="model-close col s12 btn-large blue lighten-1 waves-effect waves-green">
                     <span class="fa fa-save"></span> Criar
                   </button>
                 </form>
@@ -106,5 +105,6 @@ import JwtDecode from 'jwt-decode'
   </div>
 </template>
 <style>
+
 
 </style>

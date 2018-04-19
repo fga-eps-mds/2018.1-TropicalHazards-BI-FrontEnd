@@ -139,7 +139,7 @@ export default {
 
      deleteProject (){
       if(currentUser.id == projeto.user){
-        this.$http.delete('http://localhost:8000/project/' + this.projeto.id + '/',
+        this.$http.delete('project/' + this.projeto.id + '/',
                         { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
                           window.alert("projeto deletado")
                           console.log("deu merda")
@@ -151,7 +151,7 @@ export default {
 },
     getProject(){
       console.log("chegou aqui")
-      this.$http.get("http://localhost:8000/projects/",  { headers: { "content-type": "application/json" } }).then(result => {
+      this.$http.get("projects/",  { headers: { "content-type": "application/json" } }).then(result => {
       this.projetos = result.data;
       },
       error => {

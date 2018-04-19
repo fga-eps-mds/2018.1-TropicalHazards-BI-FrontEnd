@@ -1,11 +1,18 @@
 <template>
 
  <div id="app ">
+ 
+ <nav class="navbar hide-on-med-and-up">
+ <div class="nav-wrapper">
+   <a href="#/" data-target="mobile-menu" class="sidenav-trigger">
+   <i class="material-icons">menu</i>
+   </a>
+  </div>
+   </nav>
+
   <div class="row grey lighten-4">
     <sidebar></sidebar>
     <div id="content" class="col m11" >
-
-
       <div class="header center-align white">
         <h3>Home</h3>
       </div>
@@ -75,6 +82,44 @@
       </div>
     </div>
   </div>
+
+      <!-- Menu Side bar for mobile -->
+
+  <ul class="sidenav grey darken-4 grey-text
+             text-lighten-4 collection" id="mobile-menu">
+    <router-link :to="{ name: 'HomePage'}">
+    <img  src="../../assets/v3_rect.png" alt="" class="imageSideBar responsive-img" />
+  </router-link>
+   <router-link :to="{name: 'HomePage'}">
+     <li class="collection-item">
+       <span class="fa fa-sign-in"></span> Bem vindo {{currentUser.name}}
+     </li>
+   </router-link>
+     <router-link :to="{name: 'CreateProject'}">
+       <li class="collection-item">
+         <span class="fa fa-plus"></span> Criar Projeto
+       </li>
+     </router-link>
+
+     <router-link :to="{name: 'EditUser'}">
+       <li class="collection-item">
+         <span class="fa fa-edit"></span> Editar Perfil
+       </li>
+     </router-link>
+
+     <router-link :to="{name: 'DeleteUser'}">
+       <li class="collection-item">
+         <span class="fa fa-trash"></span> Deletar Perfil
+       </li>
+     </router-link>
+     <a v-on:click="Logout()" href="#">
+       <li class="collection-item">
+         <span class="fa fa-sign-out"></span> Logout
+       </li>
+     </a>
+  </ul>
+    <!-- Menu Side bar for mobile -->
+
 <modal-delete-proj></modal-delete-proj>
 </div>
 </template>
@@ -108,7 +153,7 @@ export default {
   methods: {
 
     deleteProject () {
-      this.$http.delete('http://localhost:8000/project/' + this.projeto.id + '/',
+      this.$http.delete('project/' + this.projeto.id + '/',
         { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
         window.alert('projeto deletado')
       },
@@ -117,7 +162,7 @@ export default {
       })
     },
     getProject () {
-      this.$http.get('http://localhost:8000/projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
+      this.$http.get('projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
         this.projects = result.data
       },
       error => {
@@ -142,11 +187,29 @@ export default {
       (document).ready(function () {
         ('select').formSelect()
       })
-    }
+    },
+    menuMobile () {
+      $(document).ready(function () {
+        $('.sidenav').sidenav();
+      });
   },
+    Logout () {
+    this.$http.post('rest-auth/logout/', this.user, { headers: { 'content-type': 'application/json'} }).then(result => {
+      this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
+      delete localStorage.token
+      this.$router.replace('/')
+    },
+    error => {
+        this.LoginFail()
+        console.error(error)
+    })
+  },
+
+},
   beforeMount () {
     this.loadUserInfo()
     this.getProject()
+    this.menuMobile()
   }
 
 }
@@ -154,8 +217,16 @@ export default {
 
 <style>
 
-p {
-  font-size: 15px;
+#mobile-menu a,
+.collection-item {
+  font-size: 1.1em;
+  background-color: inherit !important;
+  color: inherit !important;
+}
+
+.imageSideBar{
+  padding-left: 100px;
+  padding-top: 10px;
 }
 
 </style>

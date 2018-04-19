@@ -3,12 +3,14 @@ version: '2'
 services:
   th_bi-front:
     container_name: tropical-hazards-front
-    image: arthur0496/tropical-hazards-front:test
+    build:
+      dockerfile: Dockerfile.test
+      context: .
     command: /bin/bash -lc "npm install && npm run dev"
     volumes:
       - .:/TropicalHazards-BI-FrontEnd
     ports:
-      - "8080:8080"
+      - 8080:8080
     networks:
       - default
 

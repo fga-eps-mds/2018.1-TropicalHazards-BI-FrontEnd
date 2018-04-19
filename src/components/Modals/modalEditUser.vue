@@ -38,12 +38,10 @@ export default {
   data () {
     return {
       user: {
-          username: "",
-          password: "",
-          email: ""
+          username: '',
+          password: '',
+          email: ''
       },
-      response_get: "",
-
     }
   },
   components: {
@@ -58,38 +56,37 @@ export default {
       this.user.email = this.currentUser.email
     },
     sendData (){
-        this.$http.put('http://localhost:8000/users/' + this.currentUser.id + '/',
-                       this.user,
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-                         this.updateSucess(result)
-        },error => {
+        this.$http.put('users/' + this.currentUser.id + '/',
+          this.user,
+          { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+          this.updateSucess(result)
+        },
+          error => {
           this.updateFail()
         });
     },
-    updateSucess(response){
+    updateSucess(response) {
       if(!response.data){
         this.updateFail()
         return
       }
-      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+      this.$http.post('obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
         localStorage.token = result.data.token
       })
       window.alert("Usuário atualizado")
       this.$store.dispatch('update')
       this.$router.push('/home')
-      location.reload();
-
     },
-    updateFail() {
+    updateFail () {
       window.confirm("Falha no Update")
       this.$router.replace('/edituser')
     },
-    testToken(){
-      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+    testToken () {
+      this.$http.post('obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
       localStorage.token = result.data.token
       })
     },
-        modalScript() {
+        modalScript () {
 
         $(document).ready(function(){
         $('.modal').modal();
