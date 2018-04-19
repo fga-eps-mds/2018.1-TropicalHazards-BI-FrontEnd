@@ -89,6 +89,11 @@
 
 <script>
 /* eslint-disable */
+// FIXME this function is breaking the tests.
+// $(document).ready(function () {
+//   $('.sidenav').sidenav();
+// });
+
 import {mapGetters} from 'vuex'
 import modal from '@/components/Modals/modal'
 

@@ -2,7 +2,7 @@
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop">
-      <div class="modal"role="dialog">
+      <div class="modal" role="dialog">
         <div class="row">
                 <button
               type="button"
