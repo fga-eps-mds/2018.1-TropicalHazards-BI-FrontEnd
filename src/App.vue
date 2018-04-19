@@ -16,9 +16,7 @@ export default {
 </script>
 
 <style>
-.navbar {
-  background-color: #2b4a6ef1;
-}
+
 .page-footer{
   background-color:#1b1b1b;
   display: flex;
@@ -80,13 +78,12 @@ h6 {
 #content .header h3 {
   margin: 0;
   padding: .3em;
-  position: static;
 }
 
 #sidebar {
   height: 100%;
   border-right: 1px solid #999;
-  position: relative;
+  position: static;
   color: #333;
 }
 

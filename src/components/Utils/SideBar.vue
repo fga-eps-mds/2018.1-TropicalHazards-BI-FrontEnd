@@ -46,15 +46,6 @@
         </a>
         <hr>
       </ul>
-      <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text
-                                     text-lighten-4 collection" id="mobile-menu">
-        <router-link :to="{name: 'Login'}">
-
-          <li class="collection-item">
-            <span class="fa fa-sign-in"></span> Login
-          </li>
-        </router-link>
-      </ul>
 <modal-delete-user></modal-delete-user>
 <modal-new-proj></modal-new-proj>
 <modal-edit-user></modal-edit-user>
@@ -112,23 +103,11 @@ export default {
       this.user.id = this.currentUser.id;
       this.user.username = this.currentUser.name;
       this.user.email = this.currentUser.email;
-    },
-
+    }
   }
 };
 </script>
 
 <style>
-
-#mobile-menu a,
-.collection-item {
-  font-size: 1.1em;
-  background-color: inherit !important;
-  color: inherit !important;
-}
-
-::placeholder { /* Most modern browsers support this now. */
-   color:    #ffffff;
-}
 
 </style>
