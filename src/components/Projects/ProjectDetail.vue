@@ -2,7 +2,6 @@
 
 <div id="app">
   <navbar></navbar>
-    <sidebar></sidebar>
     <div id="content" class="col m11">
       <div class="header center-align white">
         <h3>
