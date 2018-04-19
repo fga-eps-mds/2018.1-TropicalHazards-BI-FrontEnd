@@ -38,12 +38,10 @@ export default {
   data () {
     return {
       user: {
-          username: "",
-          password: "",
-          email: ""
+          username: '',
+          password: '',
+          email: ''
       },
-      response_get: "",
-
     }
   },
   components: {
@@ -59,14 +57,15 @@ export default {
     },
     sendData (){
         this.$http.put('http://localhost:8000/users/' + this.currentUser.id + '/',
-                       this.user,
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-                         this.updateSucess(result)
-        },error => {
+          this.user,
+          { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+          this.updateSucess(result)
+        },
+          error => {
           this.updateFail()
         });
     },
-    updateSucess(response){
+    updateSucess(response) {
       if(!response.data){
         this.updateFail()
         return
@@ -80,16 +79,16 @@ export default {
       location.reload();
 
     },
-    updateFail() {
+    updateFail () {
       window.confirm("Falha no Update")
       this.$router.replace('/edituser')
     },
-    testToken(){
+    testToken () {
       this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
       localStorage.token = result.data.token
       })
     },
-        modalScript() {
+        modalScript () {
 
         $(document).ready(function(){
         $('.modal').modal();

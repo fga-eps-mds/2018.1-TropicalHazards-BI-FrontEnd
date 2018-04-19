@@ -33,7 +33,6 @@
             </button>
           </form>
         </section>
-          <a class="waves-effect waves-light btn-large col s12" id="registrar" target="_blank" href="#/signup/">Registrar</a>
         </div>
       </div>
     </div>
@@ -45,8 +44,13 @@
 
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
+import modalRegister from '@/components/Modals/modalRegister'
 
 export default {
+
+  components: {
+    'modal-register': modalRegister
+  },
 
   data () {
     return {
