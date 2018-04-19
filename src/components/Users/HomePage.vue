@@ -153,7 +153,7 @@ export default {
   methods: {
 
     deleteProject () {
-      this.$http.delete('http://localhost:8000/project/' + this.projeto.id + '/',
+      this.$http.delete('project/' + this.projeto.id + '/',
         { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
         window.alert('projeto deletado')
       },
@@ -162,7 +162,7 @@ export default {
       })
     },
     getProject () {
-      this.$http.get('http://localhost:8000/projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
+      this.$http.get('projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
         this.projects = result.data
       },
       error => {
@@ -194,7 +194,7 @@ export default {
       });
   },
     Logout () {
-    this.$http.post('http://localhost:8000/rest-auth/logout/', this.user, { headers: { 'content-type': 'application/json'} }).then(result => {
+    this.$http.post('rest-auth/logout/', this.user, { headers: { 'content-type': 'application/json'} }).then(result => {
       this.$store.dispatch('logout')//trigger da ação de login implementado em store/auth.js
       delete localStorage.token
       this.$router.replace('/')

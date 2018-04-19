@@ -32,7 +32,7 @@ import JwtDecode from 'jwt-decode'
       this.project.user = this.currentUser.id
     },
     PostProject (){
-      this.$http.post("http://localhost:8000/projects/",this.project, { headers: { 'Authorization': 'JWT ' + localStorage.token, "content-type": "application/json", "Authorization": "JWT" + localStorage.Token } }
+      this.$http.post("projects/",this.project, { headers: { 'Authorization': 'JWT ' + localStorage.token, "content-type": "application/json", "Authorization": "JWT" + localStorage.Token } }
                      ).then(result => {
       this.projeto = result.data;
       this.postSucess(result)
@@ -50,7 +50,7 @@ import JwtDecode from 'jwt-decode'
       window.confirm("Falha na criação do projeto")
     },
     testToken(){
-    this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': 'senhabanda'}).then(result => {
+    this.$http.post('obtain-token/', { 'username': this.user.username, 'password': 'senhabanda'}).then(result => {
     localStorage.token = result.data.token
     })
   },

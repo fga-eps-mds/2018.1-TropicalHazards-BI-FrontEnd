@@ -177,7 +177,7 @@ export default {
       this.user.email = this.currentUser.email
     },
     getProjectDetail () {
-      this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+      this.$http.get('projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
         this.project = result.data
       },
       error => {
@@ -186,7 +186,7 @@ export default {
     },
     deleteProject () {
       if (window.confirm("Deseja realmente deletar o projeto ?")){
-        this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+        this.$http.delete('projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
           window.alert('Projeto deletado')
           this.$router.replace('/home')
 
@@ -198,7 +198,7 @@ export default {
       }
     },
     getProject () {
-      this.$http.get('http://localhost:8000/projects/', { headers:
+      this.$http.get('projects/', { headers:
                     { 'content-type': 'application/json' } }).then(result => {
         this.project = result.data
       },
@@ -207,7 +207,7 @@ export default {
       })
     },
     testToken () {
-      this.$http.post('http://localhost:8000/obtain-token/', {'username': this.user.username, 'password': this.user.password}).then(result => {
+      this.$http.post('obtain-token/', {'username': this.user.username, 'password': this.user.password}).then(result => {
         localStorage.token = result.data.token
       })
     },

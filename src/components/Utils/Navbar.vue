@@ -160,7 +160,7 @@ export default {
       },
 
       Logout(){
-      this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.$http.post("rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
       this.LogoutSucess(result)
       },
       error => {

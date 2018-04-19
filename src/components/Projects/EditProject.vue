@@ -79,7 +79,7 @@ export default {
       this.user.email = this.currentUser.email
     },
     getProjectDetail (){
-        this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
+        this.$http.get('projects/' + this.$route.params.id + '/',  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
         this.project = result.data;
         },
         error => {
@@ -88,11 +88,10 @@ export default {
 
   },
     updateProject (){
-        this.$http.put('http://localhost:8000/projects/' + this.$route.params.id + '/', this.project,
+        this.$http.put('projects/' + this.$route.params.id + '/', this.project,
          { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
         window.alert("Projeto atualizado")
         this.$router.push('/project/detail/' + this.$route.params.id + '/')
-        location.reload()
         },
         error => {
             console.error(error);
@@ -100,7 +99,7 @@ export default {
 
   },
     testToken(){
-      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+      this.$http.post('obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
       localStorage.token = result.data.token
       })
     }

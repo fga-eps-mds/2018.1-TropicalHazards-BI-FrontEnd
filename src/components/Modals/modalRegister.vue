@@ -82,7 +82,7 @@ export default {
       }
     },
     Login () {
-      this.$http.post('http://localhost:8000/rest-auth/login/', this.user, { headers: { 'content-type': 'application/json' } }).then(result => {
+      this.$http.post('rest-auth/login/', this.user, { headers: { 'content-type': 'application/json' } }).then(result => {
         this.token = JwtDecode(result.data.token)
         this.name = this.token.isStaff
         this.LoginSucess(result)
@@ -112,9 +112,8 @@ export default {
     },
 
     registerUser(){
-      this.$http.post("http://localhost:8000/users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
       this.name = result.data;
-      location.reload()
       window.alert("Usuario registrado com sucesso!")
       },
       error => {

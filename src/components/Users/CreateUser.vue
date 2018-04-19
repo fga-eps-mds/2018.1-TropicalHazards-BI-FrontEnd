@@ -36,7 +36,7 @@ import SecondNavBar from '@/components/Utils/SecondNavBar'
   },
   methods: {
     registerUser(){
-      this.$http.post("http://localhost:8000/users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
       this.user = result.data;
       window.alert("Usuario criado")
       },
