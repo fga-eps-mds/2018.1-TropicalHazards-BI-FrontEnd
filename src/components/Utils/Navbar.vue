@@ -15,10 +15,18 @@
           </a>
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
 
-              <modal v-show="isModalVisible" @close="closeModal"/>
-               <a @click="showModal">
+              <modal v-show="isModalVisibleLogin" @close="closeModalLogin"/>
+               <a @click="showModalLogin">
                 <li class="navbar-item">
                   <span class="fa fa-sign-in"></span> Login
+                </li>
+              </a>
+          </ul>
+          <ul v-if="!currentUser" class="right hide-on-med-and-down">
+              <modalRegister v-show="isModalVisibleRegister" @closed="closeModalRegister"/>
+               <a @click="showModalRegister">
+                <li class="navbar-item">
+                  <span class="fa fa-arrow-up"></span> Registrar
                 </li>
               </a>
           </ul>
@@ -32,7 +40,7 @@
           <ul v-if="!currentUser" class="right hide-on-med-and-down">
             <router-link :to="{name: 'ListProjects'}">
               <li class="navbar-item">
-                <span class="fa fa-chart"></span> Projetos
+                <span class="fa fa-area-chart"></span> Projetos
               </li>
             </router-link>
           </ul>
@@ -53,9 +61,20 @@
       <ul v-if="!currentUser" class="sidenav grey darken-4 grey-text
                                      text-lighten-4 collection" id="mobile-menu">
         <router-link :to="{name: 'Login'}">
-
           <li class="collection-item">
             <span class="fa fa-sign-in"></span> Login
+          </li>
+        </router-link>
+        
+        <router-link :to="{name: 'CreateUser'}">
+          <li class="collection-item">
+            <span class="fa fa-arrow-up"></span> Registrar
+          </li>
+        </router-link>
+
+        <router-link :to="{name: 'ListProjects'}">
+          <li class="collection-item">
+            <span class="fa fa-area-chart"></span> Projetos
           </li>
         </router-link>
       </ul>
@@ -66,11 +85,9 @@
             <span class="fa fa-sign-in"></span> Bem vindo {{currentUser.name}}
           </li>
           </router-link>
-        <a href="#/projetos">
-          <li class="collection-item">
+          <router-link :to="{name: 'ProjectDetail'}">
             <span class="fa fa-sign-in"></span> Criar observatório
-          </li>
-        </a>
+          </router-link>
       </ul>
       <div class="container center-align" id="teste">
           <h2>Sua <b>pesquisa</b>, gerenciada do <b>seu</b> jeito</h2>
@@ -96,11 +113,13 @@
 
 import {mapGetters} from 'vuex'
 import modal from '@/components/Modals/modal'
+import modalRegister from '@/components/Modals/modalRegister'
 
 export default {
   name: 'Navbar',
   components: {
-    modal
+    modal,
+    modalRegister
   },
 
   computed: {
@@ -115,16 +134,23 @@ export default {
       email: "",
       id:""
     },
-    isModalVisible: false,
+    isModalVisibleLogin: false,
+    isModalVisibleRegister: false,
 
     }
   },
   methods: {
-    showModal() {
-        this.isModalVisible = true;
+    showModalLogin() {
+        this.isModalVisibleLogin = true;
       },
-    closeModal() {
-        this.isModalVisible = false;
+    closeModalLogin() {
+        this.isModalVisibleLogin = false;
+      },
+    showModalRegister() {
+        this.isModalVisibleRegister = true;
+      },
+    closeModalRegister() {
+        this.isModalVisibleRegister = false;
       },
 
       menuMobile (){
@@ -134,7 +160,7 @@ export default {
       },
 
       Logout(){
-      this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.$http.post("rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
       this.LogoutSucess(result)
       },
       error => {

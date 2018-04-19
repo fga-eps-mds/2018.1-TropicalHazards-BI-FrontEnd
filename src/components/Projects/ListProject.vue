@@ -82,7 +82,7 @@ export default {
 
   methods: {
     getProject () {
-      this.$http.get('http://localhost:8000/projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
+      this.$http.get('projects/', { headers: { 'content-type': 'application/json' } }).then(result => {
         this.projects = result.data
       },
       error => {

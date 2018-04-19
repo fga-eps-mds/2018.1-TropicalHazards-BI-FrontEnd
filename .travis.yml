@@ -20,11 +20,11 @@ after_success:
 - docker login --username=_ --password=$HEROKU_AUTHTOKEN registry.heroku.com
 - docker build -f Dockerfile.prod -t deploy_image .
 - |
-  if [ "${TRAVIS_BRANCH}" == "development" ]; then 
-    echo "Deploying to homolog environment..."  
+  if [ "${TRAVIS_BRANCH}" == "development" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+    echo "Deploying to homolog environment..."
     docker tag deploy_image registry.heroku.com/tropical-hazards-homolog/web
     docker push registry.heroku.com/tropical-hazards-homolog/web
-  else if [ "${TRAVIS_BRANCH}" == "master" ]; then
+  else if [ "${TRAVIS_BRANCH}" == "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
     echo "Deploying to production environment..."
     docker tag deploy_image registry.heroku.com/tropical-hazards/web
     docker push registry.heroku.com/tropical-hazards/web

@@ -4,11 +4,9 @@
         <router-link :to="{ name: 'LandingPage'}">
           <img src="../../assets/v3_round.png" alt="" class="responsive-img circle center" />
         </router-link>
-        <a href="#/home" class="">
           <li class="">
             <p> {{currentUser.name}}</p>
           </li>
-        </a>
         <router-link :to="{ name: 'HomePage'}" class="sidebar-icon">
           <li class="tooltipped" data-position="right" data-tooltip="Home">
             <span class="fa fa-home"></span>
@@ -30,12 +28,12 @@
           </li>
         </a>
         <a href="#new-proj" class="modal-trigger sidebar-icon">
-          <li class="tooltipped" data-position="right" data-tooltip="Edit">
+          <li class="tooltipped" data-position="right" data-tooltip="New Proj">
             <span class="fa fa-plus"></span>
           </li>
         </a>
         <a href="#delete-user" class="modal-trigger sidebar-icon">
-          <li class="tooltipped" data-position="right" data-tooltip="Edit">
+          <li class="tooltipped" data-position="right" data-tooltip="Delete">
             <span class="fa fa-trash"></span>
           </li>
         </a>
@@ -79,7 +77,6 @@ export default {
 },
     data () {
       return {
-        isModalVisible: false,
       }
     },
 
@@ -88,14 +85,9 @@ export default {
   },
 
   methods: {
-    showModal () {
-        this.isModalVisible = true;
-      },
-    closeModal() {
-        this.isModalVisible = false;
-      },
+
     Logout () {
-      this.$http.post('http://localhost:8000/rest-auth/logout/', this.user, { headers: { 'content-type': 'application/json'} }).then(result => {
+      this.$http.post('rest-auth/logout/', this.user, { headers: { 'content-type': 'application/json'} }).then(result => {
       this.LogoutSucess(result)
       },
       error => {
@@ -119,13 +111,6 @@ export default {
 </script>
 
 <style>
-
-#mobile-menu a,
-.collection-item {
-  font-size: 1.1em;
-  background-color: inherit !important;
-  color: inherit !important;
-}
 
 ::placeholder { /* Most modern browsers support this now. */
    color:    #ffffff;

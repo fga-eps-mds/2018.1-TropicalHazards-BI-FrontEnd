@@ -15,6 +15,9 @@ import './../node_modules/materialize-css/dist/js/materialize.min.js'
 Vue.use(VueResource)
 Vue.config.productionTip = false
 
+
+Vue.http.options.root = 'http://localhost:8000'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

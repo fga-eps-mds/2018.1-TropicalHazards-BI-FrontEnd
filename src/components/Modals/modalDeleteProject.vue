@@ -33,14 +33,14 @@ export default {
     methods: {
 
     getProjectDetail (){
-        this.$http.get('http://localhost:8000/projects/4/',
+        this.$http.get('projects/4/',
                        { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
         this.projeto = result.data
         },error => {
         });
     },
     deleteProject (){
-        this.$http.delete('http://localhost:8000/project/' + this.currentUser.id + '/',
+        this.$http.delete('project/' + this.currentUser.id + '/',
                        { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
                          this.DeleteSucess(result)
         },error => {
