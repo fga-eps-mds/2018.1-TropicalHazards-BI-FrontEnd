@@ -91,12 +91,11 @@ import JwtDecode from 'jwt-decode'
                       <textarea v-model="project.description" id="deion" class="materialize-textarea"></textarea>
                       <label for="deion">Descrição do projeto</label>
                     </div>
-
                   </div>
-                  <a class="modal-close btn-large grey lighten-1 white-text waves-effect waves-light">
+                  <button type="submit" class="model-close col s12 btn-large grey lighten-1 waves-effect waves-green">
                     <span class="fa fa-trash"></span> Cancelar
-                  </a>
-                  <button v-on:click="PostProject()" type="submit" class="modal-close btn-large blue lighten-1 white-text waves-effect waves-light">
+                  </button>
+                  <button v-on:click="()" type="submit" class="model-close col s12 btn-large blue lighten-1 waves-effect waves-green">
                     <span class="fa fa-save"></span> Criar
                   </button>
                 </form>
@@ -106,5 +105,6 @@ import JwtDecode from 'jwt-decode'
   </div>
 </template>
 <style>
+
 
 </style>

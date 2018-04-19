@@ -29,12 +29,12 @@
             <div class="input-field col s12">
             <input type="password" v-model="user.password" placeholder="Password" />
             </div>
-            <button v-on:click="Login()" type="submit" class="col s12 btn-large blue lighten-1 waves-effect waves-green">
+            <button v-on:click="Login()" type="submit" class="btn-large blue lighten-1">
               <span class="fa fa-sign-in"></span> Entrar
             </button>
           </form>
         </section>
-        <button v-on:click="Login()" type="submit" class="col s12 btn-large green lighten-1 waves-effect waves-green">
+        <button v-on:click="Login()" type="submit" class=" btn-large green lighten-1">
               <span class="fa fa-sign-in"></span> Registrar
             </button>
         </div>
