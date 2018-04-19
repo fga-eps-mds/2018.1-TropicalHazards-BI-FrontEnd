@@ -22,9 +22,8 @@
 
 <script>
 
-import {mapGetters} from 'vuex'
+import {mapGetters} from "vuex";
 /* eslint-disable */
-
 export default {
   name: 'modalDeleteObservatorio',
 
