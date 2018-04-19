@@ -13,11 +13,20 @@ Vue.use(VueResource)
 Vue.use(materialize)
 Vue.config.productionTip = false
 
+
+Vue.http.options.root = 'http://localhost:8000'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>',
-  store
+  store,
+  http: {
+    root: 'http://localhost:8000',
+    headers: {
+      Authorization: 'JWT ' + localStorage.token,
+    }
+  }
 })

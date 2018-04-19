@@ -52,9 +52,8 @@ export default {
     },
     sendData (){
         console.log("chegou aqui carai")
-        this.$http.delete('http://localhost:8000/users/' + this.currentUser.id + '/',
-                       { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-                         this.DeleteSucess(result)
+        this.$http.delete('users/' + this.currentUser.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+          this.DeleteSucess(result)
         },error => {
           this.updateFail()
         });
@@ -64,7 +63,7 @@ export default {
         this.DeleteFail()
         return
       }
-      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+      this.$http.post('obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
         localStorage.token = result.data.token
       })
       this.$store.dispatch('logout')//trigger da ação de logout implementado em store/auth.js
@@ -79,7 +78,7 @@ export default {
       this.$router.replace('/')
     },
     testToken(){
-      this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
+      this.$http.post('obtain-token/', { 'username': this.user.username, 'password': this.user.password}).then(result => {
       localStorage.token = result.data.token
       })
     },

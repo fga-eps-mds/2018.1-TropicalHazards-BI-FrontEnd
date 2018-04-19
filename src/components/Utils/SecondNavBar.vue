@@ -1,9 +1,9 @@
 <template>
 <nav>
     <div class="nav-wrapper grey ">
-      <a href="#/" class="brand-logo">
+      <router-link :to="{name: 'LandingPage'}" class="brand-logo">
       <span class="fa fa-eye"></span> OBSERV
-      </a>
+      </router-link>
 
       <ul v-if="currentUser" id="nav-mobile" class="right hide-on-med-and-down">
         <li><router-link :to="{name: 'LandingPage'}"></router-link></li>
@@ -36,7 +36,7 @@ export default {
 // redireciona o user caso esteja logado
 /* eslint-disable */
     Logout(){
-      this.$http.post("http://localhost:8000/rest-auth/logout/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+      this.$http.post("rest-auth/logout/", this.user).then(result => {
       this.LogoutSucess(result)
       },
       error => {

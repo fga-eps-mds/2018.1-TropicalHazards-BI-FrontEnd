@@ -1,7 +1,7 @@
 <template>
 
 <div id="app">
-  <div class="row grey lighten-4">
+  <navbar></navbar>
     <sidebar></sidebar>
     <div id="content" class="col m11">
       <div class="header center-align white">
@@ -132,13 +132,13 @@
         </div>
       </div>
     </div>
-  </div>
   <modal-delete-observatorio></modal-delete-observatorio>
 </div>
 </template>
 
 <script>
 /* eslint-disable */
+import SecondNavBar from '@/components/Utils/SecondNavBar'
 import SideBar from '@/components/Utils/SideBar'
 import modalDeleteObservatorio from '@/components/Modals/modalDeleteObservatorio'
 import {mapGetters} from 'vuex'
@@ -146,7 +146,8 @@ import {mapGetters} from 'vuex'
 export default {
   components: {
     'sidebar': SideBar,
-    'modal-delete-observatorio': modalDeleteObservatorio
+    'modal-delete-observatorio': modalDeleteObservatorio,
+    'navbar': SecondNavBar
   },
 
   data () {
@@ -177,7 +178,7 @@ export default {
       this.user.email = this.currentUser.email
     },
     getProjectDetail () {
-      this.$http.get('http://localhost:8000/projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+      this.$http.get('projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
         this.project = result.data
       },
       error => {
@@ -186,10 +187,9 @@ export default {
     },
     deleteProject () {
       if (window.confirm("Deseja realmente deletar o projeto ?")){
-        this.$http.delete('http://localhost:8000/projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
+        this.$http.delete('projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
           window.alert('Projeto deletado')
           this.$router.replace('/home')
-
       },
       error => {
         window.alert('Erro ao deletar o projeto')
@@ -198,8 +198,7 @@ export default {
       }
     },
     getProject () {
-      this.$http.get('http://localhost:8000/projects/', { headers:
-                    { 'content-type': 'application/json' } }).then(result => {
+      this.$http.get('projects/').then(result => {
         this.project = result.data
       },
       error => {
@@ -207,7 +206,7 @@ export default {
       })
     },
     testToken () {
-      this.$http.post('http://localhost:8000/obtain-token/', {'username': this.user.username, 'password': this.user.password}).then(result => {
+      this.$http.post('obtain-token/', {'username': this.user.username, 'password': this.user.password}).then(result => {
         localStorage.token = result.data.token
       })
     },

@@ -53,14 +53,11 @@ import CreateUserVue from '../Users/CreateUser.vue';
       this.project.user = this.currentUser.id
     },
     PostProject (){
-      console.log("chegou aqui")
-      this.$http.post("http://localhost:8000/projects/",this.project, { headers: { 'Authorization': 'JWT ' + localStorage.token, "content-type": "application/json", "Authorization": "JWT" + localStorage.Token } }
-                     ).then(result => {
-      this.project = result.data;
-      window.confirm("Projeto criado com Sucesso")
-      this.$router.push('/home')
-
-      CreateSucess (result)
+      this.$http.post("projects/",this.project).then(result => {
+        this.project = result.data;
+        window.confirm("Projeto criado com Sucesso")
+        this.$router.push('/home')
+        CreateSucess (result)
       },
       error => {
           console.error(error);
@@ -77,8 +74,8 @@ import CreateUserVue from '../Users/CreateUser.vue';
       window.confirm("Falha na criação do projeto")
     },
     testToken(){
-    this.$http.post('http://localhost:8000/obtain-token/', { 'username': this.user.username, 'password': 'senhabanda'}).then(result => {
-    localStorage.token = result.data.token
+    this.$http.post('obtain-token/', { 'username': this.user.username, 'password': 'senhabanda'}).then(result => {
+      localStorage.token = result.data.token
     })
   }
   },
