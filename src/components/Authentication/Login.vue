@@ -98,7 +98,7 @@ export default {
 <style>
 
 ::placeholder { /* Most modern browsers support this now. */
-   color:    #00C583;
+   color: #3f3f3f;
 }
 
 </style>
