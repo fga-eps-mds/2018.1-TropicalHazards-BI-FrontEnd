@@ -1,5 +1,5 @@
 <template>
- <section id="about">
+  <section id="about">
     <div class="container center-align">
       <h2>Sobre</h2>
       <p style="text-align:justify">
@@ -7,7 +7,7 @@
       <p style="text-align:justify">
         <b>Observatório:</b>
         Visualize os resultados de pesquisas dos diferentes projetos cadastrados. Conheça mais sobre a estatística por regiões, idade e outras informações dos projetos de pesquisa do NMT (Núcleo de Medicina Tropical).</p>
-      <p style="text-align:justify">  
+      <p style="text-align:justify">
         <b>Projeto:</b>
         Crie e compartilhe os dados da sua pesquisa. Escolha os dados que deseja disponibilizar, interprete as informações, gere indicadores e gráficos, crie e gerencie os observatórios.</p>
       <p style="text-align:justify">
@@ -19,13 +19,8 @@
 
 <script>
 
-
 </script>
 
 <style>
 
 </style>
-Crie e compartilhe os dados da sua pesquisa. Escolha os dados que deseja disponibilizar, interprete as informações,
-gere indicadores e gráficos, crie e gerencie os observatórios.Colaboradores
-Interaja com os dados das pesquisas, gere seus próprios indicadores e contribua com o conhecimento do projeto. Dados AbertosExplore nossa base dados. O Observ disponibiliza dados de pesquisas de projetos do NMT (Núcleo de Medicina Tropical)
-sobre doenças tropicais.

@@ -1,6 +1,6 @@
 <template>
- 
-<section id="stats">
+
+  <section id="stats">
     <div class="container">
       <div class="row">
         <div class="col s12 m8">
@@ -20,7 +20,6 @@
       </div>
     </div>
   </section>
-
 
 </template>
 

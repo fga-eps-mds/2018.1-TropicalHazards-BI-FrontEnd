@@ -5,12 +5,17 @@
         <div class="row">
           <div class="container center-align">
             <h1> LOGIN </h1>
-            <input type="text" v-model="user.username" placeholder="Username" />
-            <input type="password" v-model="user.password" placeholder="Password" />
-            <a v-on:keyup.enter="Login()" v-on:click="Login()"  class="waves-effect  btn-large">Login</a>
+            <input type="text" v-model="user.username" placeholder="Username">
+            <input type="password" v-model="user.password" placeholder="Password">
+            <a v-on:
+                @keyup.enter="Login()"
+                v-on:
+                @click="Login()"
+                class="waves-effect  btn-large">Login</a>
             <b><p> Ainda não possui uma conta ? </p></b>
-            <router-link :to="{name: 'CreateUser'}"
-                              class="waves-effect waves-light btn-large">
+            <router-link
+              :to="{name: 'CreateUser'}"
+              class="waves-effect waves-light btn-large">
             Registrar</router-link>
         </div>
       </div>
@@ -20,7 +25,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 
 import {mapGetters} from 'vuex'
 import JwtDecode from 'jwt-decode'
