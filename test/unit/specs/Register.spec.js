@@ -10,4 +10,13 @@ describe('Register.vue', () => {
     expect(wrapper.contains('input[type="email"]')).to.be.true
     expect(wrapper.contains('a.btn-large')).to.be.true
   })
+
+  it('should have blank properties by default', () => {
+    const Constructor = Vue.extend(Register)
+    const comp = new Constructor().$mount()
+
+    expect(comp.user.username).to.equal('')
+    expect(comp.user.password).to.equal('')
+    expect(comp.user.email).to.equal('')
+  })
 })
