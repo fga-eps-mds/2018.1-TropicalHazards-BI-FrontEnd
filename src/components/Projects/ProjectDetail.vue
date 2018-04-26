@@ -58,12 +58,14 @@
               <span class="fa fa-plus"/>
             </a>
             <router-link
+              v-if="currentUser.id == project.user"
               :to="{ name: 'EditProject', params: { id: project.id } }"
               class="btn green lighten-1" >
               Editar Projeto
               <span class="fa fa-plus"/>
             </router-link>
             <a
+              v-if="currentUser.id == project.user"
               class="btn-flat red lighten-1 grey-text text-lighten-2"
               v-on:
               @click="deleteProject()">
@@ -132,7 +134,7 @@
                   <div class="card-content grey-text text-darken-2">
                     <span class="card-title">titulo</span>
                     <p>
-                      Lorem impsum Lorem impsum Lorem impsum
+                      Lorem impsum
                     </p>
                     <small>Criado por: Cleiton Jr.</small>
                   </div>
@@ -214,12 +216,13 @@ export default {
             })
         },
         deleteProject () {
-            if (window.confirm("Deseja realmente deletar o projeto ?")){
-                this.$http.delete("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } })
-                window.alert("Projeto deletado")
-                this.$router.replace("/home")
-            }
+
+            window.confirm("deseja realmente deletar o projeto?")
+            this.$http.delete("projects/" + this.$route.params.id + "/",  { headers: {"Authorization": "JWT " + localStorage.token } })
+            this.$router.replace("/home")
+            window.allert("projeto deletado")
         },
+
         getProject () {
             this.$http.get("projects/", { headers:
                     { "content-type": "application/json" } }).then(result => {

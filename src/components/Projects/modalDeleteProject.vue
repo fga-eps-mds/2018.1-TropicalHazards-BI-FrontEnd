@@ -62,16 +62,16 @@ export default {
 
         },
         deleteProject (){
-            this.$http.delete("projects/" + this.$route.params.id + "/",  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
+            if(this.currentUser.id == this.project.user){
+                this.$http.delete("projects/" + this.$route.params.id + "/",  { headers: {"Authorization": "JWT " + localStorage.token } })
                 window.confirm("projeto deletado")
-                this.project = result.data
                 this.$router.replace("/home")
-            },
-            error => {
-                window.alert("Erro ao deletar o projeto")
-                error.log(error)
-            })
+            }
+
+            window.alert("Erro ao deletar o projeto")
+
         },
+
         modalScript () {
             (document).ready(function(){
                 (".modal").modal()

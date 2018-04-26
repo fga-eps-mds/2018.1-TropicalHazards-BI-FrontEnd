@@ -78,6 +78,7 @@
                     </router-link>
 
                     <router-link
+                      v-if="currentUser.id == project.user"
                       :to="{ name: 'EditProject', params: { id: project.id } }"
                       class="btn blue lighten-1" >
                       <span class="fa fa-edit"/>

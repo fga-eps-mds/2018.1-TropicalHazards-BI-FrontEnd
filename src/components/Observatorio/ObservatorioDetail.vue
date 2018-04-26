@@ -148,15 +148,12 @@ export default {
         deleteProject (){
             if(this.currentUser.id == this.projeto.user){
                 this.$http.delete("project/" + this.projeto.id + "/",
-                    { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
-                    window.alert("projeto deletado")
-
-                },
-                error => {
-                    error.log("error")
-                })
+                    { headers: { "Authorization": "JWT " + localStorage.token } })
+                window.alert("projeto deletado")
             }
+            window.alert("erro ao deletar o projeto")
         },
+
         getProject(){
             this.$http.get("projects/",  { headers: { "content-type": "application/json" } }).then(result => {
                 this.projetos = result.data
@@ -185,7 +182,7 @@ export default {
             });
 
             (document).ready(function(){
-                ("select").formSelect();
+                ("select").formSelect()
             })
         }
     },

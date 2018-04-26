@@ -12,7 +12,7 @@
         <p> {{ currentUser.name }}</p>
       </li>
       <router-link
-        :to="{ name: 'HomePage' }"
+        :to="{ name: 'LandingPage' }"
         class="sidebar-icon">
         <li
           class="tooltipped"
@@ -21,8 +21,8 @@
           <span class="fa fa-home"/>
         </li>
       </router-link>
-      <a
-        href=""
+      <router-link
+        :to="{ name: 'HomePage' }"
         class="sidebar-icon">
         <li
           class="tooltipped"
@@ -30,9 +30,8 @@
           data-tooltip="Projetos">
           <span class="fa fa-th"/>
         </li>
-      </a>
+      </router-link>
       <a
-        href=""
         class="sidebar-icon">
         <li
           class="tooltipped"
@@ -41,8 +40,8 @@
           <span class="fa fa-area-chart"/>
         </li>
       </a>
-      <a
-        href="#edit-user"
+      <router-link
+        :to="{ name: 'EditUser'}"
         class="modal-trigger sidebar-icon">
         <li
           class="tooltipped"
@@ -50,7 +49,7 @@
           data-tooltip="Edit">
           <span class="fa fa-gear"/>
         </li>
-      </a>
+      </router-link>
       <a
         href="#new-proj"
         class="modal-trigger sidebar-icon">
