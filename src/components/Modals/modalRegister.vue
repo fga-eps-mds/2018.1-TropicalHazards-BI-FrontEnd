@@ -1,40 +1,68 @@
 
 <template>
   <transition name="modal-fade">
-    <div class="modal-mask" @click="closed" v-show="show">
-      <div class="modal-container" @click.stop>
+    <div
+      v-show="show"
+      class="modal-mask"
+      @click="closed">
+      <div
+        class="modal-container"
+        @click.stop>
         <div class="row">
-            <button
-              type="button"
-              class="btn-close"
-              @click="closed"
-              aria-label="Close modal"
-              style="float: right">
-             x
-            </button>
-            <h4 style="color:black">
-            <span style="color:black" class="fa fa-eye"></span> OBSERV</h4>
-            <h4 style="text-align:center; color:black;">Registrar</h4>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close modal"
+            style="float: right"
+            @click="closed">
+            x
+          </button>
+          <h4 style="color:black">
+            <span
+              style="color:black"
+              class="fa fa-eye">
+              OBSERV
+            </span>
+          </h4>
+          <h4 style="text-align:center; color:black;">Registrar</h4>
 
-         <p style="color:black; text-align:center; line-height:20px;">
-          Como visitante você tem acesso a funcionalidade de pesquisa de observatórios
-          e pode navegar entre estes observatórios.</p>
-              <section class="modal-form">
-              <form>
-            <div class="input-field col s12">
-            <input type="text" v-required v-model="user.username" placeholder="Username" />
-            </div>
-            <div class="input-field col s12">
-            <input type="email" v-model="user.email" placeholder="Email" />
-            </div>
-            <div class="input-field col s12">
-            <input type="password" v-model="user.password" placeholder="Password" />
-            </div>
-            <button v-on:click="registerUser()" id="entrar" type="submit" class="col s12 btn-large blue lighten-1 waves-effect waves-green">
-              <span class="fa fa-sign-in"></span> Registrar
-            </button>
-          </form>
-        </section>
+          <p style="color:black; text-align:center; line-height:20px;">
+            Como visitante você tem acesso a funcionalidade de pesquisa de observatórios
+            e pode navegar entre estes observatórios.</p>
+          <section class="modal-form">
+            <form>
+              <div class="input-field col s12">
+                <input
+                  v-required
+                  v-model="user.username"
+                  type="text"
+                  placeholder="Username">
+              </div>
+              <div class="input-field col s12">
+                <input
+                  v-model="user.email"
+                  type="email"
+                  placeholder="Email" >
+              </div>
+              <div class="input-field col s12">
+                <input
+                  v-model="user.password"
+                  type="password"
+                  placeholder="Password">
+              </div>
+              <button
+                id="entrar"
+                v-on:
+                click="registerUser()"
+                type="submit"
+                class="col s12 btn-large blue lighten-1 waves-effect waves-green">
+                <span
+                  class="fa fa-sign-in">
+                  Registrar
+                </span>
+              </button>
+            </form>
+          </section>
         </div>
       </div>
     </div>
@@ -42,85 +70,85 @@
 </template>
 
 <script>
-/* eslint-disable */
 
-import {mapGetters} from 'vuex'
-import JwtDecode from 'jwt-decode'
+import {mapGetters} from "vuex"
+import JwtDecode from "jwt-decode"
 
 export default {
 
 
-  data () {
-    return {
-      user: {
-        username: '',
-        email: '',
-        password: ''
-      },
-      token: '',
-      name: '',
-      error: false,
-      isModalVisibleRegister: false,
+    data () {
+        return {
+            user: {
+                username: "",
+                email: "",
+                password: ""
+            },
+            token: "",
+            name: "",
+            error: false,
+            isModalVisibleRegister: false,
+        }
+    },
+    computed: {
+        ...mapGetters({ currentUser: "currentUser" })
+    },
+    created () {
+        this.CheckLogin()
+    },
+    update () {
+        this.CheckLogin()
+    },
 
-    }
-  },
-  computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
-  },
-  created () {
-    this.CheckLogin()
-  },
-  update () {
-    this.CheckLogin()
-  },
-  methods: {
+    methods: {
     // redireciona o user caso esteja logado
-    CheckLogin () {
-      console.log(this.currentUser)
-      if (this.currentUser) {
-        this.$router.replace('/')
-      }
-    },
-    Login () {
-      this.$http.post('rest-auth/login/', this.user, { headers: { 'content-type': 'application/json' } }).then(result => {
-        this.token = JwtDecode(result.data.token)
-        this.name = this.token.isStaff
-        this.LoginSucess(result)
-      },
-      error => {
-        this.LoginFail()
-        console.error(error)
-      })
-    },
-    LoginSucess (response) {
-      if (!response.data.token) {
-        this.loginFail()
-        return
-      }
-      this.error = false
-      localStorage.token = response.data.token
-      this.$store.dispatch('login') // trigger da ação de login implementado em store/auth.js
-      this.$router.replace('/')
-    },
-    LoginFail () {
-      this.error = 'Falha no Login!'
-      this.$store.dispatch('logout') // trigger da ação de logout
-      delete localStorage.token
-    },
-    closed () {
-      this.$emit('closed')
-    },
+        CheckLogin () {
 
-    registerUser(){
-      this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.name = result.data;
-      window.alert("Usuario registrado com sucesso!")
-      },
-      error => {
-      window.alert("Erro")
-      });
-    },
-  }
+            if (this.currentUser) {
+                this.$router.replace("/")
+            }
+        },
+        Login () {
+            this.$http.post("rest-auth/login/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+                this.token = JwtDecode(result.data.token)
+                this.name = this.token.isStaff
+                this.LoginSucess(result)
+            },
+            error => {
+                this.LoginFail()
+                error.log()
+            })
+        },
+        LoginSucess (response) {
+            if (!response.data.token) {
+                this.loginFail()
+                return
+            }
+            this.error = false
+            localStorage.token = response.data.token
+            this.$store.dispatch("login") // trigger da ação de login implementado em store/auth.js
+            this.$router.replace("/")
+        },
+        LoginFail () {
+            this.error = "Falha no Login!"
+            this.$store.dispatch("logout") // trigger da ação de logout
+            delete localStorage.token
+        },
+        closed () {
+            this.$emit("closed")
+        },
+
+        registerUser(){
+            this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+                this.name = result.data
+                window.alert("Usuario registrado com sucesso!")
+            },
+            error => {
+                error.log()
+                window.alert("Erro")
+            })
+        },
+    }
 }
 </script>
 <style>
