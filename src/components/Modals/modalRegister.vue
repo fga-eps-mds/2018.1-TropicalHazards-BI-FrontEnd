@@ -52,10 +52,10 @@
               </div>
               <button
                 id="entrar"
-                v-on:
-                click="registerUser()"
+                class="col s12 btn-large blue lighten-1 waves-effect waves-green"
                 type="submit"
-                class="col s12 btn-large blue lighten-1 waves-effect waves-green">
+                v-on:
+                @click="registerUser()">
                 <span
                   class="fa fa-sign-in">
                   Registrar

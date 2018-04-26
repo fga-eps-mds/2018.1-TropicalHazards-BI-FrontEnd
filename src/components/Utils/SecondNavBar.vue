@@ -16,9 +16,12 @@
             :to="{name: 'LandingPage'}"/>
         </li>
         <li><router-link :to="{name: 'HomePage'}">Dashboard</router-link></li>
-        <li ><a
-          href="#">Logout
-          @v-on:click="Logout()"</a>
+        <li >
+          <router-link
+            v-on:
+            @click="Logout()">
+            Logout
+          </router-link>
         </li>
       </ul>
 

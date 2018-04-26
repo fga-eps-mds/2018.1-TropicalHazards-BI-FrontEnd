@@ -66,11 +66,12 @@
             </router-link>
             <a
               v-if="currentUser.id == project.user"
+              :to="{ name: 'HomePage'} "
               class="btn-flat red lighten-1 grey-text text-lighten-2"
               v-on:
               @click="deleteProject()">
-
-              <span class="fa fa-trash">Deletar Projeto</span>
+              Deletar Projeto
+              <span class="fa fa-trash"/>
             </a>
             <br>
             <br>
@@ -163,13 +164,11 @@
 
 <script>
 import SideBar from "@/components/Utils/SideBar"
-import modalDeleteObservatorio from "@/components/Modals/modalDeleteObservatorio"
 import {mapGetters} from "vuex"
 
 export default {
     components: {
         "sidebar": SideBar,
-        "modal-delete-observatorio": modalDeleteObservatorio
     },
 
     data () {
@@ -215,12 +214,18 @@ export default {
                 error.log(error)
             })
         },
-        deleteProject () {
-
-            window.confirm("deseja realmente deletar o projeto?")
-            this.$http.delete("projects/" + this.$route.params.id + "/",  { headers: {"Authorization": "JWT " + localStorage.token } })
-            this.$router.replace("/home")
-            window.allert("projeto deletado")
+        deleteProject (){
+            if (window.confirm("Deseja realmente deletar o projeto ?")){
+                this.$http.delete("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
+                    window.alert("Projeto deletado")
+                    this.$router.replace("/home")
+                    this.project = result.data
+                },
+                error => {
+                    window.alert("Erro ao deletar o projeto")
+                    error.log(error)
+                })
+            }
         },
 
         getProject () {

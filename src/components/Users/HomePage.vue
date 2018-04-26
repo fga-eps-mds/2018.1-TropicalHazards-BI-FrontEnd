@@ -147,13 +147,11 @@
 <script>
 import {mapGetters} from "vuex"
 import SideBar from "@/components/Utils/SideBar"
-import modalDeleteProject from "@/components/Modals/modalDeleteProject"
 
 export default {
 
     components: {
         "sidebar": SideBar,
-        "modal-delete-proj": modalDeleteProject
     },
     data () {
         return {

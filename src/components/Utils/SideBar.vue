@@ -50,8 +50,9 @@
           <span class="fa fa-gear"/>
         </li>
       </router-link>
-      <a
-        href="#new-proj"
+      <router-link
+        :to=" { name: 'CreateProject'}"
+
         class="modal-trigger sidebar-icon">
         <li
           class="tooltipped"
@@ -59,7 +60,7 @@
           data-tooltip="New Proj">
           <span class="fa fa-plus"/>
         </li>
-      </a>
+      </router-link>
       <a
         href="#delete-user"
         class="modal-trigger sidebar-icon">
@@ -94,9 +95,7 @@
         </li>
       </router-link>
     </ul>
-    <modal-delete-user/>
-    <modal-new-proj/>
-    <modal-edit-user/>
+
   </div>
 
 
@@ -105,15 +104,10 @@
 
 <script>
 import { mapGetters } from "vuex"
-import modalNewProject from "@/components/Modals/modalNewProject"
-import modalEditUser from "@/components/Modals/modalEditUser"
-import DeleteUser from "@/components/Users/DeleteUser"
 
 export default {
     components: {
-        "modal-new-proj": modalNewProject,
-        "modal-edit-user": modalEditUser,
-        "modal-delete-user": DeleteUser
+
     },
     data() {
         return {}

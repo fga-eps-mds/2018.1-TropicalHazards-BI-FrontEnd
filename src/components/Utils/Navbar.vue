@@ -139,12 +139,12 @@
 
 <script>
 import { mapGetters } from "vuex"
-import modal from "@/components/Modals/modal"
+import modalLogin from "@/components/Modals/modalLogin"
 import modalRegister from "@/components/Modals/modalRegister"
 
 export default {
     components: {
-        modal,
+        "modal": modalLogin,
         modalRegister
     },
 

@@ -63,40 +63,32 @@
 </template>
 
 <script>
-
 import ProjectDetail from "@/components/Projects/ProjectDetail"
 import SecondNavBar from "@/components/Utils/SecondNavBar"
 import {mapGetters} from "vuex"
-import modal from "@/components/Modals/modal.vue"
-
+import modalLogin from "@/components/Modals/modalLogin.vue"
 export default {
     components: {
         ProjectDetail,
         "secondnav": SecondNavBar,
-        modal
+        "modal": modalLogin
     },
-
     data () {
         return {
             projects: {
                 name: "",
                 description: ""
-
             },
             isModalVisible: false,
             projetos: ""
-
         }
     },
-
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
-
     beforeMount () {
         this.getProject()
     },
-
     methods: {
         getProject () {
             this.$http.get("projects/", { headers: { "content-type": "application/json" } }).then(result => {
@@ -107,14 +99,11 @@ export default {
             })
         }
     },
-
 }
 </script>
 
 <style>
-
 ::placeholder { /* Most modern browsers support this now. */
    color:    #132a71;
 }
-
 </style>
