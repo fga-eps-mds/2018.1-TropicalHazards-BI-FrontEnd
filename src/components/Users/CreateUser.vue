@@ -1,51 +1,63 @@
 <template>
-<div class = "app">
-  <div class="row">
-    <secondnav></secondnav>
-    <div id="usuario" class ="container  col s12">
-                <h2> Registrar </h2>
-          <div class="container center-align">
-          <input type="text" v-model="user.username" placeholder="Username" />
-          <input type="text" v-model="user.email" placeholder="Email" />
-          <input type="password" v-model="user.password" placeholder="password" />
-          <a v-on:click="registerUser()" v-on:keyup.enter="registerUser()" class="waves-effect waves-light btn-small">Criar Usuario</a>
-         </div>
-     </div>
-
+  <div class = "app">
+    <div class="row">
+      <secondnav/>
+      <div
+        id="usuario"
+        class ="container  col s12">
+        <h2> Registrar </h2>
+        <div class="container center-align">
+          <input
+            v-model="user.username"
+            type="text"
+            placeholder="Username" >
+          <input
+            v-model="user.email"
+            type="text"
+            placeholder="Email" >
+          <input
+            v-model="user.password"
+            type="password"
+            placeholder="password" >
+          <a
+            class="waves-effect waves-light btn-small"
+            v-on:
+            @click="registerUser()"
+            @keyup.enter="registerUser()">Criar Usuario</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-/* eslint-disable */
-import SecondNavBar from '@/components/Utils/SecondNavBar'
-  export default {
+
+import SecondNavBar from "@/components/Utils/SecondNavBar"
+export default {
     components: {
-     'secondnav': SecondNavBar
+        "secondnav": SecondNavBar
     },
-  data(){
-    name: 'CreateUser'
-    return {
-      user: {
-        username: "",
-        email: "",
-        password: ""
-
-      }
+    data(){
+        return {
+            user: {
+                username: "",
+                email: "",
+                password: ""
+            }
+        }
+    },
+    methods: {
+        registerUser(){
+            this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+                this.user = result.data
+                window.alert("Usuario criado")
+            },
+            error => {
+                window.alert("Dados incorretos ou usuario já cadastrado")
+                error.log(error)
+            })
+        },
     }
-  },
-  methods: {
-    registerUser(){
-      this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.user = result.data;
-      window.alert("Usuario criado")
-      },
-      error => {
-      window.alert("Erro")
-      });
-    },
-  }
-
 }
 </script>
 

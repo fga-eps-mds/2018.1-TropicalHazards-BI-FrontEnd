@@ -2,41 +2,57 @@
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop">
-      <div class="modal" role="dialog">
+      <div
+        class="modal"
+        role="dialog">
         <div class="row">
-                <button
-              type="button"
-              class="btn-close"
-              @click="close"
-              aria-label="Close modal"
-              style="float: right">
-             x
-            </button>
-            <h4 style="color:black">
-            <span style="color:black" class="fa fa-eye"></span> OBSERV</h4>
-            <h4 style="text-align:center">Fazer login</h4>
+          <button
+            type="button"
+            aria-label="Close modal"
+            style="float: right"
+            class="btn-close"
+            @click="close">
+            x
+          </button>
+          <h4 style="color:black">
+            <span
+              style="color:black"
+              class="fa fa-eye">OBSERV</span> </h4>
+          <h4 style="text-align:center">Fazer login</h4>
 
-         <p style="color:black; text-align:center; line-height:20px;">
-          Como visitante você tem acesso a funcionalidade de pesquisa de observatórios
-          e pode navegar entre estes observatórios.
-        </p>
-              <section class="modal-form">
+          <p style="color:black; text-align:center; line-height:20px;">
+            Como visitante você tem acesso a funcionalidade de pesquisa de observatórios
+            e pode navegar entre estes observatórios.
+          </p>
+          <section class="modal-form">
 
-              <form>
-            <div class="input-field col s12">
-            <input type="text" v-model="user.username" placeholder="Username" />
-            </div>
-            <div class="input-field col s12">
-            <input type="password" v-model="user.password" placeholder="Password" />
-            </div>
-            <button v-on:click="Login()" type="submit" class="btn-large blue lighten-1">
-              <span class="fa fa-sign-in"></span> Entrar
-            </button>
-          </form>
-        </section>
-        <button v-on:click="Login()" type="submit" class=" btn-large green lighten-1">
-              <span class="fa fa-sign-in"></span> Registrar
-            </button>
+            <form>
+              <div class="input-field col s12">
+                <input
+                  v-model="user.username"
+                  placeholder="Username"
+                  type="text">
+              </div>
+              <div class="input-field col s12">
+                <input
+                  v-model="user.password"
+                  type="password"
+                  placeholder="Password" >
+              </div>
+              <button
+                type="submit"
+                class="btn-large blue lighten-1"
+                @v-on:click="Login()">
+                <span class="fa fa-sign-in">Entrar</span>
+              </button>
+            </form>
+          </section>
+          <button
+            type="submit"
+            class=" btn-large green lighten-1"
+            @v-on:click="Login()">
+            <span class="fa fa-sign-in">Registrar</span>
+          </button>
         </div>
       </div>
     </div>
@@ -45,31 +61,30 @@
 
 <script>
 export default {
-/* eslint-disable */
-  data(){
-    name: 'Register'
-    return {
-      user: {
-        username: "",
-        email: "",
-        password: ""
-      },
-      response: "",
-    }
-  },
-  methods: {
-    // metodo pra registrar usuário
-    Register(){
-      this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-      this.user = result.data;
-      this.response = response.data;
-      },
-      error => {
-          console.error(error);
-      });
+    data(){
 
+        return {
+            user: {
+                username: "",
+                email: "",
+                password: ""
+            },
+            response: "",
+        }
+    },
+    methods: {
+    // metodo pra registrar usuário
+        Register(){
+            this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+                this.user = result.data
+                this.response = result.data
+            },
+            error => {
+                error.log(error)
+            })
+
+        }
     }
-  }
 }
 </script>
 <style>

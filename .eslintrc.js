@@ -3,7 +3,7 @@ module.exports = {
         "browser": true,
         "node": true
     },
-    "extends": "plugin:vue/essential",
+    "extends": ["eslint:recommended", "plugin:vue/recommended"],
 
     "parserOptions": {
         "ecmaFeatures": {
@@ -13,7 +13,7 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            "tab"
+            4
         ],
         "linebreak-style": [
             "error",
@@ -25,7 +25,7 @@ module.exports = {
         ],
         "semi": [
             "error",
-            "always"
+            "never"
         ]
     }
 };

@@ -1,130 +1,156 @@
 <template>
 
-<div id="app">
-  <div class="row grey lighten-4">
-    <sidebar></sidebar>
-    <div id="content" class="col m11">
-      <div class="header center-align white">
-        <h3>
-          {{project.name}}
-        </h3>
-      </div>
-      <div class="grey lighten-4">
-        <div class="custom-container">
-          <h5>Estatísticas do projeto</h5>
-          <div class="row">
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">Descrição</span>
-                  <p>
-                    <span class="fa fa-line-chart"></span> {{project.description}}
-                  </p>
+  <div id="app">
+    <div class="row grey lighten-4">
+      <sidebar/>
+      <div
+        id="content"
+        class="col m11">
+        <div class="header center-align white">
+          <h3>
+            {{ project.name }}
+          </h3>
+        </div>
+        <div class="grey lighten-4">
+          <div class="custom-container">
+            <h5>Estatísticas do projeto</h5>
+            <div class="row">
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Descrição</span>
+                    <p>
+                      <span class="fa fa-line-chart">{{ project.description }}</span>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">6</span>
-                  <p>
-                    <span class="fa fa-line-chart"></span> Observatórios
-                  </p>
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">6</span>
+                    <p>
+                      <span class="fa fa-line-chart">Observatórios</span>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">14</span>
-                  <p>
-                    <span class="fa fa-users"></span> Contribuidores
-                  </p>
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">14</span>
+                    <p>
+                      <span class="fa fa-users">Contribuidores</span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="custom-container">
-          <h5>
-            Observatórios neste projeto:
-          </h5>
-          <a href="#new-observ" class="btn-flat blue lighten-1 grey-text text-lighten-2 modal-trigger">
-            Novo Observatório
-            <span class="fa fa-plus"></span>
-          </a>
-            <router-link :to="{ name: 'EditProject', params: { id: project.id } }"
-                                class="btn green lighten-1" >
-            Editar Projeto
-            <span class="fa fa-plus"></span>
+          <div class="custom-container">
+            <h5>
+              Observatórios neste projeto:
+            </h5>
+            <a
+              href="#new-observ"
+              class="btn-flat blue lighten-1 grey-text text-lighten-2 modal-trigger">
+              Novo Observatório
+              <span class="fa fa-plus"/>
+            </a>
+            <router-link
+              v-if="currentUser.id == project.user"
+              :to="{ name: 'EditProject', params: { id: project.id } }"
+              class="btn green lighten-1" >
+              Editar Projeto
+              <span class="fa fa-plus"/>
             </router-link>
-          <a  v-on:click="deleteProject()" class="btn-flat red lighten-1 grey-text text-lighten-2">
-            Deletar Projeto
-            <span class="fa fa-trash"></span>
-          </a>
-          <br>
-          <br>
-          <div class="row" id="detail">
-            <div class=" col s12 m4 l3">
-              <div class="truncate card grey lighten-5">
-                <div class="card-content grey-text text-darken-2">
-                  <span class="card-title">Observatório x</span>
-                  <p>
-                    Observátório sobre os dados da dengue no ano de 2010
-                  </p>
-                  <small>Criado por: João do Caminhão</small>
-                </div>
-                <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="#/observer-detail" class="btn  blue lighten-1">
-                    <span class="fa fa-search"></span>
-                  </a>
-                  <a href="#" class="btn red">
-                    <span class="fa fa-remove"></span>
-                  </a>
+            <a
+              v-if="currentUser.id == project.user"
+              :to="{ name: 'HomePage'} "
+              class="btn-flat red lighten-1 grey-text text-lighten-2"
+              v-on:
+              @click="deleteProject()">
+              Deletar Projeto
+              <span class="fa fa-trash"/>
+            </a>
+            <br>
+            <br>
+            <div
+              id="detail"
+              class="row">
+              <div class=" col s12 m4 l3">
+                <div class="truncate card grey lighten-5">
+                  <div class="card-content grey-text text-darken-2">
+                    <span class="card-title">Observatório x</span>
+                    <p>
+                      Observátório sobre os dados da dengue no ano de 2010
+                    </p>
+                    <small>Criado por: João do Caminhão</small>
+                  </div>
+                  <div class="card-action center-align grey-text text-lighten-2">
+                    <a
+                      href="#/observer-detail"
+                      class="btn  blue lighten-1">
+                      <span class="fa fa-search"/>
+                    </a>
+                    <a
+                      href="#"
+                      class="btn red">
+                      <span class="fa fa-remove"/>
+                    </a>
                   <!-- <a href="#" class="btn  blue lighten-1">
                     <span class="fa fa-user-plus"></span>
                   </a> -->
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class=" col s12 m4 l3">
-              <div class="truncate card grey lighten-5">
-                <div class="card-content grey-text text-darken-2">
-                  <span class="card-title">Lago Sul</span>
-                  <p>
-                    Observátório sobre os dados da dengue no ano de 2015
-                  </p>
-                  <small>Criado por: Sérgio Capixaba</small>
-                </div>
-                <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="#/observer-detail" class="btn  blue lighten-1">
-                    <span class="fa fa-search"></span>
-                  </a>
-                 <a href="#" class="btn red">
-                    <span class="fa fa-remove"></span>
-                  </a>
+              <div class=" col s12 m4 l3">
+                <div class="truncate card grey lighten-5">
+                  <div class="card-content grey-text text-darken-2">
+                    <span class="card-title">Lago Sul</span>
+                    <p>
+                      Observátório sobre os dados da dengue no ano de 2015
+                    </p>
+                    <small>Criado por: Sérgio Capixaba</small>
+                  </div>
+                  <div class="card-action center-align grey-text text-lighten-2">
+                    <a
+                      href="#/observer-detail"
+                      class="btn  blue lighten-1">
+                      <span class="fa fa-search"/>
+                    </a>
+                    <a
+                      href="#"
+                      class="btn red">
+                      <span class="fa fa-remove"/>
+                    </a>
                   <!-- <a href="#" class="btn  blue lighten-1"> -->
                     <!-- <span class="fa fa-user-plus"></span> -->
                   <!-- </a> -->
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class=" col s12 m4 l3">
-              <div class="truncate card grey lighten-5">
-                <div class="card-content grey-text text-darken-2">
-                  <span class="card-title">titulo</span>
-                  <p>
-                    Lorem impsum Lorem impsum Lorem impsum
-                  </p>
-                  <small>Criado por: Cleiton Jr.</small>
-                </div>
-                <div class="card-action center-align grey-text text-lighten-2">
-                  <a href="#/observer-detail" class="btn  blue lighten-1">
-                    <span class="fa fa-search"></span>
-                  </a>
-                  <a href="#delete-proj" class="modal-trigger btn red">
-                    <span class="fa fa-remove"></span>
-                  </a>
+              <div class=" col s12 m4 l3">
+                <div class="truncate card grey lighten-5">
+                  <div class="card-content grey-text text-darken-2">
+                    <span class="card-title">titulo</span>
+                    <p>
+                      Lorem impsum
+                    </p>
+                    <small>Criado por: Cleiton Jr.</small>
+                  </div>
+                  <div class="card-action center-align grey-text text-lighten-2">
+                    <a
+                      href="#/observer-detail"
+                      class="btn  blue lighten-1">
+                      <span class="fa fa-search"/>
+                    </a>
+                    <a
+                      href="#delete-proj"
+                      class="modal-trigger btn red">
+                      <span class="fa fa-remove"/>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -132,102 +158,101 @@
         </div>
       </div>
     </div>
+    <modal-delete-observatorio/>
   </div>
-  <modal-delete-observatorio></modal-delete-observatorio>
-</div>
 </template>
 
 <script>
-/* eslint-disable */
-import SideBar from '@/components/Utils/SideBar'
-import modalDeleteObservatorio from '@/components/Modals/modalDeleteObservatorio'
-import {mapGetters} from 'vuex'
+import SideBar from "@/components/Utils/SideBar"
+import {mapGetters} from "vuex"
 
 export default {
-  components: {
-    'sidebar': SideBar,
-    'modal-delete-observatorio': modalDeleteObservatorio
-  },
+    components: {
+        "sidebar": SideBar,
+    },
 
-  data () {
-    return {
-      project: {
-        id: '',
-        user: '',
-        name: '',
-        description: ''
-      },
-      user: {
+    data () {
+        return {
+            project: {
+                id: "",
+                user: "",
+                name: "",
+                description: ""
+            },
+            user: {
+                name: "",
+                id: "",
+                email: ""
+            }
 
-        name: '',
-        id: '',
-        email: ''
-      }
+        }
+    },
+    computed: {
+        ...mapGetters({ currentUser: "currentUser" })
+    },
 
+    beforeMount () {
+        this.loadUserInfo()
+        this.testToken()
+        this.modalScript()
+    },
+    created () {
+        this.getProjectDetail()
+    },
+
+    methods: {
+        loadUserInfo () {
+            this.user.id = this.currentUser.id
+            this.user.username = this.currentUser.name
+            this.user.email = this.currentUser.email
+        },
+        getProjectDetail () {
+            this.$http.get("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
+                this.project = result.data
+            },
+            error => {
+                error.log(error)
+            })
+        },
+        deleteProject (){
+            if (window.confirm("Deseja realmente deletar o projeto ?")){
+                this.$http.delete("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
+                    window.alert("Projeto deletado")
+                    this.$router.replace("/home")
+                    this.project = result.data
+                },
+                error => {
+                    window.alert("Erro ao deletar o projeto")
+                    error.log(error)
+                })
+            }
+        },
+
+        getProject () {
+            this.$http.get("projects/", { headers:
+                    { "content-type": "application/json" } }).then(result => {
+                this.project = result.data
+            },
+            error => {
+                error.log(error)
+            })
+        },
+        testToken () {
+            this.$http.post("obtain-token/", {"username": this.user.username, "password": this.user.password}).then(result => {
+                localStorage.token = result.data.token
+            })
+        },
+        modalScript () {
+            (document).ready(function () {
+                (".modal").modal()
+            });
+
+            (document).ready(function () {
+                ("select").formSelect()
+            })
+        }
     }
-  },
 
-  computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
-  },
-  methods: {
-    loadUserInfo () {
-      this.user.id = this.currentUser.id
-      this.user.username = this.currentUser.name
-      this.user.email = this.currentUser.email
-    },
-    getProjectDetail () {
-      this.$http.get('projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-        this.project = result.data
-      },
-      error => {
-        console.error(error)
-      })
-    },
-    deleteProject () {
-      if (window.confirm("Deseja realmente deletar o projeto ?")){
-        this.$http.delete('projects/' + this.$route.params.id + '/', { headers: { 'Authorization': 'JWT ' + localStorage.token } }).then(result => {
-          window.alert('Projeto deletado')
-          this.$router.replace('/home')
-
-      },
-      error => {
-        window.alert('Erro ao deletar o projeto')
-        console.error(error)
-        })
-      }
-    },
-    getProject () {
-      this.$http.get('projects/', { headers:
-                    { 'content-type': 'application/json' } }).then(result => {
-        this.project = result.data
-      },
-      error => {
-        console.error(error)
-      })
-    },
-    testToken () {
-      this.$http.post('obtain-token/', {'username': this.user.username, 'password': this.user.password}).then(result => {
-        localStorage.token = result.data.token
-      })
-    },
-    modalScript () {
-      (document).ready(function () {
-        ('.modal').modal()
-      })
-      (document).ready(function () {
-        ('select').formSelect()
-      })
-    }
-  },
-  beforeMount () {
-    this.loadUserInfo()
-    this.testToken()
-    this.modalScript()
-  },
-  created () {
-    this.getProjectDetail()
-  }
 }
 </script>
 
