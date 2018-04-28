@@ -1,9 +1,16 @@
 import Vue from "vue"
+import Vuelidate from "vuelidate"
 import { shallow } from "@vue/test-utils"
 import Register from "@/components/Authentication/Register.vue"
 
+Vue.use(Vuelidate)
+
 describe("tests of Register.vue", () => {
-    const wrapper = shallow(Register)
+    let wrapper
+
+    beforeEach(() => {
+        wrapper = shallow(Register)
+    })
 
     it("should be a Vue instance", () => {
         expect(wrapper.isVueInstance()).toBeTruthy()
@@ -25,7 +32,7 @@ describe("tests of Register.vue", () => {
         expect(comp.user.email).toEqual("")
     })
 
-    it("", () => {
-
+    it("should have initial validation as invalid", () => {
+        expect(wrapper.vm.$v.$invalid).toBeTruthy()
     })
 })
