@@ -24,15 +24,24 @@ describe("tests of Register.vue", () => {
     })
 
     it("should have blank properties by default", () => {
-        const Constructor = Vue.extend(Register)
-        const comp = new Constructor().$mount()
-
-        expect(comp.user.username).toEqual("")
-        expect(comp.user.password).toEqual("")
-        expect(comp.user.email).toEqual("")
+        expect(wrapper.vm.user.username).toEqual("")
+        expect(wrapper.vm.user.email).toEqual("")
+        expect(wrapper.vm.user.password).toEqual("")
     })
 
     it("should have initial validation as invalid", () => {
         expect(wrapper.vm.$v.$invalid).toBeTruthy()
+    })
+
+    it("should be valid if all fields are correctly filled", () => {
+        wrapper.setData({
+            user: {
+                username: "rick-martin",
+                email: "rick&martin@example.com",
+                password: "supersecret"
+            }
+        })
+
+        expect(wrapper.vm.$v.$invalid).toBeFalsy()
     })
 })
