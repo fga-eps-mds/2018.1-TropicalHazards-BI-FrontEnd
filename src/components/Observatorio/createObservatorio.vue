@@ -1,52 +1,50 @@
 <template>
-  <div id="app">
-    <div class="row grey lighten-4">
-      <sidebar/>
-      <div
-        id="content"
-        class="col m11">
-        <div class="header center-align white">
-          <h3>
-            Criar Observatório
-          </h3>
+  <div class="row grey lighten-4">
+    <sidebar/>
+    <div
+      id="content"
+      class="col m11">
+      <div class="header center-align white">
+        <h3>
+          Criar Observatório
+        </h3>
+      </div>
+      <div class="container center-align">
+        <div class="row">
+          <div class="">
+            <div class="card grey lighten-3">
+              <div class="card-content black-text">
+                <span style="color: grey;text-align:left;"><h4>Nome</h4></span>
+                <p style="text-align:left">{{ observatory.name }}</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <form>
         <div class="container center-align">
           <div class="row">
-            <div class="">
-              <div class="card grey lighten-3">
-                <div class="card-content black-text">
-                  <span style="color: grey;text-align:left;"><h4>Nome</h4></span>
-                  <p style="text-align:left">{{ observatory.name }}</p>
-                </div>
-              </div>
+            <div class="input-field col s12">
+              <input
+                id="name"
+                v-model="observatory.name"
+                type="text"
+                class="validate">
             </div>
           </div>
+          <router-link
+            :to="{ name: 'ProjectDetail' , params: { id: project.id }}"
+            class=" btn-large grey lighten-1 white-text waves-effect waves-light">
+            Cancelar
+          </router-link>
+          <a
+            class=" btn-large blue lighten-1 white-text waves-effect waves-light"
+            v-on:
+            @click="PostObservatory()">
+            Criar
+          </a>
         </div>
-        <form>
-          <div class="container center-align">
-            <div class="row">
-              <div class="input-field col s12">
-                <input
-                  id="name"
-                  v-model="observatory.name"
-                  type="text"
-                  class="validate">
-              </div>
-            </div>
-            <router-link
-              :to="{ name: 'ProjectDetail' , params: { id: project.id }}"
-              class=" btn-large grey lighten-1 white-text waves-effect waves-light">
-              Cancelar
-            </router-link>
-            <a
-              class=" btn-large blue lighten-1 white-text waves-effect waves-light"
-              v-on:
-              @click="PostObservatory()">
-              Criar
-            </a>
-          </div>
-        </form>
-      </div>
+      </form>
     </div>
   </div>
 </template>
