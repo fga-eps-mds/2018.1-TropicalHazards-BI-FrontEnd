@@ -42,7 +42,7 @@
             <a
               class=" btn-large blue lighten-1 white-text waves-effect waves-light"
               v-on:
-              @click="updateProject()">
+              @click="updateDashboard()">
               Atualizar
             </a>
           </div>

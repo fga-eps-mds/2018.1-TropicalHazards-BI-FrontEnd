@@ -91,6 +91,7 @@
                       projeto relacionado: {{ dashboard.project }}
                     </p>
                     <small>Criado por: {{ project.user }}</small>
+                    <small>Id dashboard: {{ dashboard.id }}</small>
                   </div>
                   <div class="card-action center-align grey-text text-lighten-2">
                     <a
@@ -98,12 +99,13 @@
                       class="btn  blue lighten-1">
                       <span class="fa fa-search"/>
                     </a>
-                    <a
+                    <router-link
                       v-if="currentUser.id == project.user"
+                      :to="{ name: 'editObservatorio', params: { id: dashboard.id } }"
                       href="#"
-                      class="btn red">
-                      <span class="fa fa-remove"/>
-                    </a>
+                      class="btn blue">
+                      <span class="fa fa-edit"/>
+                    </router-link>
                   </div>
                 </div>
               </div>
