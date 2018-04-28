@@ -73,7 +73,7 @@ export default new Router({
       component: DeleteUser
     },
     {
-      path: '/observer-detail',
+      path: '/observer-detail/:id',
       name: 'ObservatorioDetail',
       component: ObservatorioDetail
     },
