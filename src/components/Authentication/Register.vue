@@ -10,15 +10,18 @@
             <h1> REGISTRAR </h1>
             <input
               v-model="user.username"
+              @input="$v.user.username.$touch()"
               type="text"
               placeholder="Username">
             <input
               v-model="user.password"
+              @input="$v.user.password.$touch()"
               type="password"
               placeholder="Password">
             <input
               v-model="user.email"
-              type="text"
+              @input="$v.user.email.$touch()"
+              type="email"
               placeholder="Email">
             <a
               v-on:
@@ -41,6 +44,8 @@
 </template>
 
 <script>
+import { required, minLength, between } from "vuelidate/lib/validators"
+
 export default {
     data(){
         return {
@@ -50,6 +55,22 @@ export default {
                 password: ""
             },
             response: "",
+        }
+    },
+    validations: {
+        user: {
+            username: {
+                required,
+                between: between(3, 50)
+            },
+            email: {
+                required,
+                between: between(6, 70)
+            },
+            password: {
+                required,
+                minLength: minLength(4)
+            }
         }
     },
     methods: {
