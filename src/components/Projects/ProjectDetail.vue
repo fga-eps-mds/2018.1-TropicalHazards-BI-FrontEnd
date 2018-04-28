@@ -51,12 +51,13 @@
             <h5>
               Observatórios neste projeto:
             </h5>
-            <a
-              href="#new-observ"
-              class="btn-flat blue lighten-1 grey-text text-lighten-2 modal-trigger">
-              Novo Observatório
+            <router-link
+              v-if="currentUser.id == project.user"
+              :to="{ name: 'createObservatorio', params: { id: project.id } }"
+              class="btn blue lighten-1" >
+              Novo observatório
               <span class="fa fa-plus"/>
-            </a>
+            </router-link>
             <router-link
               v-if="currentUser.id == project.user"
               :to="{ name: 'EditProject', params: { id: project.id } }"
@@ -78,14 +79,18 @@
             <div
               id="detail"
               class="row">
-              <div class=" col s12 m4 l3">
+              <div
+
+                v-for="dashboard in dashboards"
+                :key="dashboard.id"
+                class=" col s12 m4 l3">
                 <div class="truncate card grey lighten-5">
                   <div class="card-content grey-text text-darken-2">
-                    <span class="card-title">Observatório x</span>
+                    <span class="card-title">{{ dashboard.name }}</span>
                     <p>
-                      Observátório sobre os dados da dengue no ano de 2010
+                      projeto relacionado: {{ dashboard.project }}
                     </p>
-                    <small>Criado por: João do Caminhão</small>
+                    <small>Criado por: {{ project.user }}</small>
                   </div>
                   <div class="card-action center-align grey-text text-lighten-2">
                     <a
@@ -94,60 +99,9 @@
                       <span class="fa fa-search"/>
                     </a>
                     <a
+                      v-if="currentUser.id == project.user"
                       href="#"
                       class="btn red">
-                      <span class="fa fa-remove"/>
-                    </a>
-                  <!-- <a href="#" class="btn  blue lighten-1">
-                    <span class="fa fa-user-plus"></span>
-                  </a> -->
-                  </div>
-                </div>
-              </div>
-              <div class=" col s12 m4 l3">
-                <div class="truncate card grey lighten-5">
-                  <div class="card-content grey-text text-darken-2">
-                    <span class="card-title">Lago Sul</span>
-                    <p>
-                      Observátório sobre os dados da dengue no ano de 2015
-                    </p>
-                    <small>Criado por: Sérgio Capixaba</small>
-                  </div>
-                  <div class="card-action center-align grey-text text-lighten-2">
-                    <a
-                      href="#/observer-detail"
-                      class="btn  blue lighten-1">
-                      <span class="fa fa-search"/>
-                    </a>
-                    <a
-                      href="#"
-                      class="btn red">
-                      <span class="fa fa-remove"/>
-                    </a>
-                  <!-- <a href="#" class="btn  blue lighten-1"> -->
-                    <!-- <span class="fa fa-user-plus"></span> -->
-                  <!-- </a> -->
-                  </div>
-                </div>
-              </div>
-              <div class=" col s12 m4 l3">
-                <div class="truncate card grey lighten-5">
-                  <div class="card-content grey-text text-darken-2">
-                    <span class="card-title">titulo</span>
-                    <p>
-                      Lorem impsum
-                    </p>
-                    <small>Criado por: Cleiton Jr.</small>
-                  </div>
-                  <div class="card-action center-align grey-text text-lighten-2">
-                    <a
-                      href="#/observer-detail"
-                      class="btn  blue lighten-1">
-                      <span class="fa fa-search"/>
-                    </a>
-                    <a
-                      href="#delete-proj"
-                      class="modal-trigger btn red">
                       <span class="fa fa-remove"/>
                     </a>
                   </div>
@@ -183,6 +137,11 @@ export default {
                 name: "",
                 id: "",
                 email: ""
+            },
+            dashboards:{
+                id: "",
+                name: "",
+                project: ""
             }
 
         }
@@ -198,6 +157,7 @@ export default {
     },
     created () {
         this.getProjectDetail()
+        this.getObserv()
     },
 
     methods: {
@@ -232,6 +192,15 @@ export default {
             this.$http.get("projects/", { headers:
                     { "content-type": "application/json" } }).then(result => {
                 this.project = result.data
+            },
+            error => {
+                error.log(error)
+            })
+        },
+        getObserv () {
+            this.$http.get("dashboards/", { headers:
+                    { "content-type": "application/json" } }).then(result => {
+                this.dashboards = result.data
             },
             error => {
                 error.log(error)
