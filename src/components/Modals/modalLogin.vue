@@ -4,28 +4,25 @@
     <div
       v-show="show"
       class="modal-mask"
-      @click="closed">
+      @click="close">
+
       <div
         class="modal-container"
         @click.stop>
         <div class="row">
           <button
+            aria-label="Close modal"
             type="button"
             class="btn-close"
-            aria-label="Close modal"
             style="float: right"
-            @click="closed">
+            @click="close">
             x
           </button>
           <h4 style="color:black">
             <span
               style="color:black"
-              class="fa fa-eye">
-              OBSERV
-            </span>
-          </h4>
-          <h4 style="text-align:center; color:black;">Registrar</h4>
-
+              class="fa fa-eye">OBSERV</span></h4>
+          <h4 style="text-align:center; color:black;">Fazer login</h4>
           <p style="color:black; text-align:center; line-height:20px;">
             Como visitante você tem acesso a funcionalidade de pesquisa de observatórios
             e pode navegar entre estes observatórios.</p>
@@ -33,16 +30,9 @@
             <form>
               <div class="input-field col s12">
                 <input
-                  v-required
                   v-model="user.username"
                   type="text"
                   placeholder="Username">
-              </div>
-              <div class="input-field col s12">
-                <input
-                  v-model="user.email"
-                  type="email"
-                  placeholder="Email" >
               </div>
               <div class="input-field col s12">
                 <input
@@ -51,15 +41,13 @@
                   placeholder="Password">
               </div>
               <button
+
                 id="entrar"
-                class="col s12 btn-large blue lighten-1 waves-effect waves-green"
                 type="submit"
+                class="col s12 btn-large blue lighten-1 waves-effect waves-green"
                 v-on:
-                @click="registerUser()">
-                <span
-                  class="fa fa-sign-in">
-                  Registrar
-                </span>
+                @click="Login()">
+                <span class="fa fa-sign-in">Entrar</span>
               </button>
             </form>
           </section>
@@ -73,21 +61,23 @@
 
 import {mapGetters} from "vuex"
 import JwtDecode from "jwt-decode"
+import modalRegister from "@/components/Modals/modalRegister"
 
 export default {
 
+    components: {
+        "modal-register": modalRegister
+    },
 
     data () {
         return {
             user: {
                 username: "",
-                email: "",
                 password: ""
             },
             token: "",
             name: "",
-            error: false,
-            isModalVisibleRegister: false,
+            error: false
         }
     },
     computed: {
@@ -99,11 +89,9 @@ export default {
     update () {
         this.CheckLogin()
     },
-
     methods: {
     // redireciona o user caso esteja logado
         CheckLogin () {
-
             if (this.currentUser) {
                 this.$router.replace("/")
             }
@@ -116,7 +104,7 @@ export default {
             },
             error => {
                 this.LoginFail()
-                error.log()
+                error.log(error)
             })
         },
         LoginSucess (response) {
@@ -127,27 +115,16 @@ export default {
             this.error = false
             localStorage.token = response.data.token
             this.$store.dispatch("login") // trigger da ação de login implementado em store/auth.js
-            this.$router.replace("/")
+            this.$router.replace("/home")
         },
         LoginFail () {
             this.error = "Falha no Login!"
             this.$store.dispatch("logout") // trigger da ação de logout
             delete localStorage.token
         },
-        closed () {
-            this.$emit("closed")
-        },
-
-        registerUser(){
-            this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
-                this.name = result.data
-                window.alert("Usuario registrado com sucesso!")
-            },
-            error => {
-                error.log()
-                window.alert("Erro")
-            })
-        },
+        close () {
+            this.$emit("close")
+        }
     }
 }
 </script>
