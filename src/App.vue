@@ -1,21 +1,63 @@
 <template>
   <div id="app">
-    <router-view />
+
+    <transition name="router-anim">
+
+      <router-view />
+
+    </transition>
 
   </div>
 </template>
 
 <script>
-/* eslint-disable */
 
 export default {
-  name: 'App',
-  components: {
-  }
+
+    components: {
+    }
 }
 </script>
 
 <style>
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+
+.page {
+  position: fixed;
+  width: inherit;
+}
+
+.router-anim-enter-active {
+  animation: coming 0.5s;
+  animation-delay: .4s;
+  opacity: 0;
+}
+
+.roter-anim-leave-active {
+  animation: going 0.5s;
+
+}
+
+@keyframes going {
+  from{
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+}
+@keyframes coming {
+  from{
+    transform: translateX(-50px);
+    opacity: 0;
+
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
 .navbar {
   background-color: #2b4a6ef1;
 }
@@ -62,9 +104,9 @@ h6 {
   color: #5252ff;
 }
 
-.header {
+/* .header {
   border-bottom: 1px solid #999;
-}
+} */
 
 .custom-container {
   max-width: 100%;
@@ -85,7 +127,7 @@ h6 {
 
 #sidebar {
   height: 100%;
-  border-right: 1px solid #999;
+  padding: .5em;
   position: relative;
   color: #333;
 }
