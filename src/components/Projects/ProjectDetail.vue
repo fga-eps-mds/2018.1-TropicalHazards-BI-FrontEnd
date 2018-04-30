@@ -91,19 +91,21 @@
                       projeto relacionado: {{ dashboard.project }}
                     </p>
                     <small>Criado por: {{ project.user }}</small>
+                    <small>Id dashboard: {{ dashboard.id }}</small>
                   </div>
                   <div class="card-action center-align grey-text text-lighten-2">
-                    <a
+                    <router-link
+                      :to="{name: 'ObservatorioDetail', params: {id: dashboard.id} }"
                       href="#/observer-detail"
                       class="btn  blue lighten-1">
                       <span class="fa fa-search"/>
-                    </a>
-                    <a
+                    </router-link>
+                    <router-link
                       v-if="currentUser.id == project.user"
-                      href="#"
-                      class="btn red">
-                      <span class="fa fa-remove"/>
-                    </a>
+                      :to="{ name: 'editObservatorio', params: { id: dashboard.id } }"
+                      class="btn blue">
+                      <span class="fa fa-edit"/>
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -112,7 +114,6 @@
         </div>
       </div>
     </div>
-    <modal-delete-observatorio/>
   </div>
 </template>
 
@@ -187,7 +188,6 @@ export default {
                 })
             }
         },
-
         getProject () {
             this.$http.get("projects/", { headers:
                     { "content-type": "application/json" } }).then(result => {
