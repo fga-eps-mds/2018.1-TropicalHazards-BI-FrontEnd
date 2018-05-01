@@ -24,9 +24,12 @@
               placeholder="Email"
               @input="$v.user.email.$touch()">
             <a
+              id="register-submit"
               v-on:
-              click="Register()"
-              class="waves-effect waves-light btn-large">Registrar</a>
+              click="register()"
+              class="waves-effect waves-light btn-large">
+              Registrar
+            </a>
 
           </div>
 
@@ -61,6 +64,7 @@ export default {
         user: {
             username: {
                 required,
+                minLength: minLength(3)
             },
             email: {
                 required,
@@ -72,8 +76,12 @@ export default {
         }
     },
     methods: {
-        Register () {
-            this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+        register () {
+            this.$http.post("users/", this.user, {
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(result => {
                 this.user = result.data
                 this.response = result.data
             },

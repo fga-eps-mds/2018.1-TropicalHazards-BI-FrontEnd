@@ -8,6 +8,14 @@ Vue.use(Vuelidate)
 describe("tests of Register.vue", () => {
     let wrapper
 
+    const setData = wrapper => wrapper.setData({
+        user: {
+            username: "rick-martin",
+            email: "rick&martin@example.com",
+            password: "supersecret"
+        }
+    })
+
     beforeEach(() => {
         wrapper = shallow(Register)
     })
@@ -34,14 +42,7 @@ describe("tests of Register.vue", () => {
     })
 
     it("should be valid if all fields are correctly filled", () => {
-        wrapper.setData({
-            user: {
-                username: "rick-martin",
-                email: "rick&martin@example.com",
-                password: "supersecret"
-            }
-        })
-
+        setData(wrapper)
         expect(wrapper.vm.$v.$invalid).toBeFalsy()
     })
 })

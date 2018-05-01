@@ -1,14 +1,11 @@
-// import Vue from "vue"
-// import { mount } from "@vue/test-utils"
-// import Login from "@/components/Authentication/Login"
+import Vue from "vue"
+import { mount } from "@vue/test-utils"
+import Login from "@/components/Authentication/Login"
 
 describe("Login", () => {
     it("placeholder test", () => {
         expect(true).toBeTruthy()
     })
-
-    // tests not passing due to modal approach
-    // when new UI is implemented this will pass ez
 
     // it("Should render the title", () => {
     //   const Constructor = Vue.extend(Login)

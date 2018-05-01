@@ -10,20 +10,26 @@
             <input
               v-model="user.username"
               type="text"
-              placeholder="Username">
+              placeholder="Username"
+              @input="$v.user.username.$touch()">
             <input
               v-model="user.password"
               type="password"
-              placeholder="Password">
+              placeholder="Password"
+              @input="$v.user.password.$touch()">
             <a
-              class="waves-effect  btn-large"
+              id="login-submit"
+              class="waves-effect btn-large"
               v-on:
-              @click="Login()">Login</a>
+              @click="Login()">
+              Login
+            </a>
             <b><p> Ainda não possui uma conta ? </p></b>
             <router-link
               :to="{name: 'CreateUser'}"
               class="waves-effect waves-light btn-large">
-              Registrar</router-link>
+              Registrar
+            </router-link>
           </div>
         </div>
       </div>
@@ -33,8 +39,9 @@
 
 <script>
 
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex"
 import JwtDecode from "jwt-decode"
+import { required, minLength } from "vuelidate/lib/validators"
 
 export default {
     data () {
@@ -48,8 +55,22 @@ export default {
             error: false
         }
     },
+    validations: {
+        user: {
+            username: {
+                required,
+                minLength: minLength(3)
+            },
+            password: {
+                required,
+                minLength: minLength(5)
+            }
+        }
+    },
     computed: {
-        ...mapGetters({ currentUser: "currentUser" })
+        ...mapGetters({
+            currentUser: "currentUser"
+        })
     },
     created () {
         this.CheckLogin()
@@ -58,14 +79,18 @@ export default {
         this.CheckLogin()
     },
     methods: {
-    // redireciona o user caso esteja logado
+    // redirects user if already logged in
         CheckLogin () {
             if (this.currentUser) {
                 this.$router.replace("/")
             }
         },
         Login () {
-            this.$http.post("rest-auth/login/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+            this.$http.post("rest-auth/login/", this.user, {
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(result => {
                 this.token = JwtDecode(result.data.token)
                 this.name = this.token.isStaff
                 this.LoginSucess(result)
@@ -82,12 +107,12 @@ export default {
             }
             this.error = false
             localStorage.token = response.data.token
-            this.$store.dispatch("login") // trigger da ação de login implementado em store/auth.js
+            this.$store.dispatch("login") // trigger login implemented in store/auth.js
             this.$router.replace("/home")
         },
         LoginFail () {
             this.error = "Falha no Login!"
-            this.$store.dispatch("logout") // trigger da ação de logout
+            this.$store.dispatch("logout") // trigger logout action
             delete localStorage.token
         }
     }
