@@ -11,32 +11,32 @@
             <h5 class="white-text">Links</h5>
             <ul>
               <li>
-                  <router-link
-                    :to="{name: ' '} "
-                    class="grey-text text-lighten-3">
-                    Link 1
-                  </router-link>
+                <router-link
+                  :to="{name: ' '} "
+                  class="grey-text text-lighten-3">
+                  Link 1
+                </router-link>
               </li>
               <li>
-                  <router-link
-                    :to="{name: ' '} "
-                    class="grey-text text-lighten-3">
-                    Link 2
-                  </router-link>
+                <router-link
+                  :to="{name: ' '} "
+                  class="grey-text text-lighten-3">
+                  Link 2
+                </router-link>
               </li>
               <li>
-                  <router-link
-                    :to="{name: ' '} "
-                    class="grey-text text-lighten-3">
-                    Link 3
-                  </router-link>
+                <router-link
+                  :to="{name: ' '} "
+                  class="grey-text text-lighten-3">
+                  Link 3
+                </router-link>
               </li>
               <li>
-                  <router-link
-                    :to="{name: ' '} "
-                    class="grey-text text-lighten-3">
-                    Link 4
-                  </router-link>
+                <router-link
+                  :to="{name: ' '} "
+                  class="grey-text text-lighten-3">
+                  Link 4
+                </router-link>
               </li>
             </ul>
           </div>
