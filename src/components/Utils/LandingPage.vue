@@ -11,16 +11,17 @@
     <div id="cardsContent">
       <CardsContent/>
     </div>
-    <landingfooter/>
+    <LandingFooter/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 import Navbar from "@/components/Utils/Navbar"
 import About from "@/components/Utils/About"
 import CardsContent from "@/components/Utils/CardsContent"
 import Footer from "@/components/Utils/Footer"
-import {mapGetters} from "vuex"
 
 export default {
     name: "LandingPage",
@@ -28,11 +29,13 @@ export default {
         Navbar,
         About,
         CardsContent,
-        "landingfooter": Footer
+        "LandingFooter": Footer
     },
 
     computed: {
-        ...mapGetters({ currentUser: "currentUser" })
+        ...mapGetters({
+            currentUser: "currentUser"
+        })
     }
 }
 </script>
