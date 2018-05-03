@@ -6,6 +6,6 @@ describe("About.vue", () => {
         const Constructor = Vue.extend(About)
         const vm = new Constructor().$mount()
 
-        expect(vm.$el.querySelector(".container h2").textContent).to.equal("Sobre")
+        expect(vm.$el.querySelector(".container h2").textContent).toEqual("Sobre")
     })
 })

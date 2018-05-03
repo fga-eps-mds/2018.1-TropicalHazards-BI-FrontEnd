@@ -11,26 +11,32 @@
             <input
               v-model="user.username"
               type="text"
-              placeholder="Username">
+              placeholder="Username"
+              @input="$v.user.username.$touch()">
             <input
               v-model="user.password"
               type="password"
-              placeholder="Password">
+              placeholder="Password"
+              @input="$v.user.password.$touch()">
             <input
               v-model="user.email"
-              type="text"
-              placeholder="Email">
+              type="email"
+              placeholder="Email"
+              @input="$v.user.email.$touch()">
             <a
+              id="register-submit"
               v-on:
-              click="Register()"
-              class="waves-effect waves-light btn-large">Registrar</a>
+              click="register()"
+              class="waves-effect waves-light btn-large">
+              Registrar
+            </a>
 
           </div>
 
           <br>
           <br>
 
-          <p> {{ response }}</p>
+          <p> {{ response }} </p>
 
         </div>
       </div>
@@ -41,8 +47,10 @@
 </template>
 
 <script>
+import { required, minLength } from "vuelidate/lib/validators"
+
 export default {
-    data(){
+    data () {
         return {
             user: {
                 username: "",
@@ -52,9 +60,28 @@ export default {
             response: "",
         }
     },
+    validations: {
+        user: {
+            username: {
+                required,
+                minLength: minLength(3)
+            },
+            email: {
+                required,
+            },
+            password: {
+                required,
+                minLength: minLength(4)
+            }
+        }
+    },
     methods: {
-        Register(){
-            this.$http.post("users/", this.user, { headers: { "content-type": "application/json" } }).then(result => {
+        register () {
+            this.$http.post("users/", this.user, {
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(result => {
                 this.user = result.data
                 this.response = result.data
             },
