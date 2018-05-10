@@ -5,7 +5,7 @@
       <div
         id="content"
         class="col m11">
-        <div class="header center-align white">
+        <div class="header center-align grey lighten-4">
           <h3>
             Criar Projeto
           </h3>
@@ -56,6 +56,10 @@
                   placeholder="Nome do projeto"
                   type="text"
                   class="validate">
+                <label
+                  for="descricao"
+                  data-error="wrong"
+                  data-success="right">Nome do projeto</label>
               </div>
             </div>
             <div class="row">
@@ -65,15 +69,23 @@
                   v-model="project.description"
                   placeholder="Descrição"
                   class="materialize-textarea"/>
+                <label
+                  for="descricao"
+                  data-error="wrong"
+                  data-success="right">Descrição</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <textarea
                   id="deion"
-                  v-model="project.tags"
-                  placeholder="tags"
-                  class="materialize-textarea"/>
+                  v-model="tags.slug"
+                  class="materialize-textarea"
+                  placeholder="tags"/>
+                <label
+                  for="descricao"
+                  data-error="wrong"
+                  data-success="right">Tags</label>
               </div>
             </div>
             <router-link
@@ -108,9 +120,10 @@ export default {
             project: {
                 user: "",
                 name: "",
-                description: ""
+                description: "",
+                tag: "",
             },
-
+            tags: "",
             user: {
                 username: "",
                 email: "",
@@ -127,6 +140,7 @@ export default {
         this.loadUserInfo()
         this.loadProject()
         this.testToken()
+        this.getTags()
     },
     methods: {
         loadUserInfo (){
@@ -145,6 +159,16 @@ export default {
             },
             error => {
                 error.log(error)
+            })
+        },
+        getTags () {
+            this.$http.get("tags/1/", { headers:
+                    {"Authorization": "JWT " + localStorage.token } }).then(result => {
+                this.tags = result.data
+            },
+            error => {
+                error.log(error)
+
             })
         },
 

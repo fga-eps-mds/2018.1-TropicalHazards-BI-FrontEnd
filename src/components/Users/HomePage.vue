@@ -17,7 +17,7 @@
       <div
         id="content"
         class="col m11" >
-        <div class="header center-align white">
+        <div class="header center-align grey lighten-4">
           <h3>Home</h3>
         </div>
         <div class="grey lighten-4">

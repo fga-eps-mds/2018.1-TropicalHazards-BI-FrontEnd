@@ -6,7 +6,7 @@
       <div
         id="content"
         class="col m11">
-        <div class="header center-align white">
+        <div class="header center-align grey lighten-4">
           <h3>
             {{ project.name }}
           </h3>
@@ -20,7 +20,7 @@
                   <div class="card-content">
                     <span class="card-title">Descrição</span>
                     <p>
-                      <span class="fa fa-line-chart">{{ project.description }}</span>
+                      <span class="fa fa-line-chart">{{ project.tags.name }}</span>
                     </p>
                   </div>
                 </div>
@@ -132,7 +132,8 @@ export default {
                 id: "",
                 user: "",
                 name: "",
-                description: ""
+                description: "",
+                tags: []
             },
             user: {
                 name: "",
@@ -143,8 +144,13 @@ export default {
                 id: "",
                 name: "",
                 project: ""
+            },
+            tags:{
+                id: "",
+                name:"",
+                slug: "",
+                last_modified: ""
             }
-
         }
     },
     computed: {
@@ -159,6 +165,7 @@ export default {
     created () {
         this.getProjectDetail()
         this.getObserv()
+        this.getTags()
     },
 
     methods: {
@@ -195,6 +202,16 @@ export default {
             },
             error => {
                 error.log(error)
+            })
+        },
+        getTags () {
+            this.$http.get("tags/", { headers:
+                    {"content-type": "application/json" } }).then(result => {
+                this.tags = result.data
+            },
+            error => {
+                error.log(error)
+
             })
         },
         getObserv () {
