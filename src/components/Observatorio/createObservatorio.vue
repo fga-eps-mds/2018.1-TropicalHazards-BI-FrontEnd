@@ -69,6 +69,7 @@ export default {
             observatory: {
                 project: "",
                 name: "",
+                user: "",
             },
 
             user: {
@@ -97,7 +98,6 @@ export default {
             this.user.username = this.currentUser.name
             this.user.email = this.currentUser.email
         },
-
         getProjectDetail () {
             this.$http.get("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
                 this.project = result.data
@@ -108,6 +108,8 @@ export default {
             })
         },
         PostObservatory (){
+            this.observatory.project = this.project.id
+            this.observatory.user = this.user.id
             this.$http.post("dashboards/", this.observatory, { headers: { "Authorization": "JWT " + localStorage.token, "content-type": "application/json", } }
             ).then(result => {
                 this.observatorios = result.data
