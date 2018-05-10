@@ -15,7 +15,7 @@
             <div class="">
               <div class="card grey lighten-3">
                 <div class="card-content black-text">
-                  <span style="color: grey; text-align:left;"><h4>Nome:</h4></span>
+                  <span style="color: grey; text-align:left;"><p>Nome:</p></span>
                   <p style="text-align:left">{{ project.name }}</p>
                 </div>
               </div>
@@ -27,8 +27,20 @@
             <div class="">
               <div class="card grey lighten-3">
                 <div class="card-content black-text">
-                  <span style="color: grey;text-align:left;"><h4>Descrição:</h4></span>
+                  <span style="color: grey;text-align:left;"><p>Descrição:</p></span>
                   <p style="text-align:left">{{ project.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container center-align">
+          <div class="row">
+            <div class="">
+              <div class="card grey lighten-3">
+                <div class="card-content black-text">
+                  <span style="color: grey;text-align:left;"><p>Tags:</p></span>
+                  <p style="text-align:left">{{ project.tags }}</p>
                 </div>
               </div>
             </div>
@@ -41,6 +53,7 @@
                 <input
                   id="name"
                   v-model="project.name"
+                  placeholder="Nome do projeto"
                   type="text"
                   class="validate">
               </div>
@@ -50,6 +63,16 @@
                 <textarea
                   id="deion"
                   v-model="project.description"
+                  placeholder="Descrição"
+                  class="materialize-textarea"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea
+                  id="deion"
+                  v-model="project.tags"
+                  placeholder="tags"
                   class="materialize-textarea"/>
               </div>
             </div>
