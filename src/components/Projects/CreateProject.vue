@@ -103,7 +103,6 @@ export default {
     beforeMount() {
         this.loadUserInfo()
         this.loadProject()
-        this.testToken()
     },
     methods: {
         loadUserInfo (){
@@ -124,7 +123,6 @@ export default {
                 error.log(error)
             })
         },
-
         postSucess() {
             window.alert("Projeto criado com Sucesso")
             this.$router.replace("/home")
@@ -132,12 +130,6 @@ export default {
 
         CreateFail () {
             window.confirm("Falha na criação do projeto")
-        },
-
-        testToken(){
-            this.$http.post("obtain-token/", { "username": this.user.username, "password": "senhabanda"}).then(result => {
-                localStorage.token = result.data.token
-            })
         },
         modalScript() {
             (document).ready(function(){
