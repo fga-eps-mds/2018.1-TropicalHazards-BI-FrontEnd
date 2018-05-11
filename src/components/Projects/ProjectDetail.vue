@@ -51,7 +51,7 @@
             <button
               class="btn"
               @click="showImportCsv ()">
-              Dynamic: Component Modal
+              Adicionar Arquivo
             </button>
             <import-csv-modal />
             <h5>
