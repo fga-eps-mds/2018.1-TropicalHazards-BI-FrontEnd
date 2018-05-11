@@ -1,7 +1,7 @@
 <template>
   <modal
     :width="600"
-    :height="550"
+    :height="350"
     name="import-csv"
     @before-open="beforeOpen">
 
@@ -12,7 +12,6 @@
       @closed="dialogEvent('closed')"/>
     <div class="container center-align">
       <h4>Inserir Dados</h4>
-      <h2>Id do Projeto: {{ project }}</h2>
       <p>passo 1: carregue o arquivo</p>
       <form>
         <div class="row">
@@ -22,9 +21,9 @@
               <input
                 id="file"
                 ref="file"
-                class="file-path validate"
                 type="file"
                 autoComplete="off"
+                required
                 @change="handleFileUpload ()">
             </div>
             <div class="file-path-wrapper">
@@ -75,49 +74,62 @@ export default {
         return {
             text: "Project id: ",
             project: "",
-            file: ""
+            file: null,
+            error: null
         }
     },
     methods: {
         beforeOpen(event) {
-            // console.log("Event:", event)
-            // console.log("Params:", event.params)
             this.project = event.params.project
+            this.file = null
         },
         handleFileUpload(){
             this.file = this.$refs.file.files[0]
         },
+        checkForm(){
+            if(this.file) return true
+            this.error = null
+            if(!this.file)
+                this.error = "Selecione um arquivo"
+            return false
+        },
         submitFile(){
-            let formData = new FormData ()
-            formData.append("file", this.file)
-            formData.append("project", this.project)
-            this.$http.post(
-                "import/",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Authorization": "JWT " + localStorage.token
+            if(this.checkForm()){
+                let formData = new FormData ()
+                formData.append("file", this.file)
+                formData.append("project", this.project)
+                this.$http.post(
+                    "import/",
+                    formData,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            "Authorization": "JWT " + localStorage.token
+                        }
                     }
-                }
-            ).then((response) => {
-                if(response.status == 201){
-                    this.showUploadSucess()
-                }
-            },
-            error => {
-                this.showUploadFail()
-                error.log(error)
-            })
+                ).then((response) => {
+                    if(response.status == 201){
+                        this.showUploadSucess()
+                    }
+                },
+                error => {
+                    this.showUploadFail()
+                    error.log(error)
+                })
+            }else{
+                this.showInvalidForm(this.error)
+            }
         },
         showUploadSucess () {
             this.$modal.show("dialog", {
+                title: "Sucesso",
                 text: "Arquivo enviado com sucesso",
                 buttons: [
                     {
                         title: "Continuar",
                         handler: () => {
                             //APAGAR LINHA ABAIXO QUANDO ESTIVER PRONTA PARTE DE RETORNAR CABEÇALHOS
+                            //SEGUIR PARA ETAPA DE CABEÇALHOS
                             this.$modal.hide("import-csv")
                             this.$modal.hide("dialog")
                         }
@@ -127,11 +139,13 @@ export default {
         },
         showUploadFail(){
             this.$modal.show("dialog", {
-                text: "Houve um erro ao enviar o arquivo",
+                title: "Erro",
+                text: "Arquivo inválido",
                 buttons: [
                     {
                         title: "Tentar novamente",
                         handler: () => {
+                            this.file = null
                             this.$modal.hide("dialog")
                         }
                     },
@@ -144,6 +158,22 @@ export default {
                     }
                 ]
             })
+        },
+        showInvalidForm(error){
+            this.$modal.show("dialog", {
+                title: "Erro",
+                text: error,
+                buttons: [
+                    {
+                        title: "Continuar",
+                        handler: () => {
+                            this.file = null
+                            this.$modal.hide("dialog")
+                        }
+                    }
+                ]
+            })
+
         }
     }
 }
