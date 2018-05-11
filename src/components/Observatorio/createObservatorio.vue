@@ -88,7 +88,6 @@ export default {
 
     beforeMount() {
         this.loadUserInfo()
-        this.testToken()
         this.getProjectDetail()
 
     },
@@ -128,12 +127,6 @@ export default {
 
         CreateFail () {
             window.confirm("Falha na criação do observatório")
-        },
-
-        testToken(){
-            this.$http.post("obtain-token/", { "username": this.user.username, "password": "senhabanda"}).then(result => {
-                localStorage.token = result.data.token
-            })
         },
         modalScript() {
             (document).ready(function(){
