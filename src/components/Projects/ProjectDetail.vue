@@ -48,6 +48,12 @@
             </div>
           </div>
           <div class="custom-container">
+            <button
+              class="btn"
+              @click="showImportCsv ()">
+              Dynamic: Component Modal
+            </button>
+            <import-csv-modal />
             <h5>
               Observatórios neste projeto:
             </h5>
@@ -120,10 +126,12 @@
 <script>
 import SideBar from "@/components/Utils/SideBar"
 import {mapGetters} from "vuex"
+import ImportCsvModal from "@/components/Files/ImportCsv.vue"
 
 export default {
     components: {
         "sidebar": SideBar,
+        "import-csv-modal": ImportCsvModal
     },
 
     data () {
@@ -162,6 +170,9 @@ export default {
     },
 
     methods: {
+        showImportCsv (){
+            this.$modal.show("import-csv", { project: this.$route.params.id })
+        },
         loadUserInfo () {
             this.user.id = this.currentUser.id
             this.user.username = this.currentUser.name
@@ -219,9 +230,8 @@ export default {
             (document).ready(function () {
                 ("select").formSelect()
             })
-        }
+        },
     }
-
 }
 </script>
 
