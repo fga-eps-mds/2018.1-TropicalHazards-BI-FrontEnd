@@ -5,7 +5,11 @@
     name="import-csv"
     @before-open="beforeOpen">
 
-    <!-- @before-open="beforeOpen"> -->
+    <v-dialog
+      @before-opened="dialogEvent('before-open')"
+      @before-closed="dialogEvent('before-close')"
+      @opened="dialogEvent('opened')"
+      @closed="dialogEvent('closed')"/>
     <div class="container center-align">
       <h4>Inserir Dados</h4>
       <h2>Id do Projeto: {{ project }}</h2>
@@ -20,6 +24,7 @@
                 ref="file"
                 class="file-path validate"
                 type="file"
+                autoComplete="off"
                 @change="handleFileUpload ()">
             </div>
             <div class="file-path-wrapper">
@@ -53,7 +58,6 @@
         </div>
         <div class="col s12 offset-m4 m4">
           <a
-            href="#!"
             class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
             @click="submitFile ()">
             Próximo
@@ -97,8 +101,50 @@ export default {
                     }
                 }
             ).then((response) => {
+                if(response.status == 201){
+                    this.showUploadSucess()
+                }
+            },
+            error => {
+                this.showUploadFail()
+                error.log(error)
             })
         },
+        showUploadSucess () {
+            this.$modal.show("dialog", {
+                text: "Arquivo enviado com sucesso",
+                buttons: [
+                    {
+                        title: "Continuar",
+                        handler: () => {
+                            //APAGAR LINHA ABAIXO QUANDO ESTIVER PRONTA PARTE DE RETORNAR CABEÇALHOS
+                            this.$modal.hide("import-csv")
+                            this.$modal.hide("dialog")
+                        }
+                    },
+                ]
+            })
+        },
+        showUploadFail(){
+            this.$modal.show("dialog", {
+                text: "Houve um erro ao enviar o arquivo",
+                buttons: [
+                    {
+                        title: "Tentar novamente",
+                        handler: () => {
+                            this.$modal.hide("dialog")
+                        }
+                    },
+                    {
+                        title: "Cancelar",
+                        handler: () => {
+                            this.$modal.hide("import-csv")
+                            this.$modal.hide("dialog")
+                        }
+                    }
+                ]
+            })
+        }
     }
 }
 </script>
