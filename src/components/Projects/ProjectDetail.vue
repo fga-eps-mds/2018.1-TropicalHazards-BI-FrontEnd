@@ -48,7 +48,9 @@
             </div>
           </div>
           <div class="custom-container">
+
             <button
+              v-if="currentUser.id == project.user"
               class="btn"
               @click="showImportCsv ()">
               Adicionar Arquivo
@@ -161,8 +163,6 @@ export default {
 
     beforeMount () {
         this.loadUserInfo()
-        this.testToken()
-        this.modalScript()
     },
     created () {
         this.getProjectDetail()
@@ -179,8 +179,10 @@ export default {
             this.user.email = this.currentUser.email
         },
         getProjectDetail () {
+            console.log("here")
             this.$http.get("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
                 this.project = result.data
+                console.log(this.project.user)
             },
             error => {
                 error.log(error)
@@ -221,16 +223,7 @@ export default {
             this.$http.post("obtain-token/", {"username": this.user.username, "password": this.user.password}).then(result => {
                 localStorage.token = result.data.token
             })
-        },
-        modalScript () {
-            (document).ready(function () {
-                (".modal").modal()
-            });
-
-            (document).ready(function () {
-                ("select").formSelect()
-            })
-        },
+        }
     }
 }
 </script>
