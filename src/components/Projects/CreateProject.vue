@@ -77,7 +77,7 @@
               <div class="input-field col s12">
                 <textarea
                   id="deion"
-                  v-model="project.tags[0].name"
+                  v-model="selectedTags"
                   class="materialize-textarea"/>
                 <label
                   for="descricao"
@@ -98,7 +98,7 @@
               </div>
             </div>
             <div class="row">
-
+              <h1>{{ project.tags }}</h1>
               <div
                 v-for="tag in tags"
                 :key="tag.id"
@@ -107,7 +107,8 @@
                   <p>
                     <label>
                       <input
-                        v-model="project.tags[0].name"
+                        v-model="project.tags"
+                        :value= "tag"
                         type="checkbox">
                       <span>{{ tag.slug }}</span>
                     </label>
@@ -158,14 +159,10 @@ export default {
                 user: "",
                 name: "",
                 description: "",
-                tags:[
-                    {
-                        name:"",
-                        slug:""
-                    }
-                ]
+                tags: [{}]
 
             },
+            selectedTags: [],
             tags: {
                 name: "",
                 slug: ""
@@ -220,7 +217,6 @@ export default {
 
             })
         },
-
         postSucess() {
             window.alert("Projeto criado com Sucesso")
             this.$router.replace("/home")
