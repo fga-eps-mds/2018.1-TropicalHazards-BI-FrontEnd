@@ -6,7 +6,7 @@
       <div
         id="content"
         class="col m11">
-        <div class="header center-align white">
+        <div class="header center-align grey lighten-4">
           <h3>
             {{ project.name }}
           </h3>
@@ -145,7 +145,7 @@ export default {
                 id: "",
                 user: "",
                 name: "",
-                description: ""
+                description: "",
             },
             user: {
                 name: "",
@@ -156,8 +156,7 @@ export default {
                 id: "",
                 name: "",
                 project: ""
-            }
-
+            },
         }
     },
     computed: {
@@ -170,6 +169,7 @@ export default {
     created () {
         this.getProjectDetail()
         this.getObserv()
+        this.getTags()
     },
 
     methods: {
@@ -211,6 +211,16 @@ export default {
             },
             error => {
                 error.log(error)
+            })
+        },
+        getTags () {
+            this.$http.get("tags/", { headers:
+                    {"content-type": "application/json" } }).then(result => {
+                this.tags = result.data
+            },
+            error => {
+                error.log(error)
+
             })
         },
         getObserv () {

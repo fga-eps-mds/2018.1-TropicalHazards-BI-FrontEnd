@@ -82,23 +82,18 @@
           <span class="fa fa-sign-out"/>
         </li>
       </a>
-      <hr>
     </ul>
     <ul
       v-if="!currentUser"
       id="mobile-menu">
       class="sidenav grey darken-4 grey-text text-lighten-4 collection"
       <router-link :to="{name: 'Login'}">
-
         <li class="collection-item">
           <span class="fa fa-sign-in"/>
         </li>
       </router-link>
     </ul>
-
   </div>
-
-
 </template>
 
 
