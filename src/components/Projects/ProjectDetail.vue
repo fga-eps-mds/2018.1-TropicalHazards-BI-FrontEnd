@@ -20,7 +20,7 @@
                   <div class="card-content">
                     <span class="card-title">Descrição</span>
                     <p>
-                      <span class="fa fa-line-chart">{{ project.tags.name }}</span>
+                      <span class="fa fa-line-chart">{{ project.description }}</span>
                     </p>
                   </div>
                 </div>
@@ -133,7 +133,6 @@ export default {
                 user: "",
                 name: "",
                 description: "",
-                tags: []
             },
             user: {
                 name: "",
@@ -145,12 +144,6 @@ export default {
                 name: "",
                 project: ""
             },
-            tags:{
-                id: "",
-                name:"",
-                slug: "",
-                last_modified: ""
-            }
         }
     },
     computed: {

@@ -34,18 +34,6 @@
             </div>
           </div>
         </div>
-        <div class="container center-align">
-          <div class="row">
-            <div class="">
-              <div class="card grey lighten-3">
-                <div class="card-content black-text">
-                  <span style="color: grey;text-align:left;"><p>Tags:</p></span>
-                  <p style="text-align:left">{{ project.tags.slug }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <form>
           <div class="container center-align">
             <div class="row">
@@ -73,32 +61,8 @@
                   data-success="right">Descrição</label>
               </div>
             </div>
+
             <div class="row">
-              <div class="input-field col s12">
-                <textarea
-                  id="deion"
-                  v-model="selectedTags"
-                  class="materialize-textarea"/>
-                <label
-                  for="descricao"
-                  data-error="wrong"
-                  data-success="right">Nome da tag</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <textarea
-                  id="deion"
-                  v-model="project.tags[0].slug"
-                  class="materialize-textarea"/>
-                <label
-                  for="descricao"
-                  data-error="wrong"
-                  data-success="right">Slug da tag</label>
-              </div>
-            </div>
-            <div class="row">
-              <h1>{{ project.tags }}</h1>
               <div
                 v-for="tag in tags"
                 :key="tag.id"
@@ -107,7 +71,7 @@
                   <p>
                     <label>
                       <input
-                        v-model="project.tags"
+                        v-model="selectedTags"
                         :value= "tag"
                         type="checkbox">
                       <span>{{ tag.slug }}</span>
@@ -159,7 +123,7 @@ export default {
                 user: "",
                 name: "",
                 description: "",
-                tags: [{}]
+                tags: []
 
             },
             selectedTags: [],
@@ -197,7 +161,9 @@ export default {
             this.project.user = this.currentUser.id
         },
 
+
         PostProject (){
+            this.project.tags = this.selectedTags
             this.$http.post("projects/",this.project, { headers: { "Authorization": "JWT " + localStorage.token, "content-type": "application/json", } }
             ).then(result => {
                 this.projeto = result.data
