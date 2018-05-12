@@ -8,6 +8,7 @@ import Vuelidate from "vuelidate"
 
 import router from "./router"
 import store from "./store"
+import VModal from "vue-js-modal"
 
 import "./../node_modules/jquery/dist/jquery.min.js"
 import "./../node_modules/materialize-css/dist/css/materialize.min.css"
@@ -15,6 +16,7 @@ import "./../node_modules/materialize-css/dist/js/materialize.min.js"
 
 Vue.use(Vuelidate)
 Vue.use(VueResource)
+Vue.use(VModal, { dialog: true, dynamic: true })
 Vue.config.productionTip = false
 
 
