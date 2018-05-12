@@ -48,6 +48,17 @@
             </div>
           </div>
           <div class="custom-container">
+            <!-- Adicionar o seguinte atributo
+            ao button abaixo quando a branch de importar csv for merjada na devel
+            Depende de elementos que não estão funcionando na branch import csv
+                          v-if="currentUser.id == project.user"
+             -->
+            <button
+              class="btn"
+              @click="showImportCsv ()">
+              Adicionar Arquivo
+            </button>
+            <import-csv-modal />
             <h5>
               Observatórios neste projeto:
             </h5>
@@ -120,10 +131,12 @@
 <script>
 import SideBar from "@/components/Utils/SideBar"
 import {mapGetters} from "vuex"
+import ImportCsvModal from "@/components/Files/ImportCsv.vue"
 
 export default {
     components: {
         "sidebar": SideBar,
+        "import-csv-modal": ImportCsvModal
     },
 
     data () {
@@ -152,8 +165,6 @@ export default {
 
     beforeMount () {
         this.loadUserInfo()
-        this.testToken()
-        this.modalScript()
     },
     created () {
         this.getProjectDetail()
@@ -162,14 +173,19 @@ export default {
     },
 
     methods: {
+        showImportCsv (){
+            this.$modal.show("import-csv", { project: this.$route.params.id })
+        },
         loadUserInfo () {
             this.user.id = this.currentUser.id
             this.user.username = this.currentUser.name
             this.user.email = this.currentUser.email
         },
         getProjectDetail () {
+            console.log("here")
             this.$http.get("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
                 this.project = result.data
+                console.log(this.project.user)
             },
             error => {
                 error.log(error)
@@ -220,18 +236,8 @@ export default {
             this.$http.post("obtain-token/", {"username": this.user.username, "password": this.user.password}).then(result => {
                 localStorage.token = result.data.token
             })
-        },
-        modalScript () {
-            (document).ready(function () {
-                (".modal").modal()
-            });
-
-            (document).ready(function () {
-                ("select").formSelect()
-            })
         }
     }
-
 }
 </script>
 
