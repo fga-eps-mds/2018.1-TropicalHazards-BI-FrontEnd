@@ -1,5 +1,5 @@
 <template>
- <footer class="page-footer  blue lighten-1 grey-text text-lighten-5">
+  <footer class="page-footer  blue lighten-1 grey-text text-lighten-5">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
@@ -13,10 +13,14 @@
           <h5 class="white-text">Links</h5>
           <ul>
             <li>
-              <a class="grey-text text-lighten-3" href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI/">Documentação</a>
+              <a
+                class="grey-text text-lighten-3"
+                href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI/">Documentação</a>
             </li>
             <li>
-              <a class="grey-text text-lighten-3" href="https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI">Repositório GitHub</a>
+              <a
+                class="grey-text text-lighten-3"
+                href="https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI">Repositório GitHub</a>
             </li>
           </ul>
         </div>
