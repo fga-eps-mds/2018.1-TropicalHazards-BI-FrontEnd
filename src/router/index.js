@@ -7,6 +7,7 @@ import LandingPage from '@/components/Utils/LandingPage'
 import Login from '@/components/Authentication/Login'
 import Register from '@/components/Authentication/Register'
 import CreateProject from '@/components/Projects/CreateProject'
+import CreateTag from '@/components/Projects/CreateTag'
 import ListProject from '@/components/Projects/ListProject'
 import ProjectDetail from '@/components/Projects/ProjectDetail'
 import EditUser from '@/components/Users/EditUser'
@@ -40,6 +41,11 @@ export default new Router({
       path: '/projetos',
       name: 'CreateProject',
       component: CreateProject
+    },
+    {
+      path: '/tags',
+      name: 'CreateTag',
+      component: CreateTag
     },
     {
       path: '/listproject',

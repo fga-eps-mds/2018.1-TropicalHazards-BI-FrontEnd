@@ -40,7 +40,7 @@
               <div class="card grey lighten-3">
                 <div class="card-content black-text">
                   <span style="color: grey;text-align:left;"><p>Tags:</p></span>
-                  <p style="text-align:left">{{ project.tags }}</p>
+                  <p style="text-align:left">{{ project.tags.slug }}</p>
                 </div>
               </div>
             </div>
@@ -53,7 +53,6 @@
                 <input
                   id="name"
                   v-model="project.name"
-                  placeholder="Nome do projeto"
                   type="text"
                   class="validate">
                 <label
@@ -67,7 +66,6 @@
                 <textarea
                   id="deion"
                   v-model="project.description"
-                  placeholder="Descrição"
                   class="materialize-textarea"/>
                 <label
                   for="descricao"
@@ -79,13 +77,52 @@
               <div class="input-field col s12">
                 <textarea
                   id="deion"
-                  v-model="tags.slug"
-                  class="materialize-textarea"
-                  placeholder="tags"/>
+                  v-model="project.tags[0].name"
+                  class="materialize-textarea"/>
                 <label
                   for="descricao"
                   data-error="wrong"
-                  data-success="right">Tags</label>
+                  data-success="right">Nome da tag</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea
+                  id="deion"
+                  v-model="project.tags[0].slug"
+                  class="materialize-textarea"/>
+                <label
+                  for="descricao"
+                  data-error="wrong"
+                  data-success="right">Slug da tag</label>
+              </div>
+            </div>
+            <div class="row">
+
+              <div
+                v-for="tag in tags"
+                :key="tag.id"
+                class="input-field col s2">
+                <form action="#">
+                  <p>
+                    <label>
+                      <input
+                        v-model="project.tags[0].name"
+                        type="checkbox">
+                      <span>{{ tag.slug }}</span>
+                    </label>
+                  </p>
+                </form>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col s4">
+                <router-link
+                  :to="{ name: 'CreateTag'}"
+                  class=" btn-large blue lighten-1 white-text waves-effect waves-light">
+                  Nova Tag +
+                </router-link>
               </div>
             </div>
             <router-link
@@ -121,9 +158,18 @@ export default {
                 user: "",
                 name: "",
                 description: "",
-                tag: "",
+                tags:[
+                    {
+                        name:"",
+                        slug:""
+                    }
+                ]
+
             },
-            tags: "",
+            tags: {
+                name: "",
+                slug: ""
+            },
             user: {
                 username: "",
                 email: "",
@@ -140,6 +186,8 @@ export default {
         this.loadUserInfo()
         this.loadProject()
         this.testToken()
+    },
+    created(){
         this.getTags()
     },
     methods: {
@@ -151,6 +199,7 @@ export default {
         loadProject (){
             this.project.user = this.currentUser.id
         },
+
         PostProject (){
             this.$http.post("projects/",this.project, { headers: { "Authorization": "JWT " + localStorage.token, "content-type": "application/json", } }
             ).then(result => {
@@ -162,8 +211,8 @@ export default {
             })
         },
         getTags () {
-            this.$http.get("tags/1/", { headers:
-                    {"Authorization": "JWT " + localStorage.token } }).then(result => {
+            this.$http.get("tags/", { headers:
+                    {"content-type": "application/json" } }).then(result => {
                 this.tags = result.data
             },
             error => {
