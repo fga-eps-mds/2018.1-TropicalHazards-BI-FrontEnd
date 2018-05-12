@@ -48,9 +48,12 @@
             </div>
           </div>
           <div class="custom-container">
-
+            <!-- Adicionar o seguinte atributo
+            ao button abaixo quando a branch de importar csv for merjada na devel
+            Depende de elementos que não estão funcionando na branch import csv
+                          v-if="currentUser.id == project.user"
+             -->
             <button
-              v-if="currentUser.id == project.user"
               class="btn"
               @click="showImportCsv ()">
               Adicionar Arquivo
