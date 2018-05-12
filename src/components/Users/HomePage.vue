@@ -17,7 +17,7 @@
       <div
         id="content"
         class="col m11" >
-        <div class="header center-align white">
+        <div class="header center-align grey lighten-4">
           <h3>Home</h3>
         </div>
         <div class="grey lighten-4">
@@ -62,7 +62,9 @@
                 :key="project.id"
                 class="col s12 m4 l3">
                 <div class="truncate card grey lighten-5">
-                  <div class="card-content grey-text text-darken-2">
+                  <div
+                    id="textotruncado"
+                    class="card-content grey-text text-darken-2">
                     <span
                       style="font-size:20px"
                       class="card-title">{{ project.name }}</span>
@@ -238,4 +240,9 @@ export default {
   padding-top: 10px;
 }
 
+#textotruncado{
+  white-space: nowrap;      /*keep text on one line */
+overflow: hidden;         /*prevent text from being shown outside the border */
+text-overflow: ellipsis;  /*cut off text with an ellipsis*/
+}
 </style>

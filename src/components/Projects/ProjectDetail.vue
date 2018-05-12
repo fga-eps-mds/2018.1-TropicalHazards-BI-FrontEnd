@@ -6,7 +6,7 @@
       <div
         id="content"
         class="col m11">
-        <div class="header center-align white">
+        <div class="header center-align grey lighten-4">
           <h3>
             {{ project.name }}
           </h3>
@@ -48,6 +48,17 @@
             </div>
           </div>
           <div class="custom-container">
+            <!-- Adicionar o seguinte atributo
+            ao button abaixo quando a branch de importar csv for merjada na devel
+            Depende de elementos que não estão funcionando na branch import csv
+                          v-if="currentUser.id == project.user"
+             -->
+            <button
+              class="btn"
+              @click="showImportCsv ()">
+              Adicionar Arquivo
+            </button>
+            <import-csv-modal />
             <h5>
               Observatórios neste projeto:
             </h5>
@@ -91,19 +102,21 @@
                       projeto relacionado: {{ dashboard.project }}
                     </p>
                     <small>Criado por: {{ project.user }}</small>
+                    <small>Id dashboard: {{ dashboard.id }}</small>
                   </div>
                   <div class="card-action center-align grey-text text-lighten-2">
-                    <a
+                    <router-link
+                      :to="{name: 'ObservatorioDetail', params: {id: dashboard.id} }"
                       href="#/observer-detail"
                       class="btn  blue lighten-1">
                       <span class="fa fa-search"/>
-                    </a>
-                    <a
+                    </router-link>
+                    <router-link
                       v-if="currentUser.id == project.user"
-                      href="#"
-                      class="btn red">
-                      <span class="fa fa-remove"/>
-                    </a>
+                      :to="{ name: 'editObservatorio', params: { id: dashboard.id } }"
+                      class="btn blue">
+                      <span class="fa fa-edit"/>
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -112,17 +125,18 @@
         </div>
       </div>
     </div>
-    <modal-delete-observatorio/>
   </div>
 </template>
 
 <script>
 import SideBar from "@/components/Utils/SideBar"
 import {mapGetters} from "vuex"
+import ImportCsvModal from "@/components/Files/ImportCsv.vue"
 
 export default {
     components: {
         "sidebar": SideBar,
+        "import-csv-modal": ImportCsvModal
     },
 
     data () {
@@ -131,7 +145,7 @@ export default {
                 id: "",
                 user: "",
                 name: "",
-                description: ""
+                description: "",
             },
             user: {
                 name: "",
@@ -142,8 +156,7 @@ export default {
                 id: "",
                 name: "",
                 project: ""
-            }
-
+            },
         }
     },
     computed: {
@@ -152,23 +165,27 @@ export default {
 
     beforeMount () {
         this.loadUserInfo()
-        this.testToken()
-        this.modalScript()
     },
     created () {
         this.getProjectDetail()
         this.getObserv()
+        this.getTags()
     },
 
     methods: {
+        showImportCsv (){
+            this.$modal.show("import-csv", { project: this.$route.params.id })
+        },
         loadUserInfo () {
             this.user.id = this.currentUser.id
             this.user.username = this.currentUser.name
             this.user.email = this.currentUser.email
         },
         getProjectDetail () {
+            console.log("here")
             this.$http.get("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
                 this.project = result.data
+                console.log(this.project.user)
             },
             error => {
                 error.log(error)
@@ -187,7 +204,6 @@ export default {
                 })
             }
         },
-
         getProject () {
             this.$http.get("projects/", { headers:
                     { "content-type": "application/json" } }).then(result => {
@@ -195,6 +211,16 @@ export default {
             },
             error => {
                 error.log(error)
+            })
+        },
+        getTags () {
+            this.$http.get("tags/", { headers:
+                    {"content-type": "application/json" } }).then(result => {
+                this.tags = result.data
+            },
+            error => {
+                error.log(error)
+
             })
         },
         getObserv () {
@@ -210,18 +236,8 @@ export default {
             this.$http.post("obtain-token/", {"username": this.user.username, "password": this.user.password}).then(result => {
                 localStorage.token = result.data.token
             })
-        },
-        modalScript () {
-            (document).ready(function () {
-                (".modal").modal()
-            });
-
-            (document).ready(function () {
-                ("select").formSelect()
-            })
         }
     }
-
 }
 </script>
 

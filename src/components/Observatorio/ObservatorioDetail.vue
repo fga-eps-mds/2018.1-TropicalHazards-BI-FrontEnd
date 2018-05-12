@@ -1,109 +1,115 @@
 <template>
-  <div id="app ">
-    <div class="row grey lighten-4">
-      <sidebar/>
-      <div
-        id="content"
-        class="col m11">
-        <div class="header center-align white">
-          <small>Projeto: Mapa da Dengue no DF</small>
-          <h3>
-            Ceilandia
-          </h3>
-        </div>
-        <div class="grey lighten-4">
-          <div class="custom-container">
-            <h5>Dados do Observatório</h5>
-            <div class="row">
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">
-                      Cleiton Jr.
-                    </span>
-                    <p>
-                      Criador
-                    </p>
-                  </div>
+  <div class="row grey lighten-4">
+    <sidebar/>
+    <div
+      id="content"
+      class="col m11">
+      <div class="header center-align white">
+        <small>Projeto: Mapa da Dengue no DF</small>
+        <h3>
+          {{ dashboard.name }}
+        </h3>
+      </div>
+      <div class="grey lighten-4">
+        <div class="custom-container">
+
+          <h5>Dados do Observatório</h5>
+
+          <div class="row">
+            <div class="col s12 m4">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">
+                    Cleiton Jr.
+                  </span>
+                  <p>
+                    Criador
+                  </p>
                 </div>
               </div>
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">1.3 Gb</span>
-                    <p>
-                      De dados
-                    </p>
-                  </div>
+              <button
+                class = "btn-large red"
+                v-on:
+                @click="deleteDashboard()">Deletar Dashboard
+                <span class="fa fa-trash"/>
+              </button>
+            </div>
+            <div class="col s12 m4">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">1.3 Gb</span>
+                  <p>
+                    De dados
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="custom-container">
-            <div class="row">
-              <div class="col s12">
-                <!-- vai ser iframe então lembrar de colocar tag de iframe com a classe de reixar IFRAME RESPONSIVO -->
-                <img
-                  src="https://s3-us-west-2.amazonaws.com/i.cdpn.io/250639.eZENxO.12a72d88-e8ed-4403-b737-dfcbde7f008d.png"
-                  class="responsive-img">
-              </div>
+        </div>
+        <div class="custom-container">
+          <div class="row">
+            <div class="col s12">
+              <!-- vai ser iframe então lembrar de colocar tag de iframe com a classe de reixar IFRAME RESPONSIVO -->
+              <img
+                src="https://s3-us-west-2.amazonaws.com/i.cdpn.io/250639.eZENxO.12a72d88-e8ed-4403-b737-dfcbde7f008d.png"
+                class="responsive-img">
             </div>
-            <div class="row white darken-1">
-              <div class="col s12">
-                <table class="table-responsive stripped">
-                  <thead>
-                    <tr>
-                      <th>Nome</th>
-                      <th>Frequência (%)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><b>A</b></td>
-                      <td>8</td>
-                    </tr>
-                    <tr>
-                      <td><b>B</b></td>
-                      <td>1.5</td>
-                    </tr>
-                    <tr>
-                      <td><b>C</b></td>
-                      <td>2.75</td>
-                    </tr>
-                    <tr>
-                      <td><b>D</b></td>
-                      <td>4.1</td>
-                    </tr>
-                    <tr>
-                      <td><b>E</b></td>
-                      <td>13</td>
-                    </tr>
-                    <tr>
-                      <td><b>F</b></td>
-                      <td>2.06</td>
-                    </tr>
-                    <tr>
-                      <td><b>G</b></td>
-                      <td>2</td>
-                    </tr>
-                    <tr>
-                      <td><b>H</b></td>
-                      <td>6</td>
-                    </tr>
-                    <tr>
-                      <td><b>I</b></td>
-                      <td>7</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col s12">
-                <a
-                  href="#"
-                  class="btn-large waves-effect waves-light blue lighten-1 white-text">
-                  <span class="fa fa-download">Baixar dados usados</span>
-                </a>
-              </div>
+          </div>
+          <div class="row white darken-1">
+            <div class="col s12">
+              <table class="table-responsive stripped">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Frequência (%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>A</b></td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td><b>B</b></td>
+                    <td>1.5</td>
+                  </tr>
+                  <tr>
+                    <td><b>C</b></td>
+                    <td>2.75</td>
+                  </tr>
+                  <tr>
+                    <td><b>D</b></td>
+                    <td>4.1</td>
+                  </tr>
+                  <tr>
+                    <td><b>E</b></td>
+                    <td>13</td>
+                  </tr>
+                  <tr>
+                    <td><b>F</b></td>
+                    <td>2.06</td>
+                  </tr>
+                  <tr>
+                    <td><b>G</b></td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td><b>H</b></td>
+                    <td>6</td>
+                  </tr>
+                  <tr>
+                    <td><b>I</b></td>
+                    <td>7</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col s12">
+              <a
+                href="#"
+                class="btn-large waves-effect waves-light blue lighten-1 white-text">
+                <span class="fa fa-download">Baixar dados usados</span>
+              </a>
             </div>
           </div>
         </div>
@@ -125,7 +131,10 @@ export default {
     data(){
 
         return {
-            projetos: "",
+            dashboard: {
+                project: "",
+                name: ""
+            },
             user: {
                 username: "",
                 password: "",
@@ -139,24 +148,29 @@ export default {
     },
 
     beforeMount(){
-        this.getProject()
+        this.getObservatorioDetail()
         this.loadUserInfo()
         this.modalScript()
     },
     methods: {
 
-        deleteProject (){
-            if(this.currentUser.id == this.projeto.user){
-                this.$http.delete("project/" + this.projeto.id + "/",
-                    { headers: { "Authorization": "JWT " + localStorage.token } })
-                window.alert("projeto deletado")
+        deleteDashboard (){
+            if (window.confirm("Deseja realmente deletar o dashboard ?")){
+                this.$http.delete("dashboards/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
+                    window.alert("dashboard deletado")
+                    this.$router.replace("/home")
+                    this.dashboard = result.data
+                },
+                error => {
+                    window.alert("Erro ao deletar o dashboard")
+                    error.log(error)
+                })
             }
-            window.alert("erro ao deletar o projeto")
         },
 
-        getProject(){
-            this.$http.get("projects/",  { headers: { "content-type": "application/json" } }).then(result => {
-                this.projetos = result.data
+        getObservatorioDetail(){
+            this.$http.get("dashboards/" + this.$route.params.id + "/",  { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
+                this.dashboard = result.data
             },
             error => {
                 error.log(error)
@@ -191,8 +205,5 @@ export default {
 
 <style>
 
-p {
-  font-size: 15px;
-}
 
 </style>

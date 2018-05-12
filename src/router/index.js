@@ -1,12 +1,10 @@
 /* eslint-disable */
 import Vue from 'vue'
 import Router from 'vue-router'
-import CreateUser from '@/components/Users/CreateUser'
 import HomePage from '@/components/Users/HomePage'
 import LandingPage from '@/components/Utils/LandingPage'
-import Login from '@/components/Authentication/Login'
-import Register from '@/components/Authentication/Register'
 import CreateProject from '@/components/Projects/CreateProject'
+import CreateTag from '@/components/Projects/CreateTag'
 import ListProject from '@/components/Projects/ListProject'
 import ProjectDetail from '@/components/Projects/ProjectDetail'
 import EditUser from '@/components/Users/EditUser'
@@ -14,17 +12,13 @@ import DeleteUser from '@/components/Users/DeleteUser'
 import ObservatorioDetail from '@/components/Observatorio/ObservatorioDetail'
 import EditProject from '@/components/Projects/EditProject'
 import createObservatorio from '@/components/Observatorio/createObservatorio'
+import editObservatorio from '@/components/Observatorio/editObservatorio'
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/signup',
-      name: 'CreateUser',
-      component: CreateUser
-    },
     {
       path: '/',
       name: 'LandingPage',
@@ -41,25 +35,19 @@ export default new Router({
       component: CreateProject
     },
     {
+      path: '/tags',
+      name: 'CreateTag',
+      component: CreateTag
+    },
+    {
       path: '/listproject',
       name: 'ListProjects',
       component: ListProject
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-
-    {
       path: '/project/detail/:id',
       name: 'ProjectDetail',
       component: ProjectDetail
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
     },
     {
       path: '/edituser',
@@ -72,7 +60,7 @@ export default new Router({
       component: DeleteUser
     },
     {
-      path: '/observer-detail',
+      path: '/observer-detail/:id',
       name: 'ObservatorioDetail',
       component: ObservatorioDetail
     },
@@ -85,6 +73,11 @@ export default new Router({
       path: '/create-observatory/:id',
       name: 'createObservatorio',
       component: createObservatorio
+    },
+    {
+      path: '/edit-observatory/:id',
+      name: 'editObservatorio',
+      component: editObservatorio
     }
   ]
 })
