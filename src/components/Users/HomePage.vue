@@ -59,7 +59,8 @@
                 id="tag"
                 v-model="tags.name"
                 type="text"
-                class="validate">
+                class="validate"
+                @keyup.enter="filterByTag">
               <label
                 for="descricao"
                 data-error="wrong"
@@ -198,6 +199,16 @@ export default {
         },
         getProject () {
             this.$http.get("projects/", { headers: { "content-type": "application/json" } }).then(result => {
+                this.projects = result.data
+            },
+            error => {
+                error.log(error)
+            })
+        },
+
+        filterByTag () {
+            this.$http.get("projects/" + "?tags__name=&tag_name=" + this.tags.name,
+                { headers: { "content-type": "application/json" } }).then(result => {
                 this.projects = result.data
             },
             error => {
