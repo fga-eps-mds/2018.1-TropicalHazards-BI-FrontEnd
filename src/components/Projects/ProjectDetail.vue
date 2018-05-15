@@ -51,6 +51,9 @@
             <h5>
               Observatórios neste projeto:
             </h5>
+            <p>
+              {{ importData[0] }}
+            </p>
             <router-link
               v-if="currentUser.id == project.user"
               :to="{ name: 'createObservatorio', params: { id: project.id } }"
@@ -143,8 +146,10 @@ export default {
                 id: "",
                 name: "",
                 project: ""
-            }
+            },
+            importData:{
 
+            }
         }
     },
     computed: {
@@ -155,13 +160,23 @@ export default {
         this.loadUserInfo()
         this.testToken()
         this.modalScript()
+        this.getImportData()
     },
     created () {
         this.getProjectDetail()
         this.getObserv()
+        this.getImportData()
     },
 
     methods: {
+        getImportData () {
+            this.$http.get("import/" + "1/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
+                this.importData = result.data
+            },
+            error => {
+                error.log(error)
+            })
+        },
         loadUserInfo () {
             this.user.id = this.currentUser.id
             this.user.username = this.currentUser.name
