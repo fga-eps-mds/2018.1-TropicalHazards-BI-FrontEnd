@@ -4,7 +4,7 @@
     :height="350"
     name="import-csv"
     @before-open="beforeOpen">
-
+    <filter-csv-modal />
     <v-dialog
       @before-opened="dialogEvent('before-open')"
       @before-closed="dialogEvent('before-close')"
@@ -68,8 +68,14 @@
 </template>
 
 <script>
+import FilterCsvModal from "@/components/Files/FilterCsv.vue"
+
 export default {
     name: "ImportCsv",
+    components: {
+        "filter-csv-modal": FilterCsvModal
+    },
+
     data (){
         return {
             text: "Project id: ",
@@ -110,6 +116,7 @@ export default {
                 ).then((response) => {
                     if(response.status == 201){
                         this.showUploadSucess()
+                        this.showFilterCsv ()
                     }
                 },
                 error => {
@@ -130,7 +137,7 @@ export default {
                         handler: () => {
                             //APAGAR LINHA ABAIXO QUANDO ESTIVER PRONTA PARTE DE RETORNAR CABEÇALHOS
                             //SEGUIR PARA ETAPA DE CABEÇALHOS
-                            this.$modal.hide("import-csv")
+                            // this.$modal.hide("import-csv")
                             this.$modal.hide("dialog")
                         }
                     },
@@ -173,8 +180,11 @@ export default {
                     }
                 ]
             })
+        },
+        showFilterCsv (){
+            this.$modal.show("filter-csv", { project: 1 })
+        },
 
-        }
     }
 }
 </script>
