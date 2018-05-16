@@ -13,6 +13,7 @@
     <div class="container center-align">
       <h4>Filtrar Arquivo</h4>
       <p>Selecione as colunas que devem ser inseridas no arquivo</p>
+      <p>{{ listHeaders }} </p>
     </div>
     <div class="modal-footer">
       <div class="row center-align">
@@ -40,13 +41,24 @@ export default {
     data (){
         return {
             project: "",
+            importData: {},
+            listHeaders: ""
         }
     },
     methods: {
         beforeOpen(event) {
             this.project = event.params.project
+            this.getImportData ()
         },
-
+        getImportData () {
+            this.$http.get("import/" + this.project + "/" , { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
+                this.importData = result.data
+                this.listHeaders = Object.keys(this.importData[0])
+            },
+            error => {
+                error.log(error)
+            })
+        },
     }
 }
 </script>
