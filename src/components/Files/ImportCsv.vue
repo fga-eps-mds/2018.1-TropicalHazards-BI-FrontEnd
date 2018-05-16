@@ -1,7 +1,7 @@
 <template>
   <modal
     :width="600"
-    :height="350"
+    :height="450"
     name="import-csv"
     @before-open="beforeOpen">
     <filter-csv-modal />
@@ -13,6 +13,7 @@
     <div class="container center-align">
       <h4>Inserir Dados</h4>
       <p>passo 1: carregue o arquivo</p>
+      <p> Cabeçalho: {{ line }} </p>
       <form>
         <div class="row">
           <div class="file-field input-field">
@@ -58,7 +59,7 @@
         <div class="col s12 offset-m4 m4">
           <a
             class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
-            @click="submitFile ()">
+            @click="readFile ()">
             Próximo
           </a>
         </div>
@@ -69,6 +70,7 @@
 
 <script>
 import FilterCsvModal from "@/components/Files/FilterCsv.vue"
+import LineNavigator from"../../../node_modules/line-navigator/line-navigator.js"
 
 export default {
     name: "ImportCsv",
@@ -81,7 +83,13 @@ export default {
             text: "Project id: ",
             project: "",
             file: null,
-            error: null
+            error: null,
+            reader: {
+                indexToStartWith: 0,
+                numberOfLines: 1
+            },
+            navigator: null,
+            line: ""
         }
     },
     methods: {
@@ -98,6 +106,16 @@ export default {
             if(!this.file)
                 this.error = "Selecione um arquivo"
             return false
+        },
+        readFile(){
+            this.navigator = new LineNavigator(this.file)
+            this.navigator.readLines(this.reader.indexToStartWith,
+                this.reader.numberOfLines, (err, index, lines) => { // isEof, progress
+                    if (err) {
+                        throw err
+                    }
+                    this.line = lines[0]
+                })
         },
         submitFile(){
             if(this.checkForm()){
