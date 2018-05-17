@@ -13,7 +13,6 @@
     <div class="container center-align">
       <h4>Inserir Dados</h4>
       <p>passo 1: carregue o arquivo</p>
-      <p> Cabeçalho: {{ line }} </p>
       <form>
         <div class="row">
           <div class="file-field input-field">
@@ -59,7 +58,7 @@
         <div class="col s12 offset-m4 m4">
           <a
             class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
-            @click="readFile ()">
+            @click="buttonHandler ()">
             Próximo
           </a>
         </div>
@@ -89,7 +88,8 @@ export default {
                 numberOfLines: 1
             },
             navigator: null,
-            line: ""
+            line: "",
+            headers: []
         }
     },
     methods: {
@@ -107,7 +107,7 @@ export default {
                 this.error = "Selecione um arquivo"
             return false
         },
-        readFile(){
+        getHeaders(){
             this.navigator = new LineNavigator(this.file)
             this.navigator.readLines(this.reader.indexToStartWith,
                 this.reader.numberOfLines, (err, index, lines) => { // isEof, progress
@@ -115,36 +115,43 @@ export default {
                         throw err
                     }
                     this.line = lines[0]
+                    this.headers = this.line.split(",")
+                    this.showFilterCsv()
                 })
         },
-        submitFile(){
+        buttonHandler(){
             if(this.checkForm()){
-                let formData = new FormData ()
-                formData.append("file", this.file)
-                formData.append("project", this.project)
-                this.$http.post(
-                    "import/",
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                            "Authorization": "JWT " + localStorage.token
-                        }
-                    }
-                ).then((response) => {
-                    if(response.status == 201){
-                        this.showUploadSucess()
-                        this.showFilterCsv ()
-                    }
-                },
-                error => {
-                    this.showUploadFail()
-                    error.log(error)
-                })
-            }else{
-                this.showInvalidForm(this.error)
+                this.getHeaders()
             }
         },
+        // submitFile(){
+        //     if(this.checkForm()){
+        //         let formData = new FormData ()
+        //         formData.append("file", this.file)
+        //         formData.append("project", this.project)
+        //         this.$http.post(
+        //             "import/",
+        //             formData,
+        //             {
+        //                 headers: {
+        //                     "Content-Type": "multipart/form-data",
+        //                     "Authorization": "JWT " + localStorage.token
+        //                 }
+        //             }
+        //         ).then((response) => {
+        //             if(response.status == 201){
+        //                 this.showUploadSucess()
+        //                 this.showFilterCsv ()
+        //             }
+        //         },
+        //         error => {
+        //             this.showUploadFail()
+        //             error.log(error)
+        //         })
+        //     }else{
+        //         this.showInvalidForm(this.error)
+        //     }
+        // },
         showUploadSucess () {
             this.$modal.show("dialog", {
                 title: "Sucesso",
@@ -200,7 +207,7 @@ export default {
             })
         },
         showFilterCsv (){
-            this.$modal.show("filter-csv", { project: 1 })
+            this.$modal.show("filter-csv", { project: this.project, headers: this.headers })
         },
 
     }
