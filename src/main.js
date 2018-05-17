@@ -19,8 +19,16 @@ Vue.use(VueResource)
 Vue.use(VModal, { dialog: true, dynamic: true })
 Vue.config.productionTip = false
 
+var backend_url
 
-Vue.http.options.root = "http://localhost:8000"
+if (process.env.BACKEND_URL) {
+    backend_url = process.env.BACKEND_URL
+} 
+else {
+    backend_url = "http://localhost:8000"
+}
+
+Vue.http.options.root = backend_url 
 
 /* eslint-disable no-new */
 new Vue({

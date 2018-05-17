@@ -2,19 +2,18 @@ FROM node:slim
 
 RUN apt-get update && apt-get install bzip2
 
-COPY package.json /tmp/package.json
-RUN cd /tmp && npm install
-RUN mkdir -p /usr/src/TropicalHazards-BI-FrontEnd && \
-    cp -a /tmp/node_modules /usr/src/TropicalHazards-BI-FrontEnd
+RUN mkdir -p /usr/src/tropical-hazards-frontend
 
-WORKDIR /usr/src/TropicalHazards-BI-FrontEnd
+WORKDIR /usr/src/tropical-hazards-frontend
 
-COPY . /usr/src/TropicalHazards-BI-FrontEnd
+COPY package.json /usr/src/tropical-hazards-frontend/
 
-RUN npm run build
+RUN npm install
+
+COPY . /usr/src/tropical-hazards-frontend
 
 EXPOSE 8080
 
 RUN chmod +x start.sh
 
-CMD [./start.sh]
+CMD ["./start.sh"]
