@@ -25,11 +25,11 @@
         </thead>
         <tbody>
           <tr
-            v-for="header in headers"
-            :key="header.key">
-            <td>{{ header.index }}</td>
+            v-for="(value, key, index) in header"
+            :key="key">
+            <td>{{ index + 1 }}</td>
             <td>
-              {{ header.key }}
+              {{ key }}
             </td>
             <td>
               <p>
@@ -40,7 +40,7 @@
               </p>
             </td>
             <td>
-              {{ header.value }}
+              {{ value }}
             </td>
           </tr>
         </tbody>
@@ -73,15 +73,15 @@ export default {
         return {
             project: "",
             importData: {},
-            headers: [],
+            header: [],
             file: null
         }
     },
     methods: {
         beforeOpen(event) {
-            this.headers = []
+            this.header = null
             this.project = event.params.project
-            this.headers = event.params.headers
+            this.header = event.params.header
             this.file = event.params.file
         },
         getImportData () {
