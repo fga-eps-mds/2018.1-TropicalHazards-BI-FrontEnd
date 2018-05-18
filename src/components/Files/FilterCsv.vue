@@ -43,12 +43,13 @@ export default {
             project: "",
             importData: {},
             listHeaders: "",
-            file: ""
+            file: null
         }
     },
     methods: {
         beforeOpen(event) {
             this.project = event.params.project
+            this.file = event.params.file
             this.getImportData ()
         },
         getImportData () {

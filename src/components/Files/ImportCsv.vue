@@ -121,47 +121,9 @@ export default {
         },
         buttonHandler(){
             if(this.checkForm()){
+                this.handleFileUpload()
                 this.getHeaders()
             }
-        },
-        showUploadSucess () {
-            this.$modal.show("dialog", {
-                title: "Sucesso",
-                text: "Arquivo enviado com sucesso",
-                buttons: [
-                    {
-                        title: "Continuar",
-                        handler: () => {
-                            //APAGAR LINHA ABAIXO QUANDO ESTIVER PRONTA PARTE DE RETORNAR CABEÇALHOS
-                            //SEGUIR PARA ETAPA DE CABEÇALHOS
-                            // this.$modal.hide("import-csv")
-                            this.$modal.hide("dialog")
-                        }
-                    },
-                ]
-            })
-        },
-        showUploadFail(){
-            this.$modal.show("dialog", {
-                title: "Erro",
-                text: "Arquivo inválido",
-                buttons: [
-                    {
-                        title: "Tentar novamente",
-                        handler: () => {
-                            this.file = null
-                            this.$modal.hide("dialog")
-                        }
-                    },
-                    {
-                        title: "Cancelar",
-                        handler: () => {
-                            this.$modal.hide("import-csv")
-                            this.$modal.hide("dialog")
-                        }
-                    }
-                ]
-            })
         },
         showInvalidForm(error){
             this.$modal.show("dialog", {
@@ -179,7 +141,7 @@ export default {
             })
         },
         showFilterCsv (){
-            this.$modal.show("filter-csv", { project: this.project, headers: this.headers })
+            this.$modal.show("filter-csv", { project: this.project, headers: this.headers, file: this.file })
         },
 
     }
