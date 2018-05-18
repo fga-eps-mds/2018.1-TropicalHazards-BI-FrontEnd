@@ -94,6 +94,7 @@ export default {
     methods: {
         beforeOpen(event) {
             this.project = event.params.project
+            this.headers = []
             this.file = null
         },
         handleFileUpload(){
@@ -113,8 +114,9 @@ export default {
                     if (err) {
                         throw err
                     }
+                    const regex = /,(?![^""]*\))/gm
                     var keys = lines[0].split(",")
-                    var values = lines[1].split(",")
+                    var values = lines[1].split(regex)
                     for (var i = 0; i < keys.length; i++){
                         var current = {index: i+1, key: keys[i], value: values[i]}
                         this.headers.push(current)

@@ -13,7 +13,6 @@
       <div class="container center-align">
         <h4>Filtrar Arquivo</h4>
         <p>Selecione as colunas que devem ser inseridas no arquivo</p>
-        <p>{{ listHeaders }} </p>
       </div>
       <table>
         <thead>
@@ -80,10 +79,10 @@ export default {
     },
     methods: {
         beforeOpen(event) {
+            this.headers = []
             this.project = event.params.project
             this.headers = event.params.headers
             this.file = event.params.file
-            this.getImportData ()
         },
         getImportData () {
             this.$http.get("import/" + this.project + "/" , { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
