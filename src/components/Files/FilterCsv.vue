@@ -42,7 +42,8 @@ export default {
         return {
             project: "",
             importData: {},
-            listHeaders: ""
+            listHeaders: "",
+            file: ""
         }
     },
     methods: {
@@ -87,7 +88,45 @@ export default {
                 this.showInvalidForm(this.error)
             }
         },
-
+        showUploadSucess () {
+            this.$modal.show("dialog", {
+                title: "Sucesso",
+                text: "Arquivo enviado com sucesso",
+                buttons: [
+                    {
+                        title: "Continuar",
+                        handler: () => {
+                            //APAGAR LINHA ABAIXO QUANDO ESTIVER PRONTA PARTE DE RETORNAR CABEÇALHOS
+                            //SEGUIR PARA ETAPA DE CABEÇALHOS
+                            // this.$modal.hide("import-csv")
+                            this.$modal.hide("dialog")
+                        }
+                    },
+                ]
+            })
+        },
+        showUploadFail(){
+            this.$modal.show("dialog", {
+                title: "Erro",
+                text: "Arquivo inválido",
+                buttons: [
+                    {
+                        title: "Tentar novamente",
+                        handler: () => {
+                            this.file = null
+                            this.$modal.hide("dialog")
+                        }
+                    },
+                    {
+                        title: "Cancelar",
+                        handler: () => {
+                            this.$modal.hide("import-csv")
+                            this.$modal.hide("dialog")
+                        }
+                    }
+                ]
+            })
+        },
     }
 }
 </script>
