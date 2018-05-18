@@ -70,6 +70,7 @@
 <script>
 import FilterCsvModal from "@/components/Files/FilterCsv.vue"
 import LineNavigator from"../../../node_modules/line-navigator/line-navigator.js"
+import Papaparse from "../../../node_modules/papaparse/papaparse.js"
 
 export default {
     name: "ImportCsv",
@@ -87,8 +88,11 @@ export default {
                 indexToStartWith: 0,
                 numberOfLines: 2
             },
+            config: {
+                header: true
+            },
             navigator: null,
-            headers: []
+            headers: Object
         }
     },
     methods: {
@@ -114,14 +118,16 @@ export default {
                     if (err) {
                         throw err
                     }
-                    const regex = /,(?![^""]*\))/gm
-                    var keys = lines[0].split(",")
-                    var values = lines[1].split(regex)
-                    for (var i = 0; i < keys.length; i++){
-                        var current = {index: i+1, key: keys[i], value: values[i]}
-                        this.headers.push(current)
-                    }
-                    this.showFilterCsv()
+                    var line = lines[0] + "\n" + lines[1]
+                    var header = Papaparse.parse(line, this.config)
+                    // const regex = /,(?![^""]*\))/gm
+                    // var keys = lines[0].split(",")
+                    // var values = lines[1].split(regex)
+                    // for (var i = 0; i < keys.length; i++){
+                    //     var current = {index: i+1, key: keys[i], value: values[i]}
+                    //     this.headers.push(current)
+                    // }
+                    this.showFilterCsv(header.data)
                 })
         },
         buttonHandler(){
@@ -145,8 +151,8 @@ export default {
                 ]
             })
         },
-        showFilterCsv (){
-            this.$modal.show("filter-csv", { project: this.project, headers: this.headers, file: this.file })
+        showFilterCsv (header){
+            this.$modal.show("filter-csv", { project: this.project, header: header[0], file: this.file })
         },
 
     }
