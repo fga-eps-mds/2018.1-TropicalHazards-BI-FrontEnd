@@ -13,6 +13,7 @@
     <div class="container center-align">
       <h4>Inserir Dados</h4>
       <p>passo 1: carregue o arquivo</p>
+      <p>{{ headers }}</p>
       <form>
         <div class="row">
           <div class="file-field input-field">
@@ -85,10 +86,9 @@ export default {
             error: null,
             reader: {
                 indexToStartWith: 0,
-                numberOfLines: 1
+                numberOfLines: 2
             },
             navigator: null,
-            line: "",
             headers: []
         }
     },
@@ -114,9 +114,13 @@ export default {
                     if (err) {
                         throw err
                     }
-                    this.line = lines[0]
-                    this.headers = this.line.split(",")
-                    this.showFilterCsv()
+                    var keys = lines[0].split(",")
+                    var values = lines[1].split(",")
+                    for (var i = 0; i < keys.length; i++){
+                        var current = {key: keys[i], value: values[i]}
+                        this.headers.push(current)
+                    }
+                    // this.showFilterCsv()
                 })
         },
         buttonHandler(){
