@@ -59,6 +59,35 @@ export default {
                 error.log(error)
             })
         },
+        submitFile(){
+            if(this.checkForm()){
+                let formData = new FormData ()
+                formData.append("file", this.file)
+                formData.append("project", this.project)
+                this.$http.post(
+                    "import/",
+                    formData,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            "Authorization": "JWT " + localStorage.token
+                        }
+                    }
+                ).then((response) => {
+                    if(response.status == 201){
+                        this.showUploadSucess()
+                        this.showFilterCsv ()
+                    }
+                },
+                error => {
+                    this.showUploadFail()
+                    error.log(error)
+                })
+            }else{
+                this.showInvalidForm(this.error)
+            }
+        },
+
     }
 }
 </script>
