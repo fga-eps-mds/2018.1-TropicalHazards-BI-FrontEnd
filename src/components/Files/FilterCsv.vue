@@ -1,34 +1,66 @@
 <template>
   <modal
-    :width="600"
-    :height="350"
+    :width="800"
+    :height="450"
     name="filter-csv"
     @before-open="beforeOpen">
-
-    <v-dialog
-      @before-opened="dialogEvent('before-open')"
-      @before-closed="dialogEvent('before-close')"
-      @opened="dialogEvent('opened')"
-      @closed="dialogEvent('closed')"/>
-    <div class="container center-align">
-      <h4>Filtrar Arquivo</h4>
-      <p>Selecione as colunas que devem ser inseridas no arquivo</p>
-      <p>{{ listHeaders }} </p>
-    </div>
-    <div class="modal-footer">
-      <div class="row center-align">
-        <div class="col s12 m4">
-          <a
-            class="modal-action modal-close waves-effect waves-light grey white-text btn-flat"
-            @click="$modal.hide('filter-csv')">
-            Voltar
-          </a>
-        </div>
-        <div class="col s12 offset-m4 m4">
-          <a
-            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat">
-            Próximo
-          </a>
+    <div class="container-overflow">
+      <v-dialog
+        @before-opened="dialogEvent('before-open')"
+        @before-closed="dialogEvent('before-close')"
+        @opened="dialogEvent('opened')"
+        @closed="dialogEvent('closed')"/>
+      <div class="container center-align">
+        <h4>Filtrar Arquivo</h4>
+        <p>Selecione as colunas que devem ser inseridas no arquivo</p>
+        <p>{{ listHeaders }} </p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Nome coluna</th>
+            <th>Salvar?</th>
+            <th>Exemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="header in headers"
+            :key="header.key">
+            <td>{{ header.index }}</td>
+            <td>
+              {{ header.key }}
+            </td>
+            <td>
+              <p>
+                <label>
+                  <input type="checkbox">
+                  <span>Salvar</span>
+                </label>
+              </p>
+            </td>
+            <td>
+              {{ header.value }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal-footer">
+        <div class="row center-align">
+          <div class="col s12 m4">
+            <a
+              class="modal-action modal-close waves-effect waves-light grey white-text btn-flat"
+              @click="$modal.hide('filter-csv')">
+              Voltar
+            </a>
+          </div>
+          <div class="col s12 offset-m4 m4">
+            <a
+              class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat">
+              Próximo
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -42,13 +74,14 @@ export default {
         return {
             project: "",
             importData: {},
-            listHeaders: "",
+            headers: [],
             file: null
         }
     },
     methods: {
         beforeOpen(event) {
             this.project = event.params.project
+            this.headers = event.params.headers
             this.file = event.params.file
             this.getImportData ()
         },
@@ -131,4 +164,10 @@ export default {
     }
 }
 </script>
-
+<style>
+div.container-overflow {
+  height: 450px;
+  overflow: scroll;
+  padding: 20px;
+}
+</style>
