@@ -1,5 +1,6 @@
 #!/bin/bash
 
+npm install
 
 if [ "$NODE_ENV" == "production" ]; then
     echo 'Starting production server...'
