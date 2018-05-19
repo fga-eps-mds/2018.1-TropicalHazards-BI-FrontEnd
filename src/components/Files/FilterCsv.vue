@@ -9,6 +9,7 @@
       @before-closed="dialogEvent('before-close')"
       @opened="dialogEvent('opened')"
       @closed="dialogEvent('closed')"/>
+    <define-data-modal />
     <div class="container center-align">
       <h4>Filtrar Arquivo</h4>
       <p>Selecione as colunas que devem ser inseridas no arquivo</p>
@@ -25,23 +26,24 @@
         </thead>
         <tbody>
           <tr
-            v-for="{id, name, value, selected} in headers"
-            :key="id">
-            <td>{{ id+1 }}</td>
+            v-for="item in headers"
+            :key="item.id">
+            <td>{{ item.id +1 }}</td>
             <td>
-              {{ name }}
+              {{ item.name }}
             </td>
             <td>
               <p>
                 <label>
                   <input
+                    v-model="item.selected"
                     type="checkbox">
                   <span>Salvar</span>
                 </label>
               </p>
             </td>
             <td>
-              {{ value }}
+              {{ item.example }}
             </td>
           </tr>
         </tbody>
@@ -65,7 +67,8 @@
         </div>
         <div class="col s12 m4">
           <a
-            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat">
+            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
+            @click="showDefineData()">
             Próximo
           </a>
         </div>
@@ -75,8 +78,14 @@
 </template>
 
 <script>
+import DefineDataModal from "@/components/Files/DefineData.vue"
+
+
 export default {
     name: "ImportCsv",
+    components: {
+        "define-data-modal": DefineDataModal
+    },
     data (){
         return {
             project: "",
@@ -89,16 +98,13 @@ export default {
         beforeOpen(event) {
             this.header = null
             this.projecnumbert = event.params.project
-            // this.headers = event.params.header
-            // console.log(this.headers)
             this.headers = this.convertToList(event.params.header)
-            console.log(this.headers)
             this.file = event.params.file
         },
         convertToList(header){
             var id = 0
             return Object.keys(header).map(function(key){
-                return { id: id++ , name: key, value: header[key], type: "", selected: false}
+                return { id: id++ , name: key, example: header[key], type: "", selected: false}
             })
         },
         getImportData () {
@@ -109,6 +115,10 @@ export default {
             error => {
                 error.log(error)
             })
+        },
+        showDefineData (){
+            console.log("e")
+            this.$modal.show("define-data")
         },
         submitFile(){
             if(this.checkForm()){
