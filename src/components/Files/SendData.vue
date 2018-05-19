@@ -4,11 +4,11 @@
     :height="500"
     name="send-data"
     @before-open="beforeOpen">
-    <v-dialog
+    <!-- <v-dialog
       @before-opened="dialogEvent('before-open')"
       @before-closed="dialogEvent('before-close')"
       @opened="dialogEvent('opened')"
-      @closed="dialogEvent('closed')"/>
+      @closed="dialogEvent('closed')"/> -->
     <div class="modal-content container center-align">
       <h4>Inserir Dados</h4>
       <p>Resumo</p>
@@ -94,10 +94,11 @@ export default {
             this.project = ""
             this.project = event.params.project
             this.headers = event.params.headers
+            this.splitHeaders()
             this.file = event.params.file
         },
-        submitFile(){
-            this.splitHeaders()
+        buttonHandler(){
+            this.submitFile()
         },
         splitHeaders(){
             for(var i = 0; i< this.headers.length; i++){
@@ -108,7 +109,76 @@ export default {
                     this.remove.push(this.headers[i].name)
                 }
             }
-        }
+        },
+        listToJson(list){
+            // Conversão pois o formdata append não adiciona arrays
+            return JSON.stringify(list)
+        },
+        submitFile(){
+            let formData = new FormData ()
+            formData.append("file", this.file)
+            formData.append("project", this.project)
+            formData.append("headers", this.listToJson(this.remove))
+            formData.append("define", this.listToJson(this.define))
+            formData.append("types", this.listToJson(this.types))
+            this.$http.post(
+                "import/",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "Authorization": "JWT " + localStorage.token
+                    }
+                }
+            ).then((response) => {
+                if(response.status == 201){
+                    this.showUploadSucess()
+                    this.showFilterCsv ()
+                }
+            },
+            error => {
+                this.showUploadFail()
+                error.log(error)
+            })
+        },
+        // showUploadSucess () {
+        //     this.$modal.show("dialog", {
+        //         title: "Sucesso",
+        //         text: "Arquivo enviado com sucesso",
+        //         buttons: [
+        //             {
+        //                 title: "Continuar",
+        //                 handler: () => {
+        //                     // this.$modal.hide("import-csv")
+        //                     this.$modal.hide("dialog")
+        //                 }
+        //             },
+        //         ]
+        //     })
+        // },
+        // showUploadFail(){
+        //     this.$modal.show("dialog", {
+        //         title: "Erro",
+        //         text: "Arquivo inválido",
+        //         buttons: [
+        //             {
+        //                 title: "Tentar novamente",
+        //                 handler: () => {
+        //                     this.file = null
+        //                     this.$modal.hide("dialog")
+        //                 }
+        //             },
+        //             {
+        //                 title: "Cancelar",
+        //                 handler: () => {
+        //                     this.$modal.hide("import-csv")
+        //                     this.$modal.hide("dialog")
+        //                 }
+        //             }
+        //         ]
+        //     })
+        // },
+
     }
 
 }

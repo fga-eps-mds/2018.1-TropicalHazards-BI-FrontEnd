@@ -5,11 +5,11 @@
     name="import-csv"
     @before-open="beforeOpen">
     <filter-csv-modal />
-    <v-dialog
+    <!-- <v-dialog
       @before-opened="dialogEvent('before-open')"
       @before-closed="dialogEvent('before-close')"
       @opened="dialogEvent('opened')"
-      @closed="dialogEvent('closed')"/>
+      @closed="dialogEvent('closed')"/> -->
     <div class="container center-align">
       <h4>Inserir Dados</h4>
       <p>passo 1: carregue o arquivo</p>

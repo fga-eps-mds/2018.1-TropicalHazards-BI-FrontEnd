@@ -4,11 +4,11 @@
     :height="500"
     name="filter-csv"
     @before-open="beforeOpen">
-    <v-dialog
+    <!-- <v-dialog
       @before-opened="dialogEvent('before-open')"
       @before-closed="dialogEvent('before-close')"
       @opened="dialogEvent('opened')"
-      @closed="dialogEvent('closed')"/>
+      @closed="dialogEvent('closed')"/> -->
     <define-data-modal />
     <div class="container center-align">
       <h4>Filtrar Arquivo</h4>

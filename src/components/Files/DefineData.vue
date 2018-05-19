@@ -4,11 +4,11 @@
     :height="500"
     name="define-data"
     @before-open="beforeOpen">
-    <v-dialog
+    <!-- <v-dialog
       @before-opened="dialogEvent('before-open')"
       @before-closed="dialogEvent('before-close')"
       @opened="dialogEvent('opened')"
-      @closed="dialogEvent('closed')"/>
+      @closed="dialogEvent('closed')"/> -->
     <send-data-modal />
     <div class="modal-content container center-align">
       <h4>Inserir Dados</h4>
