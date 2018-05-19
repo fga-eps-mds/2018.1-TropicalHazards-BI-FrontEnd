@@ -79,7 +79,7 @@
         <div class="col s12 offset-m4 m4">
           <a
             class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
-            @click="show()">
+            @click="showSendData()">
             Próximo
           </a>
         </div>
@@ -88,6 +88,8 @@
   </modal>
 </template>
 <script>
+import SendData from "@/components/Files/SendData.vue"
+
 export default {
     name: "DefineData",
     data (){
@@ -105,7 +107,11 @@ export default {
             this.project = event.params.project
             this.headers = event.params.headers
             this.file = event.params.file
-        }
+        },
+        showDefineData (){
+            this.$modal.show("send-data", { project: this.project, headers: this.headers, file: this.file })
+        },
+
     }
 }
 </script>
