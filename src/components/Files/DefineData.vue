@@ -9,6 +9,7 @@
       @before-closed="dialogEvent('before-close')"
       @opened="dialogEvent('opened')"
       @closed="dialogEvent('closed')"/>
+    <send-data-modal />
     <div class="modal-content container center-align">
       <h4>Inserir Dados</h4>
       <p>passo 3: Indique os tipos</p>
@@ -27,8 +28,9 @@
         <tbody>
           <tr
             v-for="item in headers"
+            v-if="item.selected"
             :key="item.id">
-            <td>{{ item.id }}</td>
+            <td>{{ item.id + 1 }}</td>
             <td>
               {{ item.name }}
             </td>
@@ -92,6 +94,9 @@ import SendData from "@/components/Files/SendData.vue"
 
 export default {
     name: "DefineData",
+    components: {
+        "send-data-modal": SendData
+    },
     data (){
         return {
             project: "",
@@ -108,7 +113,7 @@ export default {
             this.headers = event.params.headers
             this.file = event.params.file
         },
-        showDefineData (){
+        showSendData (){
             this.$modal.show("send-data", { project: this.project, headers: this.headers, file: this.file })
         },
 

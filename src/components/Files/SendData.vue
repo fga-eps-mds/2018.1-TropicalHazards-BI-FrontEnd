@@ -12,70 +12,59 @@
     <div class="modal-content container center-align">
       <h4>Inserir Dados</h4>
       <p>Resumo</p>
-      <section class="modal-form row">
-        <table>
-          <thead>
-            <tr>
-              <th>Número</th>
-              <th>Nome</th>
-              <th>Salvar</th>
-              <th>Tipo</th>
-              <th>Caracterização</th>
-              <th>Exemplo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                Casos
-              </td>
-              <td>
-                Sim
-              </td>
-              <td>
-                Inteiro
-              </td>
-              <td>
-                ---
-              </td>
-              <td>
-                650
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>
-                Renda familiar
-              </td>
-              <td>
-                Sim
-              </td>
-              <td>
-                Decimal
-              </td>
-              <td>
-                ---
-                <!-- essa coluna faz sentido apenas para o booleano,
-                    para mapear qual valor vai ser true e false -->
-              </td>
-              <td>
-                R$ 2000,00
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+    </div>
+    <div class="content">
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Nome</th>
+            <th>Salvar</th>
+            <th>Tipo</th>
+            <th>Caracterização</th>
+            <th>Exemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="item in headers"
+            v-if="item.selected"
+            :key="item.id">
+            <td>{{ item.id + 1 }}</td>
+            <td>
+              {{ item.name }}
+            </td>
+            <td v-if="item.selected">
+              Sim
+            </td>
+            <td v-else>
+              Não
+            </td>
+            <td>
+              {{ item.type }}
+            </td>
+            <td>
+              ---
+            </td>
+            <td>
+              {{ item.example }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="modal-footer">
       <div class="row center-align">
         <div class="col s12 m4">
-          <a href="#!" class="modal-action modal-close waves-effect waves-light grey disabled white-text btn-flat">
+          <a
+            class="modal-action modal-close waves-effect waves-light grey white-text btn-flat"
+            @click="$modal.hide('send-data')">
             Voltar
           </a>
         </div>
         <div class="col s12 offset-m4 m4">
-          <a href="#!" class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat">
+          <a
+            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat">
             Concluir
           </a>
         </div>
