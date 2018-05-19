@@ -182,10 +182,8 @@ export default {
             this.user.email = this.currentUser.email
         },
         getProjectDetail () {
-            console.log("here")
             this.$http.get("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
                 this.project = result.data
-                console.log(this.project.user)
             },
             error => {
                 error.log(error)
