@@ -52,7 +52,7 @@
                     value="list"
                     disabled>List</option>
                   <option
-                    value="data">Data</option>
+                    value="date">Data</option>
                   <option
                     value="identifier"
                     disabled>Identificador</option>
@@ -117,6 +117,7 @@ export default {
             if(this.checkForm(headers)){
                 this.showSendData ()
             }else{
+                this.showInvalidForm()
             }
         },
         showSendData (){
@@ -129,7 +130,23 @@ export default {
                 }
             }
             return true
-        }
+        },
+        showInvalidForm(){
+            this.$modal.show("dialog", {
+                title: "Erro",
+                text: "Você deve definir todos os tipos de dado antes de prosseguir",
+                buttons: [
+                    {
+                        title: "Continuar",
+                        handler: () => {
+                            this.file = null
+                            this.$modal.hide("dialog")
+                        }
+                    }
+                ]
+            })
+        },
+
 
     }
 }

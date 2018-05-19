@@ -64,7 +64,8 @@
         </div>
         <div class="col s12 offset-m4 m4">
           <a
-            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat">
+            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
+            @click="submitFile()">
             Concluir
           </a>
         </div>
@@ -80,6 +81,9 @@ export default {
         return {
             project: "",
             headers: [],
+            remove: [],
+            define: [],
+            types: [],
             file: null
         }
     },
@@ -92,7 +96,19 @@ export default {
             this.headers = event.params.headers
             this.file = event.params.file
         },
-
+        submitFile(){
+            this.splitHeaders()
+        },
+        splitHeaders(){
+            for(var i = 0; i< this.headers.length; i++){
+                if(this.headers[i].selected == true){
+                    this.define.push(this.headers[i].name)
+                    this.types.push(this.headers[i].type)
+                }else{
+                    this.remove.push(this.headers[i].name)
+                }
+            }
+        }
     }
 
 }
