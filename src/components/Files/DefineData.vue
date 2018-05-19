@@ -42,12 +42,12 @@
                     disabled
                     selected>Selecione o tipo</option>
                   <option value="bool">Booleano</option>
-                  <option value="interger">Inteiro</option>
+                  <option value="int">Inteiro</option>
                   <option value="float">Flutuante</option>
                   <option
                     value="geodata"
                     disabled>Geodata</option>
-                  <option value="string">String</option>
+                  <option value="str">String</option>
                   <option
                     value="list"
                     disabled>List</option>
