@@ -97,7 +97,7 @@ export default {
     methods: {
         beforeOpen(event) {
             this.header = null
-            this.projecnumbert = event.params.project
+            this.project = event.params.project
             this.headers = this.convertToList(event.params.header)
             this.file = event.params.file
         },
@@ -117,8 +117,7 @@ export default {
             })
         },
         showDefineData (){
-            console.log("e")
-            this.$modal.show("define-data")
+            this.$modal.show("define-data", { project: this.project, headers: this.headers, file: this.file })
         },
         submitFile(){
             if(this.checkForm()){
@@ -156,8 +155,6 @@ export default {
                     {
                         title: "Continuar",
                         handler: () => {
-                            //APAGAR LINHA ABAIXO QUANDO ESTIVER PRONTA PARTE DE RETORNAR CABEÇALHOS
-                            //SEGUIR PARA ETAPA DE CABEÇALHOS
                             // this.$modal.hide("import-csv")
                             this.$modal.hide("dialog")
                         }

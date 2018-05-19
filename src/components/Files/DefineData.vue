@@ -12,48 +12,60 @@
     <div class="modal-content container center-align">
       <h4>Inserir Dados</h4>
       <p>passo 3: Indique os tipos</p>
-      <section class="modal-form row">
-        <table>
-          <thead>
-            <tr>
-              <th>Número</th>
-              <th>Nome</th>
-              <th>Tipo</th>
-              <th>Caracterização</th>
-              <th>Exemplo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                Casos
-              </td>
-              <td>
-                <div class="input-field">
-                  <select>
-                    <option value="" disabled selected>Selecione o tipo</option>
-                    <option value="1">Booleano</option>
-                    <option value="2">Inteiro</option>
-                    <option value="3">Decimal</option>
-                  </select>
-                </div>
-              </td>
-              <td>
-                ---
-              </td>
-              <td>
-                650
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-      <div class="progress">
-        <div
-          class="determinate"
-          style="width: 75%" />
-      </div>
+    </div>
+    <div class="content">
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Caracterização</th>
+            <th>Exemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="item in headers"
+            :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>
+              {{ item.name }}
+            </td>
+            <td>
+              <div class="input-field">
+                <select v-model="item.type">
+                  <option
+                    value=""
+                    disabled
+                    selected>Selecione o tipo</option>
+                  <option value="bool">Booleano</option>
+                  <option value="interger">Inteiro</option>
+                  <option value="float">Flutuante</option>
+                  <option
+                    value="geodata"
+                    disabled>Geodata</option>
+                  <option value="string">String</option>
+                  <option
+                    value="list"
+                    disabled>List</option>
+                  <option
+                    value="data">Data</option>
+                  <option
+                    value="identifier"
+                    disabled>Identificador</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              ---
+            </td>
+            <td>
+              {{ item.example }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="modal-footer">
       <div class="row center-align">
@@ -66,7 +78,8 @@
         </div>
         <div class="col s12 offset-m4 m4">
           <a
-            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat">
+            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
+            @click="show()">
             Próximo
           </a>
         </div>
@@ -80,10 +93,32 @@ export default {
     data (){
         return {
             project: "",
-            importData: {},
             headers: [],
             file: null
         }
     },
+    methods: {
+        beforeOpen(event) {
+            this.headers = []
+            this.file = null
+            this.project = ""
+            this.project = event.params.project
+            this.headers = event.params.headers
+            this.file = event.params.file
+        }
+    }
 }
 </script>
+<style>
+div.content {
+  height: 300px;
+  overflow: auto;
+  padding: 20px;
+}
+.modal-footer {
+  padding-top: 20px;
+}
+div select{
+  display: inline-block;
+}
+</style>
