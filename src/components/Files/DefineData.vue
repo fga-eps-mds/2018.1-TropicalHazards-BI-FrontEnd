@@ -81,7 +81,7 @@
         <div class="col s12 offset-m4 m4">
           <a
             class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
-            @click="showSendData()">
+            @click="buttonHandler(headers)">
             Próximo
           </a>
         </div>
@@ -113,9 +113,23 @@ export default {
             this.headers = event.params.headers
             this.file = event.params.file
         },
+        buttonHandler(headers){
+            if(this.checkForm(headers)){
+                this.showSendData ()
+            }else{
+            }
+        },
         showSendData (){
             this.$modal.show("send-data", { project: this.project, headers: this.headers, file: this.file })
         },
+        checkForm(headers){
+            for(var i = 0; i<headers.length; i++){
+                if(headers[i].type == null && headers[i].selected == true){
+                    return false
+                }
+            }
+            return true
+        }
 
     }
 }
