@@ -19,8 +19,6 @@ Vue.use(VueResource)
 Vue.use(VModal, { dialog: true, dynamic: true })
 Vue.config.productionTip = false
 
-var backend_url
-
 Vue.http.options.root = process.env.API_HOST
 
 /* eslint-disable no-new */

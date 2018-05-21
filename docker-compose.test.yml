@@ -12,6 +12,6 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=test
     networks:
       - default
