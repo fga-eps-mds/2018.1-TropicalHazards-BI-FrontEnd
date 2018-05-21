@@ -19,8 +19,7 @@ Vue.use(VueResource)
 Vue.use(VModal, { dialog: true, dynamic: true })
 Vue.config.productionTip = false
 
-
-Vue.http.options.root = "http://localhost:8000"
+Vue.http.options.root = process.env.API_HOST
 
 /* eslint-disable no-new */
 new Vue({

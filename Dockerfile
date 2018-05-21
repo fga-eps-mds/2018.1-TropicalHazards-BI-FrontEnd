@@ -1,12 +1,19 @@
 FROM node:slim
 
-RUN apt-get update
-# RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && apt-get install -y nodejs tree libfontconfig bzip2 xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 && npm install --quiet --global vue-cli
+RUN apt-get update && apt-get install bzip2
 
-WORKDIR /TropicalHazards-BI-FrontEnd
+RUN mkdir -p /usr/src/tropical-hazards-frontend
 
-COPY . /TropicalHazards-BI-FrontEnd
+WORKDIR /usr/src/tropical-hazards-frontend
 
-COPY package.json /package.json
+COPY package.json /usr/src/tropical-hazards-frontend/
 
-# RUN npm install
+RUN npm install
+
+COPY . /usr/src/tropical-hazards-frontend
+
+EXPOSE 8080
+
+RUN chmod +x start.sh
+
+CMD ["./start.sh"]
