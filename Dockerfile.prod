@@ -1,0 +1,21 @@
+FROM node:slim
+
+RUN apt-get update && apt-get install bzip2
+
+WORKDIR /usr/src/tropical-hazards-frontend
+
+COPY package.json /usr/src/tropical-hazards-frontend/
+
+RUN npm install
+
+COPY . /usr/src/tropical-hazards-frontend
+
+RUN npm run build
+
+RUN rm -rf ./src ./build ./test
+
+EXPOSE 8080
+
+RUN chmod +x start.sh
+
+CMD ["./start.sh"]
