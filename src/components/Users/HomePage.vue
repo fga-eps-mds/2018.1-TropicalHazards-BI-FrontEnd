@@ -54,6 +54,18 @@
             <h5>
               Projetos
             </h5>
+            <div class="input-field col s12">
+              <input
+                id="tag"
+                v-model="tags.name"
+                type="text"
+                class="validate"
+                @keyup.enter="filterByTag">
+              <label
+                for="descricao"
+                data-error="wrong"
+                data-success="right">Filtrar por tag:</label>
+            </div>
             <div
               id="projects"
               class="row">
@@ -158,6 +170,10 @@ export default {
     data () {
         return {
             projects: [],
+            tags: {
+                name: "",
+                slug: ""
+            },
             user: {
                 username: "",
                 password: "",
@@ -183,6 +199,16 @@ export default {
         },
         getProject () {
             this.$http.get("projects/", { headers: { "content-type": "application/json" } }).then(result => {
+                this.projects = result.data
+            },
+            error => {
+                error.log(error)
+            })
+        },
+
+        filterByTag () {
+            this.$http.get("projects/" + "?tags__name=&tag_name=" + this.tags.name,
+                { headers: { "content-type": "application/json" } }).then(result => {
                 this.projects = result.data
             },
             error => {

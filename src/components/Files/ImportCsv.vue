@@ -1,15 +1,15 @@
 <template>
   <modal
     :width="600"
-    :height="350"
+    :height="450"
     name="import-csv"
     @before-open="beforeOpen">
-
-    <v-dialog
+    <filter-csv-modal />
+    <!-- <v-dialog
       @before-opened="dialogEvent('before-open')"
       @before-closed="dialogEvent('before-close')"
       @opened="dialogEvent('opened')"
-      @closed="dialogEvent('closed')"/>
+      @closed="dialogEvent('closed')"/> -->
     <div class="container center-align">
       <h4>Inserir Dados</h4>
       <p>passo 1: carregue o arquivo</p>
@@ -58,7 +58,7 @@
         <div class="col s12 offset-m4 m4">
           <a
             class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
-            @click="submitFile ()">
+            @click="buttonHandler ()">
             Próximo
           </a>
         </div>
@@ -68,19 +68,37 @@
 </template>
 
 <script>
+import FilterCsvModal from "@/components/Files/FilterCsv.vue"
+import LineNavigator from"../../../node_modules/line-navigator/line-navigator.js"
+import Papaparse from "../../../node_modules/papaparse/papaparse.js"
+
 export default {
     name: "ImportCsv",
+    components: {
+        "filter-csv-modal": FilterCsvModal
+    },
+
     data (){
         return {
             text: "Project id: ",
             project: "",
             file: null,
-            error: null
+            error: null,
+            reader: {
+                indexToStartWith: 0,
+                numberOfLines: 2
+            },
+            config: {
+                header: true
+            },
+            navigator: null,
+            headers: Object
         }
     },
     methods: {
         beforeOpen(event) {
             this.project = event.params.project
+            this.headers = []
             this.file = null
         },
         handleFileUpload(){
@@ -93,71 +111,30 @@ export default {
                 this.error = "Selecione um arquivo"
             return false
         },
-        submitFile(){
-            if(this.checkForm()){
-                let formData = new FormData ()
-                formData.append("file", this.file)
-                formData.append("project", this.project)
-                this.$http.post(
-                    "import/",
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                            "Authorization": "JWT " + localStorage.token
-                        }
+        getHeaders(){
+            this.navigator = new LineNavigator(this.file)
+            this.navigator.readLines(this.reader.indexToStartWith,
+                this.reader.numberOfLines, (err, index, lines) => { // isEof, progress
+                    if (err) {
+                        throw err
                     }
-                ).then((response) => {
-                    if(response.status == 201){
-                        this.showUploadSucess()
-                    }
-                },
-                error => {
-                    this.showUploadFail()
-                    error.log(error)
+                    var line = lines[0] + "\n" + lines[1]
+                    var header = Papaparse.parse(line, this.config)
+                    // const regex = /,(?![^""]*\))/gm
+                    // var keys = lines[0].split(",")
+                    // var values = lines[1].split(regex)
+                    // for (var i = 0; i < keys.length; i++){
+                    //     var current = {index: i+1, key: keys[i], value: values[i]}
+                    //     this.headers.push(current)
+                    // }
+                    this.showFilterCsv(header.data)
                 })
-            }else{
-                this.showInvalidForm(this.error)
+        },
+        buttonHandler(){
+            if(this.checkForm()){
+                this.handleFileUpload()
+                this.getHeaders()
             }
-        },
-        showUploadSucess () {
-            this.$modal.show("dialog", {
-                title: "Sucesso",
-                text: "Arquivo enviado com sucesso",
-                buttons: [
-                    {
-                        title: "Continuar",
-                        handler: () => {
-                            //APAGAR LINHA ABAIXO QUANDO ESTIVER PRONTA PARTE DE RETORNAR CABEÇALHOS
-                            //SEGUIR PARA ETAPA DE CABEÇALHOS
-                            this.$modal.hide("import-csv")
-                            this.$modal.hide("dialog")
-                        }
-                    },
-                ]
-            })
-        },
-        showUploadFail(){
-            this.$modal.show("dialog", {
-                title: "Erro",
-                text: "Arquivo inválido",
-                buttons: [
-                    {
-                        title: "Tentar novamente",
-                        handler: () => {
-                            this.file = null
-                            this.$modal.hide("dialog")
-                        }
-                    },
-                    {
-                        title: "Cancelar",
-                        handler: () => {
-                            this.$modal.hide("import-csv")
-                            this.$modal.hide("dialog")
-                        }
-                    }
-                ]
-            })
         },
         showInvalidForm(error){
             this.$modal.show("dialog", {
@@ -173,8 +150,11 @@ export default {
                     }
                 ]
             })
+        },
+        showFilterCsv (header){
+            this.$modal.show("filter-csv", { project: this.project, header: header[0], file: this.file })
+        },
 
-        }
     }
 }
 </script>
