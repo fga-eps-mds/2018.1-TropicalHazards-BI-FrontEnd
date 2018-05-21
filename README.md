@@ -1,5 +1,7 @@
 # tropical-hazards-bi-front-end
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a715ea21d0564479880d48f3eadd21af)](https://app.codacy.com/app/andre-filho/2018.1-TropicalHazards-BI-FrontEnd?utm_source=github.com&utm_medium=referral&utm_content=fga-gpp-mds/2018.1-TropicalHazards-BI-FrontEnd&utm_campaign=badger)
+
 > front-end for Tropical Hazards BI
 
 ## Build Setup
