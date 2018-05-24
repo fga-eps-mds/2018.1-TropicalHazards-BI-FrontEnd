@@ -33,6 +33,10 @@ after_success:
     -d '{}' \
     '${RANCHER_URL}v2-beta/${PROJECT_AND_CONTAINER_URI}/?action=restart'
 
+    else if [ "${TRAVIS_BRANCH}" == "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+      echo "deploying it"      
+      npx semantic-release
+
     else
       echo "Skipping deploy...";
   fi;
