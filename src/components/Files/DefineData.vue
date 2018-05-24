@@ -22,6 +22,7 @@
             <th>Nome</th>
             <th>Tipo</th>
             <th>Caracterização</th>
+            <th>Pode ser Nulo?</th>
             <th>Exemplo</th>
           </tr>
         </thead>
@@ -49,18 +50,21 @@
                     disabled>Geodata</option>
                   <option value="str">String</option>
                   <option
-                    value="list"
-                    disabled>List</option>
+                    value="list">List</option>
                   <option
                     value="date">Data</option>
                   <option
-                    value="identifier"
-                    disabled>Identificador</option>
+                    value="identifier">Identificador</option>
                 </select>
               </div>
             </td>
             <td>
               ---
+            </td>
+            <td>
+              <input
+                v-model="item.acceptNull"
+                type="checkbox">
             </td>
             <td>
               {{ item.example }}

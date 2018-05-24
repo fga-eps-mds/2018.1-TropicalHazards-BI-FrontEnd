@@ -104,7 +104,7 @@ export default {
         convertToList(header){
             var id = 0
             return Object.keys(header).map(function(key){
-                return { id: id++ , name: key, example: header[key], type: null, selected: false}
+                return { id: id++ , name: key, example: header[key], type: null, acceptNull: false, selected: false}
             })
         },
         getImportData () {
