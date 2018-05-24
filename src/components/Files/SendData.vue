@@ -94,29 +94,26 @@ export default {
             this.project = ""
             this.project = event.params.project
             this.headers = event.params.headers
-            this.splitHeaders()
             this.file = event.params.file
         },
         buttonHandler(){
             this.submitFile()
         },
-        splitHeaders(){
-            for(var i = 0; i< this.headers.length; i++){
-                if(this.headers[i].selected == true){
-                    this.define.push(this.headers[i].name)
-                    this.types.push(this.headers[i].type)
-                }else{
-                    this.remove.push(this.headers[i].name)
-                }
-            }
-        },
+        // splitHeaders(){
+        //     for(var i = 0; i< this.headers.length; i++){
+        //         if(this.headers[i].selected == true){
+        //             this.define.push(this.headers[i].name)
+        //             this.types.push(this.headers[i].type)
+        //         }else{
+        //             this.remove.push(this.headers[i].name)
+        //         }
+        //     }
+        // },
         submitFile(){
             let formData = new FormData ()
             formData.append("file", this.file)
             formData.append("project", this.project)
-            formData.append("headers", JSON.stringify(this.remove))
-            formData.append("define", JSON.stringify(this.define))
-            formData.append("types", JSON.stringify(this.types))
+            formData.append("headers", JSON.stringify(this.headers))
             this.$http.post(
                 "import/",
                 formData,
