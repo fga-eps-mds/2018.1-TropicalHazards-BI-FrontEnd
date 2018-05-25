@@ -23,6 +23,7 @@
             <th>Tipo</th>
             <th>Caracterização</th>
             <th>Pode ser Nulo?</th>
+            <th>Transformar?</th>
             <th>Exemplo</th>
           </tr>
         </thead>
@@ -70,6 +71,19 @@
                   <span />
                 </label>
               </p>
+            </td>
+            <td>
+              <div class="input-field">
+                <select
+                  v-if="item.type == 'bool' || item.type =='str'"
+                  v-model="item.transform">
+                  <option
+                    value=""
+                    selected>Não transformar</option>
+                  <option value="upper">Maiúsculo</option>
+                  <option value="int64">Minúsculo</option>
+                </select>
+              </div>
             </td>
             <td>
               {{ item.example }}
