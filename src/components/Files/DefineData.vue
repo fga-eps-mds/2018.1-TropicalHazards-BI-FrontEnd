@@ -43,8 +43,8 @@
                     disabled
                     selected>Selecione o tipo</option>
                   <option value="bool">Booleano</option>
-                  <option value="int">Inteiro</option>
-                  <option value="float">Flutuante</option>
+                  <option value="int64">Inteiro</option>
+                  <option value="float64">Flutuante</option>
                   <option
                     value="geodata"
                     disabled>Geodata</option>
@@ -62,9 +62,14 @@
               ---
             </td>
             <td>
-              <input
-                v-model="item.acceptNull"
-                type="checkbox">
+              <p>
+                <label>
+                  <input
+                    v-model="item.acceptNull"
+                    type="checkbox">
+                  <span />
+                </label>
+              </p>
             </td>
             <td>
               {{ item.example }}
@@ -150,8 +155,6 @@ export default {
                 ]
             })
         },
-
-
     }
 }
 </script>
