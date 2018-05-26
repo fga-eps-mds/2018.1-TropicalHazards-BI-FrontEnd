@@ -22,6 +22,8 @@
             <th>Nome</th>
             <th>Tipo</th>
             <th>Caracterização</th>
+            <th>Pode ser Nulo?</th>
+            <th>Transformar?</th>
             <th>Exemplo</th>
           </tr>
         </thead>
@@ -42,25 +44,46 @@
                     disabled
                     selected>Selecione o tipo</option>
                   <option value="bool">Booleano</option>
-                  <option value="int">Inteiro</option>
-                  <option value="float">Flutuante</option>
+                  <option value="int64">Inteiro</option>
+                  <option value="float64">Flutuante</option>
                   <option
                     value="geodata"
                     disabled>Geodata</option>
                   <option value="str">String</option>
                   <option
-                    value="list"
-                    disabled>List</option>
+                    value="list">List</option>
                   <option
                     value="date">Data</option>
                   <option
-                    value="identifier"
-                    disabled>Identificador</option>
+                    value="identifier">Identificador</option>
                 </select>
               </div>
             </td>
             <td>
               ---
+            </td>
+            <td>
+              <p>
+                <label>
+                  <input
+                    v-model="item.acceptNull"
+                    type="checkbox">
+                  <span />
+                </label>
+              </p>
+            </td>
+            <td>
+              <div class="input-field">
+                <select
+                  v-if="item.type == 'bool' || item.type =='str'"
+                  v-model="item.transform">
+                  <option
+                    value=""
+                    selected>Não transformar</option>
+                  <option value="upper">Maiúsculo</option>
+                  <option value="lower">Minúsculo</option>
+                </select>
+              </div>
             </td>
             <td>
               {{ item.example }}
@@ -146,8 +169,6 @@ export default {
                 ]
             })
         },
-
-
     }
 }
 </script>
