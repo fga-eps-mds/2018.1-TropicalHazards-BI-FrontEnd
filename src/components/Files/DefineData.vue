@@ -81,7 +81,7 @@
                     value=""
                     selected>Não transformar</option>
                   <option value="upper">Maiúsculo</option>
-                  <option value="int64">Minúsculo</option>
+                  <option value="lower">Minúsculo</option>
                 </select>
               </div>
             </td>
