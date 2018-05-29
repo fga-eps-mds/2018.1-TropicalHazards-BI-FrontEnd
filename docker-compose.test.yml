@@ -4,9 +4,9 @@ services:
   th_bi-front:
     container_name: tropical-hazards-front
     build: .
-    command: /bin/bash start.sh 
+    command: npm install --dev 
     volumes:
-      - .:/TropicalHazards-BI-FrontEnd
+      - .:/tropical-hazards-frontend    
     external_links:
       - 20181tropicalhazardsbi_default
     ports:

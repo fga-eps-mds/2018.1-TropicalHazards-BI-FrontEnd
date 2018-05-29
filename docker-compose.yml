@@ -6,7 +6,7 @@ services:
     build: .
     command: /bin/bash start.sh 
     volumes:
-      - .:/usr/src/tropical-hazards-frontend
+      - .:/tropical-hazards-frontend
     external_links:
       - 20181tropicalhazardsbi_default
     ports:
