@@ -1,0 +1,44 @@
+// colors to be used in the background
+$background-color: #fafafa !important;
+$alt-background-color: #333333 !important;
+
+// font colors
+$font-color: #333 !important;
+$alt-font-color: #f0f0f0 !important;
+$highlight-font-color: #277aa8 !important;
+
+// colors for buttons and stuff
+$elephant: #15425c !important;
+$curious-blue: #339fdb !important;
+$cornflower-blue: #4352e0 !important;
+$shamrock: #2be280 !important;
+$golden-tanoi: #ffd259 !important;
+$mandy:   #e9524d !important;
+
+// color aliases
+$blue: $curious-blue;
+$highlight-color: $elephant;
+$green: $shamrock;
+$yellow: $golden-tanoi;
+$red: $mandy;
+$purple: $cornflower-blue;
+
+// font imports
+@import url('https://fonts.googleapis.com/css?family=Quattrocento|Slabo+27px');
+@import url('https://fonts.googleapis.com/css?family=Cabin|Quattrocento+Sans|Roboto|Titillium+Web');
+$text-font-family: 'Quattrocento Sans', 'Roboto', 'Cabin', 'Titillium Web', sans-serif;
+$headings-font-family: 'Quattrocento', 'Slabo', $text-font-family;
+
+// css configurations
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+    font-family: $headings-font-family;
+    letter-spacing: .3em;
+}
+
+p,
+a {
+    font-family: $text-font-family;
+    letter-spacing: .15em;
+    line-height: .2em;
+}
