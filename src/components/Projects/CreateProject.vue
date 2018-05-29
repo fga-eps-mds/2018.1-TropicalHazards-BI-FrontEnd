@@ -183,7 +183,7 @@ export default {
 
             })
         },
-        
+
         postSucess() {
             window.alert("Projeto criado com Sucesso")
             this.$router.replace("/home")
@@ -193,12 +193,11 @@ export default {
             window.confirm("Falha na criação do projeto")
         },
         modalScript() {
-            (document).ready(function(){
-                (".modal").modal()
-            });
-
-            (document).ready(function(){
-                ("select").formSelect()
+            $(document).ready(function(){
+                $(".modal").modal()
+            })
+            $(document).ready(function(){
+                $("select").formSelect()
             })
         }
     },

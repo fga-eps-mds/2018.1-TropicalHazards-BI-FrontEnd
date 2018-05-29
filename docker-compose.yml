@@ -3,14 +3,16 @@ version: '2'
 services:
   th_bi-front:
     container_name: tropical-hazards-front
-    image: arthur0496/tropical-hazards-front:dev
-    command: /bin/bash -lc "npm install && npm run dev"
+    build: .
+    command: /bin/bash start.sh 
     volumes:
-      - .:/TropicalHazards-BI-FrontEnd
+      - .:/usr/src/tropical-hazards-frontend
     external_links:
       - 20181tropicalhazardsbi_default
     ports:
       - "8080:8080"
+    environment:
+      - NODE_ENV=development
     networks:
       - default
       - 20181tropicalhazardsbi_default

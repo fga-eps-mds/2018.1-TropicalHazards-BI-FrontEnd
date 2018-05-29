@@ -228,16 +228,16 @@ export default {
             this.isModalVisible = false
         },
         modalScript () {
-            (document).ready(function () {
-                (".modal").modal()
+            $(document).ready(function () {
+                $(".modal").modal()
             }),
-            (document).ready(function () {
-                ("select").formSelect()
+            $(document).ready(function () {
+                $("select").formSelect()
             })
         },
         menuMobile () {
-            (document).ready(function () {
-                (".sidenav").sidenav()
+            $(document).ready(function () {
+                $(".sidenav").sidenav()
             })
         },
         Logout () {
