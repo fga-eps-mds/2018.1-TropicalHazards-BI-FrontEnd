@@ -11,8 +11,11 @@ import store from "./store"
 import VModal from "vue-js-modal"
 
 import "./../node_modules/jquery/dist/jquery.min.js"
-import "./../node_modules/materialize-css/dist/css/materialize.min.css"
-import "./../node_modules/materialize-css/dist/js/materialize.min.js"
+import "bootstrap"
+
+// https://getbootstrap.com/docs/4.1/getting-started/download/#npm
+// https://getbootstrap.com/docs/4.1/getting-started/webpack/
+require("bootstrap")
 
 Vue.use(Vuelidate)
 Vue.use(VueResource)
