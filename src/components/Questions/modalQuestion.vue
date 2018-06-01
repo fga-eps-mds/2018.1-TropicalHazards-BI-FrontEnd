@@ -53,21 +53,24 @@ export default {
     },
 
     methods: {
-
+        beforeOpen(event) {
+            this.dashboard = event.params.dashboard
+        },
         createQuestion() {
-            this.$http.post("metabase/1" , this.question, { headers: {  "Authorization": "JWT " + localStorage.token, "content-type": "application/json", } }
+            this.$http.post("metabase/" + this.dashboard ,
+                this.question,
+                {
+                    headers:
+                    {
+                        "Authorization": "JWT " + localStorage.token,
+                        "content-type": "application/json"
+                    }
+                }
             ).then(result => {
-                this.uuid = result.data
-
-                console.log(result)
+                console.log(result.body)
             },
             error => {
-                console.log(error)
             })
-        },
-        beforeOpen(event) {
-            this.dashboard = event.params.dashboard.id
-            console.log(dashboard)
         }
     }
 }
