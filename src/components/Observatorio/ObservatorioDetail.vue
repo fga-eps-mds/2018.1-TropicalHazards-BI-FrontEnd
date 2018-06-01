@@ -101,8 +101,7 @@ export default {
                 username: "",
                 password: "",
                 email: ""
-            },
-            isModalVisible: false,
+            }
         }
     },
     computed: {
@@ -115,7 +114,6 @@ export default {
         this.modalScript()
     },
     methods: {
-
         deleteDashboard (){
             if (window.confirm("Deseja realmente deletar o dashboard ?")){
                 this.$http.delete("dashboards/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
@@ -129,7 +127,6 @@ export default {
                 })
             }
         },
-
         getObservatorioDetail(){
             this.$http.get("dashboards/" + this.$route.params.id + "/",  { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
                 this.dashboard = result.data
@@ -144,22 +141,6 @@ export default {
             this.user.username = this.currentUser.name
             this.user.email = this.currentUser.email
         },
-
-        showModal() {
-            this.isModalVisible = true
-        },
-        closeModal() {
-            this.isModalVisible = false
-        },
-        modalScript() {
-
-            $(document).ready(function(){
-                $(".modal").modal()
-            })
-            $(document).ready(function(){
-                $("select").formSelect()
-            })
-        }
     },
 }
 </script>
