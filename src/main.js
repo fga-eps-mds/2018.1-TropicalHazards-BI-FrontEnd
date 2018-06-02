@@ -14,7 +14,7 @@ import RavenVue from "raven-js/plugins/vue"
 
 import "./../node_modules/jquery/dist/jquery.min.js"
 import "bootstrap"
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css"
 
 // https://getbootstrap.com/docs/4.1/getting-started/download/#npm
 // https://getbootstrap.com/docs/4.1/getting-started/webpack/
