@@ -9,6 +9,8 @@ import Vuelidate from "vuelidate"
 import router from "./router"
 import store from "./store"
 import VModal from "vue-js-modal"
+import Raven from "raven-js"
+import RavenVue from "raven-js/plugins/vue"
 
 import "./../node_modules/jquery/dist/jquery.min.js"
 import "./../node_modules/materialize-css/dist/css/materialize.min.css"
@@ -29,3 +31,10 @@ new Vue({
     template: "<App/>",
     store
 })
+
+if (process.env.NODE_ENV == "production") {
+    Raven
+        .config(process.env.RAVEN_URL)
+        .addPlugin(RavenVue, Vue)
+        .install()
+}
