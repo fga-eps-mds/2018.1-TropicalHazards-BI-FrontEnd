@@ -1,22 +1,22 @@
 <template>
   <div>
-    <navbar/>
+    <Navbar/>
     <h1>the peacock lost it's pea...</h1>
     <p>working on it</p>
-    <LandingFooter/>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex"
 
-import LandingNavbar from "@/components/Landing/Navbar"
+import Navbar from "@/components/Landing/Navbar"
 import Footer from "@/components/Utils/Footer"
 
 export default {
     name: "LandingPage",
     components: {
-        LandingNavbar,
+        Navbar,
         Footer
     },
 

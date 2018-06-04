@@ -57,6 +57,7 @@ export default {
       padding-top: 1.3em;
       padding-bottom: 1.3em;
       text-decoration: none;
+      color: inherit;
       &:hover {
         background-color: #444;
         transition: all .4s ease-in-out;

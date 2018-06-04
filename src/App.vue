@@ -11,12 +11,7 @@
 </template>
 
 <script>
-
-export default {
-
-    components: {
-    }
-}
+export default {}
 </script>
 
 <style lang="scss">
@@ -74,10 +69,6 @@ export default {
 }
 .footer-copyright{
   background-color:#242424;
-}
-
-a {
-  color: inherit !important;
 }
 
 h1,
