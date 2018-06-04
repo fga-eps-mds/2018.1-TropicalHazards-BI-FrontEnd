@@ -1,41 +1,71 @@
 <template>
-  <footer class="page-footer  blue lighten-1 grey-text text-lighten-5">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Sobre Nós</h5>
-          <p class="grey-text text-lighten-4">
-            O OBSERV é um observatório de dados com interpretação de dados, geração de indicadores e gráficos.
-            Tudo isso para apoiar a visualização dos indicadores dos dados da sua pesquisa.
-          </p>
-        </div>
-        <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Links</h5>
-          <ul>
-            <li>
-              <a
-                class="grey-text text-lighten-3"
-                href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI/">Documentação</a>
-            </li>
-            <li>
-              <a
-                class="grey-text text-lighten-3"
-                href="https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI">Repositório GitHub</a>
-            </li>
-          </ul>
-        </div>
+  <footer class="container-fluid text-center dark-bg">
+    <div class="row">
+      <div class="col-12">
+        <h5>Observ</h5>
+        <p class="text-center">
+          {{ footerText }}
+        </p>
       </div>
+      <a
+        href="github.com/fga-gpp-mds/2018.1-TropicalHazards-BI/issues/new?template=bug.md"
+        class="col-4 offset-4">
+        <span class="fa fa-bug"/> Reportar um bug
+      </a>
     </div>
+    <div class="row">
+      <a
+        href="github.com/fga-gpp-mds/2018.1-TropicalHazards-BI"
+        class="col">
+        <span class="fa fa-github"/> Github
+      </a>
+      <a
+        href="fga-gpp-mds.github.io/2018.1-TropicalHazards-BI"
+        class="col">
+        <span class="fa fa-book"/> Docs
+      </a>
+      <router-link
+        :to="name='home'"
+        class="col">
+        <span class="fa fa-home"/> Home
+      </router-link>
+    </div>
+    <p
+      id="license"
+      class="text-center">
+      Protegido sob a licença MIT
+    </p>
   </footer>
 </template>
 
 <script>
-
-
+export default {
+    data () {
+        return {
+            footerText: ""
+        }
+    }
+}
 </script>
 
-<style>
+<style lang="scss" scoped>
+  footer {
+    padding-top: 1em;
+    padding-bottom: .3em;
 
+    .row a {
+      padding-top: 1.3em;
+      padding-bottom: 1.3em;
+      text-decoration: none;
+      &:hover {
+        background-color: #444;
+        transition: all .4s ease-in-out;
+      }
+    }
 
-
+    #license {
+      font-size: .7em;
+      margin-top: 4em;
+    }
+  }
 </style>

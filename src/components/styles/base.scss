@@ -3,9 +3,9 @@ $background-color: #fafafa !important;
 $alt-background-color: #333333 !important;
 
 // font colors
-$font-color: #333 !important;
-$alt-font-color: #f0f0f0 !important;
-$highlight-font-color: #277aa8 !important;
+$text-color: #333 !important;
+$alt-text-color: #f0f0f0 !important;
+$highlight-text-color: #277aa8 !important;
 
 // colors for buttons and stuff
 $elephant: #15425c !important;
@@ -41,4 +41,14 @@ a {
     font-family: $text-font-family;
     letter-spacing: .15em;
     line-height: .2em;
+}
+
+.dark-bg {
+    background-color: $alt-background-color;
+    color: $alt-text-color;
+}
+
+.light-bg {
+    background-color: $background-color;
+    color: $text-color;
 }
