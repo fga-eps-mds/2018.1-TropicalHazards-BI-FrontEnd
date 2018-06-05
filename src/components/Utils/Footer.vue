@@ -7,27 +7,22 @@
           {{ footerText }}
         </p>
       </div>
-      <a
-        href="github.com/fga-gpp-mds/2018.1-TropicalHazards-BI/issues/new?template=bug.md"
-        class="col-4 offset-4">
-        <span class="fa fa-bug"/> Reportar um bug
-      </a>
     </div>
     <div class="row">
       <a
-        href="github.com/fga-gpp-mds/2018.1-TropicalHazards-BI"
-        class="col">
-        <span class="fa fa-github"/> Github
+        href="https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI"
+        class="col text-center">
+        Github
       </a>
       <a
-        href="fga-gpp-mds.github.io/2018.1-TropicalHazards-BI"
-        class="col">
-        <span class="fa fa-book"/> Docs
+        href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI"
+        class="col text-center">
+        Docs
       </a>
       <router-link
-        :to="name='home'"
-        class="col">
-        <span class="fa fa-home"/> Home
+        :to="{name: 'HomePage'}"
+        class="col text-center">
+        Home
       </router-link>
     </div>
     <p
@@ -52,7 +47,9 @@ export default {
   footer {
     padding-top: 1em;
     padding-bottom: .3em;
-
+    .row {
+      margin: 0;
+    }
     .row a {
       padding-top: 1.3em;
       padding-bottom: 1.3em;

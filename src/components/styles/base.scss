@@ -26,21 +26,21 @@ $purple: $cornflower-blue;
 // font imports
 @import url('https://fonts.googleapis.com/css?family=Quattrocento|Slabo+27px');
 @import url('https://fonts.googleapis.com/css?family=Cabin|Quattrocento+Sans|Roboto|Titillium+Web');
-$text-font-family: 'Quattrocento Sans', 'Roboto', 'Cabin', 'Titillium Web', sans-serif;
+$text-font-family: 'Roboto', 'Cabin', 'Titillium Web', sans-serif;
 $headings-font-family: 'Titillium Web', 'Roboto', 'Slabo', sans-serif;
 
 // css configurations
 h1,h2,h3,h4,h5,h6,
 .h1,.h2,.h3,.h4,.h5,.h6 {
     font-family: $headings-font-family;
-    letter-spacing: .3em;
+    // letter-spacing: .3em;
 }
 
 p,
 a {
     font-family: $text-font-family;
-    letter-spacing: .15em;
-    line-height: .2em;
+    // letter-spacing: .15em;
+    // line-height: .2em;
 }
 
 .dark-bg {
@@ -51,4 +51,13 @@ a {
 .light-bg {
     background-color: $background-color;
     color: $text-color;
+}
+
+.btn-blue {
+    border: none;
+    background-color: #2677a3 !important;
+    transition: all .3s ease-in-out;
+    &:hover {
+        background-color: $blue;
+    }
 }

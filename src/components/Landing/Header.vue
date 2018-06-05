@@ -1,0 +1,73 @@
+<template>
+  <header>
+    <div class="filter container-fluid text-center">
+      <h1 class="motto clearfix">
+        {{ brandMotto }}
+      </h1>
+      <p class="h3 clearfix">
+        {{ briefResume }}
+      </p>
+      <div class="input-group">
+        <input
+          v-model="searchArg"
+          type="text"
+          name="search-dashes-field"
+          class="form-control"
+          placeholder="Descubra dashboards">
+        <div class="input-group-append">
+          <button
+            class="btn btn-primary btn-blue">
+            <p class="d-none d-md-inline-block">
+              Buscar
+            </p>
+            <span class="fa fa-search"/>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+</template>
+
+<script>
+export default {
+    data () {
+        return {
+            brandMotto: "Sua pesquisa gerenciada do seu jeito",
+            briefResume: "esse front end nao ta uma desgraceira",
+            backgroundImagePath: "",
+            searchArg: ""
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+  @import '../styles/base.scss';
+  header {
+    background: '' no-repeat center center;
+    background-size: cover;
+    color: $alt-text-color;
+
+    background-color: #909090;
+    .container-fluid {
+      padding-bottom: 2.5em;
+      h1 {
+        padding-top: 2em;
+        padding-bottom: 1.5em;
+      }
+      .h3 {
+        padding-bottom: 1.5em;
+      }
+      .input-group {
+        width: 80vw;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+  button {
+    p {
+      margin-bottom: auto;
+    }
+  }
+</style>
