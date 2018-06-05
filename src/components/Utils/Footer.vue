@@ -14,16 +14,17 @@
         class="col text-center">
         Github
       </a>
+      <router-link
+        :to="{name: 'LandingPage'}"
+        class="col text-center">
+        Inicio
+      </router-link>
       <a
         href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI"
         class="col text-center">
         Docs
       </a>
-      <router-link
-        :to="{name: 'HomePage'}"
-        class="col text-center">
-        Home
-      </router-link>
+
     </div>
     <p
       id="license"

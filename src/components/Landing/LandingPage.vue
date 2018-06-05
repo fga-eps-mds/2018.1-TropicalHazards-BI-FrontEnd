@@ -4,7 +4,6 @@
     <Header/>
     <h1>the peacock lost it's pea...</h1>
     <p>working on it</p>
-    <Footer/>
   </div>
 </template>
 
@@ -13,14 +12,12 @@ import { mapGetters } from "vuex"
 
 import Navbar from "@/components/Landing/Navbar"
 import Header from "@/components/Landing/Header"
-import Footer from "@/components/Utils/Footer"
 
 export default {
     name: "LandingPage",
     components: {
         Navbar,
-        Header,
-        Footer
+        Header
     },
 
     computed: {
