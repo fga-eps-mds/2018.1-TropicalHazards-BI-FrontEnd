@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar/>
+    <!-- <Navbar/> -->
     <Header/>
     <h1>the peacock lost it's pea...</h1>
     <p>working on it</p>

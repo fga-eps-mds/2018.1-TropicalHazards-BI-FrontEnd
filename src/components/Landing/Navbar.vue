@@ -1,7 +1,7 @@
 <template>
   <nav
     id="navbar"
-    class="navbar navbar-expand-md navbar-dark dark-bg">
+    class="navbar navbar-expand-md">
     <router-link
       :to="{name: 'LandingPage'}"
       class="navbar-brand">
@@ -19,7 +19,7 @@
     </button>
     <div
       id="collapseable"
-      class="collapse navbar-collapse dark-bg">
+      class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link
@@ -44,13 +44,13 @@
 import { mapGetters } from "vuex"
 
 export default {
-    data () {
+    data() {
         return {
             user: {
                 username: "",
                 email: "",
                 id: ""
-            },
+            }
         }
     },
 
@@ -69,40 +69,56 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../styles/base.scss';
-  .navbar {
-    width: 100%;
-    .navbar-brand {
-        height: 100%;
-      }
-    #collapseable {
-      height: 100%;
-      @media (max-width: 764px) {
-        width: 100vw;
-        font-size: .9em;
-        a {
-          margin-top: .4em;
-          margin-bottom: .4em;
-          padding-top: 1.1em;
-          padding-bottom: 1.1em;
-        }
-      }
-    }
-  }
-  a {
-    padding: 1em .3em;
-    margin-left: .2em;
-    margin-right: .2em;
-    &.nav-link {
-      font-size: .8em;
-      transition: all .5s linear;
-      color: $alt-text-color;
-      border-bottom: 1px solid transparent;
-      &:hover {
-        background-color: #353535;
-        border-bottom-color: $alt-text-color;
-      }
-    }
+@import "../styles/base.scss";
+
+.navbar {
+  width: 100%;
+  padding: 0 2em;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: $alt-text-color;
+  border-bottom: #f0f0f0 solid .5px;
+
+  .navbar-brand {
+    height: 100%;
+    padding: .3em;
+    color: inherit;
   }
 
+  button {
+    color: $alt-text-color;
+  }
+
+  #collapseable {
+    @media (max-width: 764px) {
+      width: 100vw;
+      font-size: 0.9em;
+
+      a {
+        margin-top: 0.4em;
+        margin-bottom: 0.4em;
+        padding-top: 1.1em;
+        padding-bottom: 1.1em;
+      }
+    }
+  }
+}
+
+a {
+  padding: 1em 0.3em;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+
+  &.nav-link {
+    font-size: 0.8em;
+    transition: all 0.5s ease-in-out;
+    color: $alt-text-color;
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      background-color: rgba(61, 101, 187, 0.5);
+      border-bottom-color: $alt-text-color;
+      color: #fff !important;
+    }
+  }
+}
 </style>

@@ -1,5 +1,6 @@
 <template>
   <header>
+    <Navbar/>
     <div class="filter container-fluid text-center">
       <h1 class="motto clearfix">
         {{ brandMotto }}
@@ -29,12 +30,17 @@
 </template>
 
 <script>
+import Navbar from "@/components/Landing/Navbar"
+
 export default {
+    components: {
+        Navbar
+    },
+
     data () {
         return {
             brandMotto: "Sua pesquisa gerenciada do seu jeito",
             briefResume: "esse front end nao ta uma desgraceira",
-            backgroundImagePath: "",
             searchArg: ""
         }
     }
@@ -44,25 +50,45 @@ export default {
 <style lang="scss" scoped>
   @import '../styles/base.scss';
   header {
-    background: '' no-repeat center center;
+    background: url('../../assets/bg-img.jpg') no-repeat center center;
     background-size: cover;
     color: $alt-text-color;
 
     background-color: #909090;
+    
+      .filter {
+        background-size: cover;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
     .container-fluid {
       padding-bottom: 2.5em;
+      
       h1 {
         padding-top: 2em;
         padding-bottom: 1.5em;
       }
+      
       .h3 {
         padding-bottom: 1.5em;
       }
+
       .input-group {
         width: 80vw;
         margin-left: auto;
         margin-right: auto;
+
+        input {
+          background-color: rgba(255, 255, 255, 0.3);
+          color: #fff;
+          border: none;
+
+          &::placeholder {
+            color: #fff;
+          }
+        }
       }
+
     }
   }
   button {
