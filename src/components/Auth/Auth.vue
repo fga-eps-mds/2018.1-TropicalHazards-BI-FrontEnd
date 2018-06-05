@@ -1,9 +1,13 @@
 <template>
   <div class="container container-custom">
-    <login-form
-      v-if="toggle"
-      @toggleForm="toggleForm"/>
-    <register-form v-if="!toggle"/>
+    <transition name="router-anim">
+      <login-form
+        v-if="toggle"
+        @toggleForm="toggleForm"/>
+      <register-form
+        v-if="!toggle"
+        @toggleForm="toggleForm"/>
+    </transition>
   </div>
 </template>
 

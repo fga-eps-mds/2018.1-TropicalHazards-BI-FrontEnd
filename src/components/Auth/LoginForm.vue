@@ -64,4 +64,10 @@ export default {
   .btn-blue {
     color: $alt-text-color;
   }
+  .input-group {
+    span {
+      text-align: center;
+      width: 36px;
+    }
+  }
 </style>

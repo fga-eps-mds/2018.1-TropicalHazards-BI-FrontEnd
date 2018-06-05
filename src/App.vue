@@ -6,12 +6,18 @@
       <router-view />
 
     </transition>
-
+    <Footer />
   </div>
 </template>
 
 <script>
-export default {}
+import Footer from "@/components/Utils/Footer"
+
+export default {
+    components: {
+        Footer
+    }
+}
 </script>
 
 <style lang="scss">
@@ -31,7 +37,7 @@ export default {}
 
 .roter-anim-leave-active {
   animation: going 0.5s;
-
+  transition: all 0.3s ease-in-out;
 }
 
 @keyframes going {
