@@ -12,6 +12,7 @@ import ObservatorioDetail from "@/components/Observatorio/ObservatorioDetail"
 import EditProject from "@/components/Projects/EditProject"
 import createObservatorio from "@/components/Observatorio/createObservatorio"
 import editObservatorio from "@/components/Observatorio/editObservatorio"
+import Auth from "@/components/Auth/Auth"
 
 
 Vue.use(Router)
@@ -26,7 +27,7 @@ export default new Router({
         {
             path: "/auth",
             name: "Auth",
-            // component:
+            component: Auth
         },
         {
             path: "/home",
