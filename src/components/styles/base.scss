@@ -10,10 +10,15 @@ $highlight-text-color: #277aa8 !important;
 // colors for buttons and stuff
 $elephant: #15425c !important;
 $curious-blue: #339fdb !important;
-$cornflower-blue: #4352e0 !important;
+$jelly-bean: #2677a3 !important;
+$royal-blue: #4352e0 !important;
 $shamrock: #2be280 !important;
 $golden-tanoi: #ffd259 !important;
 $mandy:   #e9524d !important;
+$purple-heart: #6E43E0 !important;
+$malachite: #2BE260 !important;
+$mustard: #FFDF57 !important;
+$mojo: #c43c37 !important;
 
 // color aliases
 $blue: $curious-blue;
@@ -21,26 +26,31 @@ $highlight-color: $elephant;
 $green: $shamrock;
 $yellow: $golden-tanoi;
 $red: $mandy;
-$purple: $cornflower-blue;
+$purple: $royal-blue;
+
+$blue-hover: $jelly-bean;
+$green-hover: $malachite;
+$yellow-hover: $mustard;
+$red-hover: $mojo;
+$purple-hover: $purple-heart;
 
 // font imports
 @import url('https://fonts.googleapis.com/css?family=Quattrocento|Slabo+27px');
 @import url('https://fonts.googleapis.com/css?family=Cabin|Quattrocento+Sans|Roboto|Titillium+Web');
 $text-font-family: 'Roboto', 'Cabin', 'Titillium Web', sans-serif;
-$headings-font-family: 'Titillium Web', 'Roboto', 'Slabo', sans-serif;
+$heading-font-family: 'Titillium Web', 'Roboto', 'Slabo', sans-serif;
 
 // css configurations
 h1,h2,h3,h4,h5,h6,
 .h1,.h2,.h3,.h4,.h5,.h6 {
-    font-family: $headings-font-family;
-    // letter-spacing: .3em;
+    font-family: $heading-font-family;
+    letter-spacing: .13em;
 }
 
 p,
 a {
     font-family: $text-font-family;
-    // letter-spacing: .15em;
-    // line-height: .2em;
+    letter-spacing: .15em;
 }
 
 .dark-bg {
@@ -55,9 +65,18 @@ a {
 
 .btn-blue {
     border: none;
-    background-color: #2677a3 !important;
+    background-color: $blue;
     transition: all .3s ease-in-out;
     &:hover {
-        background-color: $blue;
+        background-color: $blue-hover;
+    }
+}
+
+.btn-green {
+    border: none;
+    background-color: $green;
+    transition: all .3s ease-in-out;
+    &:hover {
+        background-color: $green-hover;
     }
 }

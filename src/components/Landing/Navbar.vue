@@ -82,6 +82,7 @@ export default {
     height: 100%;
     padding: .3em;
     color: inherit;
+    font-family: $heading-font-family;
   }
 
   button {

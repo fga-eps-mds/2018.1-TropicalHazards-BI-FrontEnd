@@ -17,7 +17,9 @@
         </div>
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text"><b>@</b></span>
+            <span class="input-group-text">
+              <b>@</b>
+            </span>
           </div>
           <input
             v-model="user.email"

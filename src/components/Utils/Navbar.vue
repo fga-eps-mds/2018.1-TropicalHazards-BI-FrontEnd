@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-dark bg-dark ">
-    <div class="text-center navbar-brand ">
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="text-center navbar-brand">
       <router-link
         :to="{ name: 'LandingPage' }">
         Observ
@@ -21,11 +21,13 @@ export default {
 nav {
   padding-top: 0;
   padding-bottom: 0;
+
   .navbar-brand {
     width: 150px;
     margin-right: auto;
     margin-left: auto;
   }
+
   a {
     color: inherit;
     text-decoration: none;

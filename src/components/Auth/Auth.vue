@@ -1,15 +1,17 @@
 <template>
   <div>
     <Navbar/>
-    <div class="container container-custom">
-      <transition name="router-anim">
-        <login-form
-          v-if="toggle"
-          @toggleForm="toggleForm"/>
-        <register-form
-          v-if="!toggle"
-          @toggleForm="toggleForm"/>
-      </transition>
+    <div class="page-bg">
+      <div class="container">
+        <transition name="router-anim">
+          <login-form
+            v-if="toggle"
+            @toggleForm="toggleForm"/>
+          <register-form
+            v-if="!toggle"
+            @toggleForm="toggleForm"/>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +40,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .page-bg {
+    height: 90vh;
+    background-color: magenta;
+  }
 </style>
