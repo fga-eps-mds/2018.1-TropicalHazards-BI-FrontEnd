@@ -5,7 +5,6 @@
     <ul class="">
       <router-link :to="{ name: 'LandingPage'}">
         <img
-          src="../../assets/v3_round.png"
           class="responsive-img circle center" >
       </router-link>
       <li class="">

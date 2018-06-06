@@ -60,9 +60,9 @@ export default {
   @import '../styles/base.scss';
 
   form {
-    padding: 2.5em;
+    padding: 1.5em;
     padding-top: 0;
-    border: 0 solid transparent;
+    border: 3px solid #efefef;
     border-radius: 5px;
     background-color: $background-color;
 
@@ -75,5 +75,5 @@ export default {
   .btn-blue {
     color: $alt-text-color;
   }
-  
+
 </style>

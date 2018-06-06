@@ -2,7 +2,7 @@
   <footer class="container-fluid text-center dark-bg">
     <div class="row">
       <div class="col-12">
-        <h5>Observ</h5>
+        <h5>Observ - dashboards inteligentes para seus dados</h5>
         <p class="text-center">
           {{ footerText }}
         </p>
