@@ -2,15 +2,17 @@
   <div>
     <Navbar/>
     <div class="page-bg">
-      <div class="container">
-        <transition name="router-anim">
-          <login-form
-            v-if="toggle"
-            @toggleForm="toggleForm"/>
-          <register-form
-            v-if="!toggle"
-            @toggleForm="toggleForm"/>
-        </transition>
+      <div class="filter">
+        <div class="container">
+          <transition name="router-anim">
+            <login-form
+              v-if="toggle"
+              @toggleForm="toggleForm"/>
+            <register-form
+              v-if="!toggle"
+              @toggleForm="toggleForm"/>
+          </transition>
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +44,21 @@ export default {
 
 <style lang="scss" scoped>
   .page-bg {
-    height: 90vh;
-    background-color: magenta;
+    background: url('../../assets/auth-bg2.jpg') repeat center center;
+    // background: url('../../assets/auth-bg.png') repeat center center;
+    background-size: contain;
+    max-height: 85vh;
+
+    .filter {
+      background-color: rgba(255, 255, 255, .7);
+      padding-top: 4em;
+      padding-bottom: 4em;
+      height: 100%;
+
+      @media (min-width: 690px) {
+        padding-top: 6em;
+        padding-bottom: 6em;
+      }
+    }
   }
 </style>

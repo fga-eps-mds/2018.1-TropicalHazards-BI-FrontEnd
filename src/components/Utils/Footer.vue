@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <!-- Footer -->
   <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
     <!-- Footer Links -->
@@ -34,6 +35,15 @@
           </ul>
         </div>
         <!-- Grid column -->
+=======
+  <footer class="container-fluid text-center dark-bg">
+    <div class="row">
+      <div class="col-12">
+        <h5>Observ - dashboards inteligentes para seus dados</h5>
+        <p class="text-center">
+          {{ footerText }}
+        </p>
+>>>>>>> 24bd0cdbf578bd6c3ca08f951435e2411bd0e61e
       </div>
       <!-- Grid row -->
     </div>
