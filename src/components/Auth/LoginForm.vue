@@ -4,7 +4,7 @@
     <h1 class="text-center">
       Login
     </h1>
-    <div class="input-group">
+    <div class="input-group input-group-lg">
       <div class="input-group-prepend">
         <span class="fa fa-user input-group-text" />
       </div>
@@ -14,7 +14,7 @@
         class="form-control"
         placeholder="Nome de Usuário">
     </div>
-    <div class="input-group">
+    <div class="input-group input-group-lg">
       <div class="input-group-prepend">
         <span class="fa fa-lock input-group-text" />
       </div>

@@ -4,7 +4,7 @@
       action=""
       class="col-12 col-md-6 offset-md-3">
       <h1 class="text-center">Cadastre-se</h1>
-      <div class="input-group">
+      <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="fa fa-user input-group-text" />
         </div>
@@ -14,7 +14,7 @@
           class="form-control"
           placeholder="Nome de Usuário">
       </div>
-      <div class="input-group">
+      <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="input-group-text">
             <b>@</b>
@@ -26,7 +26,7 @@
           class="form-control"
           placeholder="Email">
       </div>
-      <div class="input-group">
+      <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="fa fa-lock input-group-text" />
         </div>
@@ -36,7 +36,7 @@
           class="form-control"
           placeholder="Senha">
       </div>
-      <div class="input-group">
+      <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="fa fa-lock input-group-text" />
         </div>
@@ -48,7 +48,7 @@
       <button
         class="btn btn-block btn-blue btn-lg"
         @click="registerUser()">
-        Entrar
+        Cadastrar
       </button>
       <button
         class="btn btn-block btn-lg"
