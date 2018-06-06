@@ -5,6 +5,7 @@ import Vue from 'vue'
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const UPDATE = 'UPDATE'
+const REGISTER = 'REGISTER'
 
 const state = {
   user: User.from(localStorage.token)
@@ -42,6 +43,16 @@ const actions = {
     },
   logout ({ commit }) {
     commit(LOGOUT)
+  },
+  register ({ commit }, user){
+      return new Promise((resolve, reject) => {
+          Vue.http.post("users/", user, { headers: { "content-type": "application/json" } }).then(response => {
+              resolve()
+          },
+          error => {
+              reject()
+          })
+      })
   },
   update ({ commit }) {
     commit(UPDATE)

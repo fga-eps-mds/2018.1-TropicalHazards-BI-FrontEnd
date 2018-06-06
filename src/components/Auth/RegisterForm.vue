@@ -69,6 +69,11 @@ export default {
                 password: ""
             }
         }
+    },
+    methods: {
+        registerUser(){
+            this.$store.dispatch("register", this.user)
+        }
     }
 
 }
