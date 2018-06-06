@@ -67,6 +67,8 @@ a {
     border: none;
     background-color: $blue;
     transition: all .3s ease-in-out;
+    color: $alt-text-color;
+
     &:hover {
         background-color: $blue-hover;
     }

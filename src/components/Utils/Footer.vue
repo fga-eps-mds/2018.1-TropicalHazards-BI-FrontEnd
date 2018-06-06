@@ -1,66 +1,68 @@
 <template>
-
-<!-- Footer -->
-  <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
-
-    <!-- Footer Links -->
+  <footer class="page-footer dark-bg">
     <div class="container text-center text-md-left">
-
-      <!-- Grid row -->
       <div class="row">
-
-        <!-- Grid column -->
-        <div class="col-md-4 mx-auto">
-
-          <!-- Content -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Observ</h5>
-          <p class="white">Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <div class="col-md-6 mx-auto">
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">
+            Observ
+          </h5>
+          <p class="">
+            O Observ é uma plataforma online de observatórios de dados
+            científicos com suporte à geração de mapas e gráficos. Tudo de
+            maneira colaborativa.
+          </p>
         </div>
-        <!-- Grid column -->
-        <hr class="clearfix w-100 d-md-none">
-        <!-- Grid column -->
-        <div class="col-md-2 mx-auto">
-          <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
+        <div class="col-md-4 mx-auto text-md-right">
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">
+            Links
+          </h5>
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Documentação</a>
+              <a
+                href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI">
+                Docs
+              </a>
             </li>
             <li>
-              <a href="#!">GitHub</a>
+              <a
+                href="https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI">
+                GitHub
+              </a>
             </li>
             <li>
-              <a href="#!">Inicio</a>
+              <router-link
+                :to="{ name: 'LandingPage' }">
+                Inicio
+              </router-link>
             </li>
             <li>
-              <a href="#!">Dashboard</a>
+              <router-link
+                :to="{ name: 'Dashboards' }">
+                Dashboard
+              </router-link>
             </li>
           </ul>
         </div>
-        <!-- Grid column -->
       </div>
-      <!-- Grid row -->
     </div>
-    <!-- Footer Links -->
-    <hr>
-    <!-- Call to action -->
     <ul class="list-unstyled list-inline text-center py-2">
       <li class="list-inline-item">
-        <h5 class="mb-1">Registre-se de graça</h5>
+        <h5 class="mb-1">
+          Junte-se a nós
+        </h5>
       </li>
       <li class="list-inline-item">
-        <a
-          href="#!"
-          class="btn btn-primary btn-blue">Sign up!</a>
+        <router-link
+          :to="{ name: 'Auth' }"
+          class="btn btn-blue">
+          Cadastrar
+        </router-link>
       </li>
     </ul>
-    <!-- Call to action -->
     <hr>
-    <!-- Copyright -->
-    <div class="white footer-copyright text-left py-3">Linceça MIT © 2018 Copyright
+    <div class="dark-bg text-center h6">
+      Licensa MIT | 2018 Copyright
     </div>
-    <!-- Copyright -->
   </footer>
 </template>
 
@@ -78,32 +80,27 @@ export default {
   footer {
     padding-top: 1em;
     padding-bottom: .3em;
+
     .row {
       margin: 0;
     }
+
+
+    .list-unstyled li {
+      padding-top: .3em;
+      padding-bottom: .3em;
+    }
+
     .row a {
-      padding-top: 1.3em;
-      padding-bottom: 1.3em;
       text-decoration: none;
       color: inherit;
-      &:hover {
-        background-color: #444;
-        transition: all .4s ease-in-out;
-      }
+
     }
 
     #license {
       font-size: .7em;
       margin-top: 4em;
     }
-.list-unstyled{
-  color: white;
-}
-.font-weight-bold{
-  color: white;
-}
-.white{
-  color:white;
-}
+
   }
 </style>
