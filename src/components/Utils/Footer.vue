@@ -1,13 +1,17 @@
 <template>
-<<<<<<< HEAD
-  <!-- Footer -->
+
+<!-- Footer -->
   <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
+
     <!-- Footer Links -->
     <div class="container text-center text-md-left">
+
       <!-- Grid row -->
       <div class="row">
+
         <!-- Grid column -->
         <div class="col-md-4 mx-auto">
+
           <!-- Content -->
           <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Observ</h5>
           <p class="white">Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -15,7 +19,7 @@
         <!-- Grid column -->
         <hr class="clearfix w-100 d-md-none">
         <!-- Grid column -->
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-2 mx-auto">
           <!-- Links -->
           <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
@@ -35,22 +39,13 @@
           </ul>
         </div>
         <!-- Grid column -->
-=======
-  <footer class="container-fluid text-center dark-bg">
-    <div class="row">
-      <div class="col-12">
-        <h5>Observ - dashboards inteligentes para seus dados</h5>
-        <p class="text-center">
-          {{ footerText }}
-        </p>
->>>>>>> 24bd0cdbf578bd6c3ca08f951435e2411bd0e61e
       </div>
       <!-- Grid row -->
     </div>
     <!-- Footer Links -->
     <hr>
     <!-- Call to action -->
-    <ul class="list-unstyled list-inline text-center py-3">
+    <ul class="list-unstyled list-inline text-center py-2">
       <li class="list-inline-item">
         <h5 class="mb-1">Registre-se de graça</h5>
       </li>
