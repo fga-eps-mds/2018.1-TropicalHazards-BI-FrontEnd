@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { required, minLength, maxLength } from "vuelidate/lib/validators"
+
 export default {
     data(){
         return{
@@ -50,6 +52,23 @@ export default {
                 username: "",
                 password: ""
             }
+        }
+    },
+    validations: {
+        user: {
+            username: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(50)
+            },
+            password: {
+                required
+            }
+        }
+    },
+    methods: {
+        logUser(){
+            this.$store.dispatch("login", this.user)
         }
     }
 
