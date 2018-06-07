@@ -10,9 +10,11 @@
         </div>
         <input
           v-model="user.username"
-          type="text"
+          :class="{error: $v.user.username.$error, valid: $v.user.username.$dirty && !$v.user.username.$invalid}"
           class="form-control"
-          placeholder="Nome de Usuário">
+          type="text"
+          placeholder="Nome de Usuário"
+          @input="$v.user.username.$touch">
       </div>
       <div class="input-group input-group-lg">
         <div class="input-group-prepend">
@@ -51,7 +53,7 @@
         Cadastrar
       </button>
       <button
-        class="btn btn-block btn-lg"
+        class="btn btn-block btn-lg btn-grey"
         @click="$emit('toggleForm')">
         Já tenho conta
       </button>
@@ -60,6 +62,7 @@
 </template>
 
 <script>
+import { required, minLength, maxLength, email} from "vuelidate/lib/validators"
 export default {
     data(){
         return{
@@ -68,6 +71,27 @@ export default {
                 email: "",
                 password: ""
             }
+        }
+
+    },
+    validations: {
+        user: {
+            username: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(50)
+            },
+            password: {
+                required
+            },
+            email: {
+                email
+            }
+        }
+    },
+    methods: {
+        registerUser(){
+            this.$store.dispatch("register", this.user)
         }
     }
 
@@ -83,15 +107,18 @@ export default {
     border: 3px solid #efefef;
     border-radius: 5px;
     background-color: $background-color;
-
-    .input-group, .btn {
-      margin-top: 1.15em;
-      margin-bottom: 1.15em;
-    }
   }
+
+  .input-group,
+  .btn {
+        margin-top: 1.15em;
+        margin-bottom: 1.15em;
+      }
 
   .btn-blue {
-    color: $alt-text-color;
-  }
+      color: $alt-text-color;
+    }
+
+
 
 </style>

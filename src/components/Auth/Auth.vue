@@ -47,7 +47,6 @@ export default {
     background: url('../../assets/auth-bg2.jpg') repeat center center;
     // background: url('../../assets/auth-bg.png') repeat center center;
     background-size: contain;
-    max-height: 85vh;
 
     .filter {
       background-color: rgba(255, 255, 255, .7);

@@ -30,7 +30,7 @@
       Entrar
     </button>
     <button
-      class="btn btn-block btn-lg"
+      class="btn btn-block btn-lg btn-grey"
       @click="$emit('toggleForm')">
       Não tenho conta
     </button>
@@ -43,12 +43,35 @@
 </template>
 
 <script>
+import { required, minLength, maxLength } from "vuelidate/lib/validators"
+
 export default {
     data(){
         return{
             user: {
                 username: "",
                 password: ""
+            }
+        }
+    },
+    validations: {
+        user: {
+            username: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(50)
+            },
+            password: {
+                required
+            }
+        }
+    },
+    methods: {
+        logUser(){
+            this.$v.user.username.$touch()
+            this.$v.user.password.$touch()
+            if(!this.$v.$invalid){
+                this.$store.dispatch("login", this.user)
             }
         }
     }
@@ -76,4 +99,7 @@ export default {
     color: $alt-text-color;
   }
 
+  small{
+    color: $red;
+  }
 </style>
