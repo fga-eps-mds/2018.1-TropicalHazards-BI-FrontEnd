@@ -119,6 +119,8 @@ export default {
     data(){
 
         return {
+            importData: {},
+            headers: [],
             project: {
                 user: "",
                 name: "",

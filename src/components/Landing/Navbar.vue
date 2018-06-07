@@ -69,57 +69,57 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/base.scss";
+  @import "../styles/base.scss";
 
-.navbar {
-  width: 100%;
-  padding: 0 2em;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: $alt-text-color;
-  border-bottom: #f0f0f0 solid .5px;
-
-  .navbar-brand {
-    height: 100%;
-    padding: .3em;
-    color: inherit;
-    font-family: $heading-font-family;
-  }
-
-  button {
+  .navbar {
+    width: 100%;
+    padding: 0 2em;
+    background-color: rgba(0, 0, 0, 0.5);
     color: $alt-text-color;
-  }
+    border-bottom: #f0f0f0 solid .5px;
 
-  #collapseable {
-    @media (max-width: 764px) {
-      width: 100vw;
-      font-size: 0.9em;
+    .navbar-brand {
+      height: 100%;
+      padding: .3em;
+      color: inherit;
+      font-family: $heading-font-family;
+    }
 
-      a {
-        margin-top: 0.4em;
-        margin-bottom: 0.4em;
-        padding-top: 1.1em;
-        padding-bottom: 1.1em;
+    button {
+      color: $alt-text-color;
+    }
+
+    #collapseable {
+      @media (max-width: 764px) {
+        width: 100vw;
+        font-size: 0.9em;
+
+        a {
+          margin-top: 0.4em;
+          margin-bottom: 0.4em;
+          padding-top: 1.1em;
+          padding-bottom: 1.1em;
+        }
       }
     }
   }
-}
 
-a {
-  padding: 1em 0.3em;
-  margin-left: 0.2em;
-  margin-right: 0.2em;
+  a {
+    padding: 1em 0.3em;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
 
-  &.nav-link {
-    font-size: 0.8em;
-    transition: all 0.5s ease-in-out;
-    color: $alt-text-color;
-    border-bottom: 2px solid transparent;
+    &.nav-link {
+      font-size: 0.8em;
+      transition: all 0.5s ease-in-out;
+      color: $alt-text-color;
+      border-bottom: 2px solid transparent;
 
-    &:hover {
-      background-color: rgba(61, 101, 187, 0.5);
-      border-bottom-color: $alt-text-color;
-      color: #fff !important;
+      &:hover {
+        background-color: rgba(61, 101, 187, 0.5);
+        border-bottom-color: $alt-text-color;
+        color: #fff !important;
+      }
     }
   }
-}
 </style>

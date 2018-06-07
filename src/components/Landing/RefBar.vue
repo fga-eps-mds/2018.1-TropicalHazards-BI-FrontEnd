@@ -3,10 +3,10 @@
     <div class="bg-img">
       <div class="row">
         <div class="col-md-4 cell h3">
-        <span style="bolder">
-          {{ nmbrDashes }}
-        </span>
-        Dashboards
+          <span style="bolder">
+            {{ nmbrDashes }}
+          </span>
+          Dashboards
         </div>
         <div class="col-md-4 cell h3">
           <span style="bolder">

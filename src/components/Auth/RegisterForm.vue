@@ -4,7 +4,6 @@
       action=""
       class="col-12 col-md-6 offset-md-3">
       <h1 class="text-center">Cadastre-se</h1>
-      <!-- <small v-if="!$v.user.username.required">Campo obrigatório</small> -->
       <small v-if="!$v.user.username.minLength">
         Usuário pequeno demais
       </small>
@@ -17,8 +16,8 @@
         </div>
         <input
           v-model="user.username"
-          v-on:input="$v.user.username.$touch"
-          v-bind:class="{error: $v.user.username.$error, valid: $v.user.username.$dirty && !$v.user.username.$invalid}"
+          :class="{error: $v.user.username.$error, valid: $v.user.username.$dirty && !$v.user.username.$invalid}"
+          @input="$v.user.username.$touch"
           type="text"
           class="form-control"
           placeholder="Nome de Usuário">
@@ -60,7 +59,7 @@
       <button
         class="btn btn-block btn-blue btn-lg"
         @click="registerUser()">
-        Entrar
+        Cadastrar
       </button>
       <button
         class="btn btn-block btn-lg btn-grey"
