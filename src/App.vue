@@ -9,9 +9,10 @@
 
 <script>
 import Footer from "@/components/Utils/Footer"
+
 export default {
     components: {
-        Footer
+        Footer,
     }
 }
 </script>

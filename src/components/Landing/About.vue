@@ -1,0 +1,101 @@
+<template>
+  <section>
+    <div class="container text-center mx-auto">
+      <h1 class="text-center">Sobre</h1>
+      <hr style="width: 30%; padding-bottom: 2em">
+      <p>
+        O <b>OBSERV</b> é um observátorio de dados com interpretação de dados, geração de indicadores e gráficos. Tudo isso para apoiara visualização dos indicadores dos dados da sua pesquisa.
+      </p>
+
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title ">
+                <span class="fa fa-pie-chart"/>
+              </div>
+              <div class="card-subtitle  h2">
+                <h2>Dashboards</h2>
+              </div>
+              <div class="card-text align-middle">
+                <hr>
+                <p>
+                  Visualize os resultados de pesquisas dos diferentes projetos cadastrados. Conheça mais sobre a estatística por regiões, idade e outras informações dos projetos de pesquisa do NMT (Núcleo de Medicina Tropical).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title ">
+                <span class="fa fa-folder-o"/>
+              </div>
+              <div class="card-subtitle  h2">
+                <h2>Projeto</h2>
+              </div>
+              <div class="card-text align-middle">
+                <hr>
+                <p>
+                  Crie e compartilhe os dados da sua pesquisa. Escolha os dados que deseja disponibilizar, interprete as informações, gere indicadores e gráficos, crie e gerencie os observatórios.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title ">
+                <span class="fa fa-users"/>
+              </div>
+              <div class="card-subtitle  h2">
+                <h2>Colaboradores</h2>
+              </div>
+              <div class="card-text align-middle">
+                <hr>
+                <p>
+                  Interaja com os dados das pesquisas, gere seus próprios indicadores e contribua com o conhecimento do projeto.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+
+</script>
+
+<style lang="scss" scoped>
+  @import '../styles/base.scss';
+
+  section {
+    padding-top: 3em;
+    padding-bottom: 5em;
+    font-size: 1.15em;
+
+    .row {
+      padding-top: 3em;
+    }
+
+    .card {
+      min-height: 25.3em;
+      max-height: 25.3em;
+
+      .card-title {
+        font-size: 3em;
+        min-height: 1em;
+        color: $highlight-text-color;
+      }
+
+      .card-subtitle {
+        color: $blue;
+      }
+    }
+  }
+</style>
