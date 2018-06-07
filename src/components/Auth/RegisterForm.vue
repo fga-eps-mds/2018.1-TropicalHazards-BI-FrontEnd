@@ -17,10 +17,10 @@
         <input
           v-model="user.username"
           :class="{error: $v.user.username.$error, valid: $v.user.username.$dirty && !$v.user.username.$invalid}"
-          @input="$v.user.username.$touch"
-          type="text"
           class="form-control"
-          placeholder="Nome de Usuário">
+          type="text"
+          placeholder="Nome de Usuário"
+          @input="$v.user.username.$touch">
       </div>
       <small v-if="!$v.user.email.email">
         email inválido
@@ -84,18 +84,18 @@ export default {
 
     },
     validations: {
-      user: {
-          username: {
-            required,
-            minLength: minLength(3),
-            maxLength: maxLength(50)
-          },
-          password: {
-            required
-          },
-          email: {
-            email
-          }
+        user: {
+            username: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(50)
+            },
+            password: {
+                required
+            },
+            email: {
+                email
+            }
         }
     },
     methods: {
