@@ -4,16 +4,19 @@
     <h1 class="text-center">
       Login
     </h1>
+    <small v-if="!$v.user.username.required">Digite um usuário</small>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="fa fa-user input-group-text" />
       </div>
+    
       <input
         v-model="user.username"
         type="text"
         class="form-control"
         placeholder="Nome de Usuário">
     </div>
+    <small v-if="!$v.user.password.required">Digite uma senha</small>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="fa fa-lock input-group-text" />
@@ -95,4 +98,7 @@ export default {
     color: $alt-text-color;
   }
 
+small{
+  color: red;
+}
 </style>
