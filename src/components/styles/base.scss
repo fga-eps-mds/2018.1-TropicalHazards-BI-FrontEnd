@@ -19,6 +19,8 @@ $purple-heart: #6E43E0 !important;
 $malachite: #2BE260 !important;
 $mustard: #FFDF57 !important;
 $mojo: #c43c37 !important;
+$nobel: #b5b5b5 !important;
+$silver-chalice: #aeaeae !important;
 
 // color aliases
 $blue: $curious-blue;
@@ -27,7 +29,9 @@ $green: $shamrock;
 $yellow: $golden-tanoi;
 $red: $mandy;
 $purple: $royal-blue;
+$grey: $nobel;
 
+$grey-hover: $silver-chalice;
 $blue-hover: $jelly-bean;
 $green-hover: $malachite;
 $yellow-hover: $mustard;
@@ -63,6 +67,8 @@ a {
     color: $text-color;
 }
 
+// buttons
+
 .btn-blue {
     border: none;
     background-color: $blue;
@@ -78,7 +84,20 @@ a {
     border: none;
     background-color: $green;
     transition: all .3s ease-in-out;
+    color: $alt-text-color;
+
     &:hover {
         background-color: $green-hover;
+    }
+}
+
+.btn-grey {
+    border: none;
+    background-color: $grey;
+    transition: all .3s ease-in-out;
+    color: $alt-text-color;
+
+    &:hover {
+        background-color: $grey-hover;
     }
 }
