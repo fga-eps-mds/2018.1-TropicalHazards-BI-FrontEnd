@@ -4,6 +4,11 @@
     <h1 class="text-center">
       Login
     </h1>
+    <small
+      v-if="$v.user.username.$invalid && $v.$dirty"
+      class="error">
+      Digite um usuário
+    </small>
     <div class="input-group input-group-lg">
       <div class="input-group-prepend">
         <span class="fa fa-user input-group-text" />
@@ -14,6 +19,9 @@
         class="form-control"
         placeholder="Nome de Usuário">
     </div>
+    <small v-if="$v.user.password.$invalid && $v.$dirty">
+      Digite uma senha
+    </small>
     <div class="input-group input-group-lg">
       <div class="input-group-prepend">
         <span class="fa fa-lock input-group-text" />
@@ -68,8 +76,7 @@ export default {
     },
     methods: {
         logUser(){
-            this.$v.user.username.$touch()
-            this.$v.user.password.$touch()
+            this.$v.$touch()
             if(!this.$v.$invalid){
                 this.$store.dispatch("login", this.user)
             }
