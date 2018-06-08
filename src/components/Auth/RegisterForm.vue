@@ -4,23 +4,19 @@
       action=""
       class="col-12 col-md-6 offset-md-3">
       <h1 class="text-center">Cadastre-se</h1>
-      <!-- <small v-if="!$v.user.username.required">Campo obrigatório</small> -->
-      <small v-if="!$v.user.username.minLength">Usuário pequeno demais</small>
-      <small v-if="!$v.user.username.maxLength">Usuário grande demais</small>
-      <div class="input-group">
+      <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="fa fa-user input-group-text" />
         </div>
         <input
           v-model="user.username"
-          v-on:input="$v.user.username.$touch"
-          v-bind:class="{error: $v.user.username.$error, valid: $v.user.username.$dirty && !$v.user.username.$invalid}"
-          type="text"
+          :class="{error: $v.user.username.$error, valid: $v.user.username.$dirty && !$v.user.username.$invalid}"
           class="form-control"
-          placeholder="Nome de Usuário">
+          type="text"
+          placeholder="Nome de Usuário"
+          @input="$v.user.username.$touch">
       </div>
-      <small v-if="!$v.user.email.email">email inválido</small>
-      <div class="input-group">
+      <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="input-group-text">
             <b>@</b>
@@ -32,8 +28,7 @@
           class="form-control"
           placeholder="Email">
       </div>
-      <!-- <small v-if="!$v.user.username.password">Digite uma senha</small> -->
-      <div class="input-group">
+      <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="fa fa-lock input-group-text" />
         </div>
@@ -43,7 +38,7 @@
           class="form-control"
           placeholder="Senha">
       </div>
-      <div class="input-group">
+      <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="fa fa-lock input-group-text" />
         </div>
@@ -55,10 +50,10 @@
       <button
         class="btn btn-block btn-blue btn-lg"
         @click="registerUser()">
-        Entrar
+        Cadastrar
       </button>
       <button
-        class="btn btn-block btn-lg"
+        class="btn btn-block btn-lg btn-grey"
         @click="$emit('toggleForm')">
         Já tenho conta
       </button>
@@ -80,18 +75,18 @@ export default {
 
     },
     validations: {
-      user: {
-          username: {
-            required,
-            minLength: minLength(3),
-            maxLength: maxLength(50)
-          },
-          password: {
-            required
-          },
-          email: {
-            email
-          }      
+        user: {
+            username: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(50)
+            },
+            password: {
+                required
+            },
+            email: {
+                email
+            }
         }
     },
     methods: {
@@ -112,15 +107,18 @@ export default {
     border: 3px solid #efefef;
     border-radius: 5px;
     background-color: $background-color;
-}
+  }
 
-.input-group, .btn {
-      margin-top: 1.15em;
-      margin-bottom: 1.15em;
+  .input-group,
+  .btn {
+        margin-top: 1.15em;
+        margin-bottom: 1.15em;
+      }
+
+  .btn-blue {
+      color: $alt-text-color;
     }
 
-.btn-blue {
-    color: $alt-text-color;
-  }
+
 
 </style>

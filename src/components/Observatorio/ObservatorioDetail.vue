@@ -33,6 +33,12 @@
                 @click="deleteDashboard()">Deletar Dashboard
                 <span class="fa fa-trash"/>
               </button>
+              <button
+                class = "btn-large blue"
+                @click="$modal.show('ask-question', { dashboard: dashboard.id })">Gerar indicador
+                <span class="fa fa-trash"/>
+              </button>
+              <modal-question/>
             </div>
             <div class="col s12 m4">
               <div class="card">
@@ -50,60 +56,11 @@
           <div class="row">
             <div class="col s12">
               <!-- vai ser iframe então lembrar de colocar tag de iframe com a classe de reixar IFRAME RESPONSIVO -->
-              <img
-                src="https://s3-us-west-2.amazonaws.com/i.cdpn.io/250639.eZENxO.12a72d88-e8ed-4403-b737-dfcbde7f008d.png"
-                class="responsive-img">
+              <!-- <iframe
+                src="{{ iframeUrl}}" /> -->
             </div>
           </div>
           <div class="row white darken-1">
-            <div class="col s12">
-              <table class="table-responsive stripped">
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Frequência (%)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><b>A</b></td>
-                    <td>8</td>
-                  </tr>
-                  <tr>
-                    <td><b>B</b></td>
-                    <td>1.5</td>
-                  </tr>
-                  <tr>
-                    <td><b>C</b></td>
-                    <td>2.75</td>
-                  </tr>
-                  <tr>
-                    <td><b>D</b></td>
-                    <td>4.1</td>
-                  </tr>
-                  <tr>
-                    <td><b>E</b></td>
-                    <td>13</td>
-                  </tr>
-                  <tr>
-                    <td><b>F</b></td>
-                    <td>2.06</td>
-                  </tr>
-                  <tr>
-                    <td><b>G</b></td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td><b>H</b></td>
-                    <td>6</td>
-                  </tr>
-                  <tr>
-                    <td><b>I</b></td>
-                    <td>7</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
             <div class="col s12">
               <a
                 href="#"
@@ -122,25 +79,27 @@
 
 import {mapGetters} from "vuex"
 import SideBar from "@/components/Utils/SideBar"
+import modalQuestion from "@/components/Questions/modalQuestion"
 
 export default {
 
     components: {
         "sidebar": SideBar,
+        "modal-question": modalQuestion
     },
     data(){
 
         return {
             dashboard: {
                 project: "",
-                name: ""
+                name: "",
+                id: ""
             },
             user: {
                 username: "",
                 password: "",
                 email: ""
-            },
-            isModalVisible: false,
+            }
         }
     },
     computed: {
@@ -153,7 +112,6 @@ export default {
         this.modalScript()
     },
     methods: {
-
         deleteDashboard (){
             if (window.confirm("Deseja realmente deletar o dashboard ?")){
                 this.$http.delete("dashboards/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
@@ -167,7 +125,6 @@ export default {
                 })
             }
         },
-
         getObservatorioDetail(){
             this.$http.get("dashboards/" + this.$route.params.id + "/",  { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
                 this.dashboard = result.data
@@ -182,22 +139,6 @@ export default {
             this.user.username = this.currentUser.name
             this.user.email = this.currentUser.email
         },
-
-        showModal() {
-            this.isModalVisible = true
-        },
-        closeModal() {
-            this.isModalVisible = false
-        },
-        modalScript() {
-
-            $(document).ready(function(){
-                $(".modal").modal()
-            })
-            $(document).ready(function(){
-                $("select").formSelect()
-            })
-        }
     },
 }
 </script>

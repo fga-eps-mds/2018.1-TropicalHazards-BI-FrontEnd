@@ -4,20 +4,17 @@
     <h1 class="text-center">
       Login
     </h1>
-    <small v-if="!$v.user.username.required">Digite um usuário</small>
-    <div class="input-group">
+    <div class="input-group input-group-lg">
       <div class="input-group-prepend">
         <span class="fa fa-user input-group-text" />
       </div>
-    
       <input
         v-model="user.username"
         type="text"
         class="form-control"
         placeholder="Nome de Usuário">
     </div>
-    <small v-if="!$v.user.password.required">Digite uma senha</small>
-    <div class="input-group">
+    <div class="input-group input-group-lg">
       <div class="input-group-prepend">
         <span class="fa fa-lock input-group-text" />
       </div>
@@ -33,7 +30,7 @@
       Entrar
     </button>
     <button
-      class="btn btn-block btn-lg"
+      class="btn btn-block btn-lg btn-grey"
       @click="$emit('toggleForm')">
       Não tenho conta
     </button>
@@ -71,7 +68,11 @@ export default {
     },
     methods: {
         logUser(){
-            this.$store.dispatch("login", this.user)
+            this.$v.user.username.$touch()
+            this.$v.user.password.$touch()
+            if(!this.$v.$invalid){
+                this.$store.dispatch("login", this.user)
+            }
         }
     }
 
@@ -98,7 +99,7 @@ export default {
     color: $alt-text-color;
   }
 
-small{
-  color: red;
-}
+  small{
+    color: $red;
+  }
 </style>

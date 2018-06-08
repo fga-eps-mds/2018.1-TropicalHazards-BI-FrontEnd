@@ -30,6 +30,7 @@
 </template>
 
 <script>
+// quinta dia 21 11hrs na sala meeting carla pre r2
 import Navbar from "@/components/Landing/Navbar"
 
 export default {
@@ -53,28 +54,32 @@ export default {
     background: url('../../assets/bg-img.jpg') no-repeat center center;
     background-size: cover;
     color: $alt-text-color;
-
     background-color: #909090;
-    
-      .filter {
-        background-size: cover;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
+
+    .filter {
+      background-size: cover;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
 
     .container-fluid {
       padding-bottom: 2.5em;
-      
+      padding-top: .5em;
+
+      @media (min-width: 691px) {
+        padding: 8em 1.5em;
+      }
+
       h1 {
         padding-top: 2em;
         padding-bottom: 1.5em;
       }
-      
+
       .h3 {
         padding-bottom: 1.5em;
       }
 
       .input-group {
-        width: 80vw;
+        width: 75vw;
         margin-left: auto;
         margin-right: auto;
 
