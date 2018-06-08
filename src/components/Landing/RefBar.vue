@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-4 cell h3">
           <span style="bolder">
-            {{ nmbrProjects }}
+            {{ nmbrProjects() }}
           </span>
           Projetos
         </div>
@@ -35,17 +35,27 @@ export default {
         }
     },
 
+    beforeMount () {
+        this.getNmbrOfDashes()
+        this.getNmbrOfMembers()
+        this.getNmbrOfProjects()
+    },
+
     methods: {
         getNmbrOfDashes () {
-
+            // this.nmbrDashes = this.$store.state.dashboards.length()
         },
 
         getNmbrOfMembers () {
-
+            // this.nmbrMembers = this.$store.state.members.length()
         },
 
         getNmbrOfProjects () {
+            return this.$store.state.getAllProjects.length()
+        },
 
+        getProjects () {
+            this.$store.dispatch("loadProjects")
         }
     }
 }
@@ -75,4 +85,3 @@ export default {
     }
   }
 </style>
-

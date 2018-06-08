@@ -20,7 +20,7 @@
               <div class="card-text align-middle">
                 <hr>
                 <p>
-                  Visualize os resultados de pesquisas dos diferentes projetos cadastrados. Conheça mais sobre a estatística por regiões, idade e outras informações dos projetos de pesquisa do NMT (Núcleo de Medicina Tropical).
+                  Visualize os resultados de pesquisas dos diferentes projetos cadastrados.
                 </p>
               </div>
             </div>
@@ -81,11 +81,14 @@
 
     .row {
       padding-top: 3em;
+      margin-left: .01em;
     }
 
     .card {
-      min-height: 25.3em;
-      max-height: 25.3em;
+      min-height: 26em;
+      max-height: 26em;
+      margin-top: 1em;
+      margin-bottom: 1em;
 
       .card-title {
         font-size: 3em;
