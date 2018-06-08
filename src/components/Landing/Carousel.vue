@@ -19,13 +19,10 @@
         text="Nulla vitae elit libero, a pharetra augue mollis interdum."
         img-src="https://picsum.photos/1024/480/?image=52"
         img-width="50"
-        img-height="50"
-      />
+        img-height="50"/>
 
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-        <h1>Hello world!</h1>
-      </b-carousel-slide>
-
+      <b-carousel-slide
+        img-src="https://picsum.photos/1024/480/?image=54"/>
     </b-carousel>
   </div>
 </template>

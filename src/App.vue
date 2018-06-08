@@ -3,7 +3,7 @@
     <transition name="router-anim">
       <router-view />
     </transition>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 

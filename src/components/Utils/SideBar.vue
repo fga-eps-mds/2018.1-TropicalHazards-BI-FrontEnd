@@ -1,91 +1,79 @@
 <template>
-  <div class="wrapper">
-    <nav id="sidebar">
-      <div class="sidebar-header">
+  <nav class="dark-bg side-bar-expanded">
+    <div class="nav-header">
+      <h6 class="text-left">
         <span class="fa fa-user"/>
-        {{ username }}
-        <span class="fa fa-bolt"/>
-        <form action="">
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Busca">
-            <div class="input-group-append">
-              <button class="btn">
-                <span class="fa fa-search"/>
-              </button>
-            </div>
-          </div>
-        </form>
+        {{ (user.username == '') ? 'username' : user.username }}
+      </h6>
+      <h6 class="text-muted">
+        <span class="mr-auto fa fa-gear"/>
+        <small>
+          Configurações
+        </small>
+      </h6>
+      <div class="input-group input-group-sm">
+        <input
+          v-model="search"
+          class="form-control custom-field"
+          type="text"
+          placeholder="Pesquisar">
+        <div class="input-group-append">
+          <button class="btn btn-outline btn-sm btn-grey">
+            <span class="fa fa-search"/>
+          </button>
+        </div>
       </div>
-      <ul class="list-unstyled sidebar-links list-group text-capitalize">
-        <li>
-          <router-link
-            :to="{ name: '' }"
-            class="list-group-item">
-            Projetos <span class="fa fa-plus"/>
-          </router-link>
-          <ul class="list-group">
-            <li>
-              <router-link
-                :to="{ name: '' }"
-                class="list-group-item">
-                ver projetos
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                :to="{ name: '' }"
-                class="list-group-item">
-                meus projetos
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                :to="{ name: '' }"
-                class="list-group-item">
-                criar projeto
-              </router-link>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <router-link
-            :to="{ name: '' }"
-            class="list-group-item">
-            dashboards <span class="fa fa-plus"/>
-          </router-link>
-          <ul class="list-group">
-            <li>
-              <router-link
-                :to="{ name: '' }"
-                class="list-group-item">
-                ver dashboards
-              </router-link>
-            </li>
-            <li>
-              <router-link
-                :to="{ name: '' }"
-                class="list-group-item">
-                minhas dashboards
-              </router-link>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="http://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI">
-            <span class="fa fa-github"/> github
-          </a>
-        </li>
-        <li>
-          <a href="http://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI">
-            <span class="fa fa-repository"/> docs
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+    </div>
+    <hr>
+    <ul class="list-group text-capitalize">
+      <router-link
+        :to="{ name: 'home' }"
+        class="list-group-item">
+        <span class="fa fa-home"/> home
+      </router-link>
+      <li class="list-group-item disabled">
+        <span class="fa fa-pie-chart"/> Dashboards
+      </li>
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        Meus Dashboards
+      </router-link>
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        Procurar Dashboards
+      </router-link>
+      <div class="list-group-item disabled">
+        <span class="fa fa-folder"/> Projetos
+      </div>
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        Meus Projetos
+      </router-link>
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        Novo Projeto
+      </router-link>
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        Procurar Projetos
+      </router-link>
+      <a
+        href="https://github.com/fga-gpp-mds/TropicalHazards-BI"
+        class="list-group-item">
+        <span class="fa fa-github"/> github
+      </a>
+      <a
+        href="https://fga-gpp-mds.github.io/TropicalHazards-BI"
+        class="list-group-item">
+        <span class="fa fa-book"/> docs
+      </a>
+    </ul>
+  </nav>
 </template>
 
 
@@ -97,11 +85,22 @@ export default {
 
     },
     data() {
-        return {}
+        return {
+            search: "",
+            user: {
+                username: "",
+                id: "",
+                email: ""
+            }
+        }
     },
 
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
+    },
+
+    beforeMount () {
+        // this.$store.dispatch()
     },
 
     methods: {
@@ -114,8 +113,7 @@ export default {
             error => {
                 this.LoginFail()
                 error.log("erro")
-            }
-            )
+            })
         },
 
         LogoutSucess() {
@@ -135,15 +133,58 @@ export default {
 <style lang="scss" scoped>
   @import '../styles/base.scss';
 
-  .wrapper {
-    display: flex;
-  }
+  nav {
+    display: block;
+    min-height: 100vh;
+    max-width: 200px;
+    overflow: auto;
+    font-family: $text-font-family;
+    letter-spacing: .1em !important;
+    left: 0 !important;
+    font-size: .8em;
 
-  #sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    height: 10vw;
-    background-color: $alt-background-color;
-    color: $alt-text-color;
+    hr {
+      margin: 0;
+      border-color: #555;
+    }
+
+    input {
+      background-color: #444;
+      border: none;
+      color: $alt-text-color;
+
+      &:focus, &:active {
+        background-color: #555!important;
+        outline: none;
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .input-group {
+      margin-top: 1em;
+    }
+
+    .list-group-item {
+      color: inherit;
+      background-color: inherit;
+      border: none;
+    }
+
+    .text-capitalize > a.list-group-item {
+      border-left: 3px solid transparent;
+      transition: all .3s ease-in-out;
+
+      &:hover {
+        border-color: $highlight-text-color;
+        transition: all .3s ease-in-out;
+      }
+    }
+
+    .nav-header {
+      padding: 2em .6em;
+    }
   }
 </style>
