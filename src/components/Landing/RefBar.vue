@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-4 cell h3">
           <span style="bolder">
-            {{ nmbrMembers }}
+            {{ usersLength }}
           </span>
           Usuários
         </div>
@@ -31,38 +31,32 @@ import { mapGetters } from "vuex"
 export default {
     data () {
         return {
-            nmbrDashes: 0,
-            nmbrMembers: 0,
-            nmbrProjects: 0
+
         }
     },
     computed: {
         ...mapGetters({
             projectsLength: "getProjectsLength",
-            dashboardsLength: "getDashboardsLength"
+            dashboardsLength: "getDashboardsLength",
+            usersLength: "getUsersLength"
         }),
 
     },
     beforeMount () {
         this.loadProjects()
         this.loadDashboards()
-        // this.getNmbrOfDashes()
-        // this.getNmbrOfMembers()
-        // this.getNmbrOfProjects()
+        this.loadUsers()
     },
     methods: {
-        // getNmbrOfDashes () {
-        //     // this.nmbrDashes = this.$store.state.dashboards.length()
-        // },
 
-        // getNmbrOfMembers () {
-        //     // this.nmbrMembers = this.$store.state.members.length()
-        // },
         loadProjects () {
             this.$store.dispatch("loadProjects")
         },
         loadDashboards () {
             this.$store.dispatch("loadDashboards")
+        },
+        loadUsers () {
+            this.$store.dispatch("loadUsers")
         },
     }
 }
