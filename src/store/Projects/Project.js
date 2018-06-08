@@ -10,6 +10,9 @@ const state = {
 const getters = {
     getProjects: state =>{
         return state.projects
+    },
+    getProjectsLength: state =>{
+        return state.projects.length
     }
 }
 

@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-4 cell h3">
           <span style="bolder">
-            {{ nmbrProjects() }}
+            {{ projectsLength }}
           </span>
           Projetos
         </div>
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
     data () {
         return {
@@ -34,29 +36,29 @@ export default {
             nmbrProjects: 0
         }
     },
+    computed: {
+        ...mapGetters({
+            projectsLength: "getProjectsLength"
+        }),
 
-    beforeMount () {
-        this.getNmbrOfDashes()
-        this.getNmbrOfMembers()
-        this.getNmbrOfProjects()
     },
-
+    beforeMount () {
+        this.loadProjects()
+        // this.getNmbrOfDashes()
+        // this.getNmbrOfMembers()
+        // this.getNmbrOfProjects()
+    },
     methods: {
-        getNmbrOfDashes () {
-            // this.nmbrDashes = this.$store.state.dashboards.length()
-        },
+        // getNmbrOfDashes () {
+        //     // this.nmbrDashes = this.$store.state.dashboards.length()
+        // },
 
-        getNmbrOfMembers () {
-            // this.nmbrMembers = this.$store.state.members.length()
-        },
-
-        getNmbrOfProjects () {
-            return this.$store.state.getAllProjects.length()
-        },
-
-        getProjects () {
+        // getNmbrOfMembers () {
+        //     // this.nmbrMembers = this.$store.state.members.length()
+        // },
+        loadProjects () {
             this.$store.dispatch("loadProjects")
-        }
+        },
     }
 }
 </script>
