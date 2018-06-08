@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-4 cell h3">
           <span style="bolder">
-            {{ nmbrDashes }}
+            {{ dashboardsLength }}
           </span>
           Dashboards
         </div>
@@ -38,12 +38,14 @@ export default {
     },
     computed: {
         ...mapGetters({
-            projectsLength: "getProjectsLength"
+            projectsLength: "getProjectsLength",
+            dashboardsLength: "getDashboardsLength"
         }),
 
     },
     beforeMount () {
         this.loadProjects()
+        this.loadDashboards()
         // this.getNmbrOfDashes()
         // this.getNmbrOfMembers()
         // this.getNmbrOfProjects()
@@ -58,6 +60,9 @@ export default {
         // },
         loadProjects () {
             this.$store.dispatch("loadProjects")
+        },
+        loadDashboards () {
+            this.$store.dispatch("loadDashboards")
         },
     }
 }
