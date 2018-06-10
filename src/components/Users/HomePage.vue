@@ -1,11 +1,12 @@
 <template>
   <div class="wrapper toggled">
     <sidebar/>
+    <p> {{ user.username }}</p>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex"
 import SideBar from "@/components/Utils/SideBar"
 
 export default {
@@ -30,12 +31,16 @@ export default {
     },
 
     computed: {
-        ...mapGetters({ currentUser: "currentUser" })
+        ...mapGetters({
+            currentUser: "currentUser",
+            getProjects: "getProjects",
+
+        })
     },
     beforeMount () {
         this.loadUserInfo()
-        this.getProject()
-        this.menuMobile()
+        this.loadUsers()
+        this.loadProjects()
     },
     methods: {
         deleteProject () {
@@ -43,13 +48,11 @@ export default {
                 { headers: { "Authorization": "JWT " + localStorage.token } })
             window.alert("projeto deletado")
         },
-        getProject () {
-            this.$http.get("projects/", { headers: { "content-type": "application/json" } }).then(result => {
-                this.projects = result.data
-            },
-            error => {
-                error.log(error)
-            })
+        loadProjects () {
+            this.$store.dispatch("loadProjects")
+        },
+        loadUsers () {
+            this.$store.dispatch("loadUsers")
         },
 
         filterByTag () {
@@ -67,31 +70,9 @@ export default {
             this.user.username = this.currentUser.name
             this.user.email = this.currentUser.email
         },
-        showModal () {
-            this.isModalVisible = true
-        },
-        closeModal () {
-            this.isModalVisible = false
-        },
-        modalScript () {
-            $(document).ready(function () {
-                $(".modal").modal()
-            }),
-            $(document).ready(function () {
-                $("select").formSelect()
-            })
-        },
-        menuMobile () {
-            $(document).ready(function () {
-                $(".sidenav").sidenav()
-            })
-        },
-        Logout () {
-            this.$http.post("rest-auth/logout/", this.user, { headers: { "content-type": "application/json"} })
-            this.$store.dispatch("logout")//trigger da ação de login implementado em store/auth.js
-            delete localStorage.token
-            this.$router.replace("/")
 
+        Logout () {
+            this.$store.dispatch("logout")
         },
     },
 

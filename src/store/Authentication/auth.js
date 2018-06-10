@@ -47,6 +47,7 @@ const actions = {
       return new Promise((resolve, reject) => {
           Vue.http.post("rest-auth/login/", user, { headers: { "content-type": "application/json" } }).then(response => {
               commit(LOGIN, response.data.token)
+              console.log(response.data.token)
               resolve()
           },
           error => {
@@ -54,8 +55,18 @@ const actions = {
           })
       })
     },
-    logout ({ commit }) {
-        commit(LOGOUT)
+    logout ({ commit }, user ) {
+        return new Promise((resolve, reject) => {
+            Vue.http.post("rest-auth/logout/", user, { headers: { "content-type": "application/json" } }).then(response => {
+                commit(LOGOUT)
+                delete localStorage.token
+                resolve ()
+            },
+            error => {
+
+                reject ()
+            })
+        })
   },
     register ({ commit }, user){
       return new Promise((resolve, reject) => {

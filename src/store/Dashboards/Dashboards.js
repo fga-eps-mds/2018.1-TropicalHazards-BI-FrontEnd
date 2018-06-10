@@ -26,8 +26,9 @@ const mutations = {
 const actions = {
     loadDashboards ({commit}){
         return new Promise((resolve, reject)=>{
-            Vue.http.get("dashboards/", { headers: { "content-type": "application/json" } }).then(response => {
+            Vue.http.get("dashboards/", { headers: { "Content-type": "application/json" } }).then(response => {
                 commit(SET_DASHBOARDS, response.data)
+                console.log(response.data)
                 resolve()
             },
             error => {
@@ -38,7 +39,7 @@ const actions = {
 }
 
 export default {
-    name: 'dashboards',
+    name: 'Dashboards',
     state,
     mutations,
     getters,

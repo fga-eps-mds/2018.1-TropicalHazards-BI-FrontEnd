@@ -3,7 +3,9 @@
     <div class="nav-header">
       <h6 class="text-left">
         <span class="fa fa-user"/>
-        {{ (user.username == '') ? 'username' : user.username }}
+        <!-- {{ (user.username == '') ? 'username' : user.username }} -->
+        {{ user.username }}
+
       </h6>
       <h6 class="text-muted">
         <span class="mr-auto fa fa-gear"/>
@@ -27,7 +29,7 @@
     <hr>
     <ul class="list-group text-capitalize">
       <router-link
-        :to="{ name: 'home' }"
+        :to="{ name: '' }"
         class="list-group-item">
         <span class="fa fa-home"/> home
       </router-link>
@@ -100,25 +102,12 @@ export default {
     },
 
     beforeMount () {
-        // this.$store.dispatch()
+        this.loadUserInfo ()
     },
-
     methods: {
-        Logout() {
-            this.$http.post("rest-auth/logout/", this.user, {
-                headers: { "content-type": "application/json" }
-            }).then(result => {
-                this.LogoutSucess(result)
-            },
-            error => {
-                this.LoginFail()
-                error.log("erro")
-            })
-        },
 
-        LogoutSucess() {
+        logout () {
             this.$store.dispatch("logout") //trigger da ação de login implementado em store/auth.js
-            delete localStorage.token
             this.$router.replace("/")
         },
         loadUserInfo() {
