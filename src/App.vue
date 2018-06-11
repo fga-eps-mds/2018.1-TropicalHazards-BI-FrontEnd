@@ -1,26 +1,25 @@
 <template>
   <div id="app">
-
     <transition name="router-anim">
-
       <router-view />
-
     </transition>
-
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
+import Footer from "@/components/Utils/Footer"
 
 export default {
-
     components: {
+        Footer,
     }
 }
 </script>
 
-<style>
+<style lang="scss">
 @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+@import "components/styles/base.scss";
 
 .page {
   position: fixed;
@@ -35,7 +34,7 @@ export default {
 
 .roter-anim-leave-active {
   animation: going 0.5s;
-
+  transition: all 0.3s ease-in-out;
 }
 
 @keyframes going {
@@ -73,10 +72,6 @@ export default {
 }
 .footer-copyright{
   background-color:#242424;
-}
-
-a {
-  color: inherit !important;
 }
 
 h1,

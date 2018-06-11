@@ -1,0 +1,103 @@
+// colors to be used in the background
+$background-color: #fafafa !important;
+$alt-background-color: #333333 !important;
+
+// font colors
+$text-color: #333 !important;
+$alt-text-color: #f0f0f0 !important;
+$highlight-text-color: #277aa8 !important;
+
+// colors for buttons and stuff
+$elephant: #15425c !important;
+$curious-blue: #339fdb !important;
+$jelly-bean: #2677a3 !important;
+$royal-blue: #4352e0 !important;
+$shamrock: #2be280 !important;
+$golden-tanoi: #ffd259 !important;
+$mandy:   #e9524d !important;
+$purple-heart: #6E43E0 !important;
+$malachite: #2BE260 !important;
+$mustard: #FFDF57 !important;
+$mojo: #c43c37 !important;
+$nobel: #b5b5b5 !important;
+$silver-chalice: #aeaeae !important;
+
+// color aliases
+$blue: $curious-blue;
+$highlight-color: $elephant;
+$green: $shamrock;
+$yellow: $golden-tanoi;
+$red: $mandy;
+$purple: $royal-blue;
+$grey: $nobel;
+
+$grey-hover: $silver-chalice;
+$blue-hover: $jelly-bean;
+$green-hover: $malachite;
+$yellow-hover: $mustard;
+$red-hover: $mojo;
+$purple-hover: $purple-heart;
+
+// font imports
+@import url('https://fonts.googleapis.com/css?family=Quattrocento|Slabo+27px');
+@import url('https://fonts.googleapis.com/css?family=Cabin|Quattrocento+Sans|Roboto|Titillium+Web');
+$text-font-family: 'Roboto', 'Cabin', 'Titillium Web', sans-serif;
+$heading-font-family: 'Titillium Web', 'Roboto', 'Slabo', sans-serif;
+
+// css configurations
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+    font-family: $heading-font-family;
+    letter-spacing: .13em;
+}
+
+p,
+a {
+    font-family: $text-font-family;
+    letter-spacing: .15em;
+}
+
+.dark-bg {
+    background-color: $alt-background-color;
+    color: $alt-text-color;
+}
+
+.light-bg {
+    background-color: $background-color;
+    color: $text-color;
+}
+
+// buttons
+
+.btn-blue {
+    border: none;
+    background-color: $blue;
+    transition: all .3s ease-in-out;
+    color: $alt-text-color;
+
+    &:hover {
+        background-color: $blue-hover;
+    }
+}
+
+.btn-green {
+    border: none;
+    background-color: $green;
+    transition: all .3s ease-in-out;
+    color: $alt-text-color;
+
+    &:hover {
+        background-color: $green-hover;
+    }
+}
+
+.btn-grey {
+    border: none;
+    background-color: $grey;
+    transition: all .3s ease-in-out;
+    color: $alt-text-color;
+
+    &:hover {
+        background-color: $grey-hover;
+    }
+}

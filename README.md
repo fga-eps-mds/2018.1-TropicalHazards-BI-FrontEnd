@@ -11,7 +11,7 @@
 <p align="justify"> O Tropical Hazards Business Intelligence é um sistema cujo a finalidade é auxiliar os pesquisadores e profissionais de saúde do Núcleo de Medicina Tropical da UnB, permitindo o gerenciamento e compartilhamento de dados e indicadores referentes às doenças tropicais. O sistema foi projetado de modo a permitir que os profissionais possam fazer análises estatísticas, compartilhar informações gerenciadas em dashboards e disponibilizar esses dados para o público.</p>
 
 ## Deploy
-[Homolog](http://159.65.190.38)
+[Homolog](http://159.203.102.150)
 
 ## Documentação
 
