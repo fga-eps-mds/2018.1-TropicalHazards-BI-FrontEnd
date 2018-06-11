@@ -1,5 +1,5 @@
 import { shallow } from "@vue/test-utils"
-import LandingPage from "@/components/Utils/LandingPage"
+import LandingPage from "@/components/Landing/LandingPage"
 
 describe("LandingPage.vue", () => {
     it("should be a vue instance", () => {

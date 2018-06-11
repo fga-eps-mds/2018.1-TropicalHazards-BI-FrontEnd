@@ -1,99 +1,81 @@
 <template>
-  <div
-    id="sidebar"
-    class="hide-on-small-only col m1 center-align grey lighten-4">
-    <ul class="">
-      <router-link :to="{ name: 'LandingPage'}">
-        <img
-          src="../../assets/v3_round.png"
-          class="responsive-img circle center" >
+  <nav class="dark-bg side-bar-expanded">
+    <div class="nav-header">
+      <h6 class="text-left">
+        <span class="fa fa-user"/>
+        <!-- {{ (user.username == '') ? 'username' : user.username }} -->
+        {{ user.username }}
+
+      </h6>
+      <h6 class="text-muted">
+        <span class="mr-auto fa fa-gear"/>
+        <small>
+          Configurações
+        </small>
+      </h6>
+      <div class="input-group input-group-sm">
+        <input
+          v-model="search"
+          class="form-control custom-field"
+          type="text"
+          placeholder="Pesquisar">
+        <div class="input-group-append">
+          <button class="btn btn-outline btn-sm btn-grey">
+            <span class="fa fa-search"/>
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <ul class="list-group text-capitalize">
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        <span class="fa fa-home"/> home
       </router-link>
-      <li class="">
-        <p> {{ currentUser.name }}</p>
+      <li class="list-group-item disabled">
+        <span class="fa fa-pie-chart"/> Dashboards
       </li>
       <router-link
-        :to="{ name: 'LandingPage' }"
-        class="sidebar-icon">
-        <li
-          class="tooltipped"
-          data-position="right"
-          data-tooltip="Home">
-          <span class="fa fa-home"/>
-        </li>
+        :to="{ name: '' }"
+        class="list-group-item">
+        Meus Dashboards
       </router-link>
       <router-link
-        :to="{ name: 'HomePage' }"
-        class="sidebar-icon">
-        <li
-          class="tooltipped"
-          data-position="right"
-          data-tooltip="Projetos">
-          <span class="fa fa-th"/>
-        </li>
+        :to="{ name: '' }"
+        class="list-group-item">
+        Procurar Dashboards
+      </router-link>
+      <div class="list-group-item disabled">
+        <span class="fa fa-folder"/> Projetos
+      </div>
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        Meus Projetos
+      </router-link>
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        Novo Projeto
+      </router-link>
+      <router-link
+        :to="{ name: '' }"
+        class="list-group-item">
+        Procurar Projetos
       </router-link>
       <a
-        class="sidebar-icon">
-        <li
-          class="tooltipped"
-          data-position="right"
-          data-tooltip="Observatórios">
-          <span class="fa fa-area-chart"/>
-        </li>
-      </a>
-      <router-link
-        :to="{ name: 'EditUser'}"
-        class="modal-trigger sidebar-icon">
-        <li
-          class="tooltipped"
-          data-position="right"
-          data-tooltip="Edit">
-          <span class="fa fa-gear"/>
-        </li>
-      </router-link>
-      <router-link
-        :to=" { name: 'CreateProject'}"
-
-        class="modal-trigger sidebar-icon">
-        <li
-          class="tooltipped"
-          data-position="right"
-          data-tooltip="New Proj">
-          <span class="fa fa-plus"/>
-        </li>
-      </router-link>
-      <a
-        href="#delete-user"
-        class="modal-trigger sidebar-icon">
-        <li
-          class="tooltipped"
-          data-position="right"
-          data-tooltip="Delete">
-          <span class="fa fa-trash"/>
-        </li>
+        href="https://github.com/fga-gpp-mds/TropicalHazards-BI"
+        class="list-group-item">
+        <span class="fa fa-github"/> github
       </a>
       <a
-        class="sidebar-icon modal-trigger"
-        v-on:
-        @click="Logout()">
-        <li
-          class="tooltipped"
-          data-position="right"
-          data-tooltip="Sair">
-          <span class="fa fa-sign-out"/>
-        </li>
+        href="https://fga-gpp-mds.github.io/TropicalHazards-BI"
+        class="list-group-item">
+        <span class="fa fa-book"/> docs
       </a>
     </ul>
-    <ul
-      v-if="!currentUser"
-      id="mobile-menu">
-      class="sidenav grey darken-4 grey-text text-lighten-4 collection"
-      <router-link :to="{name: 'Login'}">
-        <li class="collection-item">
-          <span class="fa fa-sign-in"/>
-        </li>
-      </router-link>
-    </ul>
-  </div>
+  </nav>
 </template>
 
 
@@ -105,30 +87,27 @@ export default {
 
     },
     data() {
-        return {}
+        return {
+            search: "",
+            user: {
+                username: "",
+                id: "",
+                email: ""
+            }
+        }
     },
 
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
 
+    beforeMount () {
+        this.loadUserInfo ()
+    },
     methods: {
-        Logout() {
-            this.$http.post("rest-auth/logout/", this.user, {
-                headers: { "content-type": "application/json" }
-            }).then(result => {
-                this.LogoutSucess(result)
-            },
-            error => {
-                this.LoginFail()
-                error.log("erro")
-            }
-            )
-        },
 
-        LogoutSucess() {
+        logout () {
             this.$store.dispatch("logout") //trigger da ação de login implementado em store/auth.js
-            delete localStorage.token
             this.$router.replace("/")
         },
         loadUserInfo() {
@@ -140,9 +119,61 @@ export default {
 }
 </script>
 
-<style>
-::placeholder {
-  /* Most modern browsers support this now. */
-  color: #ffffff;
-}
+<style lang="scss" scoped>
+  @import '../styles/base.scss';
+
+  nav {
+    display: block;
+    min-height: 100vh;
+    max-width: 200px;
+    overflow: auto;
+    font-family: $text-font-family;
+    letter-spacing: .1em !important;
+    left: 0 !important;
+    font-size: .8em;
+
+    hr {
+      margin: 0;
+      border-color: #555;
+    }
+
+    input {
+      background-color: #444;
+      border: none;
+      color: $alt-text-color;
+
+      &:focus, &:active {
+        background-color: #555!important;
+        outline: none;
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .input-group {
+      margin-top: 1em;
+    }
+
+    .list-group-item {
+      color: inherit;
+      background-color: inherit;
+      border: none;
+    }
+
+    .text-capitalize > a.list-group-item {
+      border-left: 3px solid transparent;
+      transition: all .3s ease-in-out;
+
+      &:hover {
+        border-color: $highlight-text-color;
+        transition: all .3s ease-in-out;
+      }
+    }
+
+    .nav-header {
+      padding: 2em .6em;
+    }
+  }
 </style>

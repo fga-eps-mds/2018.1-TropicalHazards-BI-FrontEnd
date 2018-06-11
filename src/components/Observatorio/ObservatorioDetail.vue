@@ -33,10 +33,8 @@
                 @click="deleteDashboard()">Deletar Dashboard
                 <span class="fa fa-trash"/>
               </button>
-              <p></p>
               <button
                 class = "btn-large blue"
-                v-on:
                 @click="$modal.show('ask-question', { dashboard: dashboard.id })">Gerar indicador
                 <span class="fa fa-trash"/>
               </button>
