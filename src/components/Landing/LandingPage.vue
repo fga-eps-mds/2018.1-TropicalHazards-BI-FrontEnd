@@ -4,6 +4,7 @@
     <Carousel/>
     <RefBar/>
     <About/>
+    <Footer/>
   </div>
 </template>
 
@@ -15,15 +16,16 @@ import Header from "@/components/Landing/Header"
 import Carousel from "@/components/Landing/Carousel"
 import RefBar from "@/components/Landing/RefBar"
 import About from "@/components/Landing/About"
+import Footer from "@/components/Utils/Footer"
 
 export default {
-    name: "LandingPage",
     components: {
         Navbar,
         Header,
         Carousel,
         RefBar,
-        About
+        About,
+        Footer
     },
 
     computed: {
