@@ -1,7 +1,6 @@
 # Tropical Hazards BI
 
 ![](https://i.imgur.com/OhSvJLM.jpg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a715ea21d0564479880d48f3eadd21af)](https://app.codacy.com/app/andre-filho/2018.1-TropicalHazards-BI-FrontEnd?utm_source=github.com&utm_medium=referral&utm_content=fga-gpp-mds/2018.1-TropicalHazards-BI-FrontEnd&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/fga-gpp-mds/2018.1-TropicalHazards-BI-FrontEnd.svg?branch=master)](https://travis-ci.org/fga-gpp-mds/2018.1-TropicalHazards-BI-FrontEnd)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -27,7 +26,7 @@
 
 #### 2 - Garanta que o _network_ "20181tropicalhazardsbi_default" ja exista usando o comando:
 ``` bash
-$ docker network ls 
+$ docker network ls
 ```
   ##### 2.1 - Caso o _network_ "20181tropicalhazardsbi_default" não apareça nessa lista siga o tutorial para instalar o [back-end](https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI)
 
