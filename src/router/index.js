@@ -4,15 +4,16 @@ import Router from "vue-router"
 // basic
 import HomePage from "@/components/Users/HomePage"
 import LandingPage from "@/components/Landing/LandingPage"
-import CreateProject from "@/components/Projects/CreateProject"
 import EditUser from "@/components/Users/EditUser"
 import DeleteUser from "@/components/Users/DeleteUser"
 import Auth from "@/components/Auth/Auth"
 
 // project
-import ListProject from "@/components/Projects/ListProject"
+import ProjectsList from "@/components/Projects/ProjectsList"
+import CreateProject from "@/components/Projects/CreateProject"
 import ProjectDetail from "@/components/Projects/ProjectDetail"
 import EditProject from "@/components/Projects/EditProject"
+import MyProjects from "@/components/Projects/MyProjects"
 
 // dashboards
 import DashboardDetail from "@/components/Dashboards/DashboardDetail"
@@ -55,13 +56,13 @@ export default new Router({
         // Projects
         {
             path: "/projects",
-            name: "CreateProject",
-            component: CreateProject
+            name: "ProjectList",
+            component: ProjectsList
         },
         {
             path: "/my-projects",
-            name: "ListProjects",
-            component: ListProject
+            name: "MyProjects",
+            component: MyProjects
         },
         {
             path: "/projects/detail/:id",
@@ -72,6 +73,11 @@ export default new Router({
             path: "/projects/edit/:id",
             name: "EditProject",
             component: EditProject
+        },
+        {
+            path: "/projects/new",
+            name: "CreateProject",
+            component: CreateProject
         },
         // tags
         {

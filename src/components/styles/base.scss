@@ -54,7 +54,6 @@ h1,h2,h3,h4,h5,h6,
 p,
 a {
     font-family: $text-font-family;
-    letter-spacing: .15em;
 }
 
 .dark-bg {
@@ -68,6 +67,10 @@ a {
 }
 
 // buttons
+
+.btn {
+    letter-spacing: initial !important;
+}
 
 .btn-blue {
     border: none;
