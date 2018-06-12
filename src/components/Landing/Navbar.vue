@@ -1,7 +1,7 @@
 <template>
   <nav
     id="navbar"
-    class="navbar navbar-expand-md">
+    class="navbar navbar-expand-md light-bg">
     <router-link
       :to="{name: 'LandingPage'}"
       class="navbar-brand">
@@ -73,20 +73,21 @@ export default {
 
   .navbar {
     width: 100%;
-    padding: 0 2em;
+    padding: .5em 2em;
     background-color: rgba(0, 0, 0, 0.5);
-    color: $alt-text-color;
-    border-bottom: #f0f0f0 solid .5px;
+    border-bottom: #444 solid 1px;
 
     .navbar-brand {
       height: 100%;
       padding: .3em;
       color: inherit;
+      font-weight: bold;
       font-family: $heading-font-family;
     }
 
     button {
-      color: $alt-text-color;
+      color: $text-color;
+      border: none;
     }
 
     #collapseable {
@@ -105,14 +106,14 @@ export default {
   }
 
   a {
-    padding: 1em 0.3em;
+    padding: 1.5em 2em;
     margin-left: 0.2em;
     margin-right: 0.2em;
 
     &.nav-link {
       font-size: 0.8em;
       transition: all 0.5s ease-in-out;
-      color: $alt-text-color;
+      color: $text-color;
       border-bottom: 2px solid transparent;
 
       &:hover {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid text-center">
+  <div class="container-fluid text-center dark-bg">
     <div class="bg-img">
       <div class="row">
         <div class="col-md-4 cell h3">
@@ -66,13 +66,13 @@ export default {
   @import '../styles/base.scss';
 
   .container-fluid {
-    background: url('../../assets/data-analytics.png') no-repeat center center;
-    background-size: cover;
     padding: 0;
+    // background: url('../../assets/data-analytics.png') no-repeat center center;
+    // background-size: cover;
 
-    .bg-img {
-      background-color: rgba(0, 0, 0, 0.6);
-    }
+    // .bg-img {
+    //   background-color: rgba(0, 0, 0, 0.6);
+    // }
   }
 
   .cell {
