@@ -51,14 +51,14 @@ export default {
 <style lang="scss" scoped>
   @import '../styles/base.scss';
   header {
-    background: url('../../assets/bg-img.jpg') no-repeat center center;
+    background: url('../../assets/metachart-background.jpg') no-repeat center center;
     background-size: cover;
-    color: $alt-text-color;
+    color: $text-color;
     background-color: #909090;
 
     .filter {
       background-size: cover;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(255, 255, 255, 0.4);
     }
 
     .container-fluid {
@@ -84,13 +84,7 @@ export default {
         margin-right: auto;
 
         input {
-          background-color: rgba(255, 255, 255, 0.3);
-          color: #fff;
-          border: none;
-
-          &::placeholder {
-            color: #fff;
-          }
+          color: #333;
         }
       }
 
