@@ -15,6 +15,7 @@
         </div>
       </div>
     </div>
+    <Footer/>
   </div>
 </template>
 
@@ -22,11 +23,13 @@
 import LoginForm from "@/components/Auth/LoginForm"
 import RegisterForm from "@/components/Auth/RegisterForm"
 import Navbar from "@/components/Utils/Navbar"
+import Footer from "@/components/Utils/Footer"
 
 export default {
     components: {
         "login-form": LoginForm,
         "register-form": RegisterForm,
+        Footer,
         Navbar
     },
     data() {
