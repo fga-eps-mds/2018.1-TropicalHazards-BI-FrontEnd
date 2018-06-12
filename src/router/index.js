@@ -1,24 +1,32 @@
 import Vue from "vue"
 import Router from "vue-router"
+
+// basic
 import HomePage from "@/components/Users/HomePage"
 import LandingPage from "@/components/Landing/LandingPage"
 import CreateProject from "@/components/Projects/CreateProject"
-import CreateTag from "@/components/Projects/CreateTag"
-import ListProject from "@/components/Projects/ListProject"
-import ProjectDetail from "@/components/Projects/ProjectDetail"
 import EditUser from "@/components/Users/EditUser"
 import DeleteUser from "@/components/Users/DeleteUser"
-import ObservatorioDetail from "@/components/Observatorio/ObservatorioDetail"
-import EditProject from "@/components/Projects/EditProject"
-import createObservatorio from "@/components/Observatorio/createObservatorio"
-import editObservatorio from "@/components/Observatorio/editObservatorio"
 import Auth from "@/components/Auth/Auth"
 
+// project
+import ListProject from "@/components/Projects/ListProject"
+import ProjectDetail from "@/components/Projects/ProjectDetail"
+import EditProject from "@/components/Projects/EditProject"
+
+// dashboards
+import DashboardDetail from "@/components/Dashboards/DashboardDetail"
+import createDashboard from "@/components/Dashboards/createDashboard"
+import editDashboard from "@/components/Dashboards/editDashboard"
+
+// tags
+import CreateTag from "@/components/Projects/CreateTag"
 
 Vue.use(Router)
 
 export default new Router({
     routes: [
+        // basic
         {
             path: "/",
             name: "LandingPage",
@@ -31,58 +39,67 @@ export default new Router({
         },
         {
             path: "/home",
-            name: "HomePage",
+            name: "Homepage",
             component: HomePage
         },
         {
-            path: "/projetos",
-            name: "CreateProject",
-            component: CreateProject
-        },
-        {
-            path: "/tags",
-            name: "CreateTag",
-            component: CreateTag
-        },
-        {
-            path: "/listproject",
-            name: "ListProjects",
-            component: ListProject
-        },
-        {
-            path: "/project/detail/:id",
-            name: "ProjectDetail",
-            component: ProjectDetail
-        },
-        {
-            path: "/edituser",
+            path: "/user/edit",
             name: "EditUser",
             component: EditUser
         },
         {
-            path: "/deleteuser",
+            path: "/user/purge",
             name: "DeleteUser",
             component: DeleteUser
         },
+        // Projects
         {
-            path: "/observer-detail/:id",
-            name: "ObservatorioDetail",
-            component: ObservatorioDetail
+            path: "/projects",
+            name: "CreateProject",
+            component: CreateProject
         },
         {
-            path: "/edit-project/:id",
+            path: "/my-projects",
+            name: "ListProjects",
+            component: ListProject
+        },
+        {
+            path: "/projects/detail/:id",
+            name: "ProjectDetail",
+            component: ProjectDetail
+        },
+        {
+            path: "/projects/edit/:id",
             name: "EditProject",
             component: EditProject
         },
+        // tags
         {
-            path: "/create-observatory/:id",
-            name: "createObservatorio",
-            component: createObservatorio
+            path: "/tags/new",
+            name: "CreateTag",
+            component: CreateTag
+        },
+        // dashboards
+        {
+            path: "/dashboards",
+            name: "DashesList",
+            // TODO: fix this
+            component: DashboardDetail
         },
         {
-            path: "/edit-observatory/:id",
-            name: "editObservatorio",
-            component: editObservatorio
+            path: "/dashboards/detail/:id",
+            name: "DashboardDetail",
+            component: DashboardDetail
+        },
+        {
+            path: "/dashboards/new/:id",
+            name: "createDashboard",
+            component: createDashboard
+        },
+        {
+            path: "/dashboards/edit/:id",
+            name: "editDashboard",
+            component: editDashboard
         }
     ]
 })
