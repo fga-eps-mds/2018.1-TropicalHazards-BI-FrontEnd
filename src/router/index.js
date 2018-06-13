@@ -48,61 +48,72 @@ export default new Router({
         {
             path: "/user/edit",
             name: "EditUser",
-            component: EditUser
+            component: EditUser,
+            beforeEnter: Guard.auth
         },
         {
             path: "/user/purge",
             name: "DeleteUser",
-            component: DeleteUser
+            component: DeleteUser,
+            beforeEnter: Guard.auth
         },
         // Projects
         {
             path: "/projects",
             name: "CreateProject",
-            component: CreateProject
+            component: CreateProject,
+            beforeEnter: Guard.auth
         },
         {
             path: "/my-projects",
             name: "ListProjects",
-            component: ListProject
+            component: ListProject,
+            beforeEnter: Guard.auth
         },
         {
             path: "/projects/detail/:id",
             name: "ProjectDetail",
-            component: ProjectDetail
+            component: ProjectDetail,
+            beforeEnter: Guard.guest
         },
         {
             path: "/projects/edit/:id",
             name: "EditProject",
-            component: EditProject
+            component: EditProject,
+            BeforeEnter: Guard.auth
         },
         // tags
         {
             path: "/tags/new",
             name: "CreateTag",
-            component: CreateTag
+            component: CreateTag,
+            beforeEnter: Guard.auth
         },
         // dashboards
         {
             path: "/dashboards",
             name: "Dashboards",
             // TODO: fix this
-            component: DashboardDetail
+            component: DashboardDetail,
+            beforeEnter: Guard.guest
         },
         {
             path: "/dashboards/detail/:id",
             name: "DashboardDetail",
-            component: DashboardDetail
+            component: DashboardDetail,
+            beforeEnter: Guard.guest
         },
         {
             path: "/dashboards/new/:id",
             name: "createDashboard",
-            component: createDashboard
+            component: createDashboard,
+            beforeEnter: Guard.auth
         },
         {
             path: "/dashboards/edit/:id",
             name: "editDashboard",
-            component: editDashboard
+            component: editDashboard,
+            beforeEnter: Guard.auth
         }
     ]
 })
