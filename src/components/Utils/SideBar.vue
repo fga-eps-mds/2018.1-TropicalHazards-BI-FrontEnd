@@ -123,7 +123,7 @@ export default {
 
   nav {
     // display: block;
-    // min-height: 100vh;
+    min-height: 100%;
     // max-width: 200px;
     overflow: auto;
     font-family: $text-font-family;

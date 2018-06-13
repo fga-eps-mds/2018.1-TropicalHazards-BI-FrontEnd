@@ -1,6 +1,6 @@
 <template>
-  <footer class="page-footer dark-bg">
-    <div class="container text-center text-md-left">
+  <footer class="dark-bg">
+    <div class="text-center text-md-left">
       <div class="row">
         <div class="col-md-6 mx-auto">
           <h5 class="font-weight-bold text-uppercase mt-3 mb-4">
@@ -78,11 +78,12 @@ export default {
 
 <style lang="scss" scoped>
   footer {
+    max-width: 100%;
     padding-top: 1em;
     padding-bottom: .3em;
 
     .row {
-      margin: 0;
+      margin-left: .03em;
     }
 
 
