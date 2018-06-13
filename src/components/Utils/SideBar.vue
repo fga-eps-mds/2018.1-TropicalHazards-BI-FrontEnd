@@ -3,9 +3,8 @@
     <div class="nav-header">
       <h6 class="text-left">
         <span class="fa fa-user"/>
-        <!-- {{ (user.username == '') ? 'username' : user.username }} -->
+        {{ (user.username == '') ? 'username' : user.username }}
         {{ user.username }}
-
       </h6>
       <h6 class="text-muted">
         <span class="mr-auto fa fa-gear"/>
@@ -123,9 +122,9 @@ export default {
   @import '../styles/base.scss';
 
   nav {
-    display: block;
-    min-height: 100vh;
-    max-width: 200px;
+    // display: block;
+    min-height: 100%;
+    // max-width: 200px;
     overflow: auto;
     font-family: $text-font-family;
     letter-spacing: .1em !important;

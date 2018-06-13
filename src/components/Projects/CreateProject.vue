@@ -1,122 +1,102 @@
 <template>
-  <div id="app">
-    <div class="row grey lighten-4">
-      <sidebar/>
-      <div
-        id="content"
-        class="col m11">
-        <div class="header center-align grey lighten-4">
-          <h3>
-            Criar Projeto
-          </h3>
-        </div>
-        <div class="container center-align">
+  <div id="background">
+    <Navbar/>
+    <div class="row">
+      <sidebar class="col-md-2 sidebar"/>
+      <div class="col col-md-10 content">
+        <div class="container-fluid">
+          <header>
+            <h2>
+              Novo projeto
+            </h2>
+          </header>
           <div class="row">
-            <div class="">
-              <div class="card grey lighten-3">
-                <div class="card-content black-text">
-                  <span style="color: grey; text-align:left;"><p>Nome:</p></span>
-                  <p style="text-align:left">{{ project.name }}</p>
+            <div class="col col-md-6 offset-md-3">
+              <form>
+                <div class="form-group">
+                  <label for="p-name">
+                    Nome do projeto:
+                  </label>
+                  <input
+                    id="p-name"
+                    v-model.trim="$v.project.name.$model"
+                    type="text"
+                    class="form-control"
+                    placeholder="Ex.: Dengue no DF">
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container center-align">
-          <div class="row">
-            <div class="">
-              <div class="card grey lighten-3">
-                <div class="card-content black-text">
-                  <span style="color: grey;text-align:left;"><p>Descrição:</p></span>
-                  <p style="text-align:left">{{ project.description }}</p>
+                <div class="form-group">
+                  <label for="p-description">
+                    Descrição:
+                  </label>
+                  <textarea
+                    id="p-description"
+                    v-model.trim="$v.project.description.$model"
+                    class="form-control"
+                    rows="6"
+                    placeholder="Descrição que aparecerá no seu projeto"/>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <form>
-          <div class="container center-align">
-            <div class="row">
-              <div class="input-field col s12">
-                <input
-                  id="name"
-                  v-model="project.name"
-                  type="text"
-                  class="validate">
-                <label
-                  for="descricao"
-                  data-error="wrong"
-                  data-success="right">Nome do projeto</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <textarea
-                  id="deion"
-                  v-model="project.description"
-                  class="materialize-textarea"/>
-                <label
-                  for="descricao"
-                  data-error="wrong"
-                  data-success="right">Descrição</label>
-              </div>
-            </div>
-
-            <div class="row">
-              <div
-                v-for="tag in tags"
-                :key="tag.id"
-                class="input-field col s2">
-                <form action="#">
+                <div class="form-group">
                   <p>
-                    <label>
-                      <input
-                        v-model="selectedTags"
-                        :value= "tag"
-                        type="checkbox">
-                      <span>{{ tag.slug }}</span>
-                    </label>
+                    Tags do projeto
                   </p>
-                </form>
-              </div>
-
+                  <div
+                    v-for="(tag, index) in tags"
+                    :tag="tag"
+                    :index="index"
+                    :key="tag + index"
+                    class="form-check form-check-inline">
+                    <input
+                      :id="'inlineCheckbox' + index"
+                      :value="tag.slug"
+                      class="form-check-input"
+                      type="checkbox">
+                    <label
+                      :for="'inlineCheckbox' + index"
+                      class="form-check-label">
+                      {{ tag.name }}
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <button
+                    class="col btn btn-green btn-block btn-lg"
+                    @click="PostProject()">
+                    <span class="fa fa-check"/> Salvar
+                  </button>
+                  <router-link
+                    :to="{ name: 'MyProjects' }"
+                    class="col btn btn-grey btn-block mt-0 btn-lg">
+                    <span class="fa fa-undo"/> Voltar
+                  </router-link>
+                </div>
+              </form>
             </div>
-            <div class="row">
-              <div class="col s4">
-                <router-link
-                  :to="{ name: 'CreateTag'}"
-                  class=" btn-large blue lighten-1 white-text waves-effect waves-light">
-                  Nova Tag +
-                </router-link>
-              </div>
-            </div>
-            <router-link
-              :to="{ name: 'ProjectDetail' , params: { id: project.id }}"
-              class=" btn-large grey lighten-1 white-text waves-effect waves-light">
-              Cancelar
-            </router-link>
-            <a
-              class=" btn-large blue lighten-1 white-text waves-effect waves-light"
-              v-on:
-              @click="PostProject()">
-              Criar
-            </a>
           </div>
-        </form>
+        </div>
+        <div class="row">
+          <custom-footer></custom-footer>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex"
+import { required, minLength, maxLength } from "vuelidate/lib/validators"
+
 import SideBar from "@/components/Utils/SideBar"
+import Footer from "@/components/Utils/Footer"
+import Navbar from "@/components/Utils/Navbar"
+
 export default {
 
     components: {
-        "sidebar": SideBar
+        Navbar,
+        "sidebar": SideBar,
+        "custom-footer": Footer
     },
-    data(){
+    data () {
 
         return {
             importData: {},
@@ -139,33 +119,58 @@ export default {
                 password: ""
             },
 
-            projetos: "",
+            projects: "",
         }
     },
+
+    validations: {
+        project: {
+            name: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(100)
+            },
+            description: {
+                required,
+                minLength: minLength(8),
+                maxLength: maxLength(500)
+            }
+        }
+    },
+
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
-    beforeMount() {
+
+    beforeMount () {
         this.loadUserInfo()
         this.loadProject()
     },
-    created(){
+
+    created () {
         this.getTags()
     },
+
     methods: {
-        loadUserInfo (){
+        loadUserInfo () {
             this.user.id = this.currentUser.id
             this.user.username = this.currentUser.name
             this.user.email = this.currentUser.email
         },
-        loadProject (){
+
+        loadProject () {
             this.project.user = this.currentUser.id
         },
 
 
-        PostProject (){
+        PostProject () {
             this.project.tags = this.selectedTags
-            this.$http.post("projects/",this.project, { headers: { "Authorization": "JWT " + localStorage.token, "content-type": "application/json", } }
+            this.$http.post("projects/",this.project, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
             ).then(result => {
                 this.projeto = result.data
                 this.postSucess(result)
@@ -176,17 +181,19 @@ export default {
         },
 
         getTags () {
-            this.$http.get("tags/", { headers:
-                    {"content-type": "application/json" } }).then(result => {
+            this.$http.get("tags/", {
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(result => {
                 this.tags = result.data
             },
             error => {
                 error.log(error)
-
             })
         },
 
-        postSucess() {
+        postSucess () {
             window.alert("Projeto criado com Sucesso")
             this.$router.replace("/home")
         },
@@ -194,21 +201,39 @@ export default {
         CreateFail () {
             window.confirm("Falha na criação do projeto")
         },
-        modalScript() {
-            $(document).ready(function(){
-                $(".modal").modal()
-            })
-            $(document).ready(function(){
-                $("select").formSelect()
-            })
-        }
     },
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  @import '../styles/base.scss';
 
-::placeholder { /* Most modern browsers support this now. */
-   color:    #132a71;
-}
+  .row {
+    margin-left: 0;
+  }
+
+  form {
+    background-color: $background-color;
+    color: $text-color;
+    padding: 2em;
+    border-radius: 5px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    .btn {
+      $btn-margins: 4px;
+      margin-left: $btn-margins;
+      margin-right: $btn-margins;
+    }
+  }
+
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .sidebar {
+    padding-left: 0;
+  }
+
 </style>

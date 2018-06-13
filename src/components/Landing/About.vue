@@ -8,7 +8,7 @@
       </p>
     </div>
     <div class="container-fluid text-center mx-auto">
-            <div class="row">
+      <div class="row">
         <div class="col-md-4 text-center">
           <div class="card">
             <div class="card-body">
