@@ -11,6 +11,7 @@ const SET_USERS = 'SET_USERS'
 
 const state = {
   user: User.from(localStorage.token),
+//   user: state.user,
   users: []
 }
 
@@ -46,12 +47,12 @@ const actions = {
     login ({ commit },  user ) {
       return new Promise((resolve, reject) => {
           Vue.http.post("rest-auth/login/", user, { headers: { "content-type": "application/json" } }).then(response => {
-              commit(LOGIN, response.data.token)
-              console.log(response.data.token)
-              resolve()
-          },
+            commit(LOGIN, response.data.token)
+            resolve()
+        },
           error => {
-              reject()
+              console.log(error.data)
+              reject("Usuário e senha não existem no nosso banco de dados")
           })
       })
     },
@@ -71,7 +72,8 @@ const actions = {
     register ({ commit }, user){
       return new Promise((resolve, reject) => {
           Vue.http.post("users/", user, { headers: { "content-type": "application/json" } }).then(response => {
-              resolve()
+            commit(SET_USERS)
+            resolve()
           },
           error => {
               reject()
@@ -97,6 +99,16 @@ const actions = {
 }
 
 export default {
+
+    user () {
+        return this.state.user
+    },
+    check() {
+        if (this.state.user == null){
+            return false
+        }
+        return true
+    },
   name: 'auth',
   state,
   mutations,

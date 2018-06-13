@@ -115,7 +115,7 @@ export default {
             this.error = false
             localStorage.token = response.data.token
             this.$store.dispatch("login") // trigger da ação de login implementado em store/auth.js
-            this.$router.replace("/home")
+
         },
         LoginFail () {
             this.error = "Falha no Login!"
