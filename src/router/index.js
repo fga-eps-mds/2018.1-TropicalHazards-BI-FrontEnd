@@ -22,6 +22,7 @@ import editDashboard from "@/components/Dashboards/editDashboard"
 
 // tags
 import CreateTag from "@/components/Projects/CreateTag"
+import Guard from "@/components/Auth/middleware"
 
 Vue.use(Router)
 
@@ -36,12 +37,14 @@ export default new Router({
         {
             path: "/auth",
             name: "Auth",
-            component: Auth
+            component: Auth,
+            beforeEnter: Guard.guest
         },
         {
             path: "/home",
-            name: "Homepage",
-            component: HomePage
+            name: "HomePage",
+            component: HomePage,
+            beforeEnter: Guard.auth
         },
         {
             path: "/user/edit",
@@ -88,7 +91,7 @@ export default new Router({
         // dashboards
         {
             path: "/dashboards",
-            name: "DashesList",
+            name: "Dashboards",
             // TODO: fix this
             component: DashboardDetail
         },

@@ -79,6 +79,7 @@ export default {
             this.$v.$touch()
             if(!this.$v.$invalid){
                 this.$store.dispatch("login", this.user)
+                this.$router.replace("/home")
             }
         }
     }
