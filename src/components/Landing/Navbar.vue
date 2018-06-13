@@ -73,14 +73,14 @@ export default {
 
   .navbar {
     width: 100%;
-    padding: .5em 2em;
+    padding: 0em 1em;
     background-color: rgba(0, 0, 0, 0.5);
-    border-bottom: #444 solid 1px;
+    border-bottom: #444 solid transparent;
 
     .navbar-brand {
       height: 100%;
       padding: .3em;
-      color: inherit;
+      color: rgba(1, 6, 49, 0.808);
       font-weight: bold;
       font-family: $heading-font-family;
     }
@@ -112,7 +112,7 @@ export default {
 
     &.nav-link {
       font-size: 0.8em;
-      transition: all 0.5s ease-in-out;
+      transition: all 0.025s ease-in-out;
       color: $text-color;
       border-bottom: 2px solid transparent;
 
