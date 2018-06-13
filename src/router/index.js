@@ -1,24 +1,34 @@
 import Vue from "vue"
 import Router from "vue-router"
+
+// basic
 import HomePage from "@/components/Users/HomePage"
 import LandingPage from "@/components/Landing/LandingPage"
-import CreateProject from "@/components/Projects/CreateProject"
-import CreateTag from "@/components/Projects/CreateTag"
-import ListProject from "@/components/Projects/ListProject"
-import ProjectDetail from "@/components/Projects/ProjectDetail"
 import EditUser from "@/components/Users/EditUser"
 import DeleteUser from "@/components/Users/DeleteUser"
-import ObservatorioDetail from "@/components/Observatorio/ObservatorioDetail"
-import EditProject from "@/components/Projects/EditProject"
-import createObservatorio from "@/components/Observatorio/createObservatorio"
-import editObservatorio from "@/components/Observatorio/editObservatorio"
 import Auth from "@/components/Auth/Auth"
 
+// project
+import ProjectsList from "@/components/Projects/ProjectsList"
+import CreateProject from "@/components/Projects/CreateProject"
+import ProjectDetail from "@/components/Projects/ProjectDetail"
+import EditProject from "@/components/Projects/EditProject"
+import MyProjects from "@/components/Projects/MyProjects"
+
+// dashboards
+import DashboardDetail from "@/components/Dashboards/DashboardDetail"
+import createDashboard from "@/components/Dashboards/createDashboard"
+import editDashboard from "@/components/Dashboards/editDashboard"
+
+// tags
+import CreateTag from "@/components/Projects/CreateTag"
+import Guard from "@/components/Auth/middleware"
 
 Vue.use(Router)
 
 export default new Router({
     routes: [
+        // basic
         {
             path: "/",
             name: "LandingPage",
@@ -27,62 +37,89 @@ export default new Router({
         {
             path: "/auth",
             name: "Auth",
-            component: Auth
+            component: Auth,
+            beforeEnter: Guard.guest
         },
         {
             path: "/home",
             name: "HomePage",
-            component: HomePage
+            component: HomePage,
+            beforeEnter: Guard.auth
         },
         {
-            path: "/projetos",
+            path: "/user/edit",
+            name: "EditUser",
+            component: EditUser,
+            beforeEnter: Guard.auth
+        },
+        {
+            path: "/user/purge",
+            name: "DeleteUser",
+            component: DeleteUser,
+            beforeEnter: Guard.auth
+        },
+        // Projects
+        {
+            path: "/projects",
+            name: "ProjectsList",
+            component: ProjectsList,
+            beforeEnter: Guard.auth
+        },
+        {
+            path: "/my-projects",
+            name: "MyProjects",
+            component: MyProjects,
+            beforeEnter: Guard.auth
+        },
+        {
+            path: "/projects/detail/:id",
+            name: "ProjectDetail",
+            component: ProjectDetail,
+            beforeEnter: Guard.guest
+        },
+        {
+            path: "/projects/edit/:id",
+            name: "EditProject",
+            component: EditProject,
+            BeforeEnter: Guard.auth
+        },
+        {
+            path: "/projects/new",
             name: "CreateProject",
             component: CreateProject
         },
+        // tags
         {
-            path: "/tags",
+            path: "/tags/new",
             name: "CreateTag",
-            component: CreateTag
+            component: CreateTag,
+            beforeEnter: Guard.auth
+        },
+        // dashboards
+        {
+            path: "/dashboards",
+            name: "Dashboards",
+            // TODO: fix this
+            component: DashboardDetail,
+            beforeEnter: Guard.guest
         },
         {
-            path: "/listproject",
-            name: "ListProjects",
-            component: ListProject
+            path: "/dashboards/detail/:id",
+            name: "DashboardDetail",
+            component: DashboardDetail,
+            beforeEnter: Guard.guest
         },
         {
-            path: "/project/detail/:id",
-            name: "ProjectDetail",
-            component: ProjectDetail
+            path: "/dashboards/new/:id",
+            name: "createDashboard",
+            component: createDashboard,
+            beforeEnter: Guard.auth
         },
         {
-            path: "/edituser",
-            name: "EditUser",
-            component: EditUser
-        },
-        {
-            path: "/deleteuser",
-            name: "DeleteUser",
-            component: DeleteUser
-        },
-        {
-            path: "/observer-detail/:id",
-            name: "ObservatorioDetail",
-            component: ObservatorioDetail
-        },
-        {
-            path: "/edit-project/:id",
-            name: "EditProject",
-            component: EditProject
-        },
-        {
-            path: "/create-observatory/:id",
-            name: "createObservatorio",
-            component: createObservatorio
-        },
-        {
-            path: "/edit-observatory/:id",
-            name: "editObservatorio",
-            component: editObservatorio
+            path: "/dashboards/edit/:id",
+            name: "editDashboard",
+            component: editDashboard,
+            beforeEnter: Guard.auth
         }
     ]
 })

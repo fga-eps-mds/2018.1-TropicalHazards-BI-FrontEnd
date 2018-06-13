@@ -6,7 +6,8 @@
       <p>
         O <b>OBSERV</b> é um observátorio de dados com interpretação de dados, geração de indicadores e gráficos. Tudo isso para apoiara visualização dos indicadores dos dados da sua pesquisa.
       </p>
-
+    </div>
+    <div class="container-fluid text-center mx-auto">
       <div class="row">
         <div class="col-md-4 text-center">
           <div class="card">
@@ -76,8 +77,14 @@
 
   section {
     padding-top: 3em;
-    padding-bottom: 5em;
     font-size: 1.15em;
+
+    .container-fluid {
+      margin-top: 3em;
+      padding-top: 2em;
+      padding-bottom: 5em;
+      background-color: #e0e0e0;
+    }
 
     .row {
       padding-top: 3em;
