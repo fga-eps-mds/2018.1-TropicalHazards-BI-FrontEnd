@@ -1,9 +1,9 @@
 <template>
   <div id="background">
-    <Navbar/>
+    <Navbar class=""/>
     <div class="row">
-      <sidebar class="col-md-4"/>
-      <div class="col-md-8 container">
+      <sidebar class="col-md-2 sidebar"/>
+      <div class="col-md-10 container-fluid">
         <header>
           <h2>
             Novo projeto
@@ -72,8 +72,8 @@
           </div>
         </div>
       </div>
-    </div>
     <!-- <custom-footer/> -->
+    </div>
   </div>
 </template>
 
@@ -205,7 +205,7 @@ export default {
   @import '../styles/base.scss';
 
   .row {
-    margin-left: .05em;
+    margin-left: .031em;
   }
 
   form {
@@ -221,6 +221,10 @@ export default {
       margin-left: $btn-margins;
       margin-right: $btn-margins;
     }
+  }
+
+  .sidebar {
+    padding-left: 0;
   }
 
 </style>
