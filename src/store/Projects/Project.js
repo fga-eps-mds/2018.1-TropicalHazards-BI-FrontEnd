@@ -3,10 +3,12 @@
 import Vue from 'vue'
 const SET_PROJECTS = 'SET_PROJECTS'
 const UPDATE_CURRENT_PROJECT = 'UPDATE_CURRENT_PROJECT'
+const UPDATE_CURRENT_PROJECT_FIELDS = 'UPDATE_CURRENT_PROJECT_FIELDS'
 
 const state = {
     projects: [],
-    currentProject: null
+    currentProject: null,
+    currentProjectFields: []
 }
 
 const getters = {
@@ -18,6 +20,9 @@ const getters = {
     },
     getCurrentProject: state=>{
         return state.currentProject
+    },
+    getCurrentProjectFields: state=>{
+        return state.currentProjectFields
     }
 }
 
@@ -28,6 +33,9 @@ const mutations = {
     },
     [UPDATE_CURRENT_PROJECT](state, payload){
         state.currentProject = payload
+    },
+    [UPDATE_CURRENT_PROJECT_FIELDS](state, payload){
+        state.currentProjectFields = payload
     }
 }
 
@@ -45,11 +53,22 @@ const actions = {
     },
     updateCurrentProject({commit}, projectId){
         return new Promise((resolve, reject)=>{
-            Vue.http.get("projects/" + projectId, {headers : {"content-type": "application/json"}}).then(response=>{
+            Vue.http.get("projects/" + projectId + "/", {headers : {"content-type": "application/json"}}).then(response=>{
                 commit(UPDATE_CURRENT_PROJECT, response.data)
                 resolve()
             },
             error =>{
+                reject()
+            })
+        })
+    },
+    loadCurrentProjectFields({commit}, dashboardId){
+        return new Promise((resolve, reject)=>{
+            Vue.http.get("metabase/" + dashboardId + "/fields", { headers: { "Authorization": localStorage.token}}).then(response=>{
+                commit(UPDATE_CURRENT_PROJECT_FIELDS, response.data.fields)
+                resolve()
+            },
+            error=>{
                 reject()
             })
         })
