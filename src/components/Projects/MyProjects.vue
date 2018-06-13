@@ -12,36 +12,37 @@
             <hr>
             <ul class="list-inline">
               <li
-                class="list-inline-item"
-                v-for="tag in tags"
-                :key="tag.id">
+                v-for="tag in getTags"
+                :key="tag.id"
+                class="list-inline-item">
                 <span class="badge badge-primary btn-blue">
-                  {{ tag }}
+                  {{ tag.slug }}
                 </span>
               </li>
             </ul>
           </header>
           <hr>
-            <div class="container">
-              <form>
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control">
-                  <div class="input-group-append">
-                    <button
-                      class="btn btn-green">
-                      <span class="fa fa-search"/>
-                    </button>
-                  </div>
+          <div class="container">
+            <form>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control">
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-green">
+                    <span class="fa fa-search"/>
+                  </button>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
+          </div>
           <hr>
           <section>
-            <div class="row">
-                <!-- v-for="project in projects"
-                :key="project.id" -->
+            <div
+              v-for="project in getProjects"
+              :key="project.id"
+              class="row">
               <div
                 class="card col col-md-6">
                 <h5 class="card-header">
@@ -76,8 +77,8 @@
 </template>
 
 <script>
-import { required, minLength, maxLength } from "vuelidate/lib/validators"
-
+// import { required, minLength, maxLength } from "vuelidate/lib/validators"
+import { mapGetters } from "vuex"
 import Navbar from "@/components/Utils/Navbar"
 import Footer from "@/components/Utils/Footer"
 import Sidebar from "@/components/Utils/SideBar"
@@ -91,26 +92,33 @@ export default {
 
     data () {
         return {
-            tags: [
-                // get all tags here
-                "asgdas",
-                "asuiduhiad",
-                "asgdas",
-                "asuiduhiad",
-                "asgdas",
-                "asuiduhiad",                
-            ],
+            tags: "",
+            project: "",
 
-            project: {
-                name: "projeto teste",
-                description: "lorem ipsum dolor sit amet",
-                dashboards: 5
-            },
-            
-            projects: [
-                // all projects
-                // project
-            ],
+            projects: [],
+        }
+    },
+    computed: {
+        ...mapGetters({
+            currentUser: "currentUser",
+            getTags: "getTags",
+            getProjects: "getProjects"
+        })
+
+    },
+    beforeMount ()
+    {
+        this.loadProjects()
+        this.loadTags()
+    },
+    methods: {
+        loadProjects ()
+        {
+            this.$store.dispatch("loadProjects")
+        },
+        loadTags ()
+        {
+            this.$store.dispatch("loadTags")
         }
     }
 
@@ -119,7 +127,7 @@ export default {
 
 <style lang="scss" scoped>
   @import '../styles/base.scss';
-  
+
   .row {
     margin-left: 0;
 
