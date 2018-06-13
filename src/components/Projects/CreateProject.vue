@@ -74,7 +74,7 @@
           </div>
         </div>
         <div class="row">
-          <custom-footer></custom-footer>
+          <custom-footer/>
         </div>
       </div>
     </div>
@@ -213,7 +213,7 @@ export default {
   }
 
   form {
-    background-color: $background-color;
+    background-color: #eee;
     color: $text-color;
     padding: 2em;
     border-radius: 5px;
