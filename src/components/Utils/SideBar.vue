@@ -5,8 +5,13 @@
         <span class="fa fa-user"/>
         <!-- {{ (user.username == '') ? 'username' : user.username }} -->
         {{ user.username }}
-
       </h6>
+      <span class="fa fa-sign-out"/>
+      <a
+        class=" btn-large blue lighten-1 white-text waves-effect waves-light"
+        v-on:
+        @click="logout()">
+        Sair</a>
       <h6 class="text-muted">
         <span class="mr-auto fa fa-gear"/>
         <small>
