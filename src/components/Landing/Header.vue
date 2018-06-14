@@ -1,32 +1,33 @@
 <template>
-<div>
-  <Navbar/>
-  <header>
-    <div class="filter container-fluid text-center">
-      <h1 class="motto clearfix"> Contribua. Compartilhe. <b>Observ</b>. </h1>
-      <p class="h3 clearfix">
-        {{ briefResume }}
-      </p>
-      <div class="input-group">
-        <input
-          v-model="searchArg"
-          type="text"
-          name="search-dashes-field"
-          class="form-control"
-          placeholder="Descubra dashboards">
-        <div class="input-group-append">
-          <button id="search"
-            class="btn btn-primary btn-blue">
-            <p class="d-none d-md-inline-block">
-              Buscar
-            </p>
-            <span class="fa fa-search"/>
-          </button>
+  <div>
+    <Navbar/>
+    <header>
+      <div class="filter container-fluid text-center">
+        <h1 class="motto clearfix"> Contribua. Compartilhe. <b>Observ</b>. </h1>
+        <p class="h3 clearfix">
+          {{ briefResume }}
+        </p>
+        <div class="input-group">
+          <input
+            v-model="searchArg"
+            type="text"
+            name="search-dashes-field"
+            class="form-control"
+            placeholder="Descubra dashboards">
+          <div class="input-group-append">
+            <button
+              id="search"
+              class="btn btn-primary btn-blue">
+              <p class="d-none d-md-inline-block">
+                Buscar
+              </p>
+              <span class="fa fa-search"/>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
- </div> 
+    </header>
+  </div>
 </template>
 
 <script>
@@ -55,7 +56,7 @@ export default {
     background-size: cover;
     color: $text-color;
     background-color: #909090;
-    
+
 
     .filter {
       background-size: cover;
@@ -85,7 +86,7 @@ export default {
       .h3 {
         padding-bottom: 1.5em;
         font-style: italic;
-        color: #333F; 
+        color: #333F;
       }
 
       .input-group {
@@ -93,7 +94,7 @@ export default {
         margin-left: auto;
         margin-right: auto;
         z-index: 105;
-        
+
 
         input {
           color: rgba(169, 18, 219, 0.2);

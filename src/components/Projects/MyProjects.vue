@@ -31,8 +31,8 @@
                   placeholder="Pesquise por seus projetos">
                 <div class="input-group-append">
                   <button
-                    @click="searchProject()"
-                    class="btn btn-green">
+                    class="btn btn-green"
+                    @click="searchProject()">
                     <span class="fa fa-search"/> Buscar
                   </button>
                 </div>
@@ -40,7 +40,7 @@
             </form>
           </div>
           <hr>
-          <div v-if="projects.length == 0">
+          <div v-if="getMyProjects.length == 0">
             <b-jumbotron
               bg-variant="muted"
               class="text-muted">
@@ -65,7 +65,7 @@
           </div>
           <section v-else>
             <div
-              v-for="project in getProjects"
+              v-for="project in getMyProjects"
               :key="project.id"
               class="row">
               <div
@@ -122,7 +122,6 @@ export default {
         return {
             tags: "",
             project: "",
-
             projects: [],
         }
     },
@@ -130,17 +129,22 @@ export default {
         ...mapGetters({
             currentUser: "currentUser",
             getTags: "getTags",
-            getProjects: "getProjects"
+            getProjects: "getProjects",
+            getMyProjects: "getMyProjects"
         })
 
     },
     beforeMount () {
         this.loadProjects()
+        this.loadMyProjects()
         this.loadTags()
     },
     methods: {
         loadProjects () {
             this.$store.dispatch("loadProjects")
+        },
+        loadMyProjects () {
+            this.$store.dispatch("loadMyProjects")
         },
         loadTags () {
             this.$store.dispatch("loadTags")
