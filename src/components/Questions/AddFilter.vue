@@ -12,10 +12,10 @@
     </div>
 
     <!-- output from the popover interaction -->
-    <!-- <b-card title="Returned values:" v-if="input1Return && input2Return">
+    <!-- <b-card title="Returned values:" v-if="fieldReturn && operatorReturn">
       <p class="card-text" style="max-width:20rem">
-        Name: <strong>{{ input1Return }}</strong><br>
-        Color: <strong>{{ input2Return }}</strong>
+        Name: <strong>{{ fieldReturn }}</strong><br>
+        Color: <strong>{{ operatorReturn }}</strong>
       </p>
     </b-card> -->
 
@@ -29,9 +29,7 @@
       triggers="click"
       placement="auto"
       container="container"
-      @show="onShow"
-      @shown="onShown"
-      @hidden="onHidden">
+      @show="onShow">
       <template slot="title">
         <b-btn
           class="close"
@@ -45,7 +43,7 @@
       </template>
       <div>
         <b-form-group
-          :state="input1state"
+          :state="fieldState"
           horizontal
           class="mb-1"
           label="Campo"
@@ -54,13 +52,13 @@
           invalid-feedback="Campo obrigatório">
           <b-form-select
             id="pop1"
-            :state="input2state"
-            v-model="input2"
-            :options="options"
+            :state="fieldState"
+            v-model="field"
+            :options="fields"
             size="sm"/>
         </b-form-group>
         <b-form-group
-          :state="input2state"
+          :state="operatorState"
           horizontal
           class="mb-1"
           label="Operador"
@@ -69,9 +67,23 @@
           invalid-feedback="Campo obrigatório">
           <b-form-select
             id="pop2"
-            :state="input2state"
-            v-model="input2"
+            :state="operatorState"
+            v-model="operator"
             :options="options"
+            size="sm"/>
+        </b-form-group>
+        <b-form-group
+          :state="valueState"
+          horizontal
+          class="mb-1"
+          label="Valor"
+          label-for="pop3"
+          description="Escolha um valor"
+          invalid-feedback="Campo obrigatório">
+          <b-form-input
+            id="pop3"
+            :state="valueState"
+            v-model="value"
             size="sm"/>
         </b-form-group>
         <b-btn
@@ -88,15 +100,18 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
+
 export default {
     data () {
         return {
-            input1: "",
-            input1state: null,
-            input2: "",
-            input2state: null,
+            field: "",
+            fieldState: null,
+            operator: "",
+            operatorState: null,
+            value: "",
+            valueState: null,
             options: [
-                {text: "- Choose 1 -", value: ""},
                 {text: "Igual", value: "="},
                 {text: "Diferente de", value: "!="},
                 {text: "Menor que", value: "<"},
@@ -104,20 +119,31 @@ export default {
                 {text: "Menor ou igual que", value: "<="},
                 {text: "Maior ou igual que", value: ">="},
                 {text: "É nulo", value: "is-null"},
-                {text: "Não é nulo", value: "not-null"},
-                {text: "Entre", value: "between"}],
-            popoverShow: false
+                {text: "Não é nulo", value: "not-null"}],
+            // {text: "Entre", value: "between"}]
+            popoverShow: false,
+            filterClause: []
         }
     },
+    computed :{
+        ...mapGetters({
+            fields: "getCurrentProjectFields"
+        })
+    },
     watch: {
-        input1 (val) {
+        field (val) {
             if (val) {
-                this.input1state = true
+                this.fieldState = true
             }
         },
-        input2 (val) {
+        operator (val) {
             if (val) {
-                this.input2state = true
+                this.operatorState = true
+            }
+        },
+        value (val){
+            if (val){
+                this.valueState = true
             }
         }
     },
@@ -126,42 +152,44 @@ export default {
             this.popoverShow = false
         },
         onOk () {
-            if (!this.input1) { this.input1state = false }
-            if (!this.input2) { this.input2state = false }
-            if (this.input1 && this.input2) {
+            if (!this.field) { this.fieldState = false }
+            if (!this.operator) { this.operatorState = false }
+            if (!this.value) { this.valueState = false}
+            if (this.field && this.operator && this.value) {
                 this.onClose()
-                /* "Return" our popover "form" results */
+                this.filterClause.push(this.operator, ["field-id", this.field], this.value)
+                console.log(this.filterClause)
             }
         },
         onShow () {
             /* This is called just before the popover is shown */
             /* Reset our popover "form" variables */
-            this.input1 = ""
-            this.input2 = ""
-            this.input1state = null
-            this.input2state = null
-            this.input1Return = ""
-            this.input2Return = ""
+            this.field = ""
+            this.operator = ""
+            this.fieldState = null
+            this.operatorState = null
+            this.fieldReturn = ""
+            this.operatorReturn = ""
             this.$store.dispatch("loadCurrentProjectFields", 4)
         },
-        onShown () {
-            /* Called just after the popover has been shown */
-            /* Transfer focus to the first input */
-            this.focusRef(this.$refs.input1)
-        },
-        onHidden () {
-            /* Called just after the popover has finished hiding */
-            /* Bring focus back to the button */
-            this.focusRef(this.$refs.button)
-        },
-        focusRef (ref) {
-            /* Some references may be a component, functional component, or plain element */
-            /* This handles that check before focusing, assuming a focus() method exists */
-            /* We do this in a double nextTick to ensure components have updated & popover positioned first */
-            this.$nextTick(() => {
-                this.$nextTick(() => { (ref.$el || ref).focus() })
-            })
-        }
+        // onShown () {
+        //     /* Called just after the popover has been shown */
+        //     /* Transfer focus to the first input */
+        //     this.focusRef(this.$refs.field)
+        // },
+        // onHidden () {
+        //     /* Called just after the popover has finished hiding */
+        //     /* Bring focus back to the button */
+        //     this.focusRef(this.$refs.button)
+        // },
+        // focusRef (ref) {
+        //     /* Some references may be a component, functional component, or plain element */
+        //     /* This handles that check before focusing, assuming a focus() method exists */
+        //     /* We do this in a double nextTick to ensure components have updated & popover positioned first */
+        //     this.$nextTick(() => {
+        //         this.$nextTick(() => { (ref.$el || ref).focus() })
+        //     })
+        // }
     }
 }
 </script>
