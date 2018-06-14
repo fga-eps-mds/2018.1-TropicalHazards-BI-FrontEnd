@@ -6,12 +6,16 @@
         {{ (user.username == '') ? 'username' : user.username }}
         {{ user.username }}
       </h6>
-      <span class="fa fa-sign-out"/>
-      <a
-        class=" btn-large blue lighten-1 white-text waves-effect waves-light"
-        v-on:
-        @click="logout()">
-        Sair</a>
+      <h6>
+        <small>
+          <a
+            class=""
+            @click="logout()">
+            <span class="fa fa-sign-out"/>
+            Sair
+          </a>
+        </small>
+      </h6>
       <h6 class="text-muted">
         <span class="mr-auto fa fa-gear"/>
         <small>
@@ -34,7 +38,7 @@
     <hr>
     <ul class="list-group text-capitalize">
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'Home' }"
         class="list-group-item">
         <span class="fa fa-home"/> home
       </router-link>
@@ -55,12 +59,12 @@
         <span class="fa fa-folder"/> Projetos
       </div>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'MyProjects' }"
         class="list-group-item">
         Meus Projetos
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'CreateProject' }"
         class="list-group-item">
         Novo Projeto
       </router-link>
