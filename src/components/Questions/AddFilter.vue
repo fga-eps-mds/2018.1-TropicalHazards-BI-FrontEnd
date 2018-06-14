@@ -93,7 +93,7 @@
         <b-btn
           size="sm"
           variant="primary"
-          @click="onOk">Ok</b-btn>
+          @click="addFilter">Ok</b-btn>
       </div>
     </b-popover>
   </div>
@@ -151,14 +151,14 @@ export default {
         onClose () {
             this.popoverShow = false
         },
-        onOk () {
+        addFilter () {
             if (!this.field) { this.fieldState = false }
             if (!this.operator) { this.operatorState = false }
             if (!this.value) { this.valueState = false}
             if (this.field && this.operator && this.value) {
                 this.onClose()
                 this.filterClause.push(this.operator, ["field-id", this.field], this.value)
-                console.log(this.filterClause)
+                this.$emit("createdFilter", this.filterClause)
             }
         },
         onShow () {
@@ -170,6 +170,7 @@ export default {
             this.operatorState = null
             this.fieldReturn = ""
             this.operatorReturn = ""
+            this.filterClause = []
             this.$store.dispatch("loadCurrentProjectFields", 4)
         },
         // onShown () {
