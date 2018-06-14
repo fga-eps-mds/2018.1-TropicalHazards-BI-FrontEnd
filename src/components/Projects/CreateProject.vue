@@ -60,7 +60,7 @@
                 <div class="row">
                   <button
                     class="col btn btn-green btn-block btn-lg"
-                    @click="PostProject()">
+                    @click="postProject()">
                     <span class="fa fa-check"/> Salvar
                   </button>
                   <router-link
@@ -163,7 +163,7 @@ export default {
         },
 
 
-        PostProject () {
+        postProject () {
             this.project.tags = this.selectedTags
             this.$http.post("projects/",this.project, {
                 headers: {
@@ -173,7 +173,7 @@ export default {
             }
             ).then(result => {
                 this.projeto = result.data
-                this.postSucess(result)
+                this.postSuccess(result)
             },
             error => {
                 error.log(error)
@@ -193,12 +193,12 @@ export default {
             })
         },
 
-        postSucess () {
+        postSuccess () {
             window.alert("Projeto criado com Sucesso")
             this.$router.replace("/home")
         },
 
-        CreateFail () {
+        createFail () {
             window.confirm("Falha na criação do projeto")
         },
     },

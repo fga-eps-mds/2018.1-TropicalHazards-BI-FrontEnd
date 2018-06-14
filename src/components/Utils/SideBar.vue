@@ -34,7 +34,7 @@
     <hr>
     <ul class="list-group text-capitalize">
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'Home' }"
         class="list-group-item">
         <span class="fa fa-home"/> home
       </router-link>
@@ -55,12 +55,12 @@
         <span class="fa fa-folder"/> Projetos
       </div>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'MyProjects' }"
         class="list-group-item">
         Meus Projetos
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'CreateProject' }"
         class="list-group-item">
         Novo Projeto
       </router-link>
