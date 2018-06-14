@@ -6,12 +6,16 @@
         {{ (user.username == '') ? 'username' : user.username }}
         {{ user.username }}
       </h6>
-      <span class="fa fa-sign-out"/>
-      <a
-        class=" btn-large blue lighten-1 white-text waves-effect waves-light"
-        v-on:
-        @click="logout()">
-        Sair</a>
+      <h6>
+        <small>
+          <a
+            class=""
+            @click="logout()">
+            <span class="fa fa-sign-out"/>
+            Sair
+          </a>
+        </small>
+      </h6>
       <h6 class="text-muted">
         <span class="mr-auto fa fa-gear"/>
         <small>

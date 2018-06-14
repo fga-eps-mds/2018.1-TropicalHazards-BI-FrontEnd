@@ -24,21 +24,46 @@
           <hr>
           <div class="container">
             <form>
-              <div class="input-group">
+              <div class="input-group input-group-sm">
                 <input
                   type="text"
-                  class="form-control">
+                  class="form-control"
+                  placeholder="Pesquise por seus projetos">
                 <div class="input-group-append">
                   <button
+                    @click="searchProject()"
                     class="btn btn-green">
-                    <span class="fa fa-search"/>
+                    <span class="fa fa-search"/> Buscar
                   </button>
                 </div>
               </div>
             </form>
           </div>
           <hr>
-          <section>
+          <div v-if="projects.length == 0">
+            <b-jumbotron
+              bg-variant="muted"
+              class="text-muted">
+              <template
+                slot="header">
+                Oooops
+              </template>
+              <template
+                slot="lead">
+                Me parece que você ainda não possui nenhum projeto...
+              </template>
+              <p>
+                Não se preocupe, você ainda pode criar um projeto e começar sua
+                jornada conosco!
+              </p>
+              <router-link
+                :to="{ name: 'CreateProject' }"
+                class="btn btn-blue ml-auto">
+                <span class="fa fa-plus"/> Novo projeto
+              </router-link>
+            </b-jumbotron>
+          </div>
+          <section v-else>
             <div
               v-for="project in getProjects"
               :key="project.id"
@@ -52,9 +77,9 @@
                   <p class="card-text">
                     {{ project.description }}
                   </p>
-                  <!-- link this to the project detail -->
+                  <!-- needs to link to the project -->
                   <router-link
-                    :to="{name: 'ProjectDetail'}"
+                    :to="{ name: 'ProjectDetail' }"
                     class="btn btn-sm btn-blue mr-auto">
                     <span class="fa fa-search"/> Visualizar
                   </router-link>
@@ -77,17 +102,20 @@
 </template>
 
 <script>
-// import { required, minLength, maxLength } from "vuelidate/lib/validators"
 import { mapGetters } from "vuex"
+
 import Navbar from "@/components/Utils/Navbar"
 import Footer from "@/components/Utils/Footer"
 import Sidebar from "@/components/Utils/SideBar"
+
+import bJumbotron from "bootstrap-vue/es/components/jumbotron/jumbotron"
 
 export default {
     components: {
         Navbar,
         "custom-footer": Footer,
         "sidebar": Sidebar,
+        "b-jumbotron":bJumbotron,
     },
 
     data () {
@@ -106,18 +134,15 @@ export default {
         })
 
     },
-    beforeMount ()
-    {
+    beforeMount () {
         this.loadProjects()
         this.loadTags()
     },
     methods: {
-        loadProjects ()
-        {
+        loadProjects () {
             this.$store.dispatch("loadProjects")
         },
-        loadTags ()
-        {
+        loadTags () {
             this.$store.dispatch("loadTags")
         }
     }
