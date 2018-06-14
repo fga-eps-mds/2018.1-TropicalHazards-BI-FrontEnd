@@ -1,7 +1,7 @@
 <template>
   <div class="light-bg">
     <Header/>
-     <div class="container text-center">
+    <div class="container text-center">
       <h4>
         O <b>OBSERV</b> é um observatório de dados com interpretação de dados,
         geração de indicadores e gráficos.
@@ -11,10 +11,10 @@
           Nosso propósito é te ajudar na visualização
           dos indicadores e dados da sua pesquisa ou projeto.
         </small>
-      </h4> 
-    </div> 
+      </h4>
+    </div>
     <!-- add carousel when getter function is complete -->
-   <Carousel/> 
+    <!-- <Carousel/>  -->
     <RefBar/>
     <About/>
     <Footer/>

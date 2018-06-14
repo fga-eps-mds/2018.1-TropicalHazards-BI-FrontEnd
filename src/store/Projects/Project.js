@@ -2,11 +2,13 @@
 /* eslint-disable */
 import Vue from 'vue'
 const SET_PROJECTS = 'SET_PROJECTS'
+const SET_MYPROJECTS = 'SET_MYPROJECTS'
 const UPDATE_CURRENT_PROJECT = 'UPDATE_CURRENT_PROJECT'
 const UPDATE_CURRENT_PROJECT_FIELDS = 'UPDATE_CURRENT_PROJECT_FIELDS'
 
 const state = {
     projects: [],
+    MyProjects: [],
     currentProject: null,
     currentProjectFields: []
 }
@@ -14,6 +16,9 @@ const state = {
 const getters = {
     getProjects: state =>{
         return state.projects
+    },
+    getMyProjects: state =>{
+        return state.MyProjects
     },
     getProjectsLength: state =>{
         return state.projects.length
@@ -31,6 +36,10 @@ const mutations = {
         // Vue.set(state, projects, payload) - EVENTO PARA GERAR REATIVIDADE MAYBE
         state.projects = payload
     },
+    [SET_MYPROJECTS](state, payload){
+        // Vue.set(state, projects, payload) - EVENTO PARA GERAR REATIVIDADE MAYBE
+        state.MyProjects = payload
+    },
     [UPDATE_CURRENT_PROJECT](state, payload){
         state.currentProject = payload
     },
@@ -44,6 +53,18 @@ const actions = {
         return new Promise((resolve, reject)=>{
             Vue.http.get("projects/", { headers: { "content-type": "application/json" } }).then(response => {
                 commit(SET_PROJECTS, response.data)
+                console.log(localStorage.token)
+                resolve()
+            },
+            error => {
+                reject()
+            })
+        })
+    },
+    loadMyProjects ({commit}){
+        return new Promise((resolve, reject)=>{
+            Vue.http.get("projects/user/", { headers: { "Authorization": "JWT " + localStorage.token, "content-type": "application/json"}}).then(response => {
+                commit(SET_MYPROJECTS, response.data)
                 resolve()
             },
             error => {
@@ -64,7 +85,7 @@ const actions = {
     },
     loadCurrentProjectFields({commit}, dashboardId){
         return new Promise((resolve, reject)=>{
-            Vue.http.get("metabase/" + dashboardId + "/fields", { headers: { "Authorization": localStorage.token}}).then(response=>{
+            Vue.http.get("metabase/" + dashboardId + "/fields", { headers: { "Authorization": "JWT " + localStorage.token, "content-type": "application/json"}}).then(response=>{
                 commit(UPDATE_CURRENT_PROJECT_FIELDS, response.data.fields)
                 resolve()
             },
