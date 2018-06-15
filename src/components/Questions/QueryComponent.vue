@@ -4,7 +4,9 @@
       <filter-button
         :fields="fields"
         @createdFilter="addFilterClause"/>
-      <aggregation :fields="fields" />
+      <aggregation
+        :fields="fields"
+        @updateAggregation="updateAggregation"/>
     </div>
   </div>
 </template>
@@ -25,9 +27,10 @@ export default {
                 filter: [
                     "AND"
                 ],
-                aggregation: [],
                 breakout: [],
-            }
+            },
+            aggregation: [],
+
         }
     },
     computed: {
@@ -43,7 +46,8 @@ export default {
             this.query.filter.push(value)
         },
         updateAggregation(value){
-            this.query.aggregation[0] = value
+            this.aggregation = value
+            console.log(this.aggregation[0], this.aggregation[1])
         }
     }
 }

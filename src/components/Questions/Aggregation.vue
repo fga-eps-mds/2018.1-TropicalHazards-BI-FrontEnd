@@ -57,26 +57,35 @@ export default {
             field: "",
             fieldEnabled: false,
             operator: "",
-            aggregation: []
+            aggregationClause: [],
         }
     },
     watch: {
         operator (val){
             if(val != ""){
                 this.fieldEnabled = true
+                this.emitAggregation()
                 return
             }
+            this.emitAggregation()
             this.fieldEnabled = false
             return
+        },
+        field(){
+            this.emitAggregation()
         }
     },
     methods: {
         emitAggregation(){
-            if(this.operator != "" && this.operator != "count"){
+            if(this.operator != ""){
                 if(this.field != ""){
-                    return
+                    this.aggregationClause[0] = this.operator
+                    this.aggregationClause[1] = this.field
                 }
+            }else{
+                this.aggregationClause = []
             }
+            this.$emit("updateAggregation", this.aggregationClause)
         }
     }
 }
