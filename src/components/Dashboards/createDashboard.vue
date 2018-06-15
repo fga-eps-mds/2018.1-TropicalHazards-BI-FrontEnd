@@ -57,7 +57,7 @@ export default {
     components: {
         "sidebar": SideBar
     },
-    data(){
+    data () {
 
         return {
             project: {
@@ -89,7 +89,6 @@ export default {
     beforeMount() {
         this.loadUserInfo()
         this.getProjectDetail()
-
     },
     methods: {
         loadUserInfo (){

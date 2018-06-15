@@ -48,6 +48,7 @@ const actions = {
       return new Promise((resolve, reject) => {
           Vue.http.post("rest-auth/login/", user, { headers: { "content-type": "application/json" } }).then(response => {
             commit(LOGIN, response.data.token)
+            localStorage.token = response.data.token
             resolve()
         },
           error => {
