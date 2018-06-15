@@ -70,35 +70,30 @@
         Observ
       </h4>
       <h6 class="text-center">
-        <!-- pegar o nome do currentUser -->
         Seja bem vindo
-        <!-- {{ currentUser.name }}! -->
       </h6>
       <ul class="list-inline mx-auto text-center text-capitalize">
         <router-link
-          :to="{ name: '' }"
+          :to="{ name: 'HomePage' }"
           tag="li"
           class="list-inline-item">
           <span class="fa fa-home"/>  home
         </router-link>
         <router-link
-          :to="{ name: '' }"
+          :to="{ name: 'MyProjects' }"
           tag="li"
           class="list-inline-item">
           <span class="fa fa-folder"/> projetos
         </router-link>
         <router-link
-          :to="{ name: '' }"
+          :to="{ name: 'Dashboards' }"
           tag="li"
           class="list-inline-item">
           <span class="fa fa-pie-chart"/> dashboards
         </router-link>
-        <router-link
-          :to="{ name: '' }"
-          tag="li"
-          class="list-inline-item">
+        <a class="list-inline-item">
           <span class="fa fa-github"/>  github
-        </router-link>
+        </a>
       </ul>
     </div>
   </footer>

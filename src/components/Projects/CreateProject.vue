@@ -85,7 +85,7 @@
 import { mapGetters } from "vuex"
 import { required, minLength, maxLength } from "vuelidate/lib/validators"
 
-import SideBar from "@/components/Utils/SideBar"
+import Sidebar from "@/components/Utils/Sidebar"
 import Footer from "@/components/Utils/Footer"
 import Navbar from "@/components/Utils/Navbar"
 
@@ -93,7 +93,7 @@ export default {
 
     components: {
         Navbar,
-        "sidebar": SideBar,
+        "sidebar": Sidebar,
         "custom-footer": Footer
     },
     data () {

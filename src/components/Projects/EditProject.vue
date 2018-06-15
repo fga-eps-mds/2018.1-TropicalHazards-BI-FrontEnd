@@ -1,131 +1,239 @@
 <template>
-  <div id="app">
-    <div class="row grey lighten-4">
-      <sidebar/>
-      <div
-        id="content"
-        class="col m11">
-        <div class="header center-align white">
-          <h3>
-            {{ project.name }}
-          </h3>
-        </div>
-        <div class="container center-align">
+  <div id="background">
+    <Navbar/>
+    <div class="row">
+      <sidebar class="col-md-2 sidebar"/>
+      <div class="col col-md-10 content">
+        <div class="container-fluid">
+          <header>
+            <h2>
+              Editar projeto
+            </h2>
+          </header>
           <div class="row">
-            <div class="">
-              <div class="card grey lighten-3">
-                <div class="card-content black-text">
-                  <span style="color: grey;"><h4>Descrição</h4></span>
-                  <p style="text-align:justify">{{ project.description }}</p>
+            <div class="col col-md-6 offset-md-3">
+              <form>
+                <div class="form-group">
+                  <label for="p-name">
+                    Nome do projeto:
+                  </label>
+                  <input
+                    id="p-name"
+                    v-model.trim="$v.project.name.$model"
+                    type="text"
+                    class="form-control"
+                    placeholder="Ex.: Dengue no DF">
                 </div>
-              </div>
+                <div class="form-group">
+                  <label for="p-description">
+                    Descrição:
+                  </label>
+                  <textarea
+                    id="p-description"
+                    v-model.trim="$v.project.description.$model"
+                    class="form-control"
+                    rows="6"
+                    placeholder="Descrição que aparecerá no seu projeto"/>
+                </div>
+                <div class="form-group">
+                  <p>
+                    Tags do projeto
+                  </p>
+                  <div
+                    v-for="(tag, index) in tags"
+                    :tag="tag"
+                    :index="index"
+                    :key="tag + index"
+                    class="form-check form-check-inline">
+                    <input
+                      :id="'inlineCheckbox' + index"
+                      :value="tag.slug"
+                      class="form-check-input"
+                      type="checkbox">
+                    <label
+                      :for="'inlineCheckbox' + index"
+                      class="form-check-label">
+                      {{ tag.name }}
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <button
+                    class="col btn btn-green btn-block btn-lg"
+                    @click="postProject()">
+                    <span class="fa fa-check"/> Salvar
+                  </button>
+                  <router-link
+                    :to="{ name: 'MyProjects' }"
+                    class="col btn btn-grey btn-block mt-0 btn-lg">
+                    <span class="fa fa-undo"/> Voltar
+                  </router-link>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-        <form>
-          <div class="container center-align">
-            <div class="row">
-              <div class="input-field col s12">
-                <input
-                  id="name"
-                  v-model="project.name"
-                  type="text"
-                  class="validate">
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <textarea
-                  id="deion"
-                  v-model="project.description"
-                  class="materialize-textarea"/>
-              </div>
-            </div>
-            <router-link
-              :to="{ name: 'ProjectDetail' , params: { id: project.id }}"
-              class=" btn-large grey lighten-1 white-text waves-effect waves-light">
-              Cancelar
-            </router-link>
-            <a
-              class=" btn-large blue lighten-1 white-text waves-effect waves-light"
-              v-on:
-              @click="updateProject()">
-              Atualizar
-            </a>
-          </div>
-        </form>
+        <div class="row">
+          <custom-footer/>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex"
-import SideBar from "@/components/Utils/SideBar"
-export default {
-    components: {
-        "sidebar": SideBar
-    },
+import { mapGetters } from "vuex"
+import { required, minLength, maxLength } from "vuelidate/lib/validators"
 
+import Sidebar from "@/components/Utils/Sidebar"
+import Footer from "@/components/Utils/Footer"
+import Navbar from "@/components/Utils/Navbar"
+
+export default {
+
+    components: {
+        Navbar,
+        "sidebar": Sidebar,
+        "custom-footer": Footer
+    },
     data () {
+
         return {
+            importData: {},
+            headers: [],
             project: {
+                user: "",
                 name: "",
                 description: "",
-                email: ""
+                tags: []
+
             },
-            response_get: "",
+            selectedTags: [],
+            tags: {
+                name: "",
+                slug: ""
+            },
+            user: {
+                username: "",
+                email: "",
+                password: ""
+            },
+
+            projects: "",
         }
     },
+
+    validations: {
+        project: {
+            name: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(100)
+            },
+            description: {
+                required,
+                minLength: minLength(8),
+                maxLength: maxLength(500)
+            }
+        }
+    },
+
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
 
-    beforeMount(){
+    beforeMount () {
         this.loadUserInfo()
-        this.testToken()
+        this.loadProject()
     },
-    created(){
-        this.getProjectDetail()
+
+    created () {
+        this.getTags()
     },
+
     methods: {
-        loadUserInfo (){
+        loadUserInfo () {
             this.user.id = this.currentUser.id
             this.user.username = this.currentUser.name
             this.user.email = this.currentUser.email
         },
-        getProjectDetail (){
-            this.$http.get("projects/" + this.$route.params.id + "/",  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
-                this.project = result.data
+
+        loadProject () {
+            this.project.user = this.currentUser.id
+        },
+
+
+        postProject () {
+            this.project.tags = this.selectedTags
+            this.$http.put("projects/",this.project, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(result => {
+                this.projeto = result.data
+                this.postSuccess(result)
             },
             error => {
                 error.log(error)
             })
         },
 
-        updateProject (){
-            this.$http.put("projects/" + this.$route.params.id + "/", this.project,
-                { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
-                window.alert("Projeto atualizado")
-                this.response_get = result.data
-                this.$router.push("/project/detail/" + this.$route.params.id + "/")
+        getTags () {
+            this.$http.get("tags/", {
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(result => {
+                this.tags = result.data
             },
             error => {
                 error.log(error)
             })
         },
-        testToken(){
-            this.$http.post("obtain-token/", { "username": this.user.username, "password": this.user.password}).then(result => {
-                localStorage.token = result.data.token
-            })
-        }
+
+        postSuccess () {
+            window.alert("Projeto editado com Sucesso")
+            this.$router.replace("/projects/detail/" + this.project.id)
+        },
+
+        createFail () {
+            window.confirm("Falha na edição do projeto")
+        },
     },
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  @import '../styles/base.scss';
 
-::placeholder { /* Most modern browsers support this now. */
-   color:    #132a71;
-}
+  .row {
+    margin-left: 0;
+  }
+
+  form {
+    background-color: #eee;
+    color: $text-color;
+    padding: 2em;
+    border-radius: 5px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    .btn {
+      $btn-margins: 4px;
+      margin-left: $btn-margins;
+      margin-right: $btn-margins;
+    }
+  }
+
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .sidebar {
+    padding-left: 0;
+  }
+
 </style>

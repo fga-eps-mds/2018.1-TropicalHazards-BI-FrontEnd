@@ -31,7 +31,7 @@
                   placeholder="Pesquise por seus projetos">
                 <div class="input-group-append">
                   <button
-                    class="btn btn-green"
+                    class="btn btn-success"
                     @click="searchProject()">
                     <span class="fa fa-search"/> Buscar
                   </button>
@@ -40,17 +40,26 @@
             </form>
           </div>
           <hr>
-          <div v-if="getMyProjects.length == 0">
+          <div class="container pb-3">
+            <router-link
+              :to="{ name: 'CreateProject' }"
+              class="btn btn-blue btn">
+              <span class="fa fa-plus"/> Criar Projeto
+            </router-link>
+          </div>
+          <div
+            v-if="getMyProjects.length == 0"
+            class="container">
             <b-jumbotron
               bg-variant="muted"
               class="text-muted">
               <template
                 slot="header">
-                Oooops
+                Nada aqui... ainda
               </template>
               <template
                 slot="lead">
-                Me parece que você ainda não possui nenhum projeto...
+                Parece que você ainda não possui nenhum projeto...
               </template>
               <p>
                 Não se preocupe, você ainda pode criar um projeto e começar sua
@@ -77,7 +86,6 @@
                   <p class="card-text">
                     {{ project.description }}
                   </p>
-                  <!-- needs to link to the project -->
                   <router-link
                     :to="{ name: 'ProjectDetail' }"
                     class="btn btn-sm btn-blue mr-auto">
@@ -106,7 +114,7 @@ import { mapGetters } from "vuex"
 
 import Navbar from "@/components/Utils/Navbar"
 import Footer from "@/components/Utils/Footer"
-import Sidebar from "@/components/Utils/SideBar"
+import Sidebar from "@/components/Utils/Sidebar"
 
 import bJumbotron from "bootstrap-vue/es/components/jumbotron/jumbotron"
 
@@ -157,21 +165,7 @@ export default {
 <style lang="scss" scoped>
   @import '../styles/base.scss';
 
-  .row {
-    margin-left: 0;
-
-  }
-
   section {
     margin: 5em auto;
-  }
-
-  .content {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .sidebar {
-    padding-left: 0;
   }
 </style>
