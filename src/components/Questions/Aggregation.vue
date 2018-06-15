@@ -80,7 +80,7 @@ export default {
             if(this.operator != ""){
                 if(this.field != ""){
                     this.aggregationClause[0] = this.operator
-                    this.aggregationClause[1] = this.field
+                    this.aggregationClause[1] = this.field.value
                 }
             }else{
                 this.aggregationClause = []

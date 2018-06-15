@@ -7,6 +7,9 @@
       <aggregation
         :fields="fields"
         @updateAggregation="updateAggregation"/>
+      <breakout
+        :fields="fields"
+        @updateBreakout="updateBreakout" />
     </div>
   </div>
 </template>
@@ -14,23 +17,27 @@
 <script>
 import FilterButton from "./AddFilter"
 import Aggregation from "./Aggregation"
+import Breakout from "./Breakout"
+
 import { mapGetters } from "vuex"
 
 export default {
     components: {
         "filter-button": FilterButton,
-        "aggregation": Aggregation
+        "aggregation": Aggregation,
+        "breakout": Breakout
     },
     data (){
         return {
+            // PROVAVELMENTE MELHOR DEIXAR OS ELEMENTOS DE FORA DA QUERY E DAR ASSIGN NELES ANTES DE ENVIAR
+            // PRO PRÓXIMO PASSO
             query: {
-                filter: [
-                    "AND"
-                ],
+                filter: ["AND",
+                    []],
+                aggregation: [],
                 breakout: [],
             },
-            aggregation: [],
-
+            filter: []
         }
     },
     computed: {
@@ -43,11 +50,27 @@ export default {
     },
     methods: {
         addFilterClause(value){
-            this.query.filter.push(value)
+            this.filter.push(value)
         },
         updateAggregation(value){
-            this.aggregation = value
-            console.log(this.aggregation[0], this.aggregation[1])
+            this.query.aggregation = value
+        },
+        updateBreakout(value){
+            this.query.breakout = value
+        },
+        generateQuery(){
+            if(this.filter.length == 0){
+                delete this.query.filter
+            }else{
+                Array.prototype.push.apply(this.query.filter[1], this.filter)
+            }
+            if(this.query.aggregation == 0){
+                delete this.query.aggregation
+            }
+            if(this.query.breakout == 0){
+                delete this.query.breakout
+            }
+            console.log(JSON.stringify(this.query))
         }
     }
 }
