@@ -23,7 +23,7 @@ const getters = {
     },
     getCurrentProjectFields: state=>{
         return state.currentProjectFields.map(function(field){
-            return { text: field.name, value: field.id, type: field.base_type }
+            return { text: field.name, value: { value: field.id, type: field.base_type} }
         })
     }
 }

@@ -116,7 +116,16 @@ export default {
             operatorState: null,
             value: "",
             valueState: null,
-            options: [
+            options: [],
+            stringOptions: [
+                {text: "É nulo", value: "is-null"},
+                {text: "Não é nulo", value: "not-null"},
+                {text: "Começa com", value: "starts-with"},
+                {text: "Contem", value: "contains"},
+                {text: "Não contem", value: "does-not-contain"},
+                {text: "Termina com", value: "ends-with"}
+            ],
+            numOptions: [
                 {text: "Igual", value: "="},
                 {text: "Diferente de", value: "!="},
                 {text: "Menor que", value: "<"},
@@ -124,21 +133,21 @@ export default {
                 {text: "Menor ou igual que", value: "<="},
                 {text: "Maior ou igual que", value: ">="},
                 {text: "É nulo", value: "is-null"},
-                {text: "Não é nulo", value: "not-null"}],
-            // {text: "Entre", value: "between"}]
+                {text: "Não é nulo", value: "not-null"}
+            ],
             popoverShow: false,
             filterClause: []
         }
     },
-    // computed :{
-    //     ...mapGetters({
-    //         fields: "getCurrentProjectFields"
-    //     })
-    // },
     watch: {
         field (val) {
             if (val) {
                 this.fieldState = true
+            }
+            if(this.field.type === "type/Text"){
+                this.options = this.stringOptions
+            }else{ // todo: checar fieldType para opções numéricas
+                this.options = this.numOptions
             }
         },
         operator (val) {
@@ -162,7 +171,7 @@ export default {
             if (!this.value) { this.valueState = false}
             if (this.field && this.operator && this.value) {
                 this.onClose()
-                this.filterClause.push(this.operator, ["field-id", this.field], this.value)
+                this.filterClause.push(this.operator, ["field-id", this.field.value], this.value)
                 this.$emit("createdFilter", this.filterClause)
             }
         },
@@ -176,26 +185,7 @@ export default {
             this.fieldReturn = ""
             this.operatorReturn = ""
             this.filterClause = []
-            // this.$store.dispatch("loadCurrentProjectFields", 4)
-        },
-        // onShown () {
-        //     /* Called just after the popover has been shown */
-        //     /* Transfer focus to the first input */
-        //     this.focusRef(this.$refs.field)
-        // },
-        // onHidden () {
-        //     /* Called just after the popover has finished hiding */
-        //     /* Bring focus back to the button */
-        //     this.focusRef(this.$refs.button)
-        // },
-        // focusRef (ref) {
-        //     /* Some references may be a component, functional component, or plain element */
-        //     /* This handles that check before focusing, assuming a focus() method exists */
-        //     /* We do this in a double nextTick to ensure components have updated & popover positioned first */
-        //     this.$nextTick(() => {
-        //         this.$nextTick(() => { (ref.$el || ref).focus() })
-        //     })
-        // }
+        }
     }
 }
 </script>
