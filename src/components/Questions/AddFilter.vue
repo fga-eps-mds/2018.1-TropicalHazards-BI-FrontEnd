@@ -100,9 +100,14 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
 
 export default {
+    props: {
+        fields: {
+            type: Array,
+            required: true
+        }
+    },
     data () {
         return {
             field: "",
@@ -125,11 +130,11 @@ export default {
             filterClause: []
         }
     },
-    computed :{
-        ...mapGetters({
-            fields: "getCurrentProjectFields"
-        })
-    },
+    // computed :{
+    //     ...mapGetters({
+    //         fields: "getCurrentProjectFields"
+    //     })
+    // },
     watch: {
         field (val) {
             if (val) {
@@ -171,7 +176,7 @@ export default {
             this.fieldReturn = ""
             this.operatorReturn = ""
             this.filterClause = []
-            this.$store.dispatch("loadCurrentProjectFields", 4)
+            // this.$store.dispatch("loadCurrentProjectFields", 4)
         },
         // onShown () {
         //     /* Called just after the popover has been shown */
