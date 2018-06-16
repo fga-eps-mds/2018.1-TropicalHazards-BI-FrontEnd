@@ -34,8 +34,8 @@
               class="card col col-md-6">
               <div class="embed-responsive embed-responsive-16by9">
                 <iframe
-                  class="embed-responsive-item"
                   :src="dashboard.iframe"
+                  class="embed-responsive-item"
                   frameborder="0"/>
               </div>
               <div class="card-body">
@@ -50,7 +50,6 @@
                 <p class="card-text">
                   {{ dashboard.description }}
                 </p>
-                <p></p>
                 <router-link
                   :to="{ name: 'DashboardDetail' }"
                   class="btn btn-blue btn-sm">
