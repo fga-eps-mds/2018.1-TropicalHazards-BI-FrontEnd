@@ -9,16 +9,6 @@
       <div class="col col-md-6 offset-md-3">
         <form>
           <div class="form-group">
-            <label for="p-name">
-              Nome da Question:
-            </label>
-            <input
-              id="p-name"
-              type="text"
-              class="form-control"
-              placeholder="Ex.: Gráfico de Pessoas">
-          </div>
-          <div class="form-group">
             <filter-button
               :fields="fields"
               @createdFilter="addFilterClause"/>
@@ -32,11 +22,11 @@
           <div class="row">
             <button
               class="col btn btn-green btn-block btn-lg"
-              @click="postProject()">
+              @click="generateQuery()">
               <span class="fa fa-check"/> Salvar
             </button>
             <router-link
-              :to="{ name: 'MyProjects' }"
+              :to="{ name: 'HomePage' }"
               class="col btn btn-grey btn-block mt-0 btn-lg">
               <span class="fa fa-undo"/> Voltar
             </router-link>
@@ -104,7 +94,7 @@ export default {
             if(this.query.breakout == 0){
                 delete this.query.breakout
             }
-            console.log(JSON.stringify(this.query))
+            this.$router.push({name: "AskQuestion", params: {query: this.query }})
         }
     }
 }
