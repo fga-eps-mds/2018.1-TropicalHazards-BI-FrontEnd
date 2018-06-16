@@ -1,18 +1,32 @@
 <template>
-  <div class="wrapper toggled">
-    <sidebar/>
-    <p> {{ user.username }}</p>
+  <div id="background">
+    <navbar />
+    <div class="row">
+      <sidebar class="col-md-2 sidebar"/>
+      <div class="col col-md-10 content">
+        <transition name="router-anim">
+          <router-view />
+        </transition>
+      </div>
+    </div>
+    <div class="">
+      <custom-footer/>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex"
 import SideBar from "@/components/Utils/SideBar"
+import Footer from "@/components/Utils/Footer"
+import Navbar from "@/components/Utils/Navbar"
 
 export default {
 
     components: {
         "sidebar": SideBar,
+        "navbar": Navbar,
+        "custom-footer": Footer
     },
     data () {
         return {
@@ -91,4 +105,35 @@ export default {
 #wrapper.toggled {
   padding-left: 250px;
 }
+
+  @import '../styles/base.scss';
+
+  .row {
+    margin-left: 0;
+  }
+
+  form {
+    background-color: #eee;
+    color: $text-color;
+    padding: 2em;
+    border-radius: 5px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    .btn {
+      $btn-margins: 4px;
+      margin-left: $btn-margins;
+      margin-right: $btn-margins;
+    }
+  }
+
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .sidebar {
+    padding-left: 0;
+  }
+
 </style>
