@@ -4,7 +4,6 @@
       <h2>
         Nova Question
       </h2>
-      <h3>{{ JSON.stringify(query) }}</h3>
     </header>
     <div class="row">
       <div class="col col-md-6 offset-md-3">
@@ -29,7 +28,7 @@
               v-model="question.display"
               class="form-control"
               placeholder="Ex.: Gráfico de Pessoas">
-              <options value="table">Tabela</options>
+              <option value="table">Tabela</option>
             </select>
           </div>
           <div class="row">
@@ -73,12 +72,9 @@ export default {
             dashboard: ""
         }
     },
-    beforeMount(){
-        console.log(JSON.stringify(this.query))
-    },
     methods: {
         createQuestion() {
-            this.$http.post("metabase/" + this.dashboard ,
+            this.$http.post("metabase/" + this.dashboard,
                 this.question,
                 {
                     headers:

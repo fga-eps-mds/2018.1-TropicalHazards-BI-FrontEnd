@@ -56,7 +56,7 @@ export default {
             // PROVAVELMENTE MELHOR DEIXAR OS ELEMENTOS DE FORA DA QUERY E DAR ASSIGN NELES ANTES DE ENVIAR
             // PRO PRÓXIMO PASSO
             query: {
-                filter: ["AND",
+                filter: [ "AND",
                     []],
                 aggregation: [],
                 breakout: [],

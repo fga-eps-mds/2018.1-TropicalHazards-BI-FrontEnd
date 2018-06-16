@@ -27,8 +27,6 @@
       </b-col>
     </b-form-row>
   </b-container>
-  </div>
-
 </template>
 
 <script>
@@ -78,7 +76,7 @@ export default {
             if(this.operator != ""){
                 if(this.field != ""){
                     this.aggregationClause[0] = this.operator
-                    this.aggregationClause[1] = this.field.value
+                    this.aggregationClause[1] = ["field-id", this.field.value]
                 }
             }else{
                 this.aggregationClause = []
