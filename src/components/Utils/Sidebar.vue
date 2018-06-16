@@ -1,27 +1,37 @@
 <template>
   <nav class="dark-bg side-bar-expanded">
     <div class="nav-header">
-      <h6 class="text-left">
-        <span class="fa fa-user"/>
-        {{ (user.username == '') ? 'username' : user.username }}
-        {{ user.username }}
-      </h6>
-      <h6>
-        <small>
-          <a
-            class=""
-            @click="logout()">
-            <span class="fa fa-sign-out"/>
-            Sair
-          </a>
-        </small>
-      </h6>
-      <h6 class="text-muted">
-        <span class="mr-auto fa fa-gear"/>
-        <small>
-          Configurações
-        </small>
-      </h6>
+      <div v-if="currentUser">
+        <h6 class="text-left">
+          <span class="fa fa-user"/>
+          {{ (user.username == '') ? 'username' : user.username }}
+          {{ user.username }}
+        </h6>
+        <h6>
+          <small>
+            <a
+              class=""
+              @click="logout()">
+              <span class="fa fa-sign-out"/>
+              Sair
+            </a>
+          </small>
+        </h6>
+        <h6 class="text-muted">
+          <span class="mr-auto fa fa-gear"/>
+          <small>
+            Configurações
+          </small>
+        </h6>
+      </div>
+      <div v-else
+        class="nav-header">
+        <router-link
+          :to="{ name: 'Auth' }"
+          class="text-left dark-bg h6">
+          <span class="fa fa-sign-in"/> Entrar
+        </router-link>
+      </div>
       <div class="input-group input-group-sm">
         <input
           v-model="search"
@@ -46,8 +56,9 @@
         <span class="fa fa-pie-chart"/> Dashboards
       </li>
       <router-link
+        v-if="currentUser"
         :to="{ name: '' }"
-        class="list-group-item">
+        class=" list-group-item">
         Meus Dashboards
       </router-link>
       <router-link
@@ -59,13 +70,15 @@
         <span class="fa fa-folder"/> Projetos
       </div>
       <router-link
+        v-if="currentUser"
         :to="{ name: 'MyProjects' }"
-        class="list-group-item">
+        class=" list-group-item">
         Meus Projetos
       </router-link>
       <router-link
+        v-if="currentUser"
         :to="{ name: 'CreateProject' }"
-        class="list-group-item">
+        class=" list-group-item">
         Novo Projeto
       </router-link>
       <router-link
@@ -132,9 +145,7 @@ export default {
   @import '../styles/base.scss';
 
   nav {
-    // display: block;
     min-height: 100%;
-    // max-width: 200px;
     overflow: auto;
     font-family: $text-font-family;
     letter-spacing: .1em !important;

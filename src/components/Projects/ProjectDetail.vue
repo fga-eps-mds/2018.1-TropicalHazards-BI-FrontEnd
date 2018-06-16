@@ -28,6 +28,7 @@
             <p class="text-justify">
               {{ project.description }}
             </p>
+
             <div
               v-for="dashboard in dashboards"
               :key="dashboard.id"
@@ -57,6 +58,7 @@
                 </router-link>
               </div>
             </div>
+
           </div>
         </div>
         <div class="row">
