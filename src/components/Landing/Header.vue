@@ -73,6 +73,7 @@ export default {
 
       @media (min-width: 691px) {
         padding: 11em 2.5em;
+        height: 100vh;
       }
 
     #search {

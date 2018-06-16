@@ -1,61 +1,69 @@
 <template>
-  <div class = "ListProject">
-    <div
-      id="content"
-      class="col m12" >
-      <secondnav/>
-      <div class="grey lighten-4">
-        <div class="center-align">
-          <h5> <span class="fa fa-line-chart">Estatísticas</span></h5>
+    <div id="background">
+    <Navbar/>
+    <div class="row">
+      <sidebar class="col-md-2 sidebar"/>
+      <div class="col col-md-10 content">
+        <div class="container-fluid">
+          <header>
+            <h2>
+              Projetos
+            </h2>
+          </header>
+          <hr>
           <div class="row">
-            <div class="col s12   ">
-              <div class="card ">
-                <div class="card-content ">
-                  <span class="card-title">{{ projects.length }}</span>
-                  <p>Projetos ativos</p>
+            <h5 class="col col-md-4">
+              Busca
+            </h5>
+            <form class="col col-md-8">
+              <div class="input-group">
+                <input
+                  v-model="searchArgument"
+                  class="form-control"
+                  type="text"
+                  placeholder="Busque por projetos">
+                <div class="input-group-append">
+                  <button
+                    @click="searchProject()"
+                    class="input-group-btn btn btn-green">
+                    <span class="fa fa-search"/>
+                      Buscar
+                  </button>
                 </div>
+              </div>
+            </form>
+            <hr>
+          </div>
+          <div class="row">
+            <div class="col col-md-6 offset-md-3">
+              <div class="row">
+                <div
+                v-for="project in projects"
+                :key="project.id"
+                class="card col col-md-6">
+                <h5 class="card-header">
+                  {{ project.name }}
+                </h5>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    {{ project.owner }}
+                  </h5>
+                  <p>
+                    {{ project.description }}
+                  </p>
+                  <router-link
+                    :to="{ path: '/projects/detail/' + project.id }"
+                    class="btn btn-small btn-blue">
+                    <span class="fa fa-search"/> Visualizar
+                  </router-link>
+                </div>
+              </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="custom-container">
-        <h5>Projetos</h5>
-        <div
-          id="projects"
-          class="row">
-          <div
-            v-for="project in projects"
-            :key="project.id"
-            class="col s12 m4 l3">
-            <div class="card grey lighten-5">
-              <div class="truncate card-content grey-text text-darken-2">
-                <span
-                  style="font-size:20px"
-                  class="card-title">{{ project.name }}</span>
-                <p> Descrição: {{ project.description }} </p>
-                <p> IdProjeto: {{ project.id }} </p>
-                <p> IdUser: {{ project.user }} </p>
-              </div>
-              <div class="card-action center-align grey-text text-lighten-2">
-                <router-link
-                  :to="{ name: 'ProjectDetail', params: { id: project.id } }"
-                  class="btn blue lighten-1" >
-                  <span class="fa fa-search"/>
-                </router-link>
-
-                <router-link
-                  :to="{ name: 'EditProject', params: { id: project.id } }"
-                  class="btn blue lighten-1" >
-                  <span class="fa fa-edit"/>
-                </router-link>
-
-              <!-- <a href="#delete-proj" class="modal-trigger btn red">
-                    <span class="fa fa-remove"></span>
-              </a> -->
-              </div>
-            </div>
-          </div>
+        <div class="row">
+          <custom-footer class="col"/>
         </div>
       </div>
     </div>
@@ -63,24 +71,26 @@
 </template>
 
 <script>
-import ProjectDetail from "@/components/Projects/ProjectDetail"
-import SecondNavBar from "@/components/Utils/SecondNavBar"
-import {mapGetters} from "vuex"
-import modalLogin from "@/components/Modals/modalLogin.vue"
+import { mapGetters } from "vuex"
+
+import Navbar from "@/components/Utils/Navbar"
+import Footer from "@/components/Utils/Footer"
+import SideBar from "@/components/Utils/SideBar"
+
 export default {
     components: {
-        ProjectDetail,
-        "secondnav": SecondNavBar,
-        "modal": modalLogin
+        Navbar,
+        "custom-footer": Footer,
+        "sidebar": SideBar,
     },
     data () {
         return {
-            projects: {
+            project: {
                 name: "",
                 description: ""
             },
             isModalVisible: false,
-            projetos: ""
+            projects: []
         }
     },
     computed: {
@@ -91,8 +101,8 @@ export default {
     },
     methods: {
         getProject () {
-            this.$http.get("projects/", { headers: { "content-type": "application/json" } }).then(result => {
-                this.projects = result.data
+            this.$http.get("project/", { headers: { "content-type": "application/json" } }).then(result => {
+                this.project = result.data
             },
             error => {
                 error.log(error)
@@ -102,8 +112,14 @@ export default {
 }
 </script>
 
-<style>
-::placeholder { /* Most modern browsers support this now. */
-   color:    #132a71;
-}
+<style lang="scss" scoped>
+  .row {
+    margin: 0;
+  }
+
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
 </style>
