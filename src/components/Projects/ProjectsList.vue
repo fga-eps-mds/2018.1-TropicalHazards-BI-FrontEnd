@@ -32,6 +32,20 @@
                 </div>
               </div>
             </form>
+            <ul class="list-inline">
+              <li class="list-inline-group">
+                <h5>
+                  Tags
+                </h5>
+              </li>
+              <li
+                v-for="tag in tags"
+                :key="tag.id"
+                @click="filterByTag()"
+                class="badge btn-blue">
+                {{ tag.name }}
+              </li>
+            </ul>
             <hr>
           </div>
           <div class="row">
