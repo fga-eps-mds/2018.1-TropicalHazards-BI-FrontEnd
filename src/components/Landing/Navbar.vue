@@ -11,7 +11,9 @@
         width=""
         height="25px"
         class="d-inline-block align-top">
-        Observ
+      Observ
+      class="navbar-brand dark-bg">
+      Observ
     </router-link>
     <button
       type="button"
