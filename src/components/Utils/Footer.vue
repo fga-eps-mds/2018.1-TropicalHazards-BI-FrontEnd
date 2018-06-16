@@ -1,5 +1,5 @@
 <template>
-  <footer class="dark-bg">
+  <footer class="dark-bg col">
     <div v-if="!currentUser">
       <div class="text-center text-md-left">
         <div class="row">
