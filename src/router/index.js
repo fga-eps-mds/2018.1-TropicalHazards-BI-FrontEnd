@@ -27,6 +27,7 @@ import Guard from "@/components/Auth/middleware"
 
 // Query
 import QueryComponent from "@/components/Questions/QueryComponent"
+import AskQuestion from "@/components/Questions/AskQuestion"
 
 Vue.use(Router)
 
@@ -130,6 +131,12 @@ export default new Router({
             path: "/query",
             name: "QueryComponent",
             component: QueryComponent,
+        },
+        {
+            path: "/question",
+            name: "AskQuestion",
+            component: AskQuestion,
+            props: true
         }
     ]
 })
