@@ -1,34 +1,32 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <b-form-group
-        horizontal
-        class="mb-1"
-        label="Visualizar"
-        label-for="pop"
-        description="Escolha um valor"
-        invalid-feedback="Campo obrigatório">
+  <b-container>
+    <p>Visualizar: </p>
+    <b-form-row>
+      <b-col>
         <b-form-select
           id="pop"
           :options="options"
           v-model="operator"
           size="sm"/>
-      </b-form-group>
-      <b-form-group
-        horizontal
-        class="mb-1"
-        label=""
-        label-for="pop"
-        description="Campo"
-        invalid-feedback="Campo obrigatório">
-        <b-form-select
-          id="pop"
-          :options="fields"
-          :disabled="!fieldEnabled"
-          v-model="field"
-          size="sm"/>
-      </b-form-group>
-    </div>
+      </b-col>
+      <b-col>
+        <b-form-group
+          horizontal
+          class="mb-1"
+          label=""
+          label-for="pop"
+          description="Campo"
+          invalid-feedback="Campo obrigatório">
+          <b-form-select
+            id="pop"
+            :options="fields"
+            :disabled="!fieldEnabled"
+            v-model="field"
+            size="sm"/>
+        </b-form-group>
+      </b-col>
+    </b-form-row>
+  </b-container>
   </div>
 
 </template>
@@ -45,7 +43,7 @@ export default {
     data(){
         return {
             options: [
-                {text: "Dado Cru", value: ""},
+                {text: "Dados Brutos", value: ""},
                 {text: "Média de", value: "avg"},
                 {text: "Contagem de", value: "count"},
                 {text: "Contagem Cumulativa de", value: "cum-count"},

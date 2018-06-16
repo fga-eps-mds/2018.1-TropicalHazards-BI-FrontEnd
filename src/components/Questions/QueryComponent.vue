@@ -1,18 +1,52 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
+    <header>
+      <h2>
+        Nova Question
+      </h2>
+    </header>
     <div class="row">
-      <filter-button
-        :fields="fields"
-        @createdFilter="addFilterClause"/>
-      <aggregation
-        :fields="fields"
-        @updateAggregation="updateAggregation"/>
-      <breakout
-        :fields="fields"
-        @updateBreakout="updateBreakout" />
+      <div class="col col-md-6 offset-md-3">
+        <form>
+          <div class="form-group">
+            <label for="p-name">
+              Nome da Question:
+            </label>
+            <input
+              id="p-name"
+              type="text"
+              class="form-control"
+              placeholder="Ex.: Gráfico de Pessoas">
+          </div>
+          <div class="form-group">
+            <filter-button
+              :fields="fields"
+              @createdFilter="addFilterClause"/>
+          </div>
+          <aggregation
+            :fields="fields"
+            @updateAggregation="updateAggregation"/>
+          <breakout
+            :fields="fields"
+            @updateBreakout="updateBreakout" />
+          <div class="row">
+            <button
+              class="col btn btn-green btn-block btn-lg"
+              @click="postProject()">
+              <span class="fa fa-check"/> Salvar
+            </button>
+            <router-link
+              :to="{ name: 'MyProjects' }"
+              class="col btn btn-grey btn-block mt-0 btn-lg">
+              <span class="fa fa-undo"/> Voltar
+            </router-link>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import FilterButton from "./AddFilter"

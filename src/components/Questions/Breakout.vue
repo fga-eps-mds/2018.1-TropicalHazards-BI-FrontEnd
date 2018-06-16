@@ -1,13 +1,8 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <b-form-group
-        horizontal
-        class="mb-1"
-        label="Agrupar por"
-        label-for="pop"
-        description="Campo"
-        invalid-feedback="Campo obrigatório">
+  <b-container>
+    <p>Agrupar por: </p>
+    <b-form-row>
+      <b-form-group>
         <b-form-select
           id="pop"
           :options="fields"
@@ -18,8 +13,8 @@
             value="">Não agrupar</option>
         </b-form-select>
       </b-form-group>
-    </div>
-  </div>
+    </b-form-row>
+  </b-container>
 
 </template>
 
