@@ -24,6 +24,11 @@ import editDashboard from "@/components/Dashboards/editDashboard"
 import CreateTag from "@/components/Projects/CreateTag"
 import Guard from "@/components/Auth/middleware"
 
+
+// Query
+import QueryComponent from "@/components/Questions/QueryComponent"
+import AskQuestion from "@/components/Questions/AskQuestion"
+
 Vue.use(Router)
 
 export default new Router({
@@ -120,6 +125,18 @@ export default new Router({
             name: "editDashboard",
             component: editDashboard,
             beforeEnter: Guard.auth
+        },
+        // Query
+        {
+            path: "/query",
+            name: "QueryComponent",
+            component: QueryComponent,
+        },
+        {
+            path: "/question",
+            name: "AskQuestion",
+            component: AskQuestion,
+            props: true
         }
     ]
 })
