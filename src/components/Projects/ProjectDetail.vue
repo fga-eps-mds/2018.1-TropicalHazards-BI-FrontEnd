@@ -179,4 +179,8 @@ export default {
 
 <style lang="scss" scoped>
 
+::placeholder { /* Most modern browsers support this now. */
+  color:    #132a71;
+}
+
 </style>
