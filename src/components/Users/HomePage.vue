@@ -7,10 +7,10 @@
         <transition name="router-anim">
           <router-view />
         </transition>
+        <div class="">
+          <custom-footer/>
+        </div>
       </div>
-    </div>
-    <div class="">
-      <custom-footer/>
     </div>
   </div>
 </template>

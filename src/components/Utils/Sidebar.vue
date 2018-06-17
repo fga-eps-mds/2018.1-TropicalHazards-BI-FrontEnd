@@ -51,7 +51,7 @@
         Meus Dashboards
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'DashboardsList' }"
         class="list-group-item">
         Procurar Dashboards
       </router-link>
@@ -71,7 +71,7 @@
         Novo Projeto
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'ProjectsList' }"
         class="list-group-item">
         Procurar Projetos
       </router-link>
