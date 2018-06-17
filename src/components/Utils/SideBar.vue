@@ -4,7 +4,6 @@
       <h6 class="text-left">
         <span class="fa fa-user"/>
         {{ (user.username == '') ? 'username' : user.username }}
-        {{ user.username }}
       </h6>
       <h6>
         <small>
@@ -38,7 +37,7 @@
     <hr>
     <ul class="list-group text-capitalize">
       <router-link
-        :to="{ name: 'Home' }"
+        :to="{ name: 'HomePage' }"
         class="list-group-item">
         <span class="fa fa-home"/> home
       </router-link>
@@ -51,7 +50,7 @@
         Meus Dashboards
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'DashboardsList' }"
         class="list-group-item">
         Procurar Dashboards
       </router-link>
@@ -69,7 +68,7 @@
         Novo Projeto
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'ProjectsList' }"
         class="list-group-item">
         Procurar Projetos
       </router-link>

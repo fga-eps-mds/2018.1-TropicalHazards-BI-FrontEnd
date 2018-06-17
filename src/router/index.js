@@ -16,6 +16,7 @@ import EditProject from "@/components/Projects/EditProject"
 import MyProjects from "@/components/Projects/MyProjects"
 
 // dashboards
+import DashboardsList from "@/components/Dashboards/DashboardsList"
 import DashboardDetail from "@/components/Dashboards/DashboardDetail"
 import createDashboard from "@/components/Dashboards/createDashboard"
 import editDashboard from "@/components/Dashboards/editDashboard"
@@ -103,9 +104,9 @@ export default new Router({
                 // dashboards
                 {
                     path: "/dashboards",
-                    name: "Dashboards",
+                    name: "DashboardsList",
                     // TODO: fix this
-                    component: DashboardDetail,
+                    component: DashboardsList,
                     beforeEnter: Guard.guest
                 },
                 {
