@@ -33,12 +33,12 @@
                 @click="deleteDashboard()">Deletar Dashboard
                 <span class="fa fa-trash"/>
               </button>
-              <button
+              <!-- <button
                 class = "btn-large blue"
                 @click="$modal.show('ask-question', { dashboard: dashboard.id })">Gerar indicador
                 <span class="fa fa-trash"/>
               </button>
-              <modal-question/>
+              <modal-question/> -->
             </div>
             <div class="col s12 m4">
               <div class="card">
