@@ -187,7 +187,7 @@ export default {
     }
 }
 </script>
-<style>
+<style lang="scss" scoped>
 div.content {
   height: 300px;
   overflow: auto;

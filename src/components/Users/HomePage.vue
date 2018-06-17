@@ -79,7 +79,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
