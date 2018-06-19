@@ -28,7 +28,17 @@
             Dashboards
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="currentUser">
+          Olá {{ user.username }}
+        </li>
+        <li class="nav-item" v-if="currentUser">
+          <a
+            @click="logout()"
+            class="nav-link">
+            Sair
+          </a>
+        </li>
+        <li class="nav-item" v-else>
           <router-link
             :to="{name: 'Auth'}"
             class="nav-link">
@@ -54,11 +64,19 @@ export default {
         }
     },
 
+    beforeMount () {
+        this.loadUserInfo()
+    },
+
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
 
     methods: {
+        logout () {
+            this.$store.dispatch("logout")
+            this.$router.replace("/")
+        },
         loadUserInfo() {
             this.user.id = this.currentUser.id
             this.user.username = this.currentUser.name
