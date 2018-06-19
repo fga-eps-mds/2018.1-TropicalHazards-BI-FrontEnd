@@ -76,14 +76,13 @@ const actions = {
             })
         })
     },
-    updateCurrentProject({commit}, projectId){
+    loadCurrentProject({commit}, projectId){
         return new Promise((resolve, reject)=>{
-            Vue.http.get("projects/" + projectId + "/", {headers : {"content-type": "application/json"}}).then(response=>{
-                commit(UPDATE_CURRENT_PROJECT, response.data)
-                resolve()
+            Vue.http.get("projects/" + projectId + "/", { headers: { "Authorization": "JWT " + localStorage.token,"content-type": "application/json"}}).then(response=>{
+                resolve(response.data)
             },
-            error =>{
-                reject()
+            err =>{
+                reject(err.status)
             })
         })
     },

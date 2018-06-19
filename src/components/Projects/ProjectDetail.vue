@@ -41,7 +41,7 @@
           </p>
           <ul class="list-inline">
             <li
-              v-for="tag in tags"
+              v-for="tag in project.tags"
               :key="tag.id"
               class="list-inline-item">
               <span class="badge badge-primary btn-blue">
@@ -116,7 +116,7 @@ export default {
         ...mapGetters({ currentUser: "currentUser" })
     },
 
-    beforeMount () {
+    mounted () {
         this.$store.dispatch("loadProjects")
         this.project = this.$store.getters.getProjectById(parseInt(this.$route.params.id))
         if(this.project === undefined){
@@ -148,15 +148,6 @@ export default {
                     error.log(error)
                 })
             }
-        },
-        getProject () {
-            this.$http.get("projects/", { headers:
-                    { "content-type": "application/json" } }).then(result => {
-                this.project = result.data
-            },
-            error => {
-                error.log(error)
-            })
         },
         getTags () {
             this.$http.get("tags/", { headers:

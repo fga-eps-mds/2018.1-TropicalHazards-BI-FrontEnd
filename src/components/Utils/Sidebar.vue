@@ -24,7 +24,8 @@
           </small>
         </h6>
       </div>
-      <div v-else
+      <div
+        v-else
         class="nav-header">
         <router-link
           :to="{ name: 'Auth' }"
@@ -48,7 +49,7 @@
     <hr>
     <ul class="list-group text-capitalize">
       <router-link
-        :to="{ name: 'Home' }"
+        :to="{ name: 'HomePage' }"
         class="list-group-item">
         <span class="fa fa-home"/> home
       </router-link>
