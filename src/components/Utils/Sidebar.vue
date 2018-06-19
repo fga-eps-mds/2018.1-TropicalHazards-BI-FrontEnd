@@ -1,38 +1,26 @@
 <template>
   <nav class="dark-bg side-bar-expanded">
     <div class="nav-header">
-      <div v-if="currentUser">
-        <h6 class="text-left">
-          <span class="fa fa-user"/>
-          {{ (user.username == '') ? 'username' : user.username }}
-          {{ user.username }}
-        </h6>
-        <h6>
-          <small>
-            <a
-              class=""
-              @click="logout()">
-              <span class="fa fa-sign-out"/>
-              Sair
-            </a>
-          </small>
-        </h6>
-        <h6 class="text-muted">
-          <span class="mr-auto fa fa-gear"/>
-          <small>
-            Configurações
-          </small>
-        </h6>
-      </div>
-      <div
-        v-else
-        class="nav-header">
-        <router-link
-          :to="{ name: 'Auth' }"
-          class="text-left dark-bg h6">
-          <span class="fa fa-sign-in"/> Entrar
-        </router-link>
-      </div>
+      <h6 class="text-left">
+        <span class="fa fa-user"/>
+        {{ (user.username == '') ? 'username' : user.username }}
+      </h6>
+      <h6>
+        <small>
+          <a
+            class=""
+            @click="logout()">
+            <span class="fa fa-sign-out"/>
+            Sair
+          </a>
+        </small>
+      </h6>
+      <h6 class="text-muted">
+        <span class="mr-auto fa fa-gear"/>
+        <small>
+          Configurações
+        </small>
+      </h6>
       <div class="input-group input-group-sm">
         <input
           v-model="search"
@@ -88,12 +76,14 @@
         Procurar Projetos
       </router-link>
       <a
-        href="https://github.com/fga-gpp-mds/TropicalHazards-BI"
+        href="https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI"
+        target="_blank"
         class="list-group-item">
         <span class="fa fa-github"/> github
       </a>
       <a
-        href="https://fga-gpp-mds.github.io/TropicalHazards-BI"
+        href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI/"
+        target="_blank"
         class="list-group-item">
         <span class="fa fa-book"/> docs
       </a>
