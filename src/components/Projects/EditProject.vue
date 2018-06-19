@@ -33,10 +33,12 @@
         <div class="col col-md-6 offset-md-3">
           <b-alert
             :variant="alert.status"
-            :show="alert.show"
+            :show="alert.show || ($v.$invalid && $v.$dirty)"
             dismissible
             @dismissed="alert.show=false">
-            {{ alert.text }}
+            <p>{{ alert.text }}</p>
+            <p v-show="$v.project.name.$dirty">{{ nameErrorMessage }}</p>
+            <p v-show="$v.project.description.$dirty">{{ descriptionErrorMessage }}</p>
           </b-alert>
           <form>
             <div class="form-group">
@@ -144,7 +146,7 @@ export default {
         project: {
             name: {
                 required,
-                minLength: minLength(3),
+                minLength: minLength(5),
                 maxLength: maxLength(100)
             },
             description: {
@@ -156,7 +158,25 @@ export default {
     },
 
     computed: {
-        ...mapGetters({currentUser: "currentUser"})
+        ...mapGetters({currentUser: "currentUser"}),
+        nameErrorMessage(){
+            if(!this.$v.project.name.required){
+                return "Insira o nome do projeto \n"
+            }else if(!this.$v.project.name.minLength){
+                return "O nome do projeto deve ter no mínimo " + this.$v.project.name.$params.minLength.min + " caracteres \n"
+            }else if(!this.$v.project.name.maxLength){
+                return "O nome do projeto deve ter no máximo " + this.$v.project.name.$params.maxLength.max + " caracteres \n"
+            }
+        },
+        descriptionErrorMessage(){
+            if(!this.$v.project.description.required){
+                return "Insira a descrição do projeto \n"
+            }else if(!this.$v.project.description.minLength){
+                return "A descrição do projeto deve ter no mínimo " + this.$v.project.description.$params.minLength.min + " caracteres \n"
+            }else if(!this.$v.project.description.maxLength){
+                return "A descrição do projeto deve ter no máximo " + this.$v.project.description.$params.maxLength.max + " caracteres \n"
+            }
+        },
     },
     beforeMount(){
         this.$store.dispatch("loadProjects")
@@ -176,14 +196,19 @@ export default {
     methods: {
         editProject () {
             delete this.project["tags"]
-            this.$store.dispatch("editProject", this.project).then(response=>{
-                this.alert.variant = "success"
-                this.alert.text = response
-                this.alert.show = true
-            }),err =>{
+            this.$v.$touch()
+            if(!this.$v.$invalid){
+                this.$store.dispatch("editProject", this.project).then(response=>{
+                    this.alert.variant = "success"
+                    this.alert.text = response
+                    this.alert.show = true
+                }),err =>{
+                    this.alert.variant = "warning"
+                    this.alert.text = err
+                    this.alert.show = true
+                }
+            }else{
                 this.alert.variant = "warning"
-                this.alert.text = err
-                this.alert.show = true
             }
         },
         getTags () {

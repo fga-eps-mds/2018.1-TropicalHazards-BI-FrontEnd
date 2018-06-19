@@ -1,60 +1,87 @@
 <template>
   <div class="col col-md-10 content">
     <div class="container-fluid">
-      <header>
-        <h2>
-          {{ project.name != '' ? project.name : 'Project name' }}
-          <br>
-          <small class="text-muted h4">
-            {{ project.user != '' ? project.user : 'Owner name' }}
-          </small>
-        </h2>
-        <ul class="list-inline">
-          <li
-            v-for="tag in tags"
-            :key="tag.id"
-            class="list-inline-item">
-            <span class="badge badge-primary btn-blue">
-              {{ tag.name }}
-            </span>
-          </li>
-        </ul>
-      </header>
-      <div class="row">
-        <p class="text-justify">
-          {{ project.description }}
-        </p>
-        <div
-          v-for="dashboard in dashboards"
-          :key="dashboard.id"
-          class="card col col-md-6">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe
-              :src="dashboard.iframe"
-              class="embed-responsive-item"
-              frameborder="0"/>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              {{ dashboard.name }}
-              <span
-                v-if="dashboard.owner == currentUser"
-                class="badge badge-secondary h6">
-                owner
+      <div v-if="showError">
+        <header>
+          <h2> Detalhes do Projeto </h2>
+        </header>
+        <b-jumbotron
+          bg-variant="muted"
+          class="text-muted">
+          <template
+            slot="header">
+            Oooops
+          </template>
+          <template
+            slot="lead">
+            O projeto que você está tentando acessar não existe...
+          </template>
+          <p>
+            Não se preocupe, você ainda pode criar um projeto e começar sua
+            jornada conosco!
+          </p>
+          <router-link
+            :to="{ name: 'CreateProject' }"
+            class="btn btn-blue ml-auto">
+            <span class="fa fa-plus"/> Novo projeto
+          </router-link>
+        </b-jumbotron>
+      </div>
+      <section v-else>
+        <header>
+          <h2>
+            {{ project.name != '' ? project.name : 'Project name' }}
+            <br>
+            <small class="text-muted h4">
+              {{ project.user != '' ? owner : 'Owner name' }}
+            </small>
+          </h2>
+          <p class="text-justify">
+            {{ project.description }}
+          </p>
+          <ul class="list-inline">
+            <li
+              v-for="tag in tags"
+              :key="tag.id"
+              class="list-inline-item">
+              <span class="badge badge-primary btn-blue">
+                {{ tag.name }}
               </span>
-            </h5>
-            <p class="card-text">
-              {{ dashboard.description }}
-            </p>
-            <router-link
-              :to="{ name: 'DashboardDetail' }"
-              class="btn btn-blue btn-sm">
-              <span class="fa fa-search"/> Visualizar
-            </router-link>
+            </li>
+          </ul>
+        </header>
+        <div class="row">
+          <div
+            v-for="dashboard in dashboards"
+            :key="dashboard.id"
+            class="card col col-md-6">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe
+                :src="dashboard.iframe"
+                class="embed-responsive-item"
+                frameborder="0"/>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ dashboard.name }}
+                <span
+                  v-if="dashboard.owner == currentUser"
+                  class="badge badge-secondary h6">
+                  owner
+                </span>
+              </h5>
+              <p class="card-text">
+                {{ dashboard.description }}
+              </p>
+              <router-link
+                :to="{ name: 'DashboardDetail' }"
+                class="btn btn-blue btn-sm">
+                <span class="fa fa-search"/> Visualizar
+              </router-link>
+            </div>
           </div>
         </div>
-
-      </div>
+      </section>
     </div>
   </div>
 </template>
@@ -71,6 +98,7 @@ export default {
                 name: "",
                 description: "",
             },
+            owner: "",
             user: {
                 name: "",
                 id: "",
@@ -81,6 +109,7 @@ export default {
                 name: "",
                 project: ""
             },
+            showError: false
         }
     },
     computed: {
@@ -88,10 +117,17 @@ export default {
     },
 
     beforeMount () {
-        this.loadUserInfo()
+        this.$store.dispatch("loadProjects")
+        this.project = this.$store.getters.getProjectById(parseInt(this.$route.params.id))
+        if(this.project === undefined){
+            this.showError = true
+        }else{
+            this.$store.dispatch("getProjectOwner", this.project.user).then(response=>{
+                this.owner = response
+            })
+        }
     },
     created () {
-        this.getProjectDetail()
         this.getObserv()
         this.getTags()
     },
@@ -99,19 +135,6 @@ export default {
     methods: {
         showImportCsv (){
             this.$modal.show("import-csv", { project: this.$route.params.id })
-        },
-        loadUserInfo () {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        },
-        getProjectDetail () {
-            this.$http.get("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
-                this.project = result.data
-            },
-            error => {
-                error.log(error)
-            })
         },
         deleteProject (){
             if (window.confirm("Deseja realmente deletar o projeto ?")){
