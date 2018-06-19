@@ -4,7 +4,6 @@
       <h6 class="text-left">
         <span class="fa fa-user"/>
         {{ (user.username == '') ? 'username' : user.username }}
-        {{ user.username }}
       </h6>
       <h6>
         <small>
@@ -38,7 +37,7 @@
     <hr>
     <ul class="list-group text-capitalize">
       <router-link
-        :to="{ name: 'Home' }"
+        :to="{ name: 'HomePage' }"
         class="list-group-item">
         <span class="fa fa-home"/> home
       </router-link>
@@ -74,12 +73,14 @@
         Procurar Projetos
       </router-link>
       <a
-        href="https://github.com/fga-gpp-mds/TropicalHazards-BI"
+        href="https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI"
+        target="_blank"
         class="list-group-item">
         <span class="fa fa-github"/> github
       </a>
       <a
-        href="https://fga-gpp-mds.github.io/TropicalHazards-BI"
+        href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI/"
+        target="_blank"
         class="list-group-item">
         <span class="fa fa-book"/> docs
       </a>

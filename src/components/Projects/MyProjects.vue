@@ -35,7 +35,7 @@
       </form>
     </div>
     <hr>
-    <div v-if="projects.length == 0">
+    <div v-if="getMyProjects.length == 0">
       <b-jumbotron
         bg-variant="muted"
         class="text-muted">
