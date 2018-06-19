@@ -98,7 +98,7 @@ const actions = {
     },
     editProject({commit}, project){
         return new Promise((resolve, reject)=>{
-            Vue.http.put("projects/", project, {
+            Vue.http.post("projects/" + project.id + "/", project, {
                 headers: {
                     "Authorization": "JWT " + localStorage.token,
                     "content-type": "application/json",
@@ -115,7 +115,7 @@ const actions = {
     },
     createProject({ commit }, project) {
         return new Promise((resolve, reject) => {
-            Vue.http.post("projects/" + project.id + "/", project, {
+            Vue.http.post("projects/", project, {
                 headers: {
                     "Authorization": "JWT " + localStorage.token,
                     "content-type": "application/json",

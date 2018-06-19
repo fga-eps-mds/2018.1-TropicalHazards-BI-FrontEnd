@@ -7,6 +7,13 @@
     </header>
     <div class="row">
       <div class="col col-md-6 offset-md-3">
+        <b-alert
+          :variant="alert.status"
+          :show="alert.show"
+          dismissible
+          @dismissed="alert.show=false">
+          {{ alert.text }}
+        </b-alert>
         <form>
           <div class="form-group">
             <label for="p-name">
@@ -14,7 +21,7 @@
             </label>
             <input
               id="p-name"
-              v-model.trim="$v.project.name.$model"
+              v-model.trim="project.name"
               type="text"
               class="form-control"
               placeholder="Ex.: Dengue no DF">
@@ -25,7 +32,7 @@
             </label>
             <textarea
               id="p-description"
-              v-model.trim="$v.project.description.$model"
+              v-model.trim="project.description"
               class="form-control"
               rows="6"
               placeholder="Descrição que aparecerá no seu projeto"/>
@@ -74,40 +81,32 @@
 import { mapGetters } from "vuex"
 import { required, minLength, maxLength } from "vuelidate/lib/validators"
 
-import Sidebar from "@/components/Utils/Sidebar"
-import Footer from "@/components/Utils/Footer"
-import Navbar from "@/components/Utils/Navbar"
-
 export default {
 
     components: {
-        Navbar,
-        "sidebar": Sidebar,
-        "custom-footer": Footer
+        // Navbar,
+        // "sidebar": SideBar,
+        // "custom-footer": Footer
     },
     data () {
 
         return {
-            importData: {},
-            headers: [],
+            alert: {
+                variant: "",
+                text: "",
+                show: false
+            },
             project: {
                 user: "",
                 name: "",
                 description: "",
                 tags: []
-
             },
             selectedTags: [],
             tags: {
                 name: "",
                 slug: ""
             },
-            user: {
-                username: "",
-                email: "",
-                password: ""
-            },
-
             projects: "",
         }
     },
@@ -130,45 +129,23 @@ export default {
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
-
-    beforeMount () {
-        this.loadUserInfo()
-        this.loadProject()
-    },
-
     created () {
         this.getTags()
     },
-
     methods: {
-        loadUserInfo () {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        },
-
-        loadProject () {
-            this.project.user = this.currentUser.id
-        },
-
-
         postProject () {
-            this.project.tags = this.selectedTags
-            this.$http.post("projects/",this.project, {
-                headers: {
-                    "Authorization": "JWT " + localStorage.token,
-                    "content-type": "application/json",
-                }
-            }
-            ).then(result => {
-                this.projeto = result.data
-                this.postSuccess(result)
-            },
-            error => {
-                error.log(error)
+            this.project.tags = this.selectedTags,
+            this.project.user = this.currentUser.id
+            this.$store.dispatch("createProject", this.project).then(response=>{
+                this.alert.variant = "success"
+                this.alert.text = "Projeto criado com sucesso"
+                this.alert.show = true
+            }, err =>{
+                this.alert.variant = "warning"
+                this.alert.text = err
+                this.alert.show = true
             })
         },
-
         getTags () {
             this.$http.get("tags/", {
                 headers: {
