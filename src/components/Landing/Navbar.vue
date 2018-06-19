@@ -29,7 +29,7 @@
         </router-link>
         <li class="nav-item">
           <router-link
-            :to="{name: 'Auth'}"
+            :to="{name: 'HomePage'}"
             class="nav-link">
             Dashboards
           </router-link>
@@ -141,6 +141,7 @@ export default {
       transition: all 0.025s ease-in-out;
       color: $text-color;
       border-bottom: 2px solid transparent;
+      cursor: pointer;
 
       &:hover {
         background-color: rgba(61, 101, 187, 0.5);
