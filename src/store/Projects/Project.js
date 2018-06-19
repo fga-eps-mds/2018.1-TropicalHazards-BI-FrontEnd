@@ -8,6 +8,7 @@ const UPDATE_CURRENT_PROJECT_FIELDS = 'UPDATE_CURRENT_PROJECT_FIELDS'
 
 const state = {
     projects: [],
+    project: "",
     MyProjects: [],
     currentProject: null,
     currentProjectFields: []
@@ -51,6 +52,17 @@ const mutations = {
 }
 
 const actions = {
+    createProject({ commit }, project) {
+        return new Promise((resolve, reject) => {
+            Vue.http.post("projects/", project, { headers: { "Authorization": "JWT " + localStorage.token, "content-type": "application/json" } }).then(response => {
+                commit(SET_PROJECTS)
+                resolve()
+            },
+                error => {
+                    reject()
+                })
+        })
+    },
     loadProjects ({commit}){
         return new Promise((resolve, reject)=>{
             Vue.http.get("projects/", { headers: { "content-type": "application/json" } }).then(response => {

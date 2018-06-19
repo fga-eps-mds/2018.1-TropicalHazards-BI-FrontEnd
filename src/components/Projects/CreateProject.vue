@@ -8,24 +8,37 @@
     <div class="row">
       <div class="col col-md-6 offset-md-3">
         <form>
+          <small
+            v-if="$v.project.name.$invalid && $v.$dirty"
+            style="color: red"
+            class="error">
+            Digite um projeto
+          </small>
           <div class="form-group">
             <label for="p-name">
               Nome do projeto:
             </label>
+
             <input
               id="p-name"
-              v-model.trim="$v.project.name.$model"
+              v-model="project.name"
               type="text"
               class="form-control"
               placeholder="Ex.: Dengue no DF">
           </div>
+          <small
+            v-if="$v.project.description.$invalid && $v.$dirty"
+            style="color: red"
+            class="error">
+            Digite uma descrição
+          </small>
           <div class="form-group">
             <label for="p-description">
               Descrição:
             </label>
             <textarea
               id="p-description"
-              v-model.trim="$v.project.description.$model"
+              v-model="project.description"
               class="form-control"
               rows="6"
               placeholder="Descrição que aparecerá no seu projeto"/>
@@ -64,6 +77,7 @@
               <span class="fa fa-undo"/> Voltar
             </router-link>
           </div>
+          <p> {{ project.name }} </p>
         </form>
       </div>
     </div>
@@ -149,20 +163,10 @@ export default {
 
 
         postProject () {
-            this.project.tags = this.selectedTags
-            this.$http.post("projects/",this.project, {
-                headers: {
-                    "Authorization": "JWT " + localStorage.token,
-                    "content-type": "application/json",
-                }
+            this.$v.$touch()
+            if(!this.$v.$invalid){
+                this.$store.dispatch("createProject", this.project)
             }
-            ).then(result => {
-                this.projeto = result.data
-                this.postSuccess(result)
-            },
-            error => {
-                error.log(error)
-            })
         },
 
         getTags () {
