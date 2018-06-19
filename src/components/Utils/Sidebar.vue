@@ -24,7 +24,8 @@
           </small>
         </h6>
       </div>
-      <div v-else
+      <div
+        v-else
         class="nav-header">
         <router-link
           :to="{ name: 'Auth' }"

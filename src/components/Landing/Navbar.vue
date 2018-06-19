@@ -21,6 +21,12 @@
       id="collapseable"
       class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
+        <router-link
+          v-if="currentUser"
+          :to="{ name: 'HomePage' }"
+          class="nav-link">
+          Olá {{ user.username }}
+        </router-link>
         <li class="nav-item">
           <router-link
             :to="{name: 'Auth'}"
@@ -28,17 +34,18 @@
             Dashboards
           </router-link>
         </li>
-        <li class="nav-item" v-if="currentUser">
-          Olá {{ user.username }}
-        </li>
-        <li class="nav-item" v-if="currentUser">
+        <li
+          v-if="currentUser"
+          class="nav-item">
           <a
-            @click="logout()"
-            class="nav-link">
+            class="nav-link"
+            @click="logout()">
             Sair
           </a>
         </li>
-        <li class="nav-item" v-else>
+        <li
+          v-else
+          class="nav-item">
           <router-link
             :to="{name: 'Auth'}"
             class="nav-link">
@@ -64,13 +71,14 @@ export default {
         }
     },
 
+    computed: {
+        ...mapGetters({ currentUser: "currentUser" })
+    },
+
     beforeMount () {
         this.loadUserInfo()
     },
 
-    computed: {
-        ...mapGetters({ currentUser: "currentUser" })
-    },
 
     methods: {
         logout () {
