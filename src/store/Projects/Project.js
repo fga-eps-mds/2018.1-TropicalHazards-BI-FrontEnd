@@ -95,6 +95,23 @@ const actions = {
                 reject()
             })
         })
+    },
+    editProject({commit}, project){
+        return new Promise((resolve, reject)=>{
+            Vue.http.put("projects/", this.project, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(result => {
+                resolve("Projeto editado com sucesso")
+            },
+            error => {
+                reject(error.data)
+            })
+
+        })
     }
 }
 
