@@ -21,7 +21,6 @@ const getters = {
         return state.MyProjects
     },
     getProjectById: (state) => (id) =>{
-        console.log(id)
         return state.projects.find( project => project.id === id)
     },
     getProjectsLength: state =>{
@@ -129,6 +128,21 @@ const actions = {
             },
             error => {
                 reject(error.data)
+            })
+        })
+    },
+    getProjectOwner({commit}, userId){
+        return new Promise((resolve, reject) => {
+            Vue.http.get("users/" + userId + "/", {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(response => {
+                resolve(response.data.username)
+            },err => {
+                reject(err.data)
             })
         })
     }
