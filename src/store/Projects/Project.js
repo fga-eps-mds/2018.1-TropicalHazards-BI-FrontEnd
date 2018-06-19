@@ -20,6 +20,10 @@ const getters = {
     getMyProjects: state =>{
         return state.MyProjects
     },
+    getProjectById: (state) => (id) =>{
+        console.log(id)
+        return state.projects.find( project => project.id === id)
+    },
     getProjectsLength: state =>{
         return state.projects.length
     },
@@ -55,7 +59,6 @@ const actions = {
         return new Promise((resolve, reject)=>{
             Vue.http.get("projects/", { headers: { "content-type": "application/json" } }).then(response => {
                 commit(SET_PROJECTS, response.data)
-                console.log(localStorage.token)
                 resolve()
             },
             error => {
@@ -98,7 +101,7 @@ const actions = {
     },
     editProject({commit}, project){
         return new Promise((resolve, reject)=>{
-            Vue.http.post("projects/" + project.id + "/", project, {
+            Vue.http.put("projects/" + project.id + "/", project, {
                 headers: {
                     "Authorization": "JWT " + localStorage.token,
                     "content-type": "application/json",
@@ -127,10 +130,8 @@ const actions = {
             error => {
                 reject(error.data)
             })
-
         })
     }
-
 }
 
 export default {
