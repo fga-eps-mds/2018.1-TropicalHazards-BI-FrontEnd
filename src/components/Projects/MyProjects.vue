@@ -72,9 +72,13 @@
             <p class="card-text">
               {{ project.description }}
             </p>
-            <!-- needs to link to the project -->
             <router-link
-              :to="{ name: 'ProjectDetail' }"
+              :to="{ name: 'EditProject', params: { id: project.id } }"
+              class="btn btn-sm btn-blue mr-auto">
+              <span class="fa fa-pencil"/> Editar
+            </router-link>
+            <router-link
+              :to="{ name: 'ProjectDetail', params: { id: project.id } }"
               class="btn btn-sm btn-blue mr-auto">
               <span class="fa fa-search"/> Visualizar
             </router-link>
@@ -92,14 +96,10 @@
 
 <script>
 import { mapGetters } from "vuex"
-
-import Navbar from "@/components/Utils/Navbar"
-
 import bJumbotron from "bootstrap-vue/es/components/jumbotron/jumbotron"
 
 export default {
     components: {
-        Navbar,
         "b-jumbotron":bJumbotron,
     },
 

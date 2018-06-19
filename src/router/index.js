@@ -82,7 +82,7 @@ export default new Router({
                     path: "/projects/detail/:id",
                     name: "ProjectDetail",
                     component: ProjectDetail,
-                    beforeEnter: Guard.guest
+                    // beforeEnter: Guard.guest
                 },
                 {
                     path: "/projects/edit/:id",
