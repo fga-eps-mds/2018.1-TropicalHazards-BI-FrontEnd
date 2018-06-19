@@ -138,7 +138,7 @@ export default {
             this.project.user = this.currentUser.id
             this.$store.dispatch("createProject", this.project).then(response=>{
                 this.alert.variant = "success"
-                this.alert.text = "Projeto criado com sucesso"
+                this.alert.text = response
                 this.alert.show = true
             }, err =>{
                 this.alert.variant = "warning"

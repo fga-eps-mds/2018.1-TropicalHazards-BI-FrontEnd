@@ -35,7 +35,7 @@
       </form>
     </div>
     <hr>
-    <div v-if="projects.length == 0">
+    <div v-if="MyProjects.length == 0">
       <b-jumbotron
         bg-variant="muted"
         class="text-muted">
@@ -60,7 +60,7 @@
     </div>
     <section v-else>
       <div
-        v-for="project in getProjects"
+        v-for="project in MyProjects"
         :key="project.id"
         class="row">
         <div
@@ -94,16 +94,12 @@
 import { mapGetters } from "vuex"
 
 import Navbar from "@/components/Utils/Navbar"
-import Footer from "@/components/Utils/Footer"
-import Sidebar from "@/components/Utils/Sidebar"
 
 import bJumbotron from "bootstrap-vue/es/components/jumbotron/jumbotron"
 
 export default {
     components: {
         Navbar,
-        "custom-footer": Footer,
-        "sidebar": Sidebar,
         "b-jumbotron":bJumbotron,
     },
 
@@ -119,7 +115,7 @@ export default {
             currentUser: "currentUser",
             getTags: "getTags",
             getProjects: "getProjects",
-            getMyProjects: "getMyProjects"
+            MyProjects: "getMyProjects"
         })
 
     },

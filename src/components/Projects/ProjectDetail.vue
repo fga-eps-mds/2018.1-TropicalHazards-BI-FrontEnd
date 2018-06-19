@@ -1,69 +1,59 @@
 <template>
-  <div id="background">
-    <Navbar/>
-    <div class="row">
-      <sidebar class="col-md-2 sidebar"/>
-      <div class="col col-md-10 content">
-        <div class="container-fluid">
-          <header>
-            <h2>
-              {{ project.name != '' ? project.name : 'Project name' }}
-              <br>
-              <small class="text-muted h4">
-                {{ project.user != '' ? project.user : 'Owner name' }}
-              </small>
-            </h2>
-            <ul class="list-inline">
-              <li
-                v-for="tag in tags"
-                :key="tag.id"
-                class="list-inline-item">
-                <span class="badge badge-primary btn-blue">
-                  {{ tag.name }}
-                </span>
-              </li>
-            </ul>
-          </header>
-          <div class="row">
-            <p class="text-justify">
-              {{ project.description }}
+  <div class="col col-md-10 content">
+    <div class="container-fluid">
+      <header>
+        <h2>
+          {{ project.name != '' ? project.name : 'Project name' }}
+          <br>
+          <small class="text-muted h4">
+            {{ project.user != '' ? project.user : 'Owner name' }}
+          </small>
+        </h2>
+        <ul class="list-inline">
+          <li
+            v-for="tag in tags"
+            :key="tag.id"
+            class="list-inline-item">
+            <span class="badge badge-primary btn-blue">
+              {{ tag.name }}
+            </span>
+          </li>
+        </ul>
+      </header>
+      <div class="row">
+        <p class="text-justify">
+          {{ project.description }}
+        </p>
+        <div
+          v-for="dashboard in dashboards"
+          :key="dashboard.id"
+          class="card col col-md-6">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe
+              :src="dashboard.iframe"
+              class="embed-responsive-item"
+              frameborder="0"/>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ dashboard.name }}
+              <span
+                v-if="dashboard.owner == currentUser"
+                class="badge badge-secondary h6">
+                owner
+              </span>
+            </h5>
+            <p class="card-text">
+              {{ dashboard.description }}
             </p>
-
-            <div
-              v-for="dashboard in dashboards"
-              :key="dashboard.id"
-              class="card col col-md-6">
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe
-                  :src="dashboard.iframe"
-                  class="embed-responsive-item"
-                  frameborder="0"/>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">
-                  {{ dashboard.name }}
-                  <span
-                    v-if="dashboard.owner == currentUser"
-                    class="badge badge-secondary h6">
-                    owner
-                  </span>
-                </h5>
-                <p class="card-text">
-                  {{ dashboard.description }}
-                </p>
-                <router-link
-                  :to="{ name: 'DashboardDetail' }"
-                  class="btn btn-blue btn-sm">
-                  <span class="fa fa-search"/> Visualizar
-                </router-link>
-              </div>
-            </div>
-
+            <router-link
+              :to="{ name: 'DashboardDetail' }"
+              class="btn btn-blue btn-sm">
+              <span class="fa fa-search"/> Visualizar
+            </router-link>
           </div>
         </div>
-        <div class="row">
-          <custom-footer/>
-        </div>
+
       </div>
     </div>
   </div>
@@ -72,17 +62,7 @@
 <script>
 import { mapGetters } from "vuex"
 
-import Sidebar from "@/components/Utils/Sidebar"
-import Footer from "@/components/Utils/Footer"
-import Navbar from "@/components/Utils/Navbar"
-
 export default {
-    components: {
-        Navbar,
-        "sidebar": Sidebar,
-        "custom-footer": Footer,
-    },
-
     data () {
         return {
             project: {
