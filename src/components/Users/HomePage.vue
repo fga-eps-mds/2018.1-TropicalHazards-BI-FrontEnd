@@ -17,14 +17,16 @@
 
 <script>
 import { mapGetters } from "vuex"
-import SideBar from "@/components/Utils/SideBar"
+
+
+import Sidebar from "@/components/Utils/Sidebar"
 import Footer from "@/components/Utils/Footer"
 import Navbar from "@/components/Utils/Navbar"
 
 export default {
 
     components: {
-        "sidebar": SideBar,
+        "sidebar": Sidebar,
         "navbar": Navbar,
         "custom-footer": Footer
     },

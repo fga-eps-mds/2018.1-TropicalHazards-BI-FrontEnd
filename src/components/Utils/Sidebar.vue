@@ -45,8 +45,9 @@
         <span class="fa fa-pie-chart"/> Dashboards
       </li>
       <router-link
+        v-if="currentUser"
         :to="{ name: '' }"
-        class="list-group-item">
+        class=" list-group-item">
         Meus Dashboards
       </router-link>
       <router-link
@@ -58,13 +59,15 @@
         <span class="fa fa-folder"/> Projetos
       </div>
       <router-link
+        v-if="currentUser"
         :to="{ name: 'MyProjects' }"
-        class="list-group-item">
+        class=" list-group-item">
         Meus Projetos
       </router-link>
       <router-link
+        v-if="currentUser"
         :to="{ name: 'CreateProject' }"
-        class="list-group-item">
+        class=" list-group-item">
         Novo Projeto
       </router-link>
       <router-link
@@ -133,9 +136,7 @@ export default {
   @import '../styles/base.scss';
 
   nav {
-    // display: block;
     min-height: 100%;
-    // max-width: 200px;
     overflow: auto;
     font-family: $text-font-family;
     letter-spacing: .1em !important;

@@ -35,7 +35,7 @@
       </form>
     </div>
     <hr>
-    <div v-if="getMyProjects.length == 0">
+    <div v-if="MyProjects.length == 0">
       <b-jumbotron
         bg-variant="muted"
         class="text-muted">
@@ -60,7 +60,7 @@
     </div>
     <section v-else>
       <div
-        v-for="project in getProjects"
+        v-for="project in MyProjects"
         :key="project.id"
         class="row">
         <div
@@ -72,9 +72,13 @@
             <p class="card-text">
               {{ project.description }}
             </p>
-            <!-- needs to link to the project -->
             <router-link
-              :to="{ name: 'ProjectDetail' }"
+              :to="{ name: 'EditProject', params: { id: project.id } }"
+              class="btn btn-sm btn-blue mr-auto">
+              <span class="fa fa-pencil"/> Editar
+            </router-link>
+            <router-link
+              :to="{ name: 'ProjectDetail', params: { id: project.id } }"
               class="btn btn-sm btn-blue mr-auto">
               <span class="fa fa-search"/> Visualizar
             </router-link>
@@ -92,18 +96,10 @@
 
 <script>
 import { mapGetters } from "vuex"
-
-import Navbar from "@/components/Utils/Navbar"
-import Footer from "@/components/Utils/Footer"
-import Sidebar from "@/components/Utils/SideBar"
-
 import bJumbotron from "bootstrap-vue/es/components/jumbotron/jumbotron"
 
 export default {
     components: {
-        Navbar,
-        "custom-footer": Footer,
-        "sidebar": Sidebar,
         "b-jumbotron":bJumbotron,
     },
 
@@ -119,7 +115,7 @@ export default {
             currentUser: "currentUser",
             getTags: "getTags",
             getProjects: "getProjects",
-            getMyProjects: "getMyProjects"
+            MyProjects: "getMyProjects"
         })
 
     },
@@ -146,21 +142,7 @@ export default {
 <style lang="scss" scoped>
   @import '../styles/base.scss';
 
-  .row {
-    margin-left: 0;
-
-  }
-
   section {
     margin: 5em auto;
-  }
-
-  .content {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .sidebar {
-    padding-left: 0;
   }
 </style>

@@ -7,6 +7,15 @@
     </header>
     <div class="row">
       <div class="col col-md-6 offset-md-3">
+        <b-alert
+          :variant="alert.status"
+          :show="alert.show || ($v.$invalid && $v.$dirty)"
+          dismissible
+          @dismissed="alert.show=false">
+          <p>{{ alert.text }}</p>
+          <p v-show="$v.project.name.$dirty">{{ nameErrorMessage }}</p>
+          <p v-show="$v.project.description.$dirty">{{ descriptionErrorMessage }}</p>
+        </b-alert>
         <form>
           <div class="form-group">
             <label for="p-name">
@@ -14,7 +23,7 @@
             </label>
             <input
               id="p-name"
-              v-model.trim="$v.project.name.$model"
+              v-model.trim="project.name"
               type="text"
               class="form-control"
               placeholder="Ex.: Dengue no DF">
@@ -25,7 +34,7 @@
             </label>
             <textarea
               id="p-description"
-              v-model.trim="$v.project.description.$model"
+              v-model.trim="project.description"
               class="form-control"
               rows="6"
               placeholder="Descrição que aparecerá no seu projeto"/>
@@ -76,34 +85,25 @@ import { required, minLength, maxLength } from "vuelidate/lib/validators"
 
 export default {
 
-    components: {
-        // Navbar,
-        // "sidebar": SideBar,
-        // "custom-footer": Footer
-    },
     data () {
 
         return {
-            importData: {},
-            headers: [],
+            alert: {
+                variant: "",
+                text: "",
+                show: false
+            },
             project: {
                 user: "",
                 name: "",
                 description: "",
                 tags: []
-
             },
             selectedTags: [],
             tags: {
                 name: "",
                 slug: ""
             },
-            user: {
-                username: "",
-                email: "",
-                password: ""
-            },
-
             projects: "",
         }
     },
@@ -112,7 +112,7 @@ export default {
         project: {
             name: {
                 required,
-                minLength: minLength(3),
+                minLength: minLength(5),
                 maxLength: maxLength(100)
             },
             description: {
@@ -124,47 +124,48 @@ export default {
     },
 
     computed: {
-        ...mapGetters({ currentUser: "currentUser" })
+        ...mapGetters({ currentUser: "currentUser" }),
+        nameErrorMessage(){
+            if(!this.$v.project.name.required){
+                return "Insira o nome do projeto \n"
+            }else if(!this.$v.project.name.minLength){
+                return "O nome do projeto deve ter no mínimo " + this.$v.project.name.$params.minLength.min + " caracteres \n"
+            }else if(!this.$v.project.name.maxLength){
+                return "O nome do projeto deve ter no máximo " + this.$v.project.name.$params.maxLength.max + " caracteres \n"
+            }
+        },
+        descriptionErrorMessage(){
+            if(!this.$v.project.description.required){
+                return "Insira a descrição do projeto \n"
+            }else if(!this.$v.project.description.minLength){
+                return "A descrição do projeto deve ter no mínimo " + this.$v.project.description.$params.minLength.min + " caracteres \n"
+            }else if(!this.$v.project.description.maxLength){
+                return "A descrição do projeto deve ter no máximo " + this.$v.project.description.$params.maxLength.max + " caracteres \n"
+            }
+        },
     },
-
-    beforeMount () {
-        this.loadUserInfo()
-        this.loadProject()
-    },
-
     created () {
         this.getTags()
     },
-
     methods: {
-        loadUserInfo () {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        },
-
-        loadProject () {
-            this.project.user = this.currentUser.id
-        },
-
-
         postProject () {
-            this.project.tags = this.selectedTags
-            this.$http.post("projects/",this.project, {
-                headers: {
-                    "Authorization": "JWT " + localStorage.token,
-                    "content-type": "application/json",
-                }
+            this.$v.$touch()
+            if(!this.$v.$invalid){
+                this.project.tags = this.selectedTags,
+                this.project.user = this.currentUser.id
+                this.$store.dispatch("createProject", this.project).then(response=>{
+                    this.alert.variant = "success"
+                    this.alert.text = response
+                    this.alert.show = true
+                }, err =>{
+                    this.alert.variant = "warning"
+                    this.alert.text = err
+                    this.alert.show = true
+                })
+            }else{
+                this.alert.variant = "warning"
             }
-            ).then(result => {
-                this.projeto = result.data
-                this.postSuccess(result)
-            },
-            error => {
-                error.log(error)
-            })
         },
-
         getTags () {
             this.$http.get("tags/", {
                 headers: {

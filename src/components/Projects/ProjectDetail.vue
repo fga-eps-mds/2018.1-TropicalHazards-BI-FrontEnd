@@ -1,144 +1,95 @@
 <template>
-
-  <div id="app">
-    <div class="row grey lighten-4">
-      <sidebar/>
-      <div
-        id="content"
-        class="col m11">
-        <div class="header center-align grey lighten-4">
-          <h3>
-            {{ project.name }}
-          </h3>
-        </div>
-        <div class="grey lighten-4">
-          <div class="custom-container">
-            <h5>Estatísticas do projeto</h5>
-            <div class="row">
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">Descrição</span>
-                    <p>
-                      <span class="fa fa-line-chart">{{ project.description }}</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">6</span>
-                    <p>
-                      <span class="fa fa-line-chart">Observatórios</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">14</span>
-                    <p>
-                      <span class="fa fa-users">Contribuidores</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="custom-container">
-            <!-- Adicionar o seguinte atributo
-            ao button abaixo quando a branch de importar csv for merjada na devel
-            Depende de elementos que não estão funcionando na branch import csv
-                          v-if="currentUser.id == project.user"
-             -->
-            <button
-              class="btn"
-              @click="showImportCsv ()">
-              Adicionar Arquivo
-            </button>
-            <import-csv-modal />
-            <h5>
-              Observatórios neste projeto:
-            </h5>
-            <router-link
-              v-if="currentUser.id == project.user"
-              :to="{ name: 'createObservatorio', params: { id: project.id } }"
-              class="btn blue lighten-1" >
-              Novo observatório
-              <span class="fa fa-plus"/>
-            </router-link>
-            <router-link
-              v-if="currentUser.id == project.user"
-              :to="{ name: 'EditProject', params: { id: project.id } }"
-              class="btn green lighten-1" >
-              Editar Projeto
-              <span class="fa fa-plus"/>
-            </router-link>
-            <a
-              v-if="currentUser.id == project.user"
-              :to="{ name: 'HomePage'} "
-              class="btn-flat red lighten-1 grey-text text-lighten-2"
-              v-on:
-              @click="deleteProject()">
-              Deletar Projeto
-              <span class="fa fa-trash"/>
-            </a>
-            <br>
-            <br>
-            <div
-              id="detail"
-              class="row">
-              <div
-
-                v-for="dashboard in dashboards"
-                :key="dashboard.id"
-                class=" col s12 m4 l3">
-                <div class="truncate card grey lighten-5">
-                  <div class="card-content grey-text text-darken-2">
-                    <span class="card-title">{{ dashboard.name }}</span>
-                    <p>
-                      projeto relacionado: {{ dashboard.project }}
-                    </p>
-                    <small>Criado por: {{ project.user }}</small>
-                    <small>Id dashboard: {{ dashboard.id }}</small>
-                  </div>
-                  <div class="card-action center-align grey-text text-lighten-2">
-                    <router-link
-                      :to="{name: 'ObservatorioDetail', params: {id: dashboard.id} }"
-                      href="#/observer-detail"
-                      class="btn  blue lighten-1">
-                      <span class="fa fa-search"/>
-                    </router-link>
-                    <router-link
-                      v-if="currentUser.id == project.user"
-                      :to="{ name: 'editObservatorio', params: { id: dashboard.id } }"
-                      class="btn blue">
-                      <span class="fa fa-edit"/>
-                    </router-link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="col col-md-10 content">
+    <div class="container-fluid">
+      <div v-if="showError">
+        <header>
+          <h2> Detalhes do Projeto </h2>
+        </header>
+        <b-jumbotron
+          bg-variant="muted"
+          class="text-muted">
+          <template
+            slot="header">
+            Oooops
+          </template>
+          <template
+            slot="lead">
+            O projeto que você está tentando acessar não existe...
+          </template>
+          <p>
+            Não se preocupe, você ainda pode criar um projeto e começar sua
+            jornada conosco!
+          </p>
+          <router-link
+            :to="{ name: 'CreateProject' }"
+            class="btn btn-blue ml-auto">
+            <span class="fa fa-plus"/> Novo projeto
+          </router-link>
+        </b-jumbotron>
       </div>
+      <section v-else>
+        <header>
+          <h2>
+            {{ project.name != '' ? project.name : 'Project name' }}
+            <br>
+            <small class="text-muted h4">
+              {{ project.user != '' ? owner : 'Owner name' }}
+            </small>
+          </h2>
+          <p class="text-justify">
+            {{ project.description }}
+          </p>
+          <ul class="list-inline">
+            <li
+              v-for="tag in project.tags"
+              :key="tag.id"
+              class="list-inline-item">
+              <span class="badge badge-primary btn-blue">
+                {{ tag.name }}
+              </span>
+            </li>
+          </ul>
+        </header>
+        <div class="row">
+          <div
+            v-for="dashboard in dashboards"
+            :key="dashboard.id"
+            class="card col col-md-6">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe
+                :src="dashboard.iframe"
+                class="embed-responsive-item"
+                frameborder="0"/>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ dashboard.name }}
+                <span
+                  v-if="dashboard.owner == currentUser"
+                  class="badge badge-secondary h6">
+                  owner
+                </span>
+              </h5>
+              <p class="card-text">
+                {{ dashboard.description }}
+              </p>
+              <router-link
+                :to="{ name: 'DashboardDetail' }"
+                class="btn btn-blue btn-sm">
+                <span class="fa fa-search"/> Visualizar
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script>
-import SideBar from "@/components/Utils/SideBar"
-import {mapGetters} from "vuex"
-import ImportCsvModal from "@/components/Files/ImportCsv.vue"
+import { mapGetters } from "vuex"
 
 export default {
-    components: {
-        "sidebar": SideBar,
-        "import-csv-modal": ImportCsvModal
-    },
-
     data () {
         return {
             project: {
@@ -147,6 +98,7 @@ export default {
                 name: "",
                 description: "",
             },
+            owner: "",
             user: {
                 name: "",
                 id: "",
@@ -157,17 +109,25 @@ export default {
                 name: "",
                 project: ""
             },
+            showError: false
         }
     },
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
 
-    beforeMount () {
-        this.loadUserInfo()
+    mounted () {
+        this.$store.dispatch("loadProjects")
+        this.project = this.$store.getters.getProjectById(parseInt(this.$route.params.id))
+        if(this.project === undefined){
+            this.showError = true
+        }else{
+            this.$store.dispatch("getProjectOwner", this.project.user).then(response=>{
+                this.owner = response
+            })
+        }
     },
     created () {
-        this.getProjectDetail()
         this.getObserv()
         this.getTags()
     },
@@ -175,19 +135,6 @@ export default {
     methods: {
         showImportCsv (){
             this.$modal.show("import-csv", { project: this.$route.params.id })
-        },
-        loadUserInfo () {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        },
-        getProjectDetail () {
-            this.$http.get("projects/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
-                this.project = result.data
-            },
-            error => {
-                error.log(error)
-            })
         },
         deleteProject (){
             if (window.confirm("Deseja realmente deletar o projeto ?")){
@@ -201,15 +148,6 @@ export default {
                     error.log(error)
                 })
             }
-        },
-        getProject () {
-            this.$http.get("projects/", { headers:
-                    { "content-type": "application/json" } }).then(result => {
-                this.project = result.data
-            },
-            error => {
-                error.log(error)
-            })
         },
         getTags () {
             this.$http.get("tags/", { headers:
@@ -239,10 +177,6 @@ export default {
 }
 </script>
 
-<style>
-
-::placeholder { /* Most modern browsers support this now. */
-  color:    #132a71;
-}
+<style lang="scss" scoped>
 
 </style>
