@@ -65,10 +65,12 @@
         Licensa MIT | 2018 Copyright
       </div>
     </div>
-    <div v-if="currentUser">
-      <h4 class="text-center">
-        Observ
-      </h4>
+    <div
+      v-if="currentUser"
+      class="text-center">
+      <img
+        src="../../assets/observ-navbar.png"
+        height="60px">
       <h6 class="text-center">
         <!-- pegar o nome do currentUser -->
         Seja bem vindo

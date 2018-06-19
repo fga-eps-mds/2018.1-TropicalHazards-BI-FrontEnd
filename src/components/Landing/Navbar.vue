@@ -1,11 +1,17 @@
 <template>
   <nav
     id="navbar"
-    class="navbar navbar-expand-md light-bg">
+    class="navbar navbar-expand-md dark-bg">
     <router-link
       :to="{name: 'LandingPage'}"
       class="navbar-brand">
-      Observ
+      <img
+        src="../../assets/observ-navbar.png"
+        alt=""
+        width=""
+        height="25px"
+        class="d-inline-block align-top">
+        Observ
     </router-link>
     <button
       type="button"
@@ -111,7 +117,7 @@ export default {
     .navbar-brand {
       height: 100%;
       padding: .3em;
-      color: rgba(1, 6, 49, 0.808);
+      color: $alt-text-color;
       font-weight: bold;
       font-family: $heading-font-family;
     }
@@ -144,7 +150,7 @@ export default {
     &.nav-link {
       font-size: 0.8em;
       transition: all 0.025s ease-in-out;
-      color: $text-color;
+      color: $alt-text-color;
       border-bottom: 2px solid transparent;
 
       &:hover {
