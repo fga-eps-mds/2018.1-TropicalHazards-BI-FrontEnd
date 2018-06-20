@@ -17,8 +17,9 @@ import MyProjects from "@/components/Projects/MyProjects"
 
 // dashboards
 import DashboardDetail from "@/components/Dashboards/DashboardDetail"
-import createDashboard from "@/components/Dashboards/createDashboard"
-import editDashboard from "@/components/Dashboards/editDashboard"
+import CreateDashboard from "@/components/Dashboards/CreateDashboard"
+import EditDashboard from "@/components/Dashboards/EditDashboard"
+import MyDashboards from "@/components/Dashboards/MyDashboards"
 
 // tags
 import CreateTag from "@/components/Tags/CreateTag"
@@ -117,15 +118,21 @@ export default new Router({
                     beforeEnter: Guard.guest
                 },
                 {
-                    path: "/dashboards/new/:id",
-                    name: "createDashboard",
-                    component: createDashboard,
+                    path: "/dashboards/new",
+                    name: "CreateDashboard",
+                    component: CreateDashboard,
                     beforeEnter: Guard.auth
                 },
                 {
                     path: "/dashboards/edit/:id",
-                    name: "editDashboard",
-                    component: editDashboard,
+                    name: "EditDashboard",
+                    component: EditDashboard,
+                    beforeEnter: Guard.auth
+                },
+                {
+                    path: "/my-dashboards",
+                    name: "MyDashboards",
+                    component: MyDashboards,
                     beforeEnter: Guard.auth
                 },
                 // Query
