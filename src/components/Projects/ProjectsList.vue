@@ -46,30 +46,31 @@
     <div class="row">
       <div class="col col-md-6 offset-md-3">
         <div class="row">
-          <transition-group
-            name="fade">
-            <div
-              v-for="project in filteredList"
-              :key="project.id"
-              class="card col col-md-6">
-              <h5 class="card-header">
-                {{ project.name }}
+          <!-- <transition-group
+            name="fade"> -->
+          <div
+            v-for="project in filteredList"
+            :key="project.id"
+            class="card col col-md-6">
+            <h5 class="card-header">
+              {{ project.name }}
+            </h5>
+            <div class="card-body">
+              <!-- Add later project owner -->
+              <h5 class="card-title">
+                {{  }}
               </h5>
-              <div class="card-body">
-                <h5 class="card-title">
-                  {{  }}
-                </h5>
-                <p>
-                  {{ project.description }}
-                </p>
-                <router-link
-                  :to="{ path: '/projects/detail/' + project.id }"
-                  class="btn btn-small btn-blue">
-                  <span class="fa fa-search"/> Visualizar
-                </router-link>
-              </div>
+              <p>
+                {{ project.description }}
+              </p>
+              <router-link
+                :to="{ path: '/projects/detail/' + project.id }"
+                class="btn btn-small btn-blue">
+                <span class="fa fa-search"/> Visualizar
+              </router-link>
             </div>
-          </transition-group>
+          </div>
+          <!-- </transition-group> -->
         </div>
       </div>
     </div>
