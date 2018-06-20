@@ -27,6 +27,8 @@ import CreateTag from "@/components/Tags/CreateTag"
 import Guard from "@/components/Auth/middleware"
 
 //File
+// import ImportCsv from "@/components/Files/ImportCsv"
+// import FilterCsv from "@/components/Files/Filter"
 import ContainerImport from "@/components/Files/ContainerImport"
 
 // Query
@@ -142,12 +144,24 @@ export default new Router({
                     component: AskQuestion,
                     props: true
                 },
+                // {
+                //     path: "/import",
+                //     name: "ContainerImport",
+                //     component: ImportCsv,
+                //     props: true
+                // },
                 {
                     path: "/import",
                     name: "ContainerImport",
                     component: ContainerImport,
                     props: true
-                }
+                },
+                // {
+                //     path: "/import/filter",
+                //     name: "FilterCsv",
+                //     component: FilterCsv,
+                //     props: true
+                // }
             ]
         }
     ]

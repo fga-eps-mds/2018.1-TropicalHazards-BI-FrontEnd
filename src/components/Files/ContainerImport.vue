@@ -10,19 +10,27 @@
       </h2>
     </header>
     <div class="row">
-      <import-csv
-        v-if="step == 1"
-        @filterFile="filterFile" />
+      <div class="container-fluid">
+        <import-csv
+          v-if="step == 1"
+          @filterFile="filterFile" />
+        <filter-csv
+          v-else-if="step == 2"
+          :headers = "headers"
+          :rows = "totalRows" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import ImportCsv from "@/components/Files/ImportCsv"
+import FilterCsv from "@/components/Files/Filter"
 
 export default {
     components: {
-        "import-csv": ImportCsv
+        "import-csv": ImportCsv,
+        "filter-csv": FilterCsv
     },
     props: {
         project: {
@@ -32,13 +40,25 @@ export default {
     },
     data() {
         return {
-            step: 1
+            step: 1,
+            headers: [],
+            totalRows: "",
+            file: null
         }
     },
     methods: {
         filterFile(value){
-            console.log(value)
-        }
+            this.headers = this.convertToList(value.header)
+            this.totalRows = this.headers.length
+            this.file = value.file
+            this.step = 2
+        },
+        convertToList(header){
+            return Object.keys(header).map(function(key){
+                return { name: key, example: header[key], type: null, acceptNull: false, selected: false, transform: "", true: "", false: ""}
+            })
+        },
+
     }
 }
 </script>

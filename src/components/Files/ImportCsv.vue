@@ -1,8 +1,13 @@
 <template>
   <div class="container-fluid">
+    <!-- <header>
+      <h2>
+        Novo projeto
+      </h2>
+    </header> -->
     <div class="row">
       <div class="col col-md-6 offset-md-3">
-        <div class="row">
+        <div class="form-group">
           <form>
             <div style="text-align: center">
               <h4>Inserir Dados</h4>
@@ -70,12 +75,14 @@ export default {
                         throw err
                     }
                     var line = lines[0] + "\n" + lines[1]
-                    Papa.parse(line, {
-                        header: true,
-                        completed: result =>{
-                            this.showFilterCsv(result.data)
-                        }
-                    })
+                    // Papa.parse(line, {
+                    //     header: true,
+                    //     completed: result =>{
+                    //         this.showFilterCsv(result.data)
+                    //     }
+                    // })
+                    var header = Papa.parse(line, {header: true})
+                    this.showFilterCsv(header.data)
                 })
         },
         buttonHandler(){
@@ -84,7 +91,8 @@ export default {
             }
         },
         showFilterCsv(header){
-            this.$emit("filterFile", { header: header[0], file: this.file })
+            this.$emit("filterFile", { header: header[0], file: this.file})
+            // this.$router.push({name: "FilterCsv", params: { header: header[0], file: this.file }})
         },
 
     }
