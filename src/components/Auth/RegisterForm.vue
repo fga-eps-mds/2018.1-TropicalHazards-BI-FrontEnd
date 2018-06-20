@@ -170,6 +170,7 @@ export default {
             }
         },
         logUser(){
+            /* eslint-disable */
             this.$v.$touch()
             if(!this.$v.$invalid){
                 this.loginuser.username = this.user.username

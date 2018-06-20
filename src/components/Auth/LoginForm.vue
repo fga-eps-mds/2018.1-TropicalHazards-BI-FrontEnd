@@ -78,6 +78,7 @@ export default {
         }
     },
     methods: {
+        /* eslint-disable */
         logUser(){
             this.$v.$touch()
             if(!this.$v.$invalid){
