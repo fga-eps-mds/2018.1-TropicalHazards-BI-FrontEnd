@@ -9,7 +9,11 @@
         : Importar Arquivo
       </h2>
     </header>
-    <import-csv />
+    <div class="row">
+      <import-csv
+        v-if="step == 1"
+        @filterFile="filterFile" />
+    </div>
   </div>
 </template>
 
@@ -24,6 +28,16 @@ export default {
         project: {
             type: Object,
             required: true
+        }
+    },
+    data() {
+        return {
+            step: 1
+        }
+    },
+    methods: {
+        filterFile(value){
+            console.log(value)
         }
     }
 }
