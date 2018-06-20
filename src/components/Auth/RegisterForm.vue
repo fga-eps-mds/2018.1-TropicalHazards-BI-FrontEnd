@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <v-dialog />
+
     <form
       action=""
       class="col-12 col-md-6 offset-md-3">
@@ -86,6 +88,10 @@ export default {
                 password: "",
                 passwordConfirmation: ""
             },
+            loginuser: {
+                username: "",
+                password: ""
+            },
             buttonEnable: false
         }
 
@@ -154,11 +160,49 @@ export default {
         registerUser(){
             this.$v.$touch()
             if(!this.$v.$invalid){
-                this.$store.dispatch("register", this.user)
+                this.$store.dispatch("register", this.user).then(response => {
+                    this.logUser(response)
+                    // this.$router.replace("/home")
+                },
+                error => {
+                    this.showModalError(error)
+                })
             }
+        },
+        logUser(){
+            this.$v.$touch()
+            if(!this.$v.$invalid){
+                this.loginuser.username = this.user.username
+                this.loginuser.password = this.user.password
+                this.$store.dispatch("login", this.loginuser).then(response => {
+                    this.$router.replace("/home")
+                },
+                error =>{
+                    console.log(error)
+                })
+            }
+        },
+        showModalError() {
+            this.$modal.show("dialog", {
+                title: "Erro",
+                text: "Username ou email já cadastrados",
+                buttons: [
+                    {
+                        title: "Tentar novamente",
+                        handler: () => {
+                            this.$modal.hide("dialog")
+                        }
+                    },
+                    {
+                        title: "Cancelar",
+                        handler: () => {
+                            this.$modal.hide("dialog")
+                        }
+                    }
+                ]
+            })
         }
     }
-
 }
 </script>
 

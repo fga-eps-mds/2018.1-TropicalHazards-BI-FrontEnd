@@ -1,4 +1,5 @@
 <template>
+
   <form
     class="col-12 offset-md-3 col-md-6">
     <h1 class="text-center">
@@ -47,6 +48,8 @@
       class="btn-disabled">
       Esqueci minha senha
     </a>
+    <v-dialog />
+
   </form>
 </template>
 
@@ -78,8 +81,30 @@ export default {
         logUser(){
             this.$v.$touch()
             if(!this.$v.$invalid){
-                this.$store.dispatch("login", this.user)
-                this.$router.replace("/home")
+                this.$store.dispatch("login", this.user).then(response => {
+                    this.$router.replace("/home")
+                },
+                error => {
+                    this.$modal.show("dialog", {
+                        title: "Erro",
+                        text: "Usuário e senha incorretos",
+                        buttons: [
+                            {
+                                title: "Tentar novamente",
+                                handler: () => {
+                                    this.$modal.hide("dialog")
+                                }
+                            },
+                            {
+                                title: "Cancelar",
+                                handler: () => {
+                                    this.$modal.hide("dialog")
+                                }
+                            }
+                        ]
+                    })
+                })
+
             }
         }
     }
