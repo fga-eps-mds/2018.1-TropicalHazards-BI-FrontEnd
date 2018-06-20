@@ -78,14 +78,12 @@
 <script>
 
 import {mapGetters} from "vuex"
-import SideBar from "@/components/Utils/SideBar"
-// import modalQuestion from "@/components/Questions/modalQuestion"
+import Sidebar from "@/components/Utils/Sidebar"
 
 export default {
 
     components: {
-        "sidebar": SideBar,
-        // "modal-question": modalQuestion
+        "sidebar": Sidebar,
     },
     data(){
 

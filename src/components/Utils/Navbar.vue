@@ -3,6 +3,12 @@
     <div class="text-center navbar-brand">
       <router-link
         :to="{ name: 'LandingPage' }">
+        <img
+          src="../../assets/observ-navbar.png"
+          alt=""
+          height="18px"
+          width="18px"
+          class="navbar-logo">
         Observ
       </router-link>
     </div>
@@ -26,6 +32,10 @@ nav {
     width: 150px;
     margin-right: auto;
     margin-left: auto;
+
+    .navbar-logo {
+      margin-bottom: 3px;
+    }
   }
 
   a {

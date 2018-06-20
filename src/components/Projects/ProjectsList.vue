@@ -19,10 +19,10 @@
             placeholder="Busque por projetos">
           <div class="input-group-append">
             <button
-              @click="searchProject()"
-              class="input-group-btn btn btn-green">
+              class="input-group-btn btn btn-green"
+              @click="searchProject()">
               <span class="fa fa-search"/>
-                Buscar
+              Buscar
             </button>
           </div>
         </div>
@@ -36,8 +36,8 @@
         <li
           v-for="tag in tags"
           :key="tag.id"
-          @click="filterByTag()"
-          class="badge btn-blue">
+          class="badge btn-blue"
+          @click="filterByTag()">
           {{ tag.name }}
         </li>
       </ul>
@@ -46,26 +46,30 @@
     <div class="row">
       <div class="col col-md-6 offset-md-3">
         <div class="row">
-          <div
-          v-for="project in projects"
-          :key="project.id"
-          class="card col col-md-6">
-          <h5 class="card-header">
-            {{ project.name }}
-          </h5>
-          <div class="card-body">
-            <h5 class="card-title">
-              {{ project.owner }}
-            </h5>
-            <p>
-              {{ project.description }}
-            </p>
-            <router-link
-              :to="{ path: '/projects/detail/' + project.id }"
-              class="btn btn-small btn-blue">
-              <span class="fa fa-search"/> Visualizar
-            </router-link>
-          </div>
+          <transition-group
+            name="fade">
+            <div
+              v-for="project in filteredList"
+              :key="project.id"
+              class="card col col-md-6">
+              <h5 class="card-header">
+                {{ project.name }}
+              </h5>
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ project.owner.name }}
+                </h5>
+                <p>
+                  {{ project.description }}
+                </p>
+                <router-link
+                  :to="{ path: '/projects/detail/' + project.id }"
+                  class="btn btn-small btn-blue">
+                  <span class="fa fa-search"/> Visualizar
+                </router-link>
+              </div>
+            </div>
+          </transition-group>
         </div>
         </div>
       </div>
@@ -76,46 +80,38 @@
 <script>
 import { mapGetters } from "vuex"
 
-import Navbar from "@/components/Utils/Navbar"
-import Footer from "@/components/Utils/Footer"
-import SideBar from "@/components/Utils/SideBar"
 
 export default {
-    components: {
-        Navbar,
-        "custom-footer": Footer,
-        "sidebar": SideBar,
-    },
     data () {
         return {
             project: {
                 name: "",
                 description: ""
             },
-            isModalVisible: false,
-            projects: []
+            searchArgument: ""
         }
     },
     computed: {
-        ...mapGetters({ currentUser: "currentUser" })
+        ...mapGetters({
+            currentUser: "currentUser"
+        }),
+        filteredList(){
+            return this.$store.getters.getProjects(this.searchArgument)
+        }
     },
-    beforeMount () {
-        this.getProject()
+
+    beforeCreate () {
+        this.$store.dispatch("loadProjects")
     },
     methods: {
-        getProject () {
-            this.$http.get("project/", { headers: { "content-type": "application/json" } }).then(result => {
-                this.project = result.data
-            },
-            error => {
-                error.log(error)
-            })
-        }
     },
 }
 </script>
 
 <style lang="scss" scoped>
+  .card {
+    display: inline-block;
+  }
   .row {
     margin: 0;
   }
@@ -125,4 +121,10 @@ export default {
     padding-right: 0;
   }
 
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
 </style>

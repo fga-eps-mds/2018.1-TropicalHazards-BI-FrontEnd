@@ -4,7 +4,13 @@
     class="navbar navbar-expand-md dark-bg">
     <router-link
       :to="{name: 'LandingPage'}"
-      class="navbar-brand dark-bg">
+      class="navbar-brand">
+      <img
+        src="../../assets/observ-navbar.png"
+        alt=""
+        width=""
+        height="25px"
+        class="d-inline-block align-top">
       Observ
     </router-link>
     <button
@@ -21,14 +27,37 @@
       id="collapseable"
       class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
+        <li
+          v-if="currentUser"
+          class="nav-item" >
+          <a class="nav-link">Olá {{ user.username }}</a>
+        </li>
         <li class="nav-item">
           <router-link
-            :to="{name: 'Auth'}"
+            :to="{name: ''}"
             class="nav-link">
-            Dashboards
+            Projetos
           </router-link>
         </li>
         <li class="nav-item">
+          <router-link
+            :to="{name: 'HomePage'}"
+            class="nav-link">
+            Dashboard
+          </router-link>
+        </li>
+        <li
+          v-if="currentUser"
+          class="nav-item">
+          <a
+            class="nav-link"
+            @click="logout()">
+            Sair
+          </a>
+        </li>
+        <li
+          v-else
+          class="nav-item" >
           <router-link
             :to="{name: 'Auth'}"
             class="nav-link">
@@ -57,8 +86,16 @@ export default {
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
+    beforeMount () {
+        this.loadUserInfo()
+    },
+
 
     methods: {
+        logout () {
+            this.$store.dispatch("logout")
+            this.$router.replace("/")
+        },
         loadUserInfo() {
             this.user.id = this.currentUser.id
             this.user.username = this.currentUser.name
@@ -80,7 +117,7 @@ export default {
     .navbar-brand {
       height: 100%;
       padding: .3em;
-      color: rgba(1, 6, 49, 0.808);
+      color: $alt-text-color;
       font-weight: bold;
       font-family: $heading-font-family;
     }

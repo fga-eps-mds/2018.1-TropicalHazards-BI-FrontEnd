@@ -22,7 +22,9 @@ import createDashboard from "@/components/Dashboards/createDashboard"
 import editDashboard from "@/components/Dashboards/editDashboard"
 
 // tags
-import CreateTag from "@/components/Projects/CreateTag"
+import CreateTag from "@/components/Tags/CreateTag"
+
+// Router guard
 import Guard from "@/components/Auth/middleware"
 
 
@@ -81,7 +83,7 @@ export default new Router({
                     path: "/projects/detail/:id",
                     name: "ProjectDetail",
                     component: ProjectDetail,
-                    beforeEnter: Guard.guest
+                    // beforeEnter: Guard.guest
                 },
                 {
                     path: "/projects/edit/:id",

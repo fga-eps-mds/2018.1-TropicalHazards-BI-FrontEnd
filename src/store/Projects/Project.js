@@ -14,11 +14,16 @@ const state = {
 }
 
 const getters = {
-    getProjects: state =>{
-        return state.projects
+    getProjects: (state) => (searchArgument) => {
+        return state.projects.filter(project => {
+            return project.name.toLowerCase().includes(searchArgument.toLowerCase())
+        })
     },
     getMyProjects: state =>{
         return state.MyProjects
+    },
+    getProjectById: (state) => (id) =>{
+        return state.projects.find( project => project.id === id)
     },
     getProjectsLength: state =>{
         return state.projects.length
@@ -55,7 +60,6 @@ const actions = {
         return new Promise((resolve, reject)=>{
             Vue.http.get("projects/", { headers: { "content-type": "application/json" } }).then(response => {
                 commit(SET_PROJECTS, response.data)
-                console.log(localStorage.token)
                 resolve()
             },
             error => {
@@ -74,14 +78,13 @@ const actions = {
             })
         })
     },
-    updateCurrentProject({commit}, projectId){
+    loadCurrentProject({commit}, projectId){
         return new Promise((resolve, reject)=>{
-            Vue.http.get("projects/" + projectId + "/", {headers : {"content-type": "application/json"}}).then(response=>{
-                commit(UPDATE_CURRENT_PROJECT, response.data)
-                resolve()
+            Vue.http.get("projects/" + projectId + "/", { headers: { "Authorization": "JWT " + localStorage.token,"content-type": "application/json"}}).then(response=>{
+                resolve(response.data)
             },
-            error =>{
-                reject()
+            err =>{
+                reject(err.status)
             })
         })
     },
@@ -93,6 +96,54 @@ const actions = {
             },
             error=>{
                 reject()
+            })
+        })
+    },
+    editProject({commit}, project){
+        return new Promise((resolve, reject)=>{
+            Vue.http.put("projects/" + project.id + "/", project, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(result => {
+                resolve("Projeto editado com sucesso")
+            },
+            error => {
+                reject(error.data)
+            })
+
+        })
+    },
+    createProject({ commit }, project) {
+        return new Promise((resolve, reject) => {
+            Vue.http.post("projects/", project, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(result => {
+                resolve("Projeto criado com sucesso")
+            },
+            error => {
+                reject(error.data)
+            })
+        })
+    },
+    getProjectOwner({commit}, userId){
+        return new Promise((resolve, reject) => {
+            Vue.http.get("users/" + userId + "/", {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(response => {
+                resolve(response.data.username)
+            },err => {
+                reject(err.data)
             })
         })
     }
