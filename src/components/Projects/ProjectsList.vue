@@ -46,9 +46,8 @@
     <div class="row">
       <div class="col col-md-6 offset-md-3">
         <div class="row">
-          <!-- <transition-group
-            name="fade"
-            style="display: inline-block"> -->
+          <transition-group
+            name="fade">
             <div
               v-for="project in filteredList"
               :key="project.id"
@@ -109,6 +108,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .card {
+    display: inline-block;
+  }
   .row {
     margin: 0;
   }
@@ -119,7 +121,6 @@ export default {
   }
 
   .fade-enter-active, .fade-leave-active {
-    position: absolute;
     transition: opacity .5s;
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
