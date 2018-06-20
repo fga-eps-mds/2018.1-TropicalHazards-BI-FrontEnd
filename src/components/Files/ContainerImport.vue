@@ -11,13 +11,15 @@
     </header>
     <div class="row">
       <div class="container-fluid">
-        <import-csv
-          v-if="step == 1"
-          @filterFile="filterFile" />
-        <filter-csv
-          v-else-if="step == 2"
-          :headers = "headers"
-          :rows = "totalRows" />
+        <transition name="fade">
+          <import-csv
+            v-if="step == 1"
+            @filterFile="filterFile" />
+          <filter-csv
+            v-else-if="step == 2"
+            :headers = "headers"
+            :rows = "totalRows" />
+        </transition>
       </div>
     </div>
   </div>

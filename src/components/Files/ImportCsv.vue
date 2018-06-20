@@ -17,7 +17,7 @@
               <b-form-file
                 v-model="file"
                 :state="Boolean(file)"
-                placeholder="Choose a file..."
+                placeholder="Escolha um arquivo..."
                 accept=".csv" />
             </div>
             <div class="row">
