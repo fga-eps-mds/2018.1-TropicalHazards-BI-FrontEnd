@@ -43,22 +43,21 @@
       </ul>
       <hr>
     </div>
-    <div class="row">
-      <div class="col col-md-6 offset-md-3">
-        <div class="row">
-          <!-- <transition-group
-            name="fade"> -->
-          <div
-            v-for="project in filteredList"
-            :key="project.id"
-            class="card col col-md-6">
+    <div class="">
+      <transition-group
+        name="fade"
+        class="row">
+        <div
+          v-for="project in filter"
+          :key="project.id"
+          class="col col-md-6 pt-3 pb-3">
+          <div class="card w-100">
             <h5 class="card-header">
               {{ project.name }}
             </h5>
             <div class="card-body">
-              <!-- Add later project owner -->
               <h5 class="card-title">
-                {{  }}
+                {{ project.owner.name }}
               </h5>
               <p>
                 {{ project.description }}
@@ -70,9 +69,8 @@
               </router-link>
             </div>
           </div>
-          <!-- </transition-group> -->
         </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -109,6 +107,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../styles/base.scss';
+
   .card {
     display: inline-block;
   }
