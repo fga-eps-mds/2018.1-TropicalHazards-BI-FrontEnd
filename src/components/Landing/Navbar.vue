@@ -11,7 +11,7 @@
         width=""
         height="25px"
         class="d-inline-block align-top">
-        Observ
+      Observ
     </router-link>
     <button
       type="button"

@@ -1,50 +1,61 @@
 <template>
-  <div id="app">
-    <div class="row grey lighten-4">
-      <sidebar/>
-      <div
-        id="content"
-        class="col m11">
-        <div class="header center-align white">
-          <h3>
-            Editar Observatório
-          </h3>
-        </div>
-        <div class="container center-align">
-          <div class="row">
-            <div class="">
-              <div class="card grey lighten-3">
-                <div class="card-content black-text">
-                  <span style="color: grey;"><h4>Nome</h4></span>
-                  <p style="text-align:justify">{{ observatory.name }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="container-fluid">
+    <header>
+      <h2>
+        Novo Dashboard
+      </h2>
+    </header>
+    <div class="row">
+      <div class="col col-md-6 offset-md-3">
+        <b-alert
+          :variant="alert.status"
+          :show="alert.show || ($v.$invalid && $v.$dirty)"
+          dismissible
+          @dismissed="alert.show=false">
+          <p>
+            {{ alert.text }}
+          </p>
+          <p v-show="$v.dashboard.name.$dirty">
+            {{ nameErrorMessage }}
+          </p>
+          <p v-show="$v.dashboard.description.$dirty">
+            {{ descriptionErrorMessage }}
+          </p>
+        </b-alert>
         <form>
-          <div class="container center-align">
-            <div class="row">
-              <div class="input-field col s12">
-                <input
-                  id="name"
-                  v-model="observatory.name"
-                  type="text"
-                  class="validate">
-              </div>
-            </div>
-
+          <div class="form-group">
+            <label for="p-name">
+              Nome do dashboard:
+            </label>
+            <input
+              id="p-name"
+              v-model.trim="dashboard.name"
+              type="text"
+              class="form-control"
+              placeholder="Observatório de dengue">
+          </div>
+          <div class="form-group">
+            <label for="d-description">
+              Descrição:
+            </label>
+            <textarea
+              id="d-description"
+              v-model.trim="dashboard.description"
+              class="form-control"
+              rows="6"
+              placeholder="Propósito da dashboard"/>
+          </div>
+          <div class="row">
+            <button
+              class="col btn btn-green btn-block btn-lg"
+              @click="postProject()">
+              <span class="fa fa-check"/> Salvar
+            </button>
             <router-link
-              :to="{ name: 'ProjectDetail' , params: { id: project.id }}"
-              class=" btn-large grey lighten-1 white-text waves-effect waves-light">
-              Cancelar
+              :to="{ name: 'MyProjects' }"
+              class="col btn btn-grey btn-block mt-0 btn-lg">
+              <span class="fa fa-undo"/> Voltar
             </router-link>
-            <a
-              class=" btn-large blue lighten-1 white-text waves-effect waves-light"
-              v-on:
-              @click="updateDashboard()">
-              Atualizar
-            </a>
           </div>
         </form>
       </div>
@@ -54,26 +65,39 @@
 
 <script>
 import {mapGetters} from "vuex"
-import Sidebar from "@/components/Utils/Sidebar"
-export default {
-    components: {
-        "sidebar": Sidebar
-    },
 
+export default {
     data () {
+
         return {
-            project: {
-                name: "",
-                description: "",
-                email: ""
+            alert: {
+                variant: "",
+                text: "",
+                show: false
             },
-            observatory: {
+            project: {
+                id: "",
+                user: "",
+                name: "",
+                description: ""
+            },
+            dashboard: {
                 project: "",
                 name: "",
+                user: "",
             },
-            response_get: "",
+
+            user: {
+                username: "",
+                email: "",
+                password: ""
+            },
+
+            // projetos: "",
+            dashboardList: [],
         }
     },
+
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
