@@ -1,7 +1,12 @@
 <template>
   <div class="container">
-    <v-dialog />
-
+    <b-alert
+      :variant="alert.variant"
+      :show="alert.show || ($v.$invalid && $v.$dirty)"
+      dismissible
+      @dismissed="alert.show=false">
+      <p class="text-center">{{ alert.text }}</p>
+    </b-alert>
     <form
       action=""
       class="col-12 col-md-6 offset-md-3">
@@ -92,7 +97,12 @@ export default {
                 username: "",
                 password: ""
             },
-            buttonEnable: false
+            buttonEnable: false,
+            alert: {
+                variant: "",
+                text: "",
+                show: false
+            },
         }
 
     },
@@ -165,7 +175,9 @@ export default {
                     // this.$router.replace("/home")
                 },
                 error => {
-                    this.showModalError(error)
+                    this.alert.variant = "danger"
+                    this.alert.text = error.body.username
+                    this.alert.show = true
                 })
             }
         },
@@ -180,29 +192,10 @@ export default {
                 },
                 error =>{
                     console.log(error)
+
                 })
             }
         },
-        showModalError() {
-            this.$modal.show("dialog", {
-                title: "Erro",
-                text: "Username ou email já cadastrados",
-                buttons: [
-                    {
-                        title: "Tentar novamente",
-                        handler: () => {
-                            this.$modal.hide("dialog")
-                        }
-                    },
-                    {
-                        title: "Cancelar",
-                        handler: () => {
-                            this.$modal.hide("dialog")
-                        }
-                    }
-                ]
-            })
-        }
     }
 }
 </script>
