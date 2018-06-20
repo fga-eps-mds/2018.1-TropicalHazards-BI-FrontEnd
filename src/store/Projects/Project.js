@@ -14,8 +14,10 @@ const state = {
 }
 
 const getters = {
-    getProjects: state =>{
-        return state.projects
+    getProjects: (state) => (searchArgument) => {
+        return state.projects.filter(project => {
+            return project.name.toLowerCase().includes(searchArgument.toLowerCase())
+        })
     },
     getMyProjects: state =>{
         return state.MyProjects
