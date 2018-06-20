@@ -1,70 +1,63 @@
 <template>
-  <modal
-    :width="600"
-    :height="450"
-    name="import-csv"
-    @before-open="beforeOpen">
-    <filter-csv-modal />
-    <!-- <v-dialog
-      @before-opened="dialogEvent('before-open')"
-      @before-closed="dialogEvent('before-close')"
-      @opened="dialogEvent('opened')"
-      @closed="dialogEvent('closed')"/> -->
-    <div class="container center-align">
-      <h4>Inserir Dados</h4>
-      <p>passo 1: carregue o arquivo</p>
-      <form>
-        <div class="row">
-          <div class="file-field input-field">
-            <div class="btn">
-              <span>Selecione o arquivo</span>
-              <input
-                id="file"
-                ref="file"
-                type="file"
-                autoComplete="off"
-                required
-                @change="handleFileUpload ()">
-            </div>
-            <div class="file-path-wrapper">
-              <input
-                class="file-path validate"
-                type="text">
-            </div>
+  <!-- <v-dialog
+    @before-opened="dialogEvent('before-open')"
+    @before-closed="dialogEvent('before-close')"
+    @opened="dialogEvent('opened')"
+    @closed="dialogEvent('closed')"/> -->
+  <div class="row">
+    <h4>Inserir Dados</h4>
+    <p>passo 1: carregue o arquivo</p>
+    <div class="row">
+      <div class="col col-md-6 offset-md-3">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Selecione o arquivo</span>
+            <input
+              id="file"
+              ref="file"
+              type="file"
+              autoComplete="off"
+              required
+              @change="handleFileUpload ()">
           </div>
-          <p class="left-align">
-            <label>
-              <input type="checkbox">
-              <span>O arquivo possui cabeçalho</span>
-            </label>
-          </p>
+          <div class="file-path-wrapper">
+            <input
+              class="file-path validate"
+              type="text">
+          </div>
         </div>
-      </form>
-      <div class="progress">
-        <div
-          class="determinate"
-          style="width: 25%" />
+        <p class="left-align">
+          <label>
+            <input type="checkbox">
+            <span>O arquivo possui cabeçalho</span>
+          </label>
+        </p>
       </div>
     </div>
-    <div class="modal-footer">
-      <div class="row center-align">
-        <div class="col s12 m4">
-          <a
-            class="modal-action modal-close waves-effect waves-light grey white-text btn-flat"
-            @click="$modal.hide('import-csv')">
-            Voltar
-          </a>
-        </div>
-        <div class="col s12 offset-m4 m4">
-          <a
-            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
-            @click="buttonHandler ()">
-            Próximo
-          </a>
-        </div>
+    <div class="progress">
+      <div
+        class="determinate"
+        style="width: 25%" />
+    </div>
+  </div>
+  <!-- <div class="modal-footer">
+    <div class="row center-align">
+      <div class="col s12 m4">
+        <a
+          class="modal-action modal-close waves-effect waves-light grey white-text btn-flat"
+          @click="$modal.hide('import-csv')">
+          Voltar
+        </a>
+      </div>
+      <div class="col s12 offset-m4 m4">
+        <a
+          class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
+          @click="buttonHandler ()">
+          Próximo
+        </a>
       </div>
     </div>
-  </modal>
+  </div> -->
 </template>
 
 <script>
@@ -77,7 +70,12 @@ export default {
     components: {
         "filter-csv-modal": FilterCsvModal
     },
-
+    props: {
+        project: {
+            type: Object,
+            required: true
+        }
+    },
     data (){
         return {
             text: "Project id: ",

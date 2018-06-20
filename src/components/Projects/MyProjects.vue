@@ -82,6 +82,11 @@
               class="btn btn-sm btn-blue mr-auto">
               <span class="fa fa-search"/> Visualizar
             </router-link>
+            <router-link
+              :to="{ name: 'ContainerImport', params: { project: project} }"
+              class="btn blue lighten-1" >
+              <span class="fa fa-edit"/> Importar
+            </router-link>
             <button
               class="btn btn-danger btn-sm"
               @click="deleteProject()">
@@ -145,4 +150,5 @@ export default {
   section {
     margin: 5em auto;
   }
+
 </style>

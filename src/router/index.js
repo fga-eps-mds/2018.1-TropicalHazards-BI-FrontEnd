@@ -26,6 +26,8 @@ import CreateTag from "@/components/Tags/CreateTag"
 // Router guard
 import Guard from "@/components/Auth/middleware"
 
+//File
+import ContainerImport from "@/components/Files/ContainerImport"
 
 // Query
 import QueryComponent from "@/components/Questions/QueryComponent"
@@ -138,6 +140,12 @@ export default new Router({
                     path: "/question",
                     name: "AskQuestion",
                     component: AskQuestion,
+                    props: true
+                },
+                {
+                    path: "/import",
+                    name: "ContainerImport",
+                    component: ContainerImport,
                     props: true
                 }
             ]
