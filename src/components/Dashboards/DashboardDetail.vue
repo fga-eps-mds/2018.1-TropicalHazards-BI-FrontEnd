@@ -80,21 +80,35 @@
             </router-link>
           </div>
         </div>
-
         <section>
-
+          <div class="row">
+            <div
+              v-for="iframe in iframes"
+              :key="iframe.id"
+              class="col-lg-6">
+              <div class="card col">
+                <div class="embed-responsive">
+                  <custom-iframe
+                    :iframeUrl="iframe.url"
+                    class="embed-responsive-item"/>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
-
       </div>
     </section>
   </div>
 </template>
 
 <script>
-
 import { mapGetters } from "vuex"
+import IframeComponent from "@/components/Questions/IframeComponent"
 
 export default {
+    components: {
+        "custom-iframe": IframeComponent,
+    },
 
     data () {
 

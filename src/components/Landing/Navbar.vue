@@ -34,14 +34,14 @@
         </li>
         <li class="nav-item">
           <router-link
-            :to="{name: ''}"
+            :to="{name: 'ProjectsList'}"
             class="nav-link">
             Projetos
           </router-link>
         </li>
         <li class="nav-item">
           <router-link
-            :to="{name: 'HomePage'}"
+            :to="{name: 'DashboardsList'}"
             class="nav-link">
             Dashboard
           </router-link>
@@ -154,8 +154,8 @@ export default {
       border-bottom: 2px solid transparent;
 
       &:hover {
-        background-color: rgba(61, 101, 187, 0.5);
-        border-bottom-color: $alt-text-color;
+        background-color: rgba(71, 71, 71, 0.5);
+        // border-bottom-color: $alt-text-color;
         color: #fff !important;
       }
     }
