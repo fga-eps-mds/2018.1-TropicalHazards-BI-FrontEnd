@@ -1,118 +1,95 @@
 <template>
-  <modal
-    :width="800"
-    :height="500"
-    name="send-data"
-    @before-open="beforeOpen">
-    <v-dialog />
-    <!-- @before-opened="dialogEvent('before-open')"
-    @before-closed="dialogEvent('before-close')"
-    @opened="dialogEvent('opened')"
-    @closed="dialogEvent('closed')" -->
-    <div class="modal-content container center-align">
-      <h4>Inserir Dados</h4>
-      <p>Resumo</p>
-    </div>
-    <div class="content">
-      <table>
-        <thead>
-          <tr>
-            <th>Número</th>
-            <th>Nome</th>
-            <th>Salvar</th>
-            <th>Tipo</th>
-            <th>Caracterização</th>
-            <th>Exemplo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in headers"
-            v-if="item.selected"
-            :key="item.id">
-            <td>{{ item.id + 1 }}</td>
-            <td>
-              {{ item.name }}
-            </td>
-            <td v-if="item.selected">
-              Sim
-            </td>
-            <td v-else>
-              Não
-            </td>
-            <td>
-              {{ item.type }}
-            </td>
-            <td>
-              ---
-            </td>
-            <td>
-              {{ item.example }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="modal-footer">
-      <div class="row center-align">
-        <div class="col s12 m4">
-          <a
-            class="modal-action modal-close waves-effect waves-light grey white-text btn-flat"
-            @click="$modal.hide('send-data')">
-            Voltar
-          </a>
-        </div>
-        <div class="col s12 offset-m4 m4">
-          <a
-            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
-            @click="submitFile()">
-            Concluir
-          </a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <form>
+            <div style="text-align: center">
+              <h4>Confirmar Dados Selecionados</h4>
+            </div>
+            <div class="form-group">
+              <b-table
+                :fields="fields"
+                :items="headers"
+                :current-page="currentPage"
+                :per-page="perPage"
+                responsive
+                bordered />
+              <b-row>
+                <b-col
+                  md="6"
+                  class="my-1">
+                  <b-pagination
+                    :total-rows="totalRows"
+                    :per-page="perPage"
+                    v-model="currentPage"
+                    class="my-0" />
+                </b-col>
+              </b-row>
+            </div>
+            <div class="row">
+              <button
+                class="col btn btn-green btn-block btn-lg"
+                @click="buttonHandler()">
+                <span class="fa fa-check"/> Continuar
+              </button>
+              <button
+                class="col btn btn-grey btn-block mt-0 btn-lg"
+                @click="$emit('goBack')">
+                <span class="fa fa-undo"/> Voltar
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </modal>
+  </div>
 </template>
+
 
 <script>
 export default {
-    name: "SendData",
-    data (){
+    props: {
+        file: {
+            type: Object,
+            required: true
+        },
+        headers: {
+            type: Array,
+            required: true
+        },
+        project: {
+            type: Number,
+            required: true
+        }
+    },
+    data(){
         return {
-            project: "",
-            headers: [],
-            remove: [],
-            define: [],
-            types: [],
-            file: null
+            currentPage: 1,
+            perPage: 4,
+            fields: [
+                { key: "name", label: "Nome"},
+                { key: "example", label: "Exemplo"},
+                { key: "selected", label: "Salvar?"},
+                { key: "acceptNull", label: "Pode ser nulo?"},
+                { key: "type", label: "Tipo"},
+                { key: "transform", label: "Transformar"},
+            ]
+        }
+    },
+    computed: {
+        totalRows(){
+            return this.headers.length
         }
     },
     methods: {
-        beforeOpen(event) {
-            this.headers = []
-            this.file = null
-            this.project = ""
-            this.project = event.params.project
-            this.headers = event.params.headers
-            this.file = event.params.file
-        },
         buttonHandler(){
             this.submitFile()
         },
-        // splitHeaders(){
-        //     for(var i = 0; i< this.headers.length; i++){
-        //         if(this.headers[i].selected == true){
-        //             this.define.push(this.headers[i].name)
-        //             this.types.push(this.headers[i].type)
-        //         }else{
-        //             this.remove.push(this.headers[i].name)
-        //         }
-        //     }
-        // },
         submitFile(){
             let formData = new FormData ()
             formData.append("file", this.file)
-            formData.append("project", this.project)
+            formData.append("project", this.project.id)
             formData.append("headers", JSON.stringify(this.headers))
             this.$http.post(
                 "import/",
@@ -124,51 +101,10 @@ export default {
                     }
                 }
             ).then((response) => {
-                if(response.status == 201){
-                    this.showUploadSucess()
-                    this.showFilterCsv ()
-                }
+                console.log(response)
             },
             error => {
-                this.showUploadFail()
                 error.log(error)
-            })
-        },
-        showUploadSucess () {
-            this.$modal.show("dialog", {
-                title: "Sucesso",
-                text: "Arquivo enviado com sucesso",
-                buttons: [
-                    {
-                        title: "Continuar",
-                        handler: () => {
-                            // this.$modal.hide("import-csv")
-                            this.$modal.hide("dialog")
-                        }
-                    },
-                ]
-            })
-        },
-        showUploadFail(){
-            this.$modal.show("dialog", {
-                title: "Erro",
-                text: "Houve uma falha no envio",
-                buttons: [
-                    {
-                        title: "Tentar novamente",
-                        handler: () => {
-                            this.file = null
-                            this.$modal.hide("dialog")
-                        }
-                    },
-                    {
-                        title: "Cancelar",
-                        handler: () => {
-                            this.$modal.hide("import-csv")
-                            this.$modal.hide("dialog")
-                        }
-                    }
-                ]
             })
         },
 
@@ -176,15 +112,3 @@ export default {
 
 }
 </script>
-
-<style>
-div.content {
-  height: 300px;
-  overflow: auto;
-  padding: 20px;
-}
-.modal-footer {
-  padding-top: 20px;
-}
-
-</style>
