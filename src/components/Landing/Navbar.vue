@@ -41,7 +41,7 @@
         </li>
         <li class="nav-item">
           <router-link
-            :to="{name: 'DashboardsList'}"
+            :to="{name: 'DashboardList'}"
             class="nav-link">
             Dashboard
           </router-link>

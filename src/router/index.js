@@ -20,7 +20,7 @@ import DashboardDetail from "@/components/Dashboards/DashboardDetail"
 import CreateDashboard from "@/components/Dashboards/CreateDashboard"
 import EditDashboard from "@/components/Dashboards/EditDashboard"
 import MyDashboards from "@/components/Dashboards/MyDashboards"
-
+import DashboardList from "@/components/Dashboards/DashboardList"
 // tags
 import CreateTag from "@/components/Tags/CreateTag"
 
@@ -136,6 +136,11 @@ export default new Router({
                     name: "MyDashboards",
                     component: MyDashboards,
                     beforeEnter: Guard.auth
+                },
+                {
+                    path: "/dashboards",
+                    name: "DashboardList",
+                    component: DashboardList
                 },
                 // Query
                 {
