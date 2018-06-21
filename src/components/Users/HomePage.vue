@@ -2,15 +2,15 @@
   <div id="background">
     <navbar />
     <div class="row">
-      <sidebar class="col-md-2 sidebar"/>
-      <div class="col col-md-10 content">
+      <sidebar class="col-md-3 col-lg-2 sidebar"/>
+      <div class="col-md-9 col-lg-10 content">
         <transition name="router-anim">
           <router-view />
         </transition>
+        <div class="bottom">
+          <custom-footer/>
+        </div>
       </div>
-    </div>
-    <div class="">
-      <custom-footer/>
     </div>
   </div>
 </template>
@@ -95,7 +95,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -132,6 +132,15 @@ export default {
   .content {
     padding-left: 0;
     padding-right: 0;
+
+    .container-fluid {
+      min-height: 75vh;
+    }
+  }
+
+  .bottom {
+    display: block;
+    bottom: 0;
   }
 
   .sidebar {

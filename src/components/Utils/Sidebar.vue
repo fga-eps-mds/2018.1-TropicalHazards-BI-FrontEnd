@@ -4,8 +4,8 @@
       <div
         v-if="!currentUser">
         <router-link
-          :to="{ name: 'Auth' }"
           id="log-or-reg"
+          :to="{ name: 'Auth' }"
           class="text-left dark-bg h6">
           Entrar ou registrar
         </router-link>
@@ -58,12 +58,12 @@
       </li>
       <router-link
         v-if="currentUser"
-        :to="{ name: '' }"
+        :to="{ name: 'MyDashboards' }"
         class=" list-group-item">
         Meus Dashboards
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'DashboardList' }"
         class="list-group-item">
         Procurar Dashboards
       </router-link>

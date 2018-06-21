@@ -18,21 +18,19 @@
     </header>
     <hr>
     <div class="container">
-      <form>
-        <div class="input-group input-group-sm">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Pesquise por seus projetos">
-          <div class="input-group-append">
-            <button
-              class="btn btn-green"
-              @click="searchProject()">
-              <span class="fa fa-search"/> Buscar
-            </button>
-          </div>
+      <div class="input-group input-group-sm">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Pesquise por seus projetos">
+        <div class="input-group-append">
+          <button
+            class="btn btn-green"
+            @click="searchProject()">
+            <span class="fa fa-search"/> Buscar
+          </button>
         </div>
-      </form>
+      </div>
     </div>
     <hr>
     <div v-if="MyProjects.length == 0">

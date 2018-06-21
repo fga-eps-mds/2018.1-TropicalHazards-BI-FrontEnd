@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <header>
       <h2>
-        Minhas dashboards
+        Dashboards
       </h2>
     </header>
     <hr>
@@ -18,8 +18,7 @@
           placeholder="Busque por dashboards">
         <div class="input-group-append">
           <button
-            class="input-group-btn btn btn-green"
-            @click="searchDashboard()">
+            class="input-group-btn btn btn-green">
             <span class="fa fa-search"/> Buscar
           </button>
         </div>
@@ -44,20 +43,12 @@
           v-for="dashboard in filteredDashboards"
           :key="dashboard.id"
           class="col col-lg-6 pb-3 pt-3">
-          <!-- <div class="embed-responsive embed-responsive-16by9">
-            <custom-iframe
-              :src="2"
-              class=""/>
-              <iframe
-              :src="dashboard.iframe"
-              class="embed-responsive-item"
-              frameborder="0"/>
-          </div> -->
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
                 {{ dashboard.name }}
                 <span
+                  v-if="dashboard.user == currentUser.id"
                   class="badge badge-success h6">
                   owner
                 </span>
@@ -74,6 +65,7 @@
                 <span class="fa fa-search"/> Visualizar
               </router-link>
               <router-link
+                v-if="dashboard.user == currentUser.id"
                 :to="{ name: 'EditDashboard', params: { dashboard: dashboard } }"
                 class="btn btn-sm btn-blue mr-auto">
                 <span class="fa fa-pencil"/> Editar
@@ -87,23 +79,18 @@
 </template>
 
 <script>
-import IframeComponent from "@/components/Questions/IframeComponent"
 import { mapGetters } from "vuex"
 
 export default {
-    components: {
-        "custom-iframe": IframeComponent,
-    },
     data () {
         return {
             srchArg: "",
         }
     },
     computed: {
-        ...mapGetters({ currentUser: "currentUser" }),
-        dashboards(){
-            return this.$store.getters.getMyDashboards(this.currentUser.id)
-        },
+        ...mapGetters({ currentUser: "currentUser",
+            dashboards: "getDashboards"
+        }),
         filteredDashboards(){
             return this.dashboards.filter(dashboard =>{
                 return dashboard.name.toLowerCase().includes(this.srchArg.toLowerCase())
