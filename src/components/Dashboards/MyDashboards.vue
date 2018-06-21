@@ -69,9 +69,14 @@
                 {{ dashboard.description }}
               </p>
               <router-link
-                :to="{ name: 'DashboardDetail' }"
+                :to="{ name: 'DashboardDetail', params: { id: dashboard.id} }"
                 class="btn btn-blue btn-sm">
                 <span class="fa fa-search"/> Visualizar
+              </router-link>
+              <router-link
+                :to="{ name: 'EditDashboard', params: { dashboard: dashboard } }"
+                class="btn btn-sm btn-blue mr-auto">
+                <span class="fa fa-pencil"/> Editar
               </router-link>
             </div>
           </div>

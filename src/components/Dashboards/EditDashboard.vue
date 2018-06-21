@@ -48,11 +48,11 @@
           <div class="row">
             <button
               class="col btn btn-green btn-block btn-lg"
-              @click="postProject()">
+              @click="editDashboard()">
               <span class="fa fa-check"/> Salvar
             </button>
             <router-link
-              :to="{ name: 'MyProjects' }"
+              :to="{ name: 'MyDashboards' }"
               class="col btn btn-grey btn-block mt-0 btn-lg">
               <span class="fa fa-undo"/> Voltar
             </router-link>
