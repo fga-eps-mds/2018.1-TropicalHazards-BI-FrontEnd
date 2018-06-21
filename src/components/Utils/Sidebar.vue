@@ -58,7 +58,7 @@
       </li>
       <router-link
         v-if="currentUser"
-        :to="{ name: '' }"
+        :to="{ name: 'MyDashboards' }"
         class=" list-group-item">
         Meus Dashboards
       </router-link>

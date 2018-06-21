@@ -38,11 +38,10 @@
       </ul>
     </div>
     <hr>
-
     <section id="dashboards-board">
       <div class="row">
         <div
-          v-for="dashboard in dashboards"
+          v-for="dashboard in filteredDashboards"
           :key="dashboard.id"
           class="col col-lg-6 pb-3 pt-3">
           <!-- <div class="embed-responsive embed-responsive-16by9">
@@ -59,13 +58,12 @@
               <h5 class="card-title">
                 {{ dashboard.name }}
                 <span
-                  v-if="dashboard.owner == currentUser"
                   class="badge badge-success h6">
                   owner
                 </span>
               </h5>
               <h6 class="card-subtitle">
-                {{ dashboard.project.name }}
+                Placeholder Nome Projeto
               </h6>
               <p class="card-text">
                 {{ dashboard.description }}
@@ -86,82 +84,30 @@
 
 <script>
 import IframeComponent from "@/components/Questions/IframeComponent"
+import { mapGetters } from "vuex"
 
 export default {
     components: {
-      "custom-iframe": IframeComponent,
+        "custom-iframe": IframeComponent,
     },
-
     data () {
         return {
-            srchArg: '',
-
-            tagList: [
-                {
-                    name: "example"
-                },
-                {
-                    name: "example"
-                },
-                {
-                    name: "example"
-                },
-                {
-                    name: "example"
-                },
-            ],
-
-            dashboards: [
-                {
-                    name: 'dashboard name',
-                    owner: {
-                        name: "owner name"
-                    },
-                    description: "jsdjfosjdi",
-                    project: {
-                        name: "project name",
-                        description: "very long description",
-                        owner: {
-                            name: "PO name"
-                        },
-                        tags: [],
-                        id: 0,
-                    }
-                },
-                {
-                    name: 'dashboard name',
-                    owner: {
-                        name: "owner name"
-                    },
-                    description: "jsdjfosjdi",
-                    project: {
-                        name: "project name",
-                        description: "very long description",
-                        owner: {
-                            name: "PO name"
-                        },
-                        tags: [],
-                        id: 0,
-                    }
-                },
-                {
-                    name: 'dashboard name',
-                    owner: {
-                        name: "owner name"
-                    },
-                    description: "jsdjfosjdi",
-                    project: {
-                        name: "project name",
-                        description: "very long description",
-                        owner: {
-                            name: "PO name"
-                        },
-                        tags: [],
-                        id: 0,
-                    }
-                },
-            ]
+            srchArg: "",
         }
+    },
+    computed: {
+        ...mapGetters({ currentUser: "currentUser" }),
+        dashboards(){
+            return this.$store.getters.getMyDashboards(this.currentUser.id)
+        },
+        filteredDashboards(){
+            return this.dashboards.filter(dashboard =>{
+                return dashboard.name.toLowerCase().includes(this.srchArg.toLowerCase())
+            })
+        }
+    },
+    beforeCreate(){
+        this.$store.dispatch("loadDashboards")
     }
 
 }

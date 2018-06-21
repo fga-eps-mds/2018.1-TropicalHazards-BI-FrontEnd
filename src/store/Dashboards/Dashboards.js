@@ -13,6 +13,11 @@ const getters = {
     },
     getDashboardsLength: state =>{
         return state.dashboards.length
+    },
+    getMyDashboards: (state) => (id) =>{
+        return state.dashboards.filter(dashboard =>{
+            return dashboard.user === id
+        })
     }
 }
 
