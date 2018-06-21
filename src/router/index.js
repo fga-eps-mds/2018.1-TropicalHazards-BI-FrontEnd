@@ -18,15 +18,20 @@ import MyProjects from "@/components/Projects/MyProjects"
 // dashboards
 import DashboardsList from "@/components/Dashboards/DashboardsList"
 import DashboardDetail from "@/components/Dashboards/DashboardDetail"
-import createDashboard from "@/components/Dashboards/createDashboard"
-import editDashboard from "@/components/Dashboards/editDashboard"
-
+import CreateDashboard from "@/components/Dashboards/CreateDashboard"
+import EditDashboard from "@/components/Dashboards/EditDashboard"
+import MyDashboards from "@/components/Dashboards/MyDashboards"
+import DashboardList from "@/components/Dashboards/DashboardList"
 // tags
 import CreateTag from "@/components/Tags/CreateTag"
 
 // Router guard
 import Guard from "@/components/Auth/middleware"
 
+//File
+// import ImportCsv from "@/components/Files/ImportCsv"
+// import FilterCsv from "@/components/Files/Filter"
+import ContainerImport from "@/components/Files/ContainerImport"
 
 // Query
 import QueryComponent from "@/components/Questions/QueryComponent"
@@ -108,26 +113,39 @@ export default new Router({
                     path: "/dashboards",
                     name: "DashboardsList",
                     // TODO: fix this
-                    component: DashboardsList,
-                    beforeEnter: Guard.guest
+                    component: DashboardDetail,
+                    // beforeEnter: Guard.guest
                 },
                 {
                     path: "/dashboards/detail/:id",
                     name: "DashboardDetail",
                     component: DashboardDetail,
-                    beforeEnter: Guard.guest
+                    // beforeEnter: Guard.guest
                 },
                 {
-                    path: "/dashboards/new/:id",
-                    name: "createDashboard",
-                    component: createDashboard,
+                    path: "/dashboards/new",
+                    name: "CreateDashboard",
+                    component: CreateDashboard,
+                    beforeEnter: Guard.auth,
+                    props: true
+                },
+                {
+                    path: "/dashboards/edit/",
+                    name: "EditDashboard",
+                    component: EditDashboard,
+                    beforeEnter: Guard.auth,
+                    props: true
+                },
+                {
+                    path: "/my-dashboards",
+                    name: "MyDashboards",
+                    component: MyDashboards,
                     beforeEnter: Guard.auth
                 },
                 {
-                    path: "/dashboards/edit/:id",
-                    name: "editDashboard",
-                    component: editDashboard,
-                    beforeEnter: Guard.auth
+                    path: "/dashboards",
+                    name: "DashboardList",
+                    component: DashboardList
                 },
                 // Query
                 {
@@ -140,7 +158,25 @@ export default new Router({
                     name: "AskQuestion",
                     component: AskQuestion,
                     props: true
-                }
+                },
+                // {
+                //     path: "/import",
+                //     name: "ContainerImport",
+                //     component: ImportCsv,
+                //     props: true
+                // },
+                {
+                    path: "/import",
+                    name: "ContainerImport",
+                    component: ContainerImport,
+                    props: true
+                },
+                // {
+                //     path: "/import/filter",
+                //     name: "FilterCsv",
+                //     component: FilterCsv,
+                //     props: true
+                // }
             ]
         }
     ]

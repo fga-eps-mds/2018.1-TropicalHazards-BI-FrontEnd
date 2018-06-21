@@ -44,33 +44,29 @@
       <hr>
     </div>
     <div class="">
-      <transition-group
-        name="fade"
-        class="row">
-        <div
-          v-for="project in filter"
-          :key="project.id"
-          class="col col-md-6 pt-3 pb-3">
-          <div class="card w-100">
-            <h5 class="card-header">
-              {{ project.name }}
+      <div
+        v-for="project in filter"
+        :key="project.id"
+        class="col col-md-6 pt-3 pb-3">
+        <div class="card w-100">
+          <h5 class="card-header">
+            {{ project.name }}
+          </h5>
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ project.owner.name }}
             </h5>
-            <div class="card-body">
-              <h5 class="card-title">
-                {{ project.owner.name }}
-              </h5>
-              <p>
-                {{ project.description }}
-              </p>
-              <router-link
-                :to="{ path: '/projects/detail/' + project.id }"
-                class="btn btn-small btn-blue">
-                <span class="fa fa-search"/> Visualizar
-              </router-link>
-            </div>
+            <p>
+              {{ project.description }}
+            </p>
+            <router-link
+              :to="{ path: '/projects/detail/' + project.id }"
+              class="btn btn-small btn-blue">
+              <span class="fa fa-search"/> Visualizar
+            </router-link>
           </div>
         </div>
-      </transition-group>
+      </div>
     </div>
   </div>
 </template>

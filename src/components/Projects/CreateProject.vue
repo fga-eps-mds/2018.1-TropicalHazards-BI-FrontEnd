@@ -125,21 +125,25 @@ export default {
 
     computed: {
         ...mapGetters({ currentUser: "currentUser" }),
-        nameErrorMessage(){
-            if(!this.$v.project.name.required){
+        nameErrorMessage () {
+            if(!this.$v.project.name.required) {
                 return "Insira o nome do projeto \n"
-            }else if(!this.$v.project.name.minLength){
+            }
+            else if(!this.$v.project.name.minLength) {
                 return "O nome do projeto deve ter no mínimo " + this.$v.project.name.$params.minLength.min + " caracteres \n"
-            }else if(!this.$v.project.name.maxLength){
+            }
+            else if(!this.$v.project.name.maxLength) {
                 return "O nome do projeto deve ter no máximo " + this.$v.project.name.$params.maxLength.max + " caracteres \n"
             }
         },
-        descriptionErrorMessage(){
-            if(!this.$v.project.description.required){
+        descriptionErrorMessage () {
+            if(!this.$v.project.description.required) {
                 return "Insira a descrição do projeto \n"
-            }else if(!this.$v.project.description.minLength){
+            }
+            else if(!this.$v.project.description.minLength) {
                 return "A descrição do projeto deve ter no mínimo " + this.$v.project.description.$params.minLength.min + " caracteres \n"
-            }else if(!this.$v.project.description.maxLength){
+            }
+            else if(!this.$v.project.description.maxLength) {
                 return "A descrição do projeto deve ter no máximo " + this.$v.project.description.$params.maxLength.max + " caracteres \n"
             }
         },
@@ -150,19 +154,20 @@ export default {
     methods: {
         postProject () {
             this.$v.$touch()
-            if(!this.$v.$invalid){
+            if(!this.$v.$invalid) {
                 this.project.tags = this.selectedTags,
                 this.project.user = this.currentUser.id
-                this.$store.dispatch("createProject", this.project).then(response=>{
+                this.$store.dispatch("createProject", this.project).then(response => {
                     this.alert.variant = "success"
                     this.alert.text = response
                     this.alert.show = true
-                }, err =>{
+                }, err => {
                     this.alert.variant = "warning"
                     this.alert.text = err
                     this.alert.show = true
                 })
-            }else{
+            }
+            else {
                 this.alert.variant = "warning"
             }
         },
