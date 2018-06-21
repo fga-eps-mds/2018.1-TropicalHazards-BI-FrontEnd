@@ -39,7 +39,7 @@
         <p class="text-justify">
           {{ dashboard.description }}
         </p>
-        <ul class="list-inline">
+        <!-- <ul class="list-inline">
           <li
             v-for="tag in dashboard.project.tags"
             :key="tag.id"
@@ -48,12 +48,10 @@
               {{ tag.name }}
             </span>
           </li>
-        </ul>
+        </ul> -->
       </header>
-      <div class="row">
+      <!-- <div class="row">
         <div
-          v-for="dashboard in dashboards"
-          :key="dashboard.id"
           class="card col col-md-6">
           <div class="embed-responsive embed-responsive-16by9">
             <iframe
@@ -96,7 +94,7 @@
             </div>
           </div>
         </section>
-      </div>
+      </div> -->
     </section>
   </div>
 </template>
@@ -109,61 +107,29 @@ export default {
     components: {
         "custom-iframe": IframeComponent,
     },
-
     data () {
-
         return {
+            showError: false,
             dashboard: {
-                project: "",
                 name: "",
-                id: ""
-            },
-            user: {
-                username: "",
-                password: "",
-                email: "",
-                id: ""
-            },
-            showError: false
+                user: "",
+                project: ""
+            }
         }
     },
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
-
-    beforeMount(){
-        this.getObservatorioDetail()
-        this.loadUserInfo()
-        this.modalScript()
-    },
-    methods: {
-        deleteDashboard (){
-            if (window.confirm("Deseja realmente deletar o dashboard ?")){
-                this.$http.delete("dashboards/" + this.$route.params.id + "/", { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
-                    window.alert("dashboard deletado")
-                    this.$router.replace("/home")
-                    this.dashboard = result.data
-                },
-                error => {
-                    window.alert("Erro ao deletar o dashboard")
-                    error.log(error)
-                })
-            }
-        },
-        getObservatorioDetail(){
-            this.$http.get("dashboards/" + this.$route.params.id + "/",  { headers: { "Authorization": "JWT " + localStorage.token } }).then(result => {
-                this.dashboard = result.data
-            },
-            error => {
-                error.log(error)
+    beforeMount () {
+        this.$store.dispatch("loadDashboards")
+        this.dashboard = this.$store.getters.getDashboardById(parseInt(this.$route.params.id))
+        if(this.dashboard === undefined){
+            this.showError = true
+        }else{
+            this.$store.dispatch("getProjectOwner", this.project.user).then(response=>{
+                this.owner = response
             })
         }
-        ,
-        loadUserInfo (){
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        },
     },
 }
 </script>

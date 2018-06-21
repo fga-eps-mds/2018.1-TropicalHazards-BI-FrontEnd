@@ -128,7 +128,8 @@ export default new Router({
                     path: "/dashboards/edit/",
                     name: "EditDashboard",
                     component: EditDashboard,
-                    beforeEnter: Guard.auth
+                    beforeEnter: Guard.auth,
+                    props: true
                 },
                 {
                     path: "/my-dashboards",
