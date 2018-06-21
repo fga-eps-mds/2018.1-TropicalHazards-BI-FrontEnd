@@ -110,7 +110,7 @@ export default new Router({
                 // dashboards
                 {
                     path: "/dashboards",
-                    name: "Dashboards",
+                    name: "DashboardsList",
                     // TODO: fix this
                     component: DashboardDetail,
                     // beforeEnter: Guard.guest

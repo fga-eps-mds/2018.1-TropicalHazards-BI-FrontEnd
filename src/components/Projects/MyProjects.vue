@@ -18,19 +18,22 @@
     </header>
     <hr>
     <div class="container">
-      <div class="input-group input-group-sm">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Pesquise por seus projetos">
-        <div class="input-group-append">
-          <button
-            class="btn btn-green"
-            @click="searchProject()">
-            <span class="fa fa-search"/> Buscar
-          </button>
+      <form>
+        <div class="input-group input-group-sm">
+          <input
+            v-model="searchArgument"
+            type="text"
+            class="form-control"
+            placeholder="Pesquise por seus projetos">
+          <div class="input-group-append">
+            <button
+              class="btn btn-green"
+              @click="searchProject()">
+              <span class="fa fa-search"/> Buscar
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
     <hr>
     <div v-if="MyProjects.length == 0">
@@ -57,47 +60,49 @@
       </b-jumbotron>
     </div>
     <section v-else>
-      <div
-        v-for="project in MyProjects"
-        :key="project.id"
-        class="row">
+      <transition-group name="fade">
         <div
-          class="card col col-md-6">
-          <h5 class="card-header">
-            {{ project.name }}
-          </h5>
-          <div class="card-body">
-            <p class="card-text">
-              {{ project.description }}
-            </p>
-            <router-link
-              :to="{ name: 'EditProject', params: { id: project.id } }"
-              class="btn btn-sm btn-blue mr-auto">
-              <span class="fa fa-pencil"/> Editar
-            </router-link>
-            <router-link
-              :to="{ name: 'CreateDashboard', params: { project: project.id } }"
-              class="btn btn-sm btn-blue mr-auto">
-              <span class="fa fa-pencil"/> Criar Dashboard
-            </router-link>
-            <router-link
-              :to="{ name: 'ProjectDetail', params: { id: project.id } }"
-              class="btn btn-sm btn-blue mr-auto">
-              <span class="fa fa-search"/> Visualizar
-            </router-link>
-            <router-link
-              :to="{ name: 'ContainerImport', params: { project: project} }"
-              class="btn blue lighten-1" >
-              <span class="fa fa-edit"/> Importar
-            </router-link>
-            <button
-              class="btn btn-danger btn-sm"
-              @click="deleteProject()">
-              <span class="fa fa-trash"/> Excluir
-            </button>
+          v-for="project in filteredList"
+          :key="project.id"
+          class="row">
+          <div
+            class="card col col-md-6">
+            <h5 class="card-header">
+              {{ project.name }}
+            </h5>
+            <div class="card-body">
+              <p class="card-text">
+                {{ project.description }}
+              </p>
+              <router-link
+                :to="{ name: 'EditProject', params: { id: project.id } }"
+                class="btn btn-sm btn-blue mr-auto">
+                <span class="fa fa-pencil"/> Editar
+              </router-link>
+              <router-link
+                :to="{ name: 'CreateDashboard', params: { project: project.id } }"
+                class="btn btn-sm btn-blue mr-auto">
+                <span class="fa fa-pencil"/> Criar Dashboard
+              </router-link>
+              <router-link
+                :to="{ name: 'ProjectDetail', params: { id: project.id } }"
+                class="btn btn-sm btn-blue mr-auto">
+                <span class="fa fa-search"/> Visualizar
+              </router-link>
+              <button
+                class="btn btn-danger btn-sm"
+                @click="deleteProject()">
+                <span class="fa fa-trash"/> Excluir
+              </button>
+              <router-link
+                :to="{ name: 'ContainerImport', params: { project: project} }"
+                class="btn blue lighten-1" >
+                <span class="fa fa-edit"/> Importar
+              </router-link>
+            </div>
           </div>
         </div>
-      </div>
+      </transition-group>
     </section>
   </div>
 </template>
@@ -116,6 +121,7 @@ export default {
             tags: "",
             project: "",
             projects: [],
+            searchArgument: ""
         }
     },
     computed: {
@@ -124,8 +130,10 @@ export default {
             getTags: "getTags",
             getProjects: "getProjects",
             MyProjects: "getMyProjects"
-        })
-
+        }),
+        filteredList(){
+            return this.$store.getters.getMyProjects(this.searchArgument)
+        }
     },
     beforeMount () {
         this.loadProjects()
@@ -152,6 +160,12 @@ export default {
 
   section {
     margin: 5em auto;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 
 </style>

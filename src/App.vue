@@ -3,7 +3,6 @@
     <transition name="router-anim">
       <router-view />
     </transition>
-    <!-- <Footer /> -->
   </div>
 </template>
 
@@ -57,22 +56,7 @@ export default {
     opacity: 1;
   }
 }
-.navbar {
-  background-color: #2b4a6ef1;
-}
-.page-footer{
-  background-color:#1b1b1b;
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 auto;
-  position: absolute;
-  width: 100%;
 
-
-}
-.footer-copyright{
-  background-color:#242424;
-}
 
 h1,
 h2,

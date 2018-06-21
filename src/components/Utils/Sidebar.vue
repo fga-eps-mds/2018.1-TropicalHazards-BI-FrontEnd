@@ -83,7 +83,7 @@
         Novo Projeto
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'ProjectsList' }"
         class="list-group-item">
         Procurar Projetos
       </router-link>

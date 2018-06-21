@@ -1,108 +1,128 @@
 <template>
-  <div class = "ListProject">
-    <div
-      id="content"
-      class="col m12" >
-      <secondnav/>
-      <div class="grey lighten-4">
-        <div class="center-align">
-          <h5> <span class="fa fa-line-chart">Estatísticas</span></h5>
-          <div class="row">
-            <div class="col s12   ">
-              <div class="card ">
-                <div class="card-content ">
-                  <span class="card-title">{{ projects.length }}</span>
-                  <p>Projetos ativos</p>
-                </div>
-              </div>
-            </div>
+  <div class="container-fluid">
+    <header>
+      <h2>
+        Projetos
+      </h2>
+    </header>
+    <hr>
+    <div class="row">
+      <h5 class="col col-md-4">
+        Busca
+      </h5>
+      <form class="col col-md-8">
+        <div class="input-group">
+          <input
+            v-model="searchArgument"
+            class="form-control"
+            type="text"
+            placeholder="Busque por projetos">
+          <div class="input-group-append">
+            <button
+              class="input-group-btn btn btn-green"
+              @click="searchProject()">
+              <span class="fa fa-search"/>
+              Buscar
+            </button>
           </div>
         </div>
-      </div>
-      <div class="custom-container">
-        <h5>Projetos</h5>
+      </form>
+      <!-- <ul class="list-inline">
+        <li class="list-inline-group">
+          <h5>
+            Tags
+          </h5>
+        </li>
+        <li
+          v-for="tag in tags"
+          :key="tag.id"
+          class="badge btn-blue"
+          @click="filterByTag()">
+          {{ tag.name }}
+        </li>
+      </ul> -->
+      <hr>
+    </div>
+    <div class="">
+      <transition-group name="fade">
         <div
-          id="projects"
-          class="row">
-          <div
-            v-for="project in projects"
-            :key="project.id"
-            class="col s12 m4 l3">
-            <div class="card grey lighten-5">
-              <div class="truncate card-content grey-text text-darken-2">
-                <span
-                  style="font-size:20px"
-                  class="card-title">{{ project.name }}</span>
-                <p> Descrição: {{ project.description }} </p>
-                <p> IdProjeto: {{ project.id }} </p>
-                <p> IdUser: {{ project.user }} </p>
-              </div>
-              <div class="card-action center-align grey-text text-lighten-2">
-                <router-link
-                  :to="{ name: 'ProjectDetail', params: { id: project.id } }"
-                  class="btn blue lighten-1" >
-                  <span class="fa fa-search"/>
-                </router-link>
-
-                <router-link
-                  :to="{ name: 'EditProject', params: { id: project.id } }"
-                  class="btn blue lighten-1" >
-                  <span class="fa fa-edit"/>
-                </router-link>
-              <!-- <a href="#delete-proj" class="modal-trigger btn red">
-                    <span class="fa fa-remove"></span>
-              </a> -->
-              </div>
+          v-for="project in filteredList"
+          :key="project.id"
+          class="col col-md-6 pt-3 pb-3">
+          <div class="card w-100">
+            <h5 class="card-header">
+              {{ project.name }}
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title">
+                <!-- {{ project.owner.name }} -->
+              </h5>
+              <p>
+                {{ project.description }}
+              </p>
+              <router-link
+                :to="{ path: '/projects/detail/' + project.id }"
+                class="btn btn-small btn-blue">
+                <span class="fa fa-search"/> Visualizar
+              </router-link>
             </div>
           </div>
         </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
 
 <script>
-import ProjectDetail from "@/components/Projects/ProjectDetail"
-import SecondNavBar from "@/components/Utils/SecondNavBar"
-import {mapGetters} from "vuex"
-import modalLogin from "@/components/Modals/modalLogin.vue"
+import { mapGetters } from "vuex"
+
+
 export default {
-    components: {
-        ProjectDetail,
-        "secondnav": SecondNavBar,
-        "modal": modalLogin
-    },
     data () {
         return {
-            projects: {
+            project: {
                 name: "",
                 description: ""
             },
-            isModalVisible: false,
-            projetos: ""
+            searchArgument: ""
         }
     },
     computed: {
-        ...mapGetters({ currentUser: "currentUser" })
+        ...mapGetters({
+            currentUser: "currentUser"
+        }),
+        filteredList(){
+            return this.$store.getters.getProjects(this.searchArgument)
+        }
     },
-    beforeMount () {
-        this.getProject()
+
+    beforeCreate () {
+        this.$store.dispatch("loadProjects")
     },
     methods: {
-        getProject () {
-            this.$http.get("projects/", { headers: { "content-type": "application/json" } }).then(result => {
-                this.projects = result.data
-            },
-            error => {
-                error.log(error)
-            })
-        }
     },
 }
 </script>
 
-<style>
-::placeholder { /* Most modern browsers support this now. */
-   color:    #132a71;
-}
+<style lang="scss" scoped>
+  @import '../styles/base.scss';
+
+  .card {
+    display: inline-block;
+  }
+  .row {
+    margin: 0;
+  }
+
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
 </style>
