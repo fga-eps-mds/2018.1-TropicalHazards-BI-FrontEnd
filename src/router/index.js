@@ -149,7 +149,8 @@ export default new Router({
                     path: "/query",
                     name: "QueryComponent",
                     component: QueryComponent,
-                    beforeEnter: Guard.auth
+                    beforeEnter: Guard.auth,
+                    props: true
                 },
                 {
                     path: "/question",

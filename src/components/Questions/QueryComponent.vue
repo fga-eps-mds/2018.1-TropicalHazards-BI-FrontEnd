@@ -23,7 +23,7 @@
             <button
               class="col btn btn-green btn-block btn-lg"
               @click="generateQuery()">
-              <span class="fa fa-check"/> Salvar
+              <span class="fa fa-check"/> Continuar
             </button>
             <router-link
               :to="{ name: 'HomePage' }"
@@ -51,6 +51,12 @@ export default {
         "aggregation": Aggregation,
         "breakout": Breakout
     },
+    props: {
+        id: {
+            type: Number,
+            required: true
+        }
+    },
     data (){
         return {
             // PROVAVELMENTE MELHOR DEIXAR OS ELEMENTOS DE FORA DA QUERY E DAR ASSIGN NELES ANTES DE ENVIAR
@@ -70,7 +76,7 @@ export default {
         })
     },
     beforeMount(){
-        this.$store.dispatch("loadCurrentProjectFields", 4)
+        this.$store.dispatch("loadCurrentProjectFields", this.id)
     },
     methods: {
         addFilterClause(value){
@@ -94,7 +100,7 @@ export default {
             if(this.query.breakout == 0){
                 delete this.query.breakout
             }
-            this.$router.push({name: "AskQuestion", params: {query: this.query }})
+            this.$router.push({name: "AskQuestion", params: {query: this.query, id: this.id }})
         }
     }
 }

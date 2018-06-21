@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div v-if="showError">
+    <div v-if="!(dashboard)">
       <header>
         <h2> Detalhes do Dashboard </h2>
       </header>
@@ -39,6 +39,21 @@
         <p class="text-justify">
           {{ dashboard.description }}
         </p>
+        <router-link
+          :to="{ name: 'QueryComponent', params: { id: dashboard.id} }"
+          class="btn btn-blue btn-sm">
+          <span class="fa fa-search"/> Nova Question
+        </router-link>
+        <!-- <ul class="list-inline">
+          <li
+            v-for="tag in dashboard.project.tags"
+            :key="tag.id"
+            class="list-inline-item">
+            <span class="badge badge-primary btn-blue">
+              {{ tag.name }}
+            </span>
+          </li>
+        </ul> -->
       </header>
       <div class="row">
         <div
@@ -75,11 +90,13 @@
               :key="iframe.id"
               class="col">
               <div class="card border-primary">
-                <div class="embed-responsive">
+                <custom-iframe
+                  :iframe-url="iframe.uuid" />
+              <!-- <div class="embed-responsive">
                   <custom-iframe
-                    :iframeUrl="iframe.url"
+                    :iframe-url="iframe.uuid"
                     class="embed-responsive-item"/>
-                </div>
+              </div> -->
               </div>
             </div>
           </div>
@@ -100,26 +117,20 @@ export default {
     data () {
         return {
             showError: false,
-            dashboard: {
-                name: "",
-                user: "",
-                project: ""
-            }
+            iframes: []
         }
     },
     computed: {
-        ...mapGetters({ currentUser: "currentUser" })
+        ...mapGetters({ currentUser: "currentUser" }),
+        dashboard(){
+            return this.$store.getters.getDashboardById(parseInt(this.$route.params.id))
+        }
     },
     beforeMount () {
         this.$store.dispatch("loadDashboards")
-        this.dashboard = this.$store.getters.getDashboardById(parseInt(this.$route.params.id))
-        if(this.dashboard === undefined){
-            this.showError = true
-        }else{
-            this.$store.dispatch("getProjectOwner", this.project.user).then(response=>{
-                this.owner = response
-            })
-        }
+        this.$store.dispatch("getIframes", 1).then(response=>{
+            this.iframes = response
+        })
     },
 }
 </script>
