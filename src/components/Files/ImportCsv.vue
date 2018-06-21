@@ -35,15 +35,12 @@
 </template>
 
 <script>
-import FilterCsvModal from "@/components/Files/FilterCsv.vue"
+/*eslint-disable*/
 import LineNavigator from"../../../node_modules/line-navigator/line-navigator.js"
 import Papa from "../../../node_modules/papaparse/papaparse.js"
 
 export default {
     name: "ImportCsv",
-    components: {
-        "filter-csv-modal": FilterCsvModal
-    },
     data (){
         return {
             file: null,

@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col col-md-6 offset-md-3">
+      <div class="col">
         <div class="form-group">
           <form>
             <div style="text-align: center">
@@ -15,14 +15,13 @@
                 :current-page="currentPage"
                 :per-page="perPage"
                 responsive
-                striped
-                bordered
-                hover>
+                bordered>
                 <template
                   slot="selected"
                   slot-scope="data">
                   <b-form-checkbox
-                    v-model="data.item.selected" />
+                    v-model="data.item.selected"
+                    success/>
                 </template>
                 <template
                   slot="type"
@@ -38,55 +37,37 @@
                   <b-form-checkbox
                     v-model="data.item.acceptNull" />
                 </template>
+                <template
+                  slot="transform"
+                  slot-scope="data">
+                  <b-form-select
+                    :options="transformOptions"
+                    :disabled="!(data.item.type == 'bool' || data.item.type == 'str')"
+                    v-model="data.item.transform" />
+                </template>
               </b-table>
               <b-row>
                 <b-col
                   md="6"
                   class="my-1">
                   <b-pagination
-                    :total-rows="headers.length"
+                    :total-rows="totalRows"
                     :per-page="perPage"
                     v-model="currentPage"
                     class="my-0" />
                 </b-col>
               </b-row>
-              <!-- <table>
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Salvar?</th>
-                    <th>Exemplo</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="item in headers"
-                    :key="item.id">
-                    <td>
-                      {{ item.name }}
-                    </td>
-                    <td>
-                      <p>
-                        <label>
-                          <input
-                            v-model="item.selected"
-                            type="checkbox">
-                          <span>Salvar</span>
-                        </label>
-                      </p>
-                    </td>
-                    <td>
-                      {{ item.example }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
             </div>
             <div class="row">
               <button
                 class="col btn btn-green btn-block btn-lg"
                 @click="buttonHandler()">
                 <span class="fa fa-check"/> Continuar
+              </button>
+              <button
+                class="col btn btn-grey btn-block mt-0 btn-lg"
+                @click="$emit('goBack')">
+                <span class="fa fa-undo"/> Voltar
               </button>
             </div>
           </form>
@@ -103,7 +84,7 @@ export default {
         headers: {
             type: Array,
             required: true
-        }
+        },
     },
     data (){
         return {
@@ -118,21 +99,28 @@ export default {
                 { key: "transform", label: "Transformar"},
             ],
             typeOptions: [
+                { text: "", value: "str"},
                 { text: "Booleano", value: "bool"},
                 { text: "Inteiro", value: "int64"},
                 { text: "Flutuante", value: "float64"},
                 { text: "String", value: "str"}
             ],
             transformOptions: [
-                { text: "Não transformar", value: "", selected},
+                { text: "Não transformar", value: ""},
                 { text: "Transformar Maíusculo", value:"upper"},
                 { text: "Transformar Minúsculo", value: "lower"}
             ]
         }
     },
+    computed: {
+        totalRows(){
+            return this.headers.length
+        }
+    },
     methods: {
-
-
+        buttonHandler(){
+            this.$emit("filterContinue", this.headers)
+        }
     }
 }
 </script>
