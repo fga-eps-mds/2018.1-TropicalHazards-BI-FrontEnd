@@ -1,80 +1,25 @@
 <template>
-  <modal
-    :width="800"
-    :height="500"
-    name="filter-csv"
-    @before-open="beforeOpen">
-    <!-- <v-dialog
-      @before-opened="dialogEvent('before-open')"
-      @before-closed="dialogEvent('before-close')"
-      @opened="dialogEvent('opened')"
-      @closed="dialogEvent('closed')"/> -->
-    <define-data-modal />
-    <div class="container center-align">
-      <h4>Filtrar Arquivo</h4>
-      <p>Selecione as colunas que devem ser inseridas no arquivo</p>
-    </div>
-    <div class="content">
-      <table>
-        <thead>
-          <tr>
-            <th>Número</th>
-            <th>Nome coluna</th>
-            <th>Salvar?</th>
-            <th>Exemplo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in headers"
-            :key="item.id">
-            <td>{{ item.id +1 }}</td>
-            <td>
-              {{ item.name }}
-            </td>
-            <td>
-              <p>
-                <label>
-                  <input
-                    v-model="item.selected"
-                    type="checkbox">
-                  <span>Salvar</span>
-                </label>
-              </p>
-            </td>
-            <td>
-              {{ item.example }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="modal-footer">
-      <div class="row center-align">
-        <div class="col s12 m4">
-          <a
-            class="modal-action modal-close waves-effect waves-light grey white-text btn-flat"
-            @click="$modal.hide('filter-csv')">
-            Voltar
-          </a>
-        </div>
-        <div class="col m4">
-          <label>
-            <input
-              type="checkbox">
-            <span>Selecionar todos</span>
-          </label>
-        </div>
-        <div class="col s12 m4">
-          <a
-            class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
-            @click="showDefineData()">
-            Próximo
-          </a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col col-md-6 offset-md-3">
+        <div class="row">
+          <form>
+            <div style="text-align: center">
+              <h4>Inserir Dados</h4>
+              <p>passo 1: carregue o arquivo</p>
+            </div>
+          </form>
+          <!-- <div class="col s12 m4">
+            <a
+              class="modal-action modal-close waves-effect waves-light blue lighten-1 white-text btn-flat"
+              @click="showDefineData()">
+              Próximo
+            </a>
+          </div> -->
         </div>
       </div>
     </div>
-  </modal>
+  </div>
 </template>
 
 <script>

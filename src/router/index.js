@@ -27,6 +27,10 @@ import CreateTag from "@/components/Tags/CreateTag"
 // Router guard
 import Guard from "@/components/Auth/middleware"
 
+//File
+// import ImportCsv from "@/components/Files/ImportCsv"
+// import FilterCsv from "@/components/Files/Filter"
+import ContainerImport from "@/components/Files/ContainerImport"
 
 // Query
 import QueryComponent from "@/components/Questions/QueryComponent"
@@ -147,7 +151,25 @@ export default new Router({
                     name: "AskQuestion",
                     component: AskQuestion,
                     props: true
-                }
+                },
+                // {
+                //     path: "/import",
+                //     name: "ContainerImport",
+                //     component: ImportCsv,
+                //     props: true
+                // },
+                {
+                    path: "/import",
+                    name: "ContainerImport",
+                    component: ContainerImport,
+                    props: true
+                },
+                // {
+                //     path: "/import/filter",
+                //     name: "FilterCsv",
+                //     component: FilterCsv,
+                //     props: true
+                // }
             ]
         }
     ]

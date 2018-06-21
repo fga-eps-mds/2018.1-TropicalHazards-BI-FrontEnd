@@ -49,7 +49,6 @@
                   class="btn blue lighten-1" >
                   <span class="fa fa-edit"/>
                 </router-link>
-
               <!-- <a href="#delete-proj" class="modal-trigger btn red">
                     <span class="fa fa-remove"></span>
               </a> -->

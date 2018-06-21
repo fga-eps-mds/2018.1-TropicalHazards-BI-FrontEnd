@@ -51,36 +51,39 @@
           </ul>
         </header>
         <div class="row">
-          <div
-            v-for="dashboard in dashboards"
-            :key="dashboard.id"
-            class="card col col-md-6">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe
-                :src="dashboard.iframe"
-                class="embed-responsive-item"
-                frameborder="0"/>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">
-                {{ dashboard.name }}
-                <span
-                  v-if="dashboard.owner == currentUser"
-                  class="badge badge-secondary h6">
-                  owner
-                </span>
-              </h5>
-              <p class="card-text">
-                {{ dashboard.description }}
-              </p>
-              <router-link
-                :to="{ name: 'DashboardDetail' }"
-                class="btn btn-blue btn-sm">
-                <span class="fa fa-search"/> Visualizar
-              </router-link>
+          <router-link
+            :to="{ name: 'ContainerImport', params: { project: project} }"
+            class="btn-green btn-lg" >
+            <span class="fa fa-edit"/> Importar
+          </router-link>
+        </div>
+        <section>
+          <div class="row">
+            <div
+              v-for="dashboard in dashboards"
+              :key="dashboard.id"
+              class="card col col-md-6">
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ dashboard.name }}
+                  <span
+                    v-if="dashboard.owner == currentUser"
+                    class="badge badge-secondary h6">
+                    owner
+                  </span>
+                </h5>
+                <p class="card-text">
+                  {{ dashboard.description }}
+                </p>
+                <router-link
+                  :to="{ name: 'DashboardDetail' }"
+                  class="btn btn-blue btn-sm">
+                  <span class="fa fa-search"/> Visualizar
+                </router-link>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
     </div>
   </div>
