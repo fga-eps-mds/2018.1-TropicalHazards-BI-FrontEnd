@@ -109,22 +109,23 @@ export default new Router({
                     name: "Dashboards",
                     // TODO: fix this
                     component: DashboardDetail,
-                    beforeEnter: Guard.guest
+                    // beforeEnter: Guard.guest
                 },
                 {
                     path: "/dashboards/detail/:id",
                     name: "DashboardDetail",
                     component: DashboardDetail,
-                    beforeEnter: Guard.guest
+                    // beforeEnter: Guard.guest
                 },
                 {
                     path: "/dashboards/new",
                     name: "CreateDashboard",
                     component: CreateDashboard,
-                    beforeEnter: Guard.auth
+                    beforeEnter: Guard.auth,
+                    props: true
                 },
                 {
-                    path: "/dashboards/edit/:id",
+                    path: "/dashboards/edit/",
                     name: "EditDashboard",
                     component: EditDashboard,
                     beforeEnter: Guard.auth

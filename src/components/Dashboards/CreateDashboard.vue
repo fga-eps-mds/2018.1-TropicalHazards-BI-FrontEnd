@@ -48,7 +48,7 @@
           <div class="row">
             <button
               class="col btn btn-green btn-block btn-lg"
-              @click="postProject()">
+              @click="createDashboard()">
               <span class="fa fa-check"/> Salvar
             </button>
             <router-link
@@ -68,7 +68,12 @@ import { mapGetters } from "vuex"
 import { required, minLength, maxLength } from "vuelidate/lib/validators"
 
 export default {
-
+    props: {
+        project: {
+            type: Number,
+            required: true
+        }
+    },
     data () {
 
         return {
@@ -77,25 +82,12 @@ export default {
                 text: "",
                 show: false
             },
-            project: {
-                id: "",
-                user: "",
-                name: "",
-                description: ""
-            },
             dashboard: {
                 project: "",
                 name: "",
+                description: "",
                 user: "",
             },
-
-            user: {
-                username: "",
-                email: "",
-                password: ""
-            },
-
-            // projetos: "",
             dashboardList: [],
         }
     },
@@ -115,7 +107,6 @@ export default {
 
     computed: {
         ...mapGetters({ currentUser: "currentUser" }),
-
         nameErrorMessage () {
             if(!this.$v.dashboard.name.required) {
                 return "Insira o nome do projeto \n"
@@ -127,71 +118,30 @@ export default {
                 return "O nome do projeto deve ter no máximo " + this.$v.dashboard.name.$params.maxLength.max + " caracteres \n"
             }
         },
-
         descriptionErrorMessage () {
-            if(!this.$v.dashboard.description.required) {
-                return "Insira a descrição do projeto \n"
-            }
-            else if(!this.$v.dashboard.description.minLength) {
-                return "A descrição do projeto deve ter no mínimo " + this.$v.dashboard.description.$params.minLength.min + " caracteres \n"
-            }
-            else if(!this.$v.dashboard.description.maxLength) {
+            if(!this.$v.dashboard.description.maxLength) {
                 return "A descrição do projeto deve ter no máximo " + this.$v.dashboard.description.$params.maxLength.max + " caracteres \n"
             }
         },
     },
-
-    beforeMount() {
-        this.loadUserInfo()
-        this.getProjectDetail()
-    },
-
     methods: {
-        loadUserInfo () {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        },
-        getProjectDetail () {
-            this.$http.get("projects/" + this.$route.params.id + "/", {
-                headers: {
-                    "Authorization": "JWT " + localStorage.token
-                }
-            }).then(result => {
-                this.project = result.data
-                this.dashboard.project = this.project.id
-            },
-            error => {
-                error.log(error)
-            })
-        },
-        postDashboard () {
-            this.dashboard.project = this.project.id
-            this.dashboard.user = this.user.id
-            this.$http.post("dashboards/", this.dashboard, {
-                headers: {
-                    "Authorization": "JWT " + localStorage.token,
-                    "content-type": "application/json",
-                }
-            }).then(result => {
-                this.dashboardList = result.data
-                this.postSucess(result)
-            },
-            error => {
-                error.log(error)
-                this.createFail()
-            })
-        },
-
-        postSucess () {
-            window.alert("Observatório criado com Sucesso")
-            this.$router.replace("/home")
-        },
-
-        createFail () {
-            window.confirm("Falha na criação do observatório")
-        },
-    },
+        createDashboard(){
+            this.$v.$touch()
+            if(!this.$v.$invalid) {
+                this.dashboard.user = this.currentUser.id
+                this.dashboard.project = this.project
+                this.$store.dispatch("createDashboard", this.dashboard).then(response=>{
+                    this.alert.variant = "success"
+                    this.alert.text = response
+                    this.alert.show = true
+                },err=>{
+                    this.alert.variant = "warning"
+                    this.alert.text = err
+                    this.alert.show = true
+                })
+            }
+        }
+    }
 }
 </script>
 

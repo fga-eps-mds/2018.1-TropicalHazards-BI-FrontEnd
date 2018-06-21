@@ -1,8 +1,8 @@
 <template>
-    <div class="container-fluid">
+  <div class="container-fluid">
     <header>
       <h2>
-        Novo Dashboard
+        Editar Dashboard
       </h2>
     </header>
     <div class="row">
@@ -65,8 +65,15 @@
 
 <script>
 import {mapGetters} from "vuex"
+import { required, minLength, maxLength } from "vuelidate/lib/validators"
 
 export default {
+    props: {
+        dashboard: {
+            type: Object,
+            required: true
+        },
+    },
     data () {
 
         return {
@@ -75,72 +82,57 @@ export default {
                 text: "",
                 show: false
             },
-            project: {
-                id: "",
-                user: "",
-                name: "",
-                description: ""
-            },
-            dashboard: {
-                project: "",
-                name: "",
-                user: "",
-            },
-
-            user: {
-                username: "",
-                email: "",
-                password: ""
-            },
-
-            // projetos: "",
-            dashboardList: [],
         }
     },
-
+    validations: {
+        dashboard: {
+            name: {
+                required,
+                minLength: minLength(3),
+                maxLength: maxLength(100)
+            },
+            description: {
+                maxLength: maxLength(400)
+            }
+        }
+    },
     computed: {
-        ...mapGetters({ currentUser: "currentUser" })
-    },
-
-    beforeMount(){
-        this.loadUserInfo()
-        this.testToken()
-    },
-    created(){
-        this.getDashboardDetail()
+        ...mapGetters({ currentUser: "currentUser" }),
+        nameErrorMessage () {
+            if(!this.$v.dashboard.name.required) {
+                return "Insira o nome do projeto \n"
+            }
+            else if(!this.$v.dashboard.name.minLength) {
+                return "O nome do projeto deve ter no mínimo " + this.$v.dashboard.name.$params.minLength.min + " caracteres \n"
+            }
+            else if(!this.$v.dashboard.name.maxLength) {
+                return "O nome do projeto deve ter no máximo " + this.$v.dashboard.name.$params.maxLength.max + " caracteres \n"
+            }
+        },
+        descriptionErrorMessage () {
+            if(!this.$v.dashboard.description.maxLength) {
+                return "A descrição do projeto deve ter no máximo " + this.$v.dashboard.description.$params.maxLength.max + " caracteres \n"
+            }
+        },
     },
     methods: {
-        loadUserInfo (){
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
+        editDashboard () {
+            this.$v.$touch()
+            if(!this.$v.$invalid){
+                this.$store.dispatch("editDashboard", this.dashboard).then(response=>{
+                    this.alert.variant = "success"
+                    this.alert.text = response
+                    this.alert.show = true
+                }),err =>{
+                    this.alert.variant = "warning"
+                    this.alert.text = err
+                    this.alert.show = true
+                }
+            }else{
+                this.alert.variant = "warning"
+            }
         },
-        getDashboardDetail (){
-            this.$http.get("dashboards/" + this.$route.params.id + "/",  { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
-                this.observatory = result.data
-            },
-            error => {
-                error.log(error)
-            })
-        },
-
-        updateDashboard (){
-            this.$http.put("dashboards/" + this.$route.params.id + "/", this.observatory,
-                { headers: {"Authorization": "JWT " + localStorage.token } }).then(result => {
-                window.alert("Observatorio atualizado")
-                this.response_get = result.data
-                this.$router.push("/project/detail/" + this.$route.params.id + "/")
-            },
-            error => {
-                error.log(error)
-            })
-        },
-        testToken(){
-            this.$http.post("obtain-token/", { "username": this.user.username, "password": this.user.password}).then(result => {
-                localStorage.token = result.data.token
-            })
-        }
-    },
+    }
 }
 </script>
 
