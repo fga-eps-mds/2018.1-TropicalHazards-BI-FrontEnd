@@ -16,7 +16,6 @@ import EditProject from "@/components/Projects/EditProject"
 import MyProjects from "@/components/Projects/MyProjects"
 
 // dashboards
-import DashboardsList from "@/components/Dashboards/DashboardsList"
 import DashboardDetail from "@/components/Dashboards/DashboardDetail"
 import CreateDashboard from "@/components/Dashboards/CreateDashboard"
 import EditDashboard from "@/components/Dashboards/EditDashboard"

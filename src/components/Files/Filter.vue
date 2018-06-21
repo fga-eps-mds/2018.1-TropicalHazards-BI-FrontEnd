@@ -99,7 +99,7 @@ export default {
                 { key: "transform", label: "Transformar"},
             ],
             typeOptions: [
-                { text: "", value: "str"},
+                { text: "", value: ""},
                 { text: "Booleano", value: "bool"},
                 { text: "Inteiro", value: "int64"},
                 { text: "Flutuante", value: "float64"},

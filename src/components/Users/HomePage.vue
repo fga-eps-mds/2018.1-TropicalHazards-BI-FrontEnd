@@ -95,11 +95,7 @@ export default {
 }
 </script>
 
-<<<<<<< HEAD
-<style lang="scss" scoped>
-=======
 <style lang="scss">
->>>>>>> development
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;

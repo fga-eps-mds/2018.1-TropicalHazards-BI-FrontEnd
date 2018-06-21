@@ -100,8 +100,8 @@ export default {
                         "Authorization": "JWT " + localStorage.token
                     }
                 }
+            /*eslint-disable-next-line*/
             ).then((response) => {
-                console.log(response)
             },
             error => {
                 error.log(error)

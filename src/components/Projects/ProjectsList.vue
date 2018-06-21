@@ -27,7 +27,7 @@
           </div>
         </div>
       </form>
-      <ul class="list-inline">
+      <!-- <ul class="list-inline">
         <li class="list-inline-group">
           <h5>
             Tags
@@ -40,33 +40,35 @@
           @click="filterByTag()">
           {{ tag.name }}
         </li>
-      </ul>
+      </ul> -->
       <hr>
     </div>
     <div class="">
-      <div
-        v-for="project in filter"
-        :key="project.id"
-        class="col col-md-6 pt-3 pb-3">
-        <div class="card w-100">
-          <h5 class="card-header">
-            {{ project.name }}
-          </h5>
-          <div class="card-body">
-            <h5 class="card-title">
-              {{ project.owner.name }}
+      <transition-group name="fade">
+        <div
+          v-for="project in filteredList"
+          :key="project.id"
+          class="col col-md-6 pt-3 pb-3">
+          <div class="card w-100">
+            <h5 class="card-header">
+              {{ project.name }}
             </h5>
-            <p>
-              {{ project.description }}
-            </p>
-            <router-link
-              :to="{ path: '/projects/detail/' + project.id }"
-              class="btn btn-small btn-blue">
-              <span class="fa fa-search"/> Visualizar
-            </router-link>
+            <div class="card-body">
+              <h5 class="card-title">
+                <!-- {{ project.owner.name }} -->
+              </h5>
+              <p>
+                {{ project.description }}
+              </p>
+              <router-link
+                :to="{ path: '/projects/detail/' + project.id }"
+                class="btn btn-small btn-blue">
+                <span class="fa fa-search"/> Visualizar
+              </router-link>
+            </div>
           </div>
         </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
