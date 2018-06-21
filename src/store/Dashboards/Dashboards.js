@@ -35,7 +35,41 @@ const actions = {
                 reject()
             })
         })
-    }
+    },
+    createDashboard({commit}, dashboard){
+        return new Promise((resolve, reject) => {
+            Vue.http.post("dashboards/", dashboard, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(result => {
+                resolve("Dashboard criado com sucesso")
+            },
+            error => {
+                reject(error.data)
+            })
+        })
+    },
+    editDashboard({ commit }, dashboard) {
+        return new Promise((resolve, reject) => {
+            Vue.http.put("dashboard/" + dashboard.id + "/", dashboard, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(result => {
+                resolve("Dashboard editado com sucesso")
+            },
+            error => {
+                reject(error.data)
+            })
+
+        })
+    },
+
 }
 
 export default {

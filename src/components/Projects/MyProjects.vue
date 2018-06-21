@@ -78,6 +78,11 @@
               <span class="fa fa-pencil"/> Editar
             </router-link>
             <router-link
+              :to="{ name: 'CreateDashboard', params: { project: project.id } }"
+              class="btn btn-sm btn-blue mr-auto">
+              <span class="fa fa-pencil"/> Criar Dashboard
+            </router-link>
+            <router-link
               :to="{ name: 'ProjectDetail', params: { id: project.id } }"
               class="btn btn-sm btn-blue mr-auto">
               <span class="fa fa-search"/> Visualizar

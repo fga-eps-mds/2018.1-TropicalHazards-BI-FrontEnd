@@ -1,26 +1,38 @@
 <template>
   <nav class="dark-bg side-bar-expanded">
     <div class="nav-header">
-      <h6 class="text-left">
-        <span class="fa fa-user"/>
-        {{ (user.username == '') ? 'username' : user.username }}
-      </h6>
-      <h6>
-        <small>
-          <a
-            class=""
-            @click="logout()">
-            <span class="fa fa-sign-out"/>
-            Sair
-          </a>
-        </small>
-      </h6>
-      <h6 class="text-muted">
-        <span class="mr-auto fa fa-gear"/>
-        <small>
-          Configurações
-        </small>
-      </h6>
+      <div
+        v-if="!currentUser">
+        <router-link
+          :to="{ name: 'Auth' }"
+          id="log-or-reg"
+          class="text-left dark-bg h6">
+          Entrar ou registrar
+        </router-link>
+      </div>
+      <div
+        v-else>
+        <h6 class="text-left">
+          <span class="fa fa-user"/>
+          {{ (user.username == '') ? 'username' : user.username }}
+        </h6>
+        <h6>
+          <small>
+            <a
+              class=""
+              @click="logout()">
+              <span class="fa fa-sign-out"/>
+              Sair
+            </a>
+          </small>
+        </h6>
+        <h6 class="text-muted">
+          <span class="mr-auto fa fa-gear"/>
+          <small>
+            Configurações
+          </small>
+        </h6>
+      </div>
       <div class="input-group input-group-sm">
         <input
           v-model="search"
@@ -181,6 +193,10 @@ export default {
         border-color: $highlight-text-color;
         transition: all .3s ease-in-out;
       }
+    }
+
+    #log-or-reg {
+      text-decoration: none;
     }
 
     .nav-header {
