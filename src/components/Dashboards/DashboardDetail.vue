@@ -39,18 +39,8 @@
         <p class="text-justify">
           {{ dashboard.description }}
         </p>
-        <!-- <ul class="list-inline">
-          <li
-            v-for="tag in dashboard.project.tags"
-            :key="tag.id"
-            class="list-inline-item">
-            <span class="badge badge-primary btn-blue">
-              {{ tag.name }}
-            </span>
-          </li>
-        </ul> -->
       </header>
-      <!-- <div class="row">
+      <div class="row">
         <div
           class="card col col-md-6">
           <div class="embed-responsive embed-responsive-16by9">
@@ -83,8 +73,8 @@
             <div
               v-for="iframe in iframes"
               :key="iframe.id"
-              class="col-lg-6">
-              <div class="card col">
+              class="col">
+              <div class="card border-primary">
                 <div class="embed-responsive">
                   <custom-iframe
                     :iframeUrl="iframe.url"
@@ -94,7 +84,7 @@
             </div>
           </div>
         </section>
-      </div> -->
+      </div>
     </section>
   </div>
 </template>
