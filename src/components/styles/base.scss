@@ -104,3 +104,23 @@ a {
         background-color: $grey-hover;
     }
 }
+
+a {
+    cursor: pointer !important;
+}
+// those props for the sidebar
+.row {
+margin-left: 0;
+}
+.content {
+padding-left: 0;
+padding-right: 0;
+}
+
+.sidebar {
+    padding-left: 0;
+
+    a {
+        cursor: pointer !important;
+    }
+}

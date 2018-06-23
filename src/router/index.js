@@ -17,12 +17,22 @@ import MyProjects from "@/components/Projects/MyProjects"
 
 // dashboards
 import DashboardDetail from "@/components/Dashboards/DashboardDetail"
-import createDashboard from "@/components/Dashboards/createDashboard"
-import editDashboard from "@/components/Dashboards/editDashboard"
+import CreateDashboard from "@/components/Dashboards/CreateDashboard"
+import EditDashboard from "@/components/Dashboards/EditDashboard"
+import MyDashboards from "@/components/Dashboards/MyDashboards"
+import DashboardList from "@/components/Dashboards/DashboardList"
 
 // tags
-import CreateTag from "@/components/Projects/CreateTag"
+import CreateTag from "@/components/Tags/CreateTag"
+
 import Guard from "@/components/Auth/middleware"
+
+//File
+import ContainerImport from "@/components/Files/ContainerImport"
+
+// Query
+import QueryComponent from "@/components/Questions/QueryComponent"
+import AskQuestion from "@/components/Questions/AskQuestion"
 
 Vue.use(Router)
 
@@ -44,82 +54,126 @@ export default new Router({
             path: "/home",
             name: "HomePage",
             component: HomePage,
-            beforeEnter: Guard.auth
-        },
-        {
-            path: "/user/edit",
-            name: "EditUser",
-            component: EditUser,
-            beforeEnter: Guard.auth
-        },
-        {
-            path: "/user/purge",
-            name: "DeleteUser",
-            component: DeleteUser,
-            beforeEnter: Guard.auth
-        },
-        // Projects
-        {
-            path: "/projects",
-            name: "ProjectsList",
-            component: ProjectsList,
-            beforeEnter: Guard.auth
-        },
-        {
-            path: "/my-projects",
-            name: "MyProjects",
-            component: MyProjects,
-            beforeEnter: Guard.auth
-        },
-        {
-            path: "/projects/detail/:id",
-            name: "ProjectDetail",
-            component: ProjectDetail,
-            beforeEnter: Guard.guest
-        },
-        {
-            path: "/projects/edit/:id",
-            name: "EditProject",
-            component: EditProject,
-            BeforeEnter: Guard.auth
-        },
-        {
-            path: "/projects/new",
-            name: "CreateProject",
-            component: CreateProject
-        },
-        // tags
-        {
-            path: "/tags/new",
-            name: "CreateTag",
-            component: CreateTag,
-            beforeEnter: Guard.auth
-        },
-        // dashboards
-        {
-            path: "/dashboards",
-            name: "Dashboards",
-            // TODO: fix this
-            component: DashboardDetail,
-            beforeEnter: Guard.guest
-        },
-        {
-            path: "/dashboards/detail/:id",
-            name: "DashboardDetail",
-            component: DashboardDetail,
-            beforeEnter: Guard.guest
-        },
-        {
-            path: "/dashboards/new/:id",
-            name: "createDashboard",
-            component: createDashboard,
-            beforeEnter: Guard.auth
-        },
-        {
-            path: "/dashboards/edit/:id",
-            name: "editDashboard",
-            component: editDashboard,
-            beforeEnter: Guard.auth
+            beforeEnter: Guard.auth,
+            children: [
+                {
+                    path: "/user/edit",
+                    name: "EditUser",
+                    component: EditUser,
+                    beforeEnter: Guard.auth
+                },
+                {
+                    path: "/user/purge",
+                    name: "DeleteUser",
+                    component: DeleteUser,
+                    beforeEnter: Guard.auth
+                },
+                // Projects
+                {
+                    path: "/projects",
+                    name: "ProjectsList",
+                    component: ProjectsList,
+                    beforeEnter: Guard.auth
+                },
+                {
+                    path: "/my-projects",
+                    name: "MyProjects",
+                    component: MyProjects,
+                    beforeEnter: Guard.auth
+                },
+                {
+                    path: "/projects/detail/:id",
+                    name: "ProjectDetail",
+                    component: ProjectDetail,
+                    beforeEnter: Guard.guest
+                },
+                {
+                    path: "/projects/edit/:id",
+                    name: "EditProject",
+                    component: EditProject,
+                    BeforeEnter: Guard.auth
+                },
+                {
+                    path: "/projects/new",
+                    name: "CreateProject",
+                    component: CreateProject
+                },
+                // tags
+                {
+                    path: "/tags/new",
+                    name: "CreateTag",
+                    component: CreateTag,
+                    beforeEnter: Guard.auth
+                },
+                // dashboards
+                {
+                    path: "/dashboards",
+                    name: "DashboardsList",
+                    component: DashboardList,
+                    beforeEnter: Guard.guest
+                },
+                {
+                    path: "/dashboards/detail/:id",
+                    name: "DashboardDetail",
+                    component: DashboardDetail,
+                    beforeEnter: Guard.guest
+                },
+                {
+                    path: "/dashboards/new",
+                    name: "CreateDashboard",
+                    component: CreateDashboard,
+                    beforeEnter: Guard.auth,
+                    props: true
+                },
+                {
+                    path: "/dashboards/edit/",
+                    name: "EditDashboard",
+                    component: EditDashboard,
+                    beforeEnter: Guard.auth,
+                    props: true
+                },
+                {
+                    path: "/my-dashboards",
+                    name: "MyDashboards",
+                    component: MyDashboards,
+                    beforeEnter: Guard.auth
+                },
+                {
+                    path: "/dashboards",
+                    name: "DashboardList",
+                    component: DashboardList
+                },
+                // Query
+                {
+                    path: "/query",
+                    name: "QueryComponent",
+                    component: QueryComponent,
+                },
+                {
+                    path: "/question",
+                    name: "AskQuestion",
+                    component: AskQuestion,
+                    props: true
+                },
+                // {
+                //     path: "/import",
+                //     name: "ContainerImport",
+                //     component: ImportCsv,
+                //     props: true
+                // },
+                {
+                    path: "/import",
+                    name: "ContainerImport",
+                    component: ContainerImport,
+                    props: true
+                },
+                // {
+                //     path: "/import/filter",
+                //     name: "FilterCsv",
+                //     component: FilterCsv,
+                //     props: true
+                // }
+            ]
         }
     ]
 })

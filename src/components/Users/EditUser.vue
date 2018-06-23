@@ -65,11 +65,11 @@
 
 <script>
 import {mapGetters} from "vuex"
-import SideBar from "@/components/Utils/SideBar"
+import Sidebar from "@/components/Utils/Sidebar"
 
 export default {
     components: {
-        "sidebar": SideBar
+        "sidebar": Sidebar
     },
 
     data () {
@@ -170,7 +170,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 ::placeholder { /* Most modern browsers support this now. */
    color:    #132a71;

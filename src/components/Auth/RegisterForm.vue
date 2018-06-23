@@ -1,5 +1,12 @@
 <template>
   <div class="container">
+    <b-alert
+      :variant="alert.variant"
+      :show="alert.show || ($v.$invalid && $v.$dirty)"
+      dismissible
+      @dismissed="alert.show=false">
+      <p class="text-center">{{ alert.text }}</p>
+    </b-alert>
     <form
       action=""
       class="col-12 col-md-6 offset-md-3">
@@ -86,7 +93,16 @@ export default {
                 password: "",
                 passwordConfirmation: ""
             },
-            buttonEnable: false
+            loginuser: {
+                username: "",
+                password: ""
+            },
+            buttonEnable: false,
+            alert: {
+                variant: "",
+                text: "",
+                show: false
+            },
         }
 
     },
@@ -154,11 +170,33 @@ export default {
         registerUser(){
             this.$v.$touch()
             if(!this.$v.$invalid){
-                this.$store.dispatch("register", this.user)
+                this.$store.dispatch("register", this.user).then(response => {
+                    this.logUser(response)
+                    // this.$router.replace("/home")
+                },
+                error => {
+                    this.alert.variant = "danger"
+                    this.alert.text = error.body.username
+                    this.alert.show = true
+                })
             }
-        }
-    }
+        },
+        logUser(){
+            /* eslint-disable */
+            this.$v.$touch()
+            if(!this.$v.$invalid){
+                this.loginuser.username = this.user.username
+                this.loginuser.password = this.user.password
+                this.$store.dispatch("login", this.loginuser).then(response => {
+                    this.$router.replace("/home")
+                },
+                error =>{
+                    console.log(error)
 
+                })
+            }
+        },
+    }
 }
 </script>
 

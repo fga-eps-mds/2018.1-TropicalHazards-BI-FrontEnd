@@ -1,18 +1,42 @@
 <template>
-  <div class="wrapper toggled">
-    <sidebar/>
-    <p> {{ user.username }}</p>
+  <div id="background">
+    <navbar />
+    <div class="row">
+      <button
+        id="sidebar-toggle-btn"
+        class="btn btn-block text-center col d-block d-sm-none dark-bg"
+        @click="toggleSidebar()">
+        {{ sidebarAction }} menu
+      </button>
+      <sidebar
+        :class="{'d-none d-lg-block': !sidebarVisibility}"
+        class="col-md-3 col-lg-2 sidebar"/>
+      <div class="col-12 col-md-9 col-lg-10 content">
+        <transition name="router-anim">
+          <router-view />
+        </transition>
+        <div class="bottom">
+          <custom-footer/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex"
-import SideBar from "@/components/Utils/SideBar"
+
+
+import Sidebar from "@/components/Utils/Sidebar"
+import Footer from "@/components/Utils/Footer"
+import Navbar from "@/components/Utils/Navbar"
 
 export default {
 
     components: {
-        "sidebar": SideBar,
+        "sidebar": Sidebar,
+        "navbar": Navbar,
+        "custom-footer": Footer
     },
     data () {
         return {
@@ -26,7 +50,8 @@ export default {
                 password: "",
                 email: ""
             },
-            isModalVisible: false
+            sidebarVisibility: false,
+            sidebarAction: "Mostrar"
         }
     },
 
@@ -74,12 +99,22 @@ export default {
         Logout () {
             this.$store.dispatch("logout")
         },
+
+        toggleSidebar () {
+            this.sidebarVisibility = !this.sidebarVisibility
+            if (this.sidebarVisibility) {
+                this.sidebarAction = "Ocultar"
+            }
+            else {
+                this.sidebarAction = "Mostrar"
+            }
+        }
     },
 
 }
 </script>
 
-<style>
+<style lang="scss">
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -91,4 +126,49 @@ export default {
 #wrapper.toggled {
   padding-left: 250px;
 }
+
+  @import '../styles/base.scss';
+
+  .row {
+    margin-left: 0;
+  }
+
+  form {
+    background-color: #eee;
+    color: $text-color;
+    padding: 2em;
+    border-radius: 5px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    .btn {
+      $btn-margins: 4px;
+      margin-left: $btn-margins;
+      margin-right: $btn-margins;
+    }
+  }
+
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+
+    .container-fluid {
+      min-height: 75vh;
+    }
+  }
+
+  .bottom {
+    display: block;
+    bottom: 0;
+  }
+
+  .sidebar {
+    padding-left: 0;
+  }
+
+  #sidebar-toggle-btn {
+    border-radius: 0;
+    border: 1px solid #666;
+  }
+
 </style>

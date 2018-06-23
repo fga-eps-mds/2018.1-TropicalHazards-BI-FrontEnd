@@ -1,120 +1,118 @@
 <template>
-  <div>
-    <Navbar/>
-    <div class="row">
-      <sidebar class="col-md-2 sidebar"/>
-      <div class="col col-md-10 content">
-        <div class="container-fluid">
-          <header>
-            <h2>
-              Meus Projetos
-            </h2>
-            <hr>
-            <ul class="list-inline">
-              <li
-                v-for="tag in getTags"
-                :key="tag.id"
-                class="list-inline-item">
-                <span class="badge badge-primary btn-blue">
-                  {{ tag.slug }}
-                </span>
-              </li>
-            </ul>
-          </header>
-          <hr>
-          <div class="container">
-            <form>
-              <div class="input-group input-group-sm">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Pesquise por seus projetos">
-                <div class="input-group-append">
-                  <button
-                    class="btn btn-green"
-                    @click="searchProject()">
-                    <span class="fa fa-search"/> Buscar
-                  </button>
-                </div>
-              </div>
-            </form>
+  <div class="container-fluid">
+    <header>
+      <h2>
+        Meus Projetos
+      </h2>
+      <hr>
+      <ul class="list-inline">
+        <li
+          v-for="tag in getTags"
+          :key="tag.id"
+          class="list-inline-item">
+          <span class="badge badge-primary btn-blue">
+            {{ tag.slug }}
+          </span>
+        </li>
+      </ul>
+    </header>
+    <hr>
+    <div class="container">
+      <form>
+        <div class="input-group input-group-sm">
+          <input
+            v-model="searchArgument"
+            type="text"
+            class="form-control"
+            placeholder="Pesquise por seus projetos">
+          <div class="input-group-append">
+            <button
+              class="btn btn-green"
+              @click="searchProject()">
+              <span class="fa fa-search"/> Buscar
+            </button>
           </div>
-          <hr>
-          <div v-if="getMyProjects.length == 0">
-            <b-jumbotron
-              bg-variant="muted"
-              class="text-muted">
-              <template
-                slot="header">
-                Oooops
-              </template>
-              <template
-                slot="lead">
-                Me parece que você ainda não possui nenhum projeto...
-              </template>
-              <p>
-                Não se preocupe, você ainda pode criar um projeto e começar sua
-                jornada conosco!
+        </div>
+      </form>
+    </div>
+    <hr>
+    <div v-if="MyProjects.length == 0">
+      <b-jumbotron
+        bg-variant="muted"
+        class="text-muted">
+        <template
+          slot="header">
+          Oooops
+        </template>
+        <template
+          slot="lead">
+          Me parece que você ainda não possui nenhum projeto...
+        </template>
+        <p>
+          Não se preocupe, você ainda pode criar um projeto e começar sua
+          jornada conosco!
+        </p>
+        <router-link
+          :to="{ name: 'CreateProject' }"
+          class="btn btn-blue ml-auto">
+          <span class="fa fa-plus"/> Novo projeto
+        </router-link>
+      </b-jumbotron>
+    </div>
+    <section v-else>
+      <transition-group name="fade">
+        <div
+          v-for="project in filteredList"
+          :key="project.id"
+          class="row">
+          <div
+            class="card col col-md-6">
+            <h5 class="card-header">
+              {{ project.name }}
+            </h5>
+            <div class="card-body">
+              <p class="card-text">
+                {{ project.description }}
               </p>
               <router-link
-                :to="{ name: 'CreateProject' }"
-                class="btn btn-blue ml-auto">
-                <span class="fa fa-plus"/> Novo projeto
+                :to="{ name: 'EditProject', params: { id: project.id } }"
+                class="btn btn-sm btn-blue mr-auto">
+                <span class="fa fa-pencil"/> Editar
               </router-link>
-            </b-jumbotron>
-          </div>
-          <section v-else>
-            <div
-              v-for="project in getMyProjects"
-              :key="project.id"
-              class="row">
-              <div
-                class="card col col-md-6">
-                <h5 class="card-header">
-                  {{ project.name }}
-                </h5>
-                <div class="card-body">
-                  <p class="card-text">
-                    {{ project.description }}
-                  </p>
-                  <!-- needs to link to the project -->
-                  <router-link
-                    :to="{ name: 'ProjectDetail' }"
-                    class="btn btn-sm btn-blue mr-auto">
-                    <span class="fa fa-search"/> Visualizar
-                  </router-link>
-                  <button
-                    class="btn btn-danger btn-sm"
-                    @click="deleteProject()">
-                    <span class="fa fa-trash"/> Excluir
-                  </button>
-                </div>
-              </div>
+              <router-link
+                :to="{ name: 'CreateDashboard', params: { project: project.id } }"
+                class="btn btn-sm btn-blue mr-auto">
+                <span class="fa fa-pencil"/> Criar Dashboard
+              </router-link>
+              <router-link
+                :to="{ name: 'ProjectDetail', params: { id: project.id } }"
+                class="btn btn-sm btn-blue mr-auto">
+                <span class="fa fa-search"/> Visualizar
+              </router-link>
+              <button
+                class="btn btn-danger btn-sm"
+                @click="deleteProject()">
+                <span class="fa fa-trash"/> Excluir
+              </button>
+              <router-link
+                :to="{ name: 'ContainerImport', params: { project: project} }"
+                class="btn blue lighten-1" >
+                <span class="fa fa-edit"/> Importar
+              </router-link>
             </div>
-          </section>
+          </div>
         </div>
-        <div class="">
-          <custom-footer/>
-        </div>
-      </div>
-    </div>
+      </transition-group>
+    </section>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex"
-
-import Navbar from "@/components/Utils/Navbar"
-import Footer from "@/components/Utils/Footer"
-import Sidebar from "@/components/Utils/SideBar"
-
 import bJumbotron from "bootstrap-vue/es/components/jumbotron/jumbotron"
 
 export default {
     components: {
-        Navbar,
-        "custom-footer": Footer,
-        "sidebar": Sidebar,
         "b-jumbotron":bJumbotron,
     },
 
@@ -123,6 +121,7 @@ export default {
             tags: "",
             project: "",
             projects: [],
+            searchArgument: ""
         }
     },
     computed: {
@@ -130,9 +129,11 @@ export default {
             currentUser: "currentUser",
             getTags: "getTags",
             getProjects: "getProjects",
-            getMyProjects: "getMyProjects"
-        })
-
+            MyProjects: "getMyProjects"
+        }),
+        filteredList(){
+            return this.$store.getters.getMyProjects(this.searchArgument)
+        }
     },
     beforeMount () {
         this.loadProjects()
@@ -157,21 +158,14 @@ export default {
 <style lang="scss" scoped>
   @import '../styles/base.scss';
 
-  .row {
-    margin-left: 0;
-
-  }
-
   section {
     margin: 5em auto;
   }
-
-  .content {
-    padding-left: 0;
-    padding-right: 0;
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 
-  .sidebar {
-    padding-left: 0;
-  }
 </style>

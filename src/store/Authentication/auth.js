@@ -28,6 +28,9 @@ const mutations = {
   [SET_USERS](state, payload) {
     // Vue.set(state, projects, payload) - EVENTO PARA GERAR REATIVIDADE MAYBE
     state.users = payload
+  },
+  [REGISTER](state, payload){
+    state.user = payload
   }
 }
 
@@ -73,11 +76,11 @@ const actions = {
     register ({ commit }, user){
       return new Promise((resolve, reject) => {
           Vue.http.post("users/", user, { headers: { "content-type": "application/json" } }).then(response => {
-            commit(SET_USERS)
-            resolve()
+            commit(REGISTER)
+            resolve(response)
           },
           error => {
-              reject()
+              reject(error)
           })
       })
   },

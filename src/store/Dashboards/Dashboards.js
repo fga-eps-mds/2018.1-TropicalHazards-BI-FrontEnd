@@ -13,7 +13,15 @@ const getters = {
     },
     getDashboardsLength: state =>{
         return state.dashboards.length
-    }
+    },
+    getMyDashboards: (state) => (id) =>{
+        return state.dashboards.filter(dashboard =>{
+            return dashboard.user === id
+        })
+    },
+    getDashboardById: (state) => (id) => {
+        return state.dashboards.find(dashboard => dashboard.id === id)
+    },
 }
 
 const mutations = {
@@ -28,14 +36,56 @@ const actions = {
         return new Promise((resolve, reject)=>{
             Vue.http.get("dashboards/", { headers: { "Content-type": "application/json" } }).then(response => {
                 commit(SET_DASHBOARDS, response.data)
-                console.log(response.data)
                 resolve()
             },
             error => {
                 reject()
             })
         })
-    }
+    },
+    createDashboard({commit}, dashboard){
+        return new Promise((resolve, reject) => {
+            Vue.http.post("dashboards/", dashboard, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(result => {
+                resolve("Dashboard criado com sucesso")
+            },
+            error => {
+                reject(error.data)
+            })
+        })
+    },
+    editDashboard({ commit }, dashboard) {
+        return new Promise((resolve, reject) => {
+            Vue.http.put("dashboards/" + dashboard.id + "/", dashboard, {
+                headers: {
+                    "Authorization": "JWT " + localStorage.token,
+                    "content-type": "application/json",
+                }
+            }
+            ).then(result => {
+                resolve("Dashboard editado com sucesso")
+            },
+            error => {
+                reject(error.data)
+            })
+
+        })
+    },
+    loadDashboard({ commit }, dashboardId) {
+        return new Promise((resolve, reject) => {
+            Vue.http.get("dashboards/" + dashboardId + "/", { headers: { "Content-type": "application/json" } }).then(response => {
+                resolve(response.data)
+            },
+            error => {
+                reject()
+            })
+        })
+    },
 }
 
 export default {

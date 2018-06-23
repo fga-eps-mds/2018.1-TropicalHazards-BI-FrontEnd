@@ -5,7 +5,8 @@
         <div class="form-group">
           <form>
             <div style="text-align: center">
-              <h4>Confirmar Dados Selecionados</h4>
+              <h4>Filtrar</h4>
+              <p>passo 2: selecione os tipos de dados</p>
             </div>
             <div class="form-group">
               <b-table
@@ -14,7 +15,37 @@
                 :current-page="currentPage"
                 :per-page="perPage"
                 responsive
-                bordered />
+                bordered>
+                <template
+                  slot="selected"
+                  slot-scope="data">
+                  <b-form-checkbox
+                    v-model="data.item.selected"
+                    success/>
+                </template>
+                <template
+                  slot="type"
+                  slot-scope="data">
+                  <b-form-select
+                    :options="typeOptions"
+                    v-model="data.item.type"
+                    class="mb-3" />
+                </template>
+                <template
+                  slot="acceptNull"
+                  slot-scope="data">
+                  <b-form-checkbox
+                    v-model="data.item.acceptNull" />
+                </template>
+                <template
+                  slot="transform"
+                  slot-scope="data">
+                  <b-form-select
+                    :options="transformOptions"
+                    :disabled="!(data.item.type == 'bool' || data.item.type == 'str')"
+                    v-model="data.item.transform" />
+                </template>
+              </b-table>
               <b-row>
                 <b-col
                   md="6"
@@ -46,27 +77,19 @@
   </div>
 </template>
 
-
 <script>
+
 export default {
     props: {
-        file: {
-            type: Object,
-            required: true
-        },
         headers: {
             type: Array,
             required: true
         },
-        project: {
-            type: Number,
-            required: true
-        }
     },
-    data(){
+    data (){
         return {
             currentPage: 1,
-            perPage: 4,
+            perPage: 3,
             fields: [
                 { key: "name", label: "Nome"},
                 { key: "example", label: "Exemplo"},
@@ -74,6 +97,18 @@ export default {
                 { key: "acceptNull", label: "Pode ser nulo?"},
                 { key: "type", label: "Tipo"},
                 { key: "transform", label: "Transformar"},
+            ],
+            typeOptions: [
+                { text: "", value: ""},
+                { text: "Booleano", value: "bool"},
+                { text: "Inteiro", value: "int64"},
+                { text: "Flutuante", value: "float64"},
+                { text: "String", value: "str"}
+            ],
+            transformOptions: [
+                { text: "Não transformar", value: ""},
+                { text: "Transformar Maíusculo", value:"upper"},
+                { text: "Transformar Minúsculo", value: "lower"}
             ]
         }
     },
@@ -84,31 +119,9 @@ export default {
     },
     methods: {
         buttonHandler(){
-            this.submitFile()
-        },
-        submitFile(){
-            let formData = new FormData ()
-            formData.append("file", this.file)
-            formData.append("project", this.project.id)
-            formData.append("headers", JSON.stringify(this.headers))
-            this.$http.post(
-                "import/",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Authorization": "JWT " + localStorage.token
-                    }
-                }
-            /*eslint-disable-next-line*/
-            ).then((response) => {
-            },
-            error => {
-                error.log(error)
-            })
-        },
-
+            this.$emit("filterContinue", this.headers)
+        }
     }
-
 }
 </script>
+

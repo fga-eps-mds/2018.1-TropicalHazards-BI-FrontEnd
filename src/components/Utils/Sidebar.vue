@@ -1,27 +1,38 @@
 <template>
   <nav class="dark-bg side-bar-expanded">
     <div class="nav-header">
-      <h6 class="text-left">
-        <span class="fa fa-user"/>
-        {{ (user.username == '') ? 'username' : user.username }}
-        {{ user.username }}
-      </h6>
-      <h6>
-        <small>
-          <a
-            class=""
-            @click="logout()">
-            <span class="fa fa-sign-out"/>
-            Sair
-          </a>
-        </small>
-      </h6>
-      <h6 class="text-muted">
-        <span class="mr-auto fa fa-gear"/>
-        <small>
-          Configurações
-        </small>
-      </h6>
+      <div
+        v-if="!currentUser">
+        <router-link
+          id="log-or-reg"
+          :to="{ name: 'Auth' }"
+          class="text-left dark-bg h6">
+          Entrar ou registrar
+        </router-link>
+      </div>
+      <div
+        v-else>
+        <h6 class="text-left">
+          <span class="fa fa-user"/>
+          {{ (user.username == '') ? 'username' : user.username }}
+        </h6>
+        <h6>
+          <small>
+            <a
+              class=""
+              @click="logout()">
+              <span class="fa fa-sign-out"/>
+              Sair
+            </a>
+          </small>
+        </h6>
+        <h6 class="text-muted">
+          <span class="mr-auto fa fa-gear"/>
+          <small>
+            Configurações
+          </small>
+        </h6>
+      </div>
       <div class="input-group input-group-sm">
         <input
           v-model="search"
@@ -38,7 +49,7 @@
     <hr>
     <ul class="list-group text-capitalize">
       <router-link
-        :to="{ name: 'Home' }"
+        :to="{ name: 'HomePage' }"
         class="list-group-item">
         <span class="fa fa-home"/> home
       </router-link>
@@ -46,12 +57,13 @@
         <span class="fa fa-pie-chart"/> Dashboards
       </li>
       <router-link
-        :to="{ name: '' }"
-        class="list-group-item">
+        v-if="currentUser"
+        :to="{ name: 'MyDashboards' }"
+        class=" list-group-item">
         Meus Dashboards
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'DashboardList' }"
         class="list-group-item">
         Procurar Dashboards
       </router-link>
@@ -59,27 +71,31 @@
         <span class="fa fa-folder"/> Projetos
       </div>
       <router-link
+        v-if="currentUser"
         :to="{ name: 'MyProjects' }"
-        class="list-group-item">
+        class=" list-group-item">
         Meus Projetos
       </router-link>
       <router-link
+        v-if="currentUser"
         :to="{ name: 'CreateProject' }"
-        class="list-group-item">
+        class=" list-group-item">
         Novo Projeto
       </router-link>
       <router-link
-        :to="{ name: '' }"
+        :to="{ name: 'ProjectsList' }"
         class="list-group-item">
         Procurar Projetos
       </router-link>
       <a
-        href="https://github.com/fga-gpp-mds/TropicalHazards-BI"
+        href="https://github.com/fga-gpp-mds/2018.1-TropicalHazards-BI"
+        target="_blank"
         class="list-group-item">
         <span class="fa fa-github"/> github
       </a>
       <a
-        href="https://fga-gpp-mds.github.io/TropicalHazards-BI"
+        href="https://fga-gpp-mds.github.io/2018.1-TropicalHazards-BI/"
+        target="_blank"
         class="list-group-item">
         <span class="fa fa-book"/> docs
       </a>
@@ -132,9 +148,7 @@ export default {
   @import '../styles/base.scss';
 
   nav {
-    // display: block;
     min-height: 100%;
-    // max-width: 200px;
     overflow: auto;
     font-family: $text-font-family;
     letter-spacing: .1em !important;
@@ -179,6 +193,10 @@ export default {
         border-color: $highlight-text-color;
         transition: all .3s ease-in-out;
       }
+    }
+
+    #log-or-reg {
+      text-decoration: none;
     }
 
     .nav-header {
