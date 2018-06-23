@@ -146,6 +146,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../styles/base.scss';
 
+  form {
+    background-color: #eee;
+    color: $text-color;
+    padding: 2em;
+    border-radius: 5px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    .btn {
+      $btn-margins: 4px;
+      margin-left: $btn-margins;
+      margin-right: $btn-margins;
+    }
+  }
 </style>
 

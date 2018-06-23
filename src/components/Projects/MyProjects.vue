@@ -95,7 +95,7 @@
                 <span class="fa fa-trash"/> Excluir
               </button>
               <router-link
-                :to="{ name: 'ContainerImport', params: { project: project} }"
+                :to="{ name: 'ContainerImport', params: { project: project } }"
                 class="btn blue lighten-1" >
                 <span class="fa fa-edit"/> Importar
               </router-link>
