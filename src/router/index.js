@@ -58,8 +58,8 @@ export default new Router({
             beforeEnter: Guard.auth,
             children: [
                 {
-                    path: "",
-                    name: "HomePageHome",
+                    path: "/",
+                    name: "HomePage",
                     component: HomePageDefault,
                 },
                 {
