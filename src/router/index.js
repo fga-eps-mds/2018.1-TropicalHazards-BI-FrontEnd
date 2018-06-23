@@ -3,6 +3,7 @@ import Router from "vue-router"
 
 // basic
 import HomePage from "@/components/Users/HomePage"
+import HomePageDefault from "@/components/Users/HomePageDefault"
 import LandingPage from "@/components/Landing/LandingPage"
 import EditUser from "@/components/Users/EditUser"
 import DeleteUser from "@/components/Users/DeleteUser"
@@ -56,6 +57,11 @@ export default new Router({
             component: HomePage,
             beforeEnter: Guard.auth,
             children: [
+                {
+                    path: "",
+                    name: "HomePageHome",
+                    component: HomePageDefault,
+                },
                 {
                     path: "/user/edit",
                     name: "EditUser",

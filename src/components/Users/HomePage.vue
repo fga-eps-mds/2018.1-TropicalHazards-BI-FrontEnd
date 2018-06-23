@@ -153,7 +153,7 @@ export default {
     padding-right: 0;
 
     .container-fluid {
-      min-height: 75vh;
+      min-height: 75vh !important;
     }
   }
 
