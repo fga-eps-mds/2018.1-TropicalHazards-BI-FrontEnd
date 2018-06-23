@@ -123,7 +123,7 @@ export default {
     }
 
     button {
-      color: $text-color;
+      color: $alt-text-color;
       border: none;
     }
 
