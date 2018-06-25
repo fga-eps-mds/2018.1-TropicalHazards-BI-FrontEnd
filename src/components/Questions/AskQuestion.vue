@@ -57,24 +57,35 @@ export default {
         query: {
             required: true,
             type: Object
+        },
+        id: {
+            type: Number,
+            required: true
         }
     },
     data () {
         return {
             question:{
                 name: "",
-                display: ""
+                display: "",
+                query_aggregation: [],
+                query_filter: [],
+                query_breakout: []
             },
             uuid: "",
             options: [
               {text: "Tabela", value:"table"}
             ],
-            dashboard: ""
         }
     },
     methods: {
+        splitQuestion(){
+            this.query_aggregation = this.query.aggregation
+            this.query_filter = this.query.filter
+            this.query_breakout = this.query.breakout
+        },
         createQuestion() {
-            this.$http.post("metabase/" + this.dashboard,
+            this.$http.post("metabase/" + this.id,
                 this.question,
                 {
                     headers:

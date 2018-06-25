@@ -35,12 +35,15 @@
       </div>
       <div class="input-group input-group-sm">
         <input
-          v-model="search"
+          v-model="searchArg"
           class="form-control custom-field"
           type="text"
-          placeholder="Pesquisar">
+          placeholder="Pesquisar"
+          @keypress.enter="search">
         <div class="input-group-append">
-          <button class="btn btn-outline btn-sm btn-grey">
+          <button
+            class="btn btn-outline btn-sm btn-grey"
+            @click="search">
             <span class="fa fa-search"/>
           </button>
         </div>
@@ -63,7 +66,7 @@
         Meus Dashboards
       </router-link>
       <router-link
-        :to="{ name: 'DashboardsList' }"
+        :to="{ name: 'DashboardList' }"
         class="list-group-item">
         Procurar Dashboards
       </router-link>
@@ -113,7 +116,7 @@ export default {
     },
     data() {
         return {
-            search: "",
+            searchArg: "",
         }
     },
 
@@ -121,7 +124,9 @@ export default {
         ...mapGetters({ currentUser: "currentUser" })
     },
     methods: {
-
+        search(){
+            this.$router.push({ name: "DashboardList", params: { searchArg: this.searchArg}})
+        },
         logout () {
             this.$store.dispatch("logout") //trigger da ação de login implementado em store/auth.js
             this.$router.replace("/")

@@ -109,11 +109,11 @@ export default new Router({
                     beforeEnter: Guard.auth
                 },
                 // dashboards
-                {
-                    path: "/dashboards",
-                    name: "DashboardsList",
-                    component: DashboardList,
-                },
+                // {
+                //     path: "/dashboards",
+                //     name: "DashboardsList",
+                //     component: DashboardList,
+                // },
                 {
                     path: "/dashboards/detail/:id",
                     name: "DashboardDetail",
@@ -142,14 +142,16 @@ export default new Router({
                 {
                     path: "/dashboards",
                     name: "DashboardList",
-                    component: DashboardList
+                    component: DashboardList,
+                    props: true
                 },
                 // Query
                 {
                     path: "/query",
                     name: "QueryComponent",
                     component: QueryComponent,
-                    beforeEnter: Guard.auth
+                    beforeEnter: Guard.auth,
+                    props: true
                 },
                 {
                     path: "/question",
