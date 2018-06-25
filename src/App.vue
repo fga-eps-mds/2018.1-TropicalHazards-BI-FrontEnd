@@ -12,6 +12,9 @@ import Footer from "@/components/Utils/Footer"
 export default {
     components: {
         Footer,
+    },
+    beforeUpdate(){
+        this.$store.dispatch("inspectToken")
     }
 }
 </script>

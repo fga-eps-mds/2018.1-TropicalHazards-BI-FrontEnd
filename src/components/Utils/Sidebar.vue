@@ -14,7 +14,7 @@
         v-else>
         <h6 class="text-left">
           <span class="fa fa-user"/>
-          {{ (user.username == '') ? 'username' : user.username }}
+          {{ (currentUser.name == '') ? 'username' : currentUser.name }}
         </h6>
         <h6>
           <small>
@@ -63,7 +63,7 @@
         Meus Dashboards
       </router-link>
       <router-link
-        :to="{ name: 'DashboardList' }"
+        :to="{ name: 'DashboardsList' }"
         class="list-group-item">
         Procurar Dashboards
       </router-link>
@@ -114,20 +114,11 @@ export default {
     data() {
         return {
             search: "",
-            user: {
-                username: "",
-                id: "",
-                email: ""
-            }
         }
     },
 
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
-    },
-
-    beforeMount () {
-        this.loadUserInfo ()
     },
     methods: {
 
@@ -135,11 +126,6 @@ export default {
             this.$store.dispatch("logout") //trigger da ação de login implementado em store/auth.js
             this.$router.replace("/")
         },
-        loadUserInfo() {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        }
     }
 }
 </script>
