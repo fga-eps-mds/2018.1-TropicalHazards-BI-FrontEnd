@@ -47,11 +47,14 @@
             <div class="card-body">
               <h5 class="card-title">
                 {{ dashboard.name }}
-                <span
-                  v-if="dashboard.user == currentUser.id"
-                  class="badge badge-success h6">
-                  owner
-                </span>
+                <div
+                  v-if="currentUser">
+                  <span
+                    v-if="dashboard.user == currentUser.id"
+                    class="badge badge-success h6">
+                    owner
+                  </span>
+                </div>
               </h5>
               <h6 class="card-subtitle">
                 Placeholder Nome Projeto
@@ -64,12 +67,15 @@
                 class="btn btn-blue btn-sm">
                 <span class="fa fa-search"/> Visualizar
               </router-link>
-              <router-link
-                v-if="dashboard.user == currentUser.id"
-                :to="{ name: 'EditDashboard', params: { dashboard: dashboard } }"
-                class="btn btn-sm btn-blue mr-auto">
-                <span class="fa fa-pencil"/> Editar
-              </router-link>
+              <div
+                v-if="currentUser">
+                <router-link
+                  v-if="dashboard.user == currentUser.id"
+                  :to="{ name: 'EditDashboard', params: { dashboard: dashboard } }"
+                  class="btn btn-sm btn-blue mr-auto">
+                  <span class="fa fa-pencil"/> Editar
+                </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -89,12 +95,9 @@ export default {
     },
     computed: {
         ...mapGetters({ currentUser: "currentUser",
-            dashboards: "getDashboards"
         }),
         filteredDashboards(){
-            return this.dashboards.filter(dashboard =>{
-                return dashboard.name.toLowerCase().includes(this.srchArg.toLowerCase())
-            })
+            return this.$store.getters.getDashboards(this.srchArg)
         }
     },
     beforeCreate(){

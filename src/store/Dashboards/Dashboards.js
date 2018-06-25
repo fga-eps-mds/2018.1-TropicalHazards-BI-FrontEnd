@@ -8,8 +8,10 @@ const state = {
 }
 
 const getters = {
-    getDashboards: state =>{
-        return state.dashboards
+    getDashboards: (state) => (searchArgument) =>{
+        return state.dashboards.filter(dashboard => {
+            return dashboard.name.toLowerCase().includes(searchArgument.toLowerCase())
+        })
     },
     getDashboardsLength: state =>{
         return state.dashboards.length
