@@ -2,15 +2,15 @@
   <div class="container-fluid">
     <header>
       <h2>
-        Projetos
+        Explorar Projetos
       </h2>
     </header>
     <hr>
     <div class="row">
-      <h5 class="col col-md-4">
+      <h5 class="col col-md-3">
         Busca
       </h5>
-      <form class="col col-md-8">
+      <form class="col col-md-9">
         <div class="input-group">
           <input
             v-model="searchArgument"
@@ -110,6 +110,7 @@ export default {
   .card {
     display: inline-block;
   }
+
   .row {
     margin: 0;
   }
@@ -122,6 +123,7 @@ export default {
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }
+
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }

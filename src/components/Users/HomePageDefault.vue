@@ -29,7 +29,7 @@
           </router-link>
         </ul>
         <b-jumbotron
-          class="text-white bg-secondary">
+          class="">
           <template slot="header">
             Guia
           </template>
@@ -37,14 +37,15 @@
             Fluxo básico do Observ:
             <hr>
             <ul class="">
-              <li class="">
+              <li class="pt-4 pb-4">
                 Passo 1: Criar um projeto.
-                <div class="row">
+                <div class="row mt-3 mb-1">
                   <div class="col col-md-6">
-                    <!-- <img
-                      src="../../assets/.jpg"
+                    <img
+                      src="../../assets/create-project.gif"
                       alt="Passo 1"
-                      class="responsive-img"> -->
+                      width="100%"
+                      class="responsive-img">
                   </div>
                   <div class="col col-md-6 h6">
                     <p>
@@ -54,9 +55,9 @@
                   </div>
                 </div>
               </li>
-              <li class="">
+              <li class="pt-4 pb-4">
                 Passo 2: Fazer o upload de dados.
-                <div class="row">
+                <div class="row mt-3 mb-1">
                   <div class="col col-md-6">
                     <!-- <img
                       src="../../assets/.jpg"
@@ -71,14 +72,15 @@
                   </div>
                 </div>
               </li>
-              <li class="">
+              <li class="pt-4 pb-4">
                 Passo 3: Criar um dashboard.
-                <div class="row">
+                <div class="row mt-3 mb-1">
                   <div class="col col-md-6">
-                    <!-- <img
-                      src="../../assets/.jpg"
+                    <img
+                      src="../../assets/create-dashboard.gif"
                       alt="Passo 1"
-                      class="responsive-img"> -->
+                      width="100%"
+                      class="img-responsive">
                   </div>
                   <div class="col col-md-6 h6">
                     <p>
@@ -88,9 +90,9 @@
                   </div>
                 </div>
               </li>
-              <li class="">
+              <li class="pt-4 pb-4">
                 Passo 4: Criar um indicador.
-                <div class="row">
+                <div class="row mt-3 mb-1">
                   <div class="col col-md-6">
                     <!-- <img
                       src="../../assets/.jpg"
@@ -105,9 +107,9 @@
                   </div>
                 </div>
               </li>
-              <li class="">
+              <li class="pt-4 pb-4">
                 Passo 5: Compartilhar dashboard.
-                <div class="row">
+                <div class="row mt-3 mb-1">
                   <div class="col col-md-6">
                     <!-- <img
                       src="../../assets/.jpg"

@@ -76,13 +76,13 @@
               </p>
               <router-link
                 :to="{ name: 'EditProject', params: { id: project.id } }"
-                class="btn btn-sm btn-blue mr-auto">
-                <span class="fa fa-pencil"/> Editar
+                class="btn btn-sm btn-grey mr-auto">
+                <span class="fa fa-edit"/> Editar
               </router-link>
               <router-link
                 :to="{ name: 'CreateDashboard', params: { project: project.id } }"
-                class="btn btn-sm btn-blue mr-auto">
-                <span class="fa fa-pencil"/> Criar Dashboard
+                class="btn btn-sm btn-secondary mr-auto">
+                <span class="fa fa-plus"/> Criar Dashboard
               </router-link>
               <router-link
                 :to="{ name: 'ProjectDetail', params: { id: project.id } }"
@@ -96,7 +96,7 @@
               </button>
               <router-link
                 :to="{ name: 'ContainerImport', params: { project: project } }"
-                class="btn blue lighten-1" >
+                class="btn btn-green" >
                 <span class="fa fa-edit"/> Importar
               </router-link>
             </div>

@@ -2,15 +2,15 @@
   <div class="container-fluid">
     <header>
       <h2>
-        Dashboards
+        Explorar Dashboards
       </h2>
     </header>
     <hr>
     <div class="row">
-      <h5 class="col-md-4">
+      <h5 class="col-md-3">
         Buscar
       </h5>
-      <div class="input-group col-md-8">
+      <div class="input-group col-md-9">
         <input
           v-model="srchArg"
           type="text"
@@ -23,7 +23,7 @@
           </button>
         </div>
       </div>
-      <ul class="list-inline col mt-2">
+      <!-- <ul class="list-inline col mt-2">
         <li class="list-inline-item h5">
           Tags:
         </li>
@@ -34,7 +34,7 @@
           @click="filterByTag(tag.name)">
           {{ tag.name }}
         </li>
-      </ul>
+      </ul> -->
     </div>
     <hr>
     <section id="dashboards-board">
@@ -87,6 +87,7 @@ export default {
             srchArg: "",
         }
     },
+
     computed: {
         ...mapGetters({ currentUser: "currentUser",
             dashboards: "getDashboards"
@@ -97,6 +98,7 @@ export default {
             })
         }
     },
+
     beforeCreate(){
         this.$store.dispatch("loadDashboards")
     }
