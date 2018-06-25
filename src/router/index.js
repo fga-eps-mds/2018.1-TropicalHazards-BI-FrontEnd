@@ -8,6 +8,7 @@ import LandingPage from "@/components/Landing/LandingPage"
 import EditUser from "@/components/Users/EditUser"
 import DeleteUser from "@/components/Users/DeleteUser"
 import Auth from "@/components/Auth/Auth"
+import RegisterForm from "@/components/Auth/RegisterForm"
 
 // project
 import ProjectsList from "@/components/Projects/ProjectsList"
@@ -44,6 +45,12 @@ export default new Router({
             path: "/",
             name: "LandingPage",
             component: LandingPage
+        },
+        {
+            path: "/",
+            name: "RegisterForm",
+            component: RegisterForm,
+            beforeEnter: Guard.guest
         },
         {
             path: "/auth",

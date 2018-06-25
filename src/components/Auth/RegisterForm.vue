@@ -80,7 +80,7 @@
       </button>
     </form>
   </div>
-</template>
+</template> 
 
 <script>
 import { required, minLength, maxLength, email, sameAs} from "vuelidate/lib/validators"

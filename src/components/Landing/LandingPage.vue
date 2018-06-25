@@ -1,10 +1,11 @@
-<template>
+<template> 
   <div class="light-bg">
     <Header/>
     <div class="container text-center">
       <h4>
-        O <b>OBSERV</b> é um observatório de dados com interpretação de dados,
-        geração de indicadores e gráficos.
+        O <b>OBSERV</b> é uma plataforma online de observatórios de dados científicos com suporte
+        à geração de mapas e gráficos.<br>Tudo de maneira colaborativa.
+        
         <br>
         <hr>
         <small>
@@ -15,11 +16,12 @@
     </div>
     <!-- add carousel when getter function is complete -->
     <!-- <Carousel/>  -->
-    <RefBar/>
     <About/>
+    <!--<RefBar/>-->
+    <Search/>
     <Footer/>
   </div>
-</template>
+</template> 
 
 <script>
 import { mapGetters } from "vuex"
@@ -30,6 +32,7 @@ import Header from "@/components/Landing/Header"
 import RefBar from "@/components/Landing/RefBar"
 import About from "@/components/Landing/About"
 import Footer from "@/components/Utils/Footer"
+import Search from "@/components/Landing/Search"
 
 export default {
     components: {
@@ -38,7 +41,8 @@ export default {
         // Carousel,
         RefBar,
         About,
-        Footer
+        Footer,
+        Search
     },
 
     computed: {

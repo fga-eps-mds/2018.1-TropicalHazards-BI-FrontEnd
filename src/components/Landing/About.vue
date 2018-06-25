@@ -1,12 +1,12 @@
 <template>
   <section>
-    <div class="container text-center mx-auto">
+    <!--<div class="container text-center mx-auto">
       <h1 class="text-center">Sobre</h1>
       <hr style="width: 30%; padding-bottom: 2em">
       <p>
         O <b>OBSERV</b> é um observátorio de dados com interpretação de dados, geração de indicadores e gráficos. Tudo isso para apoiara visualização dos indicadores dos dados da sua pesquisa.
       </p>
-    </div>
+    </div> -->
     <div class="container-fluid text-center mx-auto">
       <div class="row">
         <div class="col-md-4 text-center">

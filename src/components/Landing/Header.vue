@@ -3,38 +3,53 @@
     <Navbar/>
     <header>
       <div class="filter container-fluid text-center">
-        <h1 class="motto clearfix"> Contribua. Compartilhe. <b>Observ</b>. </h1>
+        <h1 class="motto clearfix"> Organize, compartilhe e explore. </h1>
         <p class="h3 clearfix">
-          {{ briefResume }}
+          Simples. Fácil. <b>Observ</b>.
         </p>
-        <div class="input-group">
+        <!--<div class="input-group">
           <input
             v-model="searchArg"
             type="text"
             name="search-dashes-field"
             class="form-control"
-            placeholder="Descubra dashboards"
-            @keypress.enter="search">
+            placeholder="Descubra dashboards">
           <div class="input-group-append">
             <button
               id="search"
-              class="btn btn-primary btn-blue"
-              @click="search">
+              class="btn btn-primary btn-blue">
               <p class="d-none d-md-inline-block">
                 Buscar
               </p>
               <span class="fa fa-search"/>
             </button>
           </div>
-        </div>
+        </div>-->
+        
+        <div class="action-button-register">
+          <button
+            id="btn-create-account" 
+            class="btn btn-primary btn-blue"
+            @click="redirectRegisterAccount()"> 
+            Crie uma conta         
+          </button>  
+          
+          <button
+            id="btn-explore" 
+            class="btn btn-primary btn-dark-blue"
+            href="#search-seaction"> 
+            Encontre dados         
+          </button> 
+        </div>           
       </div>
     </header>
   </div>
 </template>
 
 <script>
-// quinta dia 21 11hrs na sala meeting carla pre r2
+
 import Navbar from "@/components/Landing/Navbar"
+import VueRouter from 'vue-router'
 
 export default {
     components: {
@@ -44,13 +59,15 @@ export default {
     data () {
         return {
             brandMotto: "Contribua. Compartilhe. Observ.",
-            briefResume: "Seus dados organizados e compartilhados",
+            briefResume: "Simples. Fácil. Observ",
             searchArg: ""
         }
     },
+
     methods: {
-        search(){
-            this.$router.push({ name: "DashboardList", params: { searchArg: this.searchArg}})
+        redirectRegisterAccount(){
+            console.log('ENTROU AQUI')
+          router.push("RegisterForm")
         }
     }
 }
@@ -64,6 +81,18 @@ export default {
     color: $text-color;
     background-color: #909090;
 
+    #btn-create-account {
+      width: 15vw;
+      height: 5vw;
+      font-size: 20px;
+      margin-right: 35px;
+    }
+
+    #btn-explore {
+      width: 15vw;
+      height: 5vw;
+      font-size: 20px;
+    }
 
     .filter {
       background-size: cover;

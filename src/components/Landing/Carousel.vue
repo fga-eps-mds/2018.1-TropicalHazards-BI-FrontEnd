@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> 
     <b-carousel
       id="carousel1"
       :interval="4000"
@@ -11,7 +11,7 @@
       img-width="1024"
       img-height="480"
       @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
+      @sliding-end="onSlideEnd" 
     >
 
       <b-carousel-slide

@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <ul class="list-unstyled list-inline text-center py-2">
+      <!--<ul class="list-unstyled list-inline text-center py-2">
         <li class="list-inline-item">
           <h5 class="mb-1">
             Junte-se a nós
@@ -59,7 +59,7 @@
             Cadastrar
           </router-link>
         </li>
-      </ul>
+      </ul>-->
       <hr>
       <div class="dark-bg text-center h6">
         Licensa MIT | 2018 Copyright
