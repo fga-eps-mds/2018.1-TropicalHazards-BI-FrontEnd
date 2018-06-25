@@ -62,7 +62,7 @@ const actions = {
     },
     logout ({ commit }, user ) {
         return new Promise((resolve, reject) => {
-            Vue.http.post("rest-auth/logout/", { headers: { "content-type": "application/json", "Authorization": "JWT " + localStorage.token } }).then(response => {
+            Vue.http.get("rest-auth/logout/", { headers: { "content-type": "application/json", "Authorization": "JWT " + localStorage.token } }).then(response => {
                 commit(LOGOUT)
                 delete localStorage.token
                 resolve ()

@@ -14,7 +14,7 @@
         v-else>
         <h6 class="text-left">
           <span class="fa fa-user"/>
-          {{ (user.username == '') ? 'username' : user.username }}
+          {{ (currentUser.name == '') ? 'username' : currentUser.name }}
         </h6>
         <h6>
           <small>
