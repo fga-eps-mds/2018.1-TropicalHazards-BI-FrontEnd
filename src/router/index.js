@@ -21,15 +21,13 @@ import CreateDashboard from "@/components/Dashboards/CreateDashboard"
 import EditDashboard from "@/components/Dashboards/EditDashboard"
 import MyDashboards from "@/components/Dashboards/MyDashboards"
 import DashboardList from "@/components/Dashboards/DashboardList"
+
 // tags
 import CreateTag from "@/components/Tags/CreateTag"
 
-// Router guard
 import Guard from "@/components/Auth/middleware"
 
 //File
-// import ImportCsv from "@/components/Files/ImportCsv"
-// import FilterCsv from "@/components/Files/Filter"
 import ContainerImport from "@/components/Files/ContainerImport"
 
 // Query
@@ -85,7 +83,6 @@ export default new Router({
                     path: "/projects/detail/:id",
                     name: "ProjectDetail",
                     component: ProjectDetail,
-                    beforeEnter: Guard.guest
                 },
                 {
                     path: "/projects/edit/:id",

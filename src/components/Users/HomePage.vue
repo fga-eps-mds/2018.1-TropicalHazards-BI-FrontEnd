@@ -2,8 +2,16 @@
   <div id="background">
     <navbar />
     <div class="row">
-      <sidebar class="col-md-3 col-lg-2 sidebar"/>
-      <div class="col-md-9 col-lg-10 content">
+      <button
+        id="sidebar-toggle-btn"
+        class="btn btn-block text-center col d-block d-sm-none dark-bg"
+        @click="toggleSidebar()">
+        {{ sidebarAction }} menu
+      </button>
+      <sidebar
+        :class="{'d-none d-lg-block': !sidebarVisibility}"
+        class="col-md-3 col-lg-2 sidebar"/>
+      <div class="col-12 col-md-9 col-lg-10 content">
         <transition name="router-anim">
           <router-view />
         </transition>
@@ -51,6 +59,16 @@ export default {
         Logout () {
             this.$store.dispatch("logout")
         },
+
+        toggleSidebar () {
+            this.sidebarVisibility = !this.sidebarVisibility
+            if (this.sidebarVisibility) {
+                this.sidebarAction = "Ocultar"
+            }
+            else {
+                this.sidebarAction = "Mostrar"
+            }
+        }
     },
 
 }
@@ -106,6 +124,11 @@ export default {
 
   .sidebar {
     padding-left: 0;
+  }
+
+  #sidebar-toggle-btn {
+    border-radius: 0;
+    border: 1px solid #666;
   }
 
 </style>
