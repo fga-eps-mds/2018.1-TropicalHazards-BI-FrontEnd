@@ -13,11 +13,13 @@
             type="text"
             name="search-dashes-field"
             class="form-control"
-            placeholder="Descubra dashboards">
+            placeholder="Descubra dashboards"
+            @keypress.enter="search">
           <div class="input-group-append">
             <button
               id="search"
-              class="btn btn-primary btn-blue">
+              class="btn btn-primary btn-blue"
+              @click="search">
               <p class="d-none d-md-inline-block">
                 Buscar
               </p>
@@ -44,6 +46,11 @@ export default {
             brandMotto: "Contribua. Compartilhe. Observ.",
             briefResume: "Seus dados organizados e compartilhados",
             searchArg: ""
+        }
+    },
+    methods: {
+        search(){
+            this.$router.push({ name: "DashboardList", params: { searchArg: this.searchArg}})
         }
     }
 }

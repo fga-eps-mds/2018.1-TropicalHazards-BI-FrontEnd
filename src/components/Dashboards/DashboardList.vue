@@ -12,7 +12,7 @@
       </h5>
       <div class="input-group col-md-8">
         <input
-          v-model="srchArg"
+          v-model="searchArg"
           type="text"
           class="form-control"
           placeholder="Busque por dashboards">
@@ -88,16 +88,17 @@
 import { mapGetters } from "vuex"
 
 export default {
-    data () {
-        return {
-            srchArg: "",
+    props: {
+        searchArg: {
+            type: String,
+            default: ""
         }
     },
     computed: {
         ...mapGetters({ currentUser: "currentUser",
         }),
         filteredDashboards(){
-            return this.$store.getters.getDashboards(this.srchArg)
+            return this.$store.getters.getDashboards(this.searchArg)
         }
     },
     beforeCreate(){
