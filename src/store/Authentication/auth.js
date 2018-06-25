@@ -63,13 +63,15 @@ const actions = {
     logout ({ commit }, user ) {
         return new Promise((resolve, reject) => {
             Vue.http.post("rest-auth/logout/", { headers: { "content-type": "application/json", "Authorization": "JWT " + localStorage.token } }).then(response => {
+                commit(LOGOUT)
+                delete localStorage.token
                 resolve ()
             },
             error => {
+                commit(LOGOUT)
+                delete localStorage.token
                 reject ()
             })
-            commit(LOGOUT)
-            delete localStorage.token
         })
     },
     register ({ commit }, user){
@@ -119,7 +121,7 @@ const actions = {
             const orig_iat = decoded.orig_iat
 
             // const lifespan = 1800  token lifespan remaining to update = lifespan - desired time to update
-            const expiring = 900 // time frame desired to prompt token to udpate( 15 mins)
+            const expiring = 3500 // time frame desired to prompt token to udpate( 15 mins)
 
             if (exp - (Date.now() / 1000) < expiring ) { //
                 this.dispatch("refreshToken")
