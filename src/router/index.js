@@ -55,7 +55,6 @@ export default new Router({
             path: "/home",
             name: "HomePage",
             component: HomePage,
-            beforeEnter: Guard.auth,
             children: [
                 {
                     path: "/",
@@ -79,7 +78,6 @@ export default new Router({
                     path: "/projects",
                     name: "ProjectsList",
                     component: ProjectsList,
-                    beforeEnter: Guard.auth
                 },
                 {
                     path: "/my-projects",
@@ -91,7 +89,6 @@ export default new Router({
                     path: "/projects/detail/:id",
                     name: "ProjectDetail",
                     component: ProjectDetail,
-                    beforeEnter: Guard.guest
                 },
                 {
                     path: "/projects/edit/:id",
@@ -112,17 +109,15 @@ export default new Router({
                     beforeEnter: Guard.auth
                 },
                 // dashboards
-                {
-                    path: "/dashboards",
-                    name: "DashboardsList",
-                    component: DashboardList,
-                    beforeEnter: Guard.guest
-                },
+                // {
+                //     path: "/dashboards",
+                //     name: "DashboardsList",
+                //     component: DashboardList,
+                // },
                 {
                     path: "/dashboards/detail/:id",
                     name: "DashboardDetail",
                     component: DashboardDetail,
-                    beforeEnter: Guard.guest
                 },
                 {
                     path: "/dashboards/new",
@@ -147,18 +142,22 @@ export default new Router({
                 {
                     path: "/dashboards",
                     name: "DashboardList",
-                    component: DashboardList
+                    component: DashboardList,
+                    props: true
                 },
                 // Query
                 {
                     path: "/query",
                     name: "QueryComponent",
                     component: QueryComponent,
+                    beforeEnter: Guard.auth,
+                    props: true
                 },
                 {
                     path: "/question",
                     name: "AskQuestion",
                     component: AskQuestion,
+                    beforeEnter: Guard.auth,
                     props: true
                 },
                 // {
@@ -171,6 +170,7 @@ export default new Router({
                     path: "/import",
                     name: "ContainerImport",
                     component: ContainerImport,
+                    beforeEnter: Guard.auth,
                     props: true
                 },
                 // {

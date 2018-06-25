@@ -1,6 +1,7 @@
 /* eslint-disable */
 import User from './User.js'
 import Vue from 'vue'
+import JwtDecode from 'jwt-decode'
 
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
@@ -55,24 +56,24 @@ const actions = {
             resolve()
         },
           error => {
-              console.log(error.data)
               reject("Usuário e senha não existem no nosso banco de dados")
           })
       })
     },
     logout ({ commit }, user ) {
         return new Promise((resolve, reject) => {
-            Vue.http.post("rest-auth/logout/", user, { headers: { "content-type": "application/json" } }).then(response => {
+            Vue.http.get("rest-auth/logout/", { headers: { "content-type": "application/json", "Authorization": "JWT " + localStorage.token } }).then(response => {
                 commit(LOGOUT)
                 delete localStorage.token
                 resolve ()
             },
             error => {
-
+                commit(LOGOUT)
+                delete localStorage.token
                 reject ()
             })
         })
-  },
+    },
     register ({ commit }, user){
       return new Promise((resolve, reject) => {
           Vue.http.post("users/", user, { headers: { "content-type": "application/json" } }).then(response => {
@@ -83,21 +84,52 @@ const actions = {
               reject(error)
           })
       })
-  },
+    },
     update ({ commit }) {
         commit(UPDATE)
-  },
-
+    },
     loadUsers({ commit }) {
         return new Promise((resolve, reject) => {
             Vue.http.get("users/", { headers: { "content-type": "application/json" } }).then(response => {
                 commit(SET_USERS, response.data)
                 resolve()
             },
-                error => {
-                    reject()
-                })
+            error => {
+                reject()
+            })
         })
+    },
+    refreshToken({ commit }) {
+        const payload = {
+            token: localStorage.token
+        }
+
+        Vue.http.post("refresh-token/", payload)
+            .then((response) => {
+                localStorage.token = response.data.token
+                commit(UPDATE)
+            })
+            .catch((error) => {
+                this.dispatch("logout")
+            })
+    },
+    inspectToken({ commit }) {
+        const token = localStorage.token;
+        if (token) {
+            const decoded = JwtDecode(token);
+            const exp = decoded.exp
+            const orig_iat = decoded.orig_iat
+
+            // const lifespan = 1800  token lifespan remaining to update = lifespan - desired time to update
+            const expiring = 900 // time frame desired to prompt token to udpate( 15 mins)
+
+            if (exp - (Date.now() / 1000) < expiring ) { //
+                this.dispatch("refreshToken")
+            }else if(exp - (Date.now() / 1000) < 0) {
+                this.dispatch("logout")
+                // Prompt user to relogin
+            }
+        }
     }
 
 }

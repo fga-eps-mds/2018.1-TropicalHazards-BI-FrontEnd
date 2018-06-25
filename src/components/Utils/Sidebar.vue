@@ -14,7 +14,7 @@
         v-else>
         <h6 class="text-left">
           <span class="fa fa-user"/>
-          {{ (user.username == '') ? 'username' : user.username }}
+          {{ (currentUser.name == '') ? 'username' : currentUser.name }}
         </h6>
         <h6>
           <small>
@@ -35,12 +35,15 @@
       </div>
       <div class="input-group input-group-sm">
         <input
-          v-model="search"
+          v-model="searchArg"
           class="form-control custom-field"
           type="text"
-          placeholder="Pesquisar">
+          placeholder="Pesquisar"
+          @keypress.enter="search">
         <div class="input-group-append">
-          <button class="btn btn-outline btn-sm btn-grey">
+          <button
+            class="btn btn-outline btn-sm btn-grey"
+            @click="search">
             <span class="fa fa-search"/>
           </button>
         </div>
@@ -113,33 +116,21 @@ export default {
     },
     data() {
         return {
-            search: "",
-            user: {
-                username: "",
-                id: "",
-                email: ""
-            }
+            searchArg: "",
         }
     },
 
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
-
-    beforeMount () {
-        this.loadUserInfo ()
-    },
     methods: {
-
+        search(){
+            this.$router.push({ name: "DashboardList", params: { searchArg: this.searchArg}})
+        },
         logout () {
             this.$store.dispatch("logout") //trigger da ação de login implementado em store/auth.js
             this.$router.replace("/")
         },
-        loadUserInfo() {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        }
     }
 }
 </script>

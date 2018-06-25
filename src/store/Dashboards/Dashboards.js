@@ -8,8 +8,10 @@ const state = {
 }
 
 const getters = {
-    getDashboards: state =>{
-        return state.dashboards
+    getDashboards: (state) => (searchArgument) =>{
+        return state.dashboards.filter(dashboard => {
+            return dashboard.name.toLowerCase().includes(searchArgument.toLowerCase())
+        })
     },
     getDashboardsLength: state =>{
         return state.dashboards.length
@@ -86,6 +88,20 @@ const actions = {
             })
         })
     },
+    getIframes({ commit }, dashboardId){
+        return new Promise((resolve, reject) => {
+            Vue.http.get("metabase/" + dashboardId, { headers:
+                {
+                    "Content-type": "application/json",
+                    "Authorization": localStorage.token
+                } }).then(response => {
+                resolve(response.data)
+            },
+            error => {
+                reject()
+            })
+        })
+    }
 }
 
 export default {

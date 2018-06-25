@@ -30,7 +30,7 @@
         <li
           v-if="currentUser"
           class="nav-item" >
-          <a class="nav-link">Olá {{ user.username }}</a>
+          <a class="nav-link">Olá {{ currentUser.username }}</a>
         </li>
         <li class="nav-item">
           <router-link
@@ -73,33 +73,14 @@
 import { mapGetters } from "vuex"
 
 export default {
-    data() {
-        return {
-            user: {
-                username: "",
-                email: "",
-                id: ""
-            }
-        }
-    },
 
     computed: {
         ...mapGetters({ currentUser: "currentUser" })
     },
-    beforeMount () {
-        this.loadUserInfo()
-    },
-
-
     methods: {
         logout () {
             this.$store.dispatch("logout")
             this.$router.replace("/")
-        },
-        loadUserInfo() {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
         }
     }
 }

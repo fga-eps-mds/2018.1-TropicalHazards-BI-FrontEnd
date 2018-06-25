@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
-
 
 import Sidebar from "@/components/Utils/Sidebar"
 import Footer from "@/components/Utils/Footer"
@@ -38,48 +36,17 @@ export default {
         "navbar": Navbar,
         "custom-footer": Footer
     },
-    data () {
-        return {
-            projects: [],
-            tags: {
-                name: "",
-                slug: ""
-            },
-            user: {
-                username: "",
-                password: "",
-                email: ""
-            },
-            sidebarVisibility: false,
-            sidebarAction: "Mostrar"
-        }
-    },
-
-    computed: {
-        ...mapGetters({
-            currentUser: "currentUser",
-            getProjects: "getProjects",
-
-        })
-    },
     beforeMount () {
-        this.loadUserInfo()
         this.loadUsers()
         this.loadProjects()
     },
     methods: {
-        deleteProject () {
-            this.$http.delete("project/" + this.projeto.id + "/",
-                { headers: { "Authorization": "JWT " + localStorage.token } })
-            window.alert("projeto deletado")
-        },
         loadProjects () {
             this.$store.dispatch("loadProjects")
         },
         loadUsers () {
             this.$store.dispatch("loadUsers")
         },
-
         filterByTag () {
             this.$http.get("projects/" + "?tags__name=&tag_name=" + this.tags.name,
                 { headers: { "content-type": "application/json" } }).then(result => {
@@ -89,13 +56,6 @@ export default {
                 error.log(error)
             })
         },
-
-        loadUserInfo () {
-            this.user.id = this.currentUser.id
-            this.user.username = this.currentUser.name
-            this.user.email = this.currentUser.email
-        },
-
         Logout () {
             this.$store.dispatch("logout")
         },
