@@ -76,29 +76,29 @@
               </p>
               <router-link
                 :to="{ name: 'ProjectDetail', params: { id: project.id } }"
-                class="btn btn-sm btn-blue mr-auto">
+                class="btn btn-blue mr-auto">
                 <span class="fa fa-search"/> Visualizar
               </router-link>
               <router-link
                 :to="{ name: 'ContainerImport', params: { project: project } }"
                 class="btn btn-green" >
                 <span class="fa fa-edit"/> Importar
+              </router-link>
               <router-link
                 :to="{ name: 'CreateDashboard', params: { project: project.id } }"
-                class="btn btn-sm btn-secondary mr-auto">
+                class="btn btn-grey mr-auto">
                 <span class="fa fa-plus"/> Criar Dashboard
-              </router-link>
               </router-link>
               <router-link
                 :to="{ name: 'EditProject', params: { id: project.id } }"
-                class="btn btn-sm btn-grey mr-auto">
+                class="btn btn-grey mr-auto">
                 <span class="fa fa-edit"/> Editar
+              </router-link>
               <button
-                class="btn btn-danger btn-sm"
+                class="btn btn-danger"
                 @click="deleteProject()">
                 <span class="fa fa-trash"/> Excluir
               </button>
-              </router-link>
             </div>
           </div>
         </div>

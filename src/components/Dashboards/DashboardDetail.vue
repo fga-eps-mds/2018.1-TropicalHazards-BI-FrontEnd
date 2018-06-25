@@ -21,7 +21,7 @@
         </p>
         <!-- fix link -->
         <router-link
-          :to="{}"
+          :to="{name:'MyProjects'}"
           class="btn btn-blue ml-auto">
           <span class="fa fa-arrow-left"/> Voltar ao projeto
         </router-link>

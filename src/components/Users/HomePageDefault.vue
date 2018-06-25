@@ -59,10 +59,11 @@
                 Passo 2: Fazer o upload de dados.
                 <div class="row mt-3 mb-1">
                   <div class="col col-md-6">
-                    <!-- <img
-                      src="../../assets/.jpg"
-                      alt="Passo 1"
-                      class="responsive-img"> -->
+                    <img
+                      src="../../assets/importar-arquivo-csv.gif"
+                      alt="Passo 2"
+                      width="100%"
+                      class="responsive-img">
                   </div>
                   <div class="col col-md-6 h6">
                     <p>
