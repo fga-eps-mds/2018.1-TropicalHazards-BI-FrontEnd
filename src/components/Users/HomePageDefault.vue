@@ -7,10 +7,10 @@
       <hr>
     </header>
     <section>
-      <h4>
-        O que deseja fazer hoje?
-      </h4>
       <div class="container">
+        <h4 class="pl-0">
+          O que deseja fazer hoje?
+        </h4>
         <ul class="list-inline">
           <router-link
             :to="{ name: 'CreateProject' }"
@@ -109,12 +109,15 @@
               </li>
               <li class="pt-4 pb-4">
                 Passo 5: Compartilhar dashboard.
-                <div class="row mt-3 mb-1">
+                <div class="col">
+                  Para compartilhar seu dashboard, basta enviar a url para seu destinatario
+                </div>
+                <!-- <div class="row mt-3 mb-1">
                   <div class="col col-md-6">
-                    <!-- <img
-                      src="../../assets/.jpg"
+                    <img
+                      src=""
                       alt="Passo 1"
-                      class="responsive-img"> -->
+                      class="responsive-img">
                   </div>
                   <div class="col col-md-6 h6">
                     <p>
@@ -122,7 +125,7 @@
                       de forma simples, enxuta e formal.
                     </p>
                   </div>
-                </div>
+                </div> -->
               </li>
             </ul>
           </template>
