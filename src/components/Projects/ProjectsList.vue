@@ -61,7 +61,7 @@
                 {{ project.description }}
               </p>
               <router-link
-                :to="{ path: '/projects/detail/' + project.id }"
+                :to="{ name: 'ProjectDetail', params: { id: project.id } }"
                 class="btn btn-small btn-blue">
                 <span class="fa fa-search"/> Visualizar
               </router-link>

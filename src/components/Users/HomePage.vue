@@ -75,6 +75,7 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../styles/base.scss';
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -87,25 +88,14 @@ export default {
   padding-left: 250px;
 }
 
-  @import '../styles/base.scss';
 
   .row {
-    margin-left: 0;
+    margin-left: 0 !important;
   }
 
-  form {
-    background-color: #eee;
-    color: $text-color;
-    padding: 2em;
-    border-radius: 5px;
-    margin-top: 2em;
-    margin-bottom: 2em;
-
-    .btn {
-      $btn-margins: 4px;
-      margin-left: $btn-margins;
-      margin-right: $btn-margins;
-    }
+  .col-lg-10 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   .content {
@@ -113,7 +103,7 @@ export default {
     padding-right: 0;
 
     .container-fluid {
-      min-height: 75vh;
+      min-height: 75vh !important;
     }
   }
 
