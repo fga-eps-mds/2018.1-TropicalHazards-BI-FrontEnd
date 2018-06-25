@@ -1,5 +1,12 @@
 <template>
   <div class="container-fluid">
+    <b-alert
+      :variant="alert.variant"
+      :show="alert.show"
+      dismissible
+      @dismissed="alert.show=false">
+      <p class="text-center">{{ alert.text }}</p>
+    </b-alert>
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -31,7 +38,7 @@
               <button
                 class="col btn btn-green btn-block btn-lg"
                 @click="buttonHandler()">
-                <span class="fa fa-check"/> Continuar
+                <span class="fa fa-check"/> Confirmar
               </button>
               <button
                 class="col btn btn-grey btn-block mt-0 btn-lg"
@@ -74,7 +81,12 @@ export default {
                 { key: "acceptNull", label: "Pode ser nulo?"},
                 { key: "type", label: "Tipo"},
                 { key: "transform", label: "Transformar"},
-            ]
+            ],
+            alert: {
+                variant: "",
+                text: "",
+                show: false
+            },
         }
     },
     computed: {
@@ -102,9 +114,16 @@ export default {
                 }
             /*eslint-disable-next-line*/
             ).then((response) => {
+                this.alert.variant = "success"
+                this.alert.text = "Arquivo importado com sucesso!"
+                this.alert.show = true
+
             },
             error => {
                 error.log(error)
+                this.alert.variant = "danger"
+                this.alert.text = "Falha ao importar o arquivo!"
+                this.alert.show = true
             })
         },
 
