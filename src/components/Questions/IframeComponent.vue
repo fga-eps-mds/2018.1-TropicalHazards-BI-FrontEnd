@@ -18,7 +18,7 @@ export default {
         }
     },
     created (){
-        this.iframeUrl = "http://localhost:3000/public/question/" + this.iframeUrl
+        this.iframeUrl = process.env.METABASE_HOST + "/public/question/" + this.iframeUrl
     }
 }
 </script>
