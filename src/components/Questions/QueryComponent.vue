@@ -92,7 +92,7 @@ export default {
                 this.query.filter.push("AND")
                 Array.prototype.push.apply(this.query.filter, this.filter)
             }else{
-                Array.prototype.push.apply(this.query.filter, this.filter)
+                this.query.filter = this.filter[0]
             }
             this.$router.push({name: "AskQuestion", params: {query: this.query, id: this.id}})
         }

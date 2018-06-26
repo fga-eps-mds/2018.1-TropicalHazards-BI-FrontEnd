@@ -128,7 +128,7 @@ export default {
     },
     beforeMount () {
         this.$store.dispatch("loadDashboards")
-        this.$store.dispatch("getIframes", 1).then(response=>{
+        this.$store.dispatch("getIframes", this.$route.params.id).then(response=>{
             this.iframes = response
         })
     },

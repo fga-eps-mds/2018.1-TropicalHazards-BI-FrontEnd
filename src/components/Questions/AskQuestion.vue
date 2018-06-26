@@ -19,17 +19,37 @@
               class="form-control"
               placeholder="Ex.: Gráfico de Pessoas">
           </div>
-          <div class="form-group">
+          <div class="form-group" >
             <label for="p-name">
               Tipo de Display:
             </label>
-            <select
+            <b-form-select
               id="p-name"
               v-model="question.display"
-              class="form-control"
-              placeholder="Ex.: Gráfico de Pessoas">
-              <option value="table">Tabela</option>
-            </select>
+              :options="options"
+              class="form-control" />
+          </div>
+          <div
+            v-if="question.display != 'table'"
+            class="form-group">
+            <label for="p-dimension">
+              Eixo X:
+            </label>
+            <b-form-select
+              id="p-dimension"
+              v-model="question.dimension"
+              :options="fields" />
+          </div>
+          <div
+            v-if="question.display != 'table'"
+            class="form-group">
+            <label for="p-metric">
+              Eixo Y:
+            </label>
+            <b-form-select
+              id="p-metric"
+              v-model="question.metric"
+              :options="fields" />
           </div>
           <div class="row">
             <button
@@ -51,6 +71,7 @@
 
 <script>
 /* eslint-disable */
+import { mapGetters } from "vuex"
 
 export default {
     props: {
@@ -67,24 +88,33 @@ export default {
         return {
             question:{
                 name: "",
-                display: "",
+                display: "table",
                 query_aggregation: [],
                 query_filter: [],
-                query_breakout: []
+                query_breakout: [],
+                dimension: "",
+                metric: ""
             },
             uuid: "",
             options: [
-              {text: "Tabela", value:"table"}
+              {text: "Tabela", value:"table"},
+              {text: "Gráfico de Linha", value:"line"},
+              {text: "Gráfico de Barra", value:"bar"},
+              {text: "Gráfico de Área", value:"area"}
             ],
         }
     },
+    computed: {
+        ...mapGetters({fields: "getCurrentProjectFieldsWithoutValue"})
+    },
     methods: {
         splitQuestion(){
-            this.query_aggregation = this.query.aggregation
-            this.query_filter = this.query.filter
-            this.query_breakout = this.query.breakout
+            this.question.query_aggregation = this.query.aggregation
+            this.question.query_filter = this.query.filter
+            this.question.query_breakout = this.query.breakout
         },
         createQuestion() {
+            this.splitQuestion()
             this.$http.post("metabase/" + this.id,
                 this.question,
                 {
@@ -94,11 +124,7 @@ export default {
                         "content-type": "application/json"
                     }
                 }
-            ).then(result => {
-                console.log(result)
-            },
-            error => {
-            })
+            )
         }
     }
 }
