@@ -44,6 +44,11 @@
           class="btn btn-blue btn-sm">
           <span class="fa fa-search"/> Nova Question
         </router-link>
+        <a
+          href=""
+          class="btn btn-sm btn-outline-secondary">
+          <span class="fa fa-share-alt"/> Compartilhar
+        </a>
       </header>
       <div class="row pt-4 pb-4">
         <div

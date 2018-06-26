@@ -95,10 +95,6 @@
                 Passo 4: Criar um indicador.
                 <div class="row mt-3 mb-1">
                   <div class="col col-md-6">
-                    <!-- <img
-                      src="../../assets/.jpg"
-                      alt="Passo 1"
-                      class="responsive-img"> -->
                   </div>
                   <div class="col col-md-6 h6">
                     <p>
@@ -113,20 +109,6 @@
                 <div class="col">
                   Para compartilhar seu dashboard, basta enviar a url para seu destinatario
                 </div>
-                <!-- <div class="row mt-3 mb-1">
-                  <div class="col col-md-6">
-                    <img
-                      src=""
-                      alt="Passo 1"
-                      class="responsive-img">
-                  </div>
-                  <div class="col col-md-6 h6">
-                    <p>
-                      Compartilhe os dashboards de seu projeto tanto para pesquisadores quanto para interessados,
-                      de forma simples, enxuta e formal.
-                    </p>
-                  </div>
-                </div> -->
               </li>
             </ul>
           </template>

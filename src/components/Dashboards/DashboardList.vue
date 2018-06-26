@@ -51,14 +51,14 @@
                   v-if="currentUser">
                   <span
                     v-if="dashboard.user == currentUser.id"
-                    class="badge badge-success h6">
+                    class="badge badge-success">
                     owner
                   </span>
                 </div>
               </h5>
-              <h6 class="card-subtitle">
+              <!-- <h6 class="card-subtitle">
                 Placeholder Nome Projeto
-              </h6>
+              </h6> -->
               <p class="card-text">
                 {{ dashboard.description }}
               </p>
@@ -67,15 +67,12 @@
                 class="btn btn-blue btn-sm">
                 <span class="fa fa-search"/> Visualizar
               </router-link>
-              <div
-                v-if="currentUser">
-                <router-link
-                  v-if="dashboard.user == currentUser.id"
-                  :to="{ name: 'EditDashboard', params: { dashboard: dashboard } }"
-                  class="btn btn-sm btn-blue mr-auto">
-                  <span class="fa fa-pencil"/> Editar
-                </router-link>
-              </div>
+              <router-link
+                v-if="dashboard.user == currentUser.id"
+                :to="{ name: 'EditDashboard', params: { dashboard: dashboard } }"
+                class="btn btn-sm btn-grey mr-auto">
+                <span class="fa fa-edit"/> Editar
+              </router-link>
             </div>
           </div>
         </div>
