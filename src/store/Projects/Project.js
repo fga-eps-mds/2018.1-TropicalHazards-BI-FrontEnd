@@ -37,6 +37,11 @@ const getters = {
         return state.currentProjectFields.map(function(field){
             return { text: field.name, value: { value: field.id, type: field.base_type} }
         })
+    },
+    getCurrentProjectFieldsWithoutValue: state=>{
+        return state.currentProjectFields.map(function (field) {
+            return { text: field.name, value: [field.name] }
+        })
     }
 }
 
