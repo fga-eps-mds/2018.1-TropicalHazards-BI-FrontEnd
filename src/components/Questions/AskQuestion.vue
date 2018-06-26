@@ -34,10 +34,11 @@
               id="p-name"
               v-model="question.display"
               :options="options"
+              :disabled="displayEnable"
               class="form-control" />
           </div>
           <div
-            v-if="question.display != 'table'"
+            v-if="question.display != 'table' && question.display != 'number'"
             class="form-group">
             <label for="p-dimension">
               Eixo X:
@@ -112,7 +113,8 @@ export default {
               {text: "Tabela", value:"table"},
               {text: "Gráfico de Linha", value:"line"},
               {text: "Gráfico de Barra", value:"bar"},
-              {text: "Gráfico de Área", value:"area"}
+              {text: "Gráfico de Área", value:"area"},
+              {text: "Número", value:"number"}
             ],
         }
     },
@@ -127,7 +129,6 @@ export default {
         },
         createQuestion() {
             this.splitQuestion()
-            console.log(this.question.query_filter)
             this.$http.post("metabase/" + this.id,
                 this.question,
                 {
@@ -141,6 +142,9 @@ export default {
                 this.alert.variant = "success"
                 this.alert.text = "Indicador criado com sucesso"
                 this.alert.show = true
+                setTimeout(() => {
+                    this.$router.push({name: 'DashboardDetail', params: { id: this.id }})
+                }, 3000);
             }, err => {
                 this.alert.variant = "warning"
                 this.alert.text = "Houve uma falha ao criar o indicador"
