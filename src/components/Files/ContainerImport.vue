@@ -73,7 +73,7 @@ export default {
         },
         convertToList(header){
             return Object.keys(header).map(function(key){
-                return { name: key, example: header[key], type: null, acceptNull: false, selected: false, transform: "", true: "", false: ""}
+                return { name: key, example: header[key], type: "str", acceptNull: false, selected: true, transform: "", true: "", false: ""}
             })
         },
         filterContinue(value){
