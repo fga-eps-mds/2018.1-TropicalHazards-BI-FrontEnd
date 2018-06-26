@@ -36,6 +36,14 @@ export default {
         "navbar": Navbar,
         "custom-footer": Footer
     },
+
+    data () {
+        return {
+            sidebarAction: "Abrir",
+            sidebarVisibility: false,
+        }
+    },
+
     beforeMount () {
         this.loadUsers()
         this.loadProjects()

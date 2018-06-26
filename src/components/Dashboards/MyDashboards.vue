@@ -44,32 +44,23 @@
           v-for="dashboard in filteredDashboards"
           :key="dashboard.id"
           class="col col-lg-6 pb-3 pt-3">
-          <!-- <div class="embed-responsive embed-responsive-16by9">
-            <custom-iframe
-              :src="2"
-              class=""/>
-              <iframe
-              :src="dashboard.iframe"
-              class="embed-responsive-item"
-              frameborder="0"/>
-          </div> -->
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
                 {{ dashboard.name }}
                 <span
-                  class="badge badge-success h6">
+                  class="badge badge-success">
                   owner
                 </span>
               </h5>
-              <h6 class="card-subtitle">
+              <!-- <h6 class="card-subtitle">
                 Placeholder Nome Projeto
-              </h6>
+              </h6> -->
               <p class="card-text">
                 {{ dashboard.description }}
               </p>
               <router-link
-                :to="{ name: 'DashboardDetail', params: { id: dashboard.id} }"
+                :to="{ name: 'DashboardDetail', params: { id: dashboard.id } }"
                 class="btn btn-blue btn-sm">
                 <span class="fa fa-search"/> Visualizar
               </router-link>

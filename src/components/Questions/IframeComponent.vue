@@ -19,7 +19,7 @@ export default {
     },
     computed: {
         iframe(){
-            return process.env.METABASE_HOST + "/public/question/" + this.iframeUrl + this.iframeUrl
+            return process.env.METABASE_HOST + "/public/question/" + this.iframeUrl
         }
     }
 }

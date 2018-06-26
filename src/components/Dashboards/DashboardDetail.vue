@@ -21,7 +21,7 @@
         </p>
         <!-- fix link -->
         <router-link
-          :to="{}"
+          :to="{name:'MyProjects'}"
           class="btn btn-blue ml-auto">
           <span class="fa fa-arrow-left"/> Voltar ao projeto
         </router-link>
@@ -44,32 +44,21 @@
           class="btn btn-blue btn-sm">
           <span class="fa fa-search"/> Nova Question
         </router-link>
-        <!-- <ul class="list-inline">
-          <li
-            v-for="tag in dashboard.project.tags"
-            :key="tag.id"
-            class="list-inline-item">
-            <span class="badge badge-primary btn-blue">
-              {{ tag.name }}
-            </span>
-          </li>
-        </ul> -->
+        <a
+          href=""
+          class="btn btn-sm btn-outline-secondary">
+          <span class="fa fa-share-alt"/> Compartilhar
+        </a>
       </header>
-      <div class="row">
+      <div class="row pt-4 pb-4">
         <div
-          class="card col col-md-6">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe
-              :src="dashboard.iframe"
-              class="embed-responsive-item"
-              frameborder="0"/>
-          </div>
+          class="card col">
           <div class="card-body">
             <h5 class="card-title">
               {{ dashboard.name }}
               <span
                 v-if="dashboard.owner == currentUser"
-                class="badge badge-secondary h6">
+                class="badge badge-secondary">
                 owner
               </span>
             </h5>
