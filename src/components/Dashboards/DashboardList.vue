@@ -2,15 +2,15 @@
   <div class="container-fluid">
     <header>
       <h2>
-        Dashboards
+        Explorar Dashboards
       </h2>
     </header>
     <hr>
     <div class="row">
-      <h5 class="col-md-4">
+      <h5 class="col-md-3">
         Buscar
       </h5>
-      <div class="input-group col-md-8">
+      <div class="input-group col-md-9">
         <input
           v-model="searchArg"
           type="text"
@@ -23,7 +23,7 @@
           </button>
         </div>
       </div>
-      <ul class="list-inline col mt-2">
+      <!-- <ul class="list-inline col mt-2">
         <li class="list-inline-item h5">
           Tags:
         </li>
@@ -34,7 +34,7 @@
           @click="filterByTag(tag.name)">
           {{ tag.name }}
         </li>
-      </ul>
+      </ul> -->
     </div>
     <hr>
     <section id="dashboards-board">
@@ -51,14 +51,14 @@
                   v-if="currentUser">
                   <span
                     v-if="dashboard.user == currentUser.id"
-                    class="badge badge-success h6">
+                    class="badge badge-success">
                     owner
                   </span>
                 </div>
               </h5>
-              <h6 class="card-subtitle">
+              <!-- <h6 class="card-subtitle">
                 Placeholder Nome Projeto
-              </h6>
+              </h6> -->
               <p class="card-text">
                 {{ dashboard.description }}
               </p>
@@ -67,15 +67,12 @@
                 class="btn btn-blue btn-sm">
                 <span class="fa fa-search"/> Visualizar
               </router-link>
-              <div
-                v-if="currentUser">
-                <router-link
-                  v-if="dashboard.user == currentUser.id"
-                  :to="{ name: 'EditDashboard', params: { dashboard: dashboard } }"
-                  class="btn btn-sm btn-blue mr-auto">
-                  <span class="fa fa-pencil"/> Editar
-                </router-link>
-              </div>
+              <router-link
+                v-if="dashboard.user == currentUser.id"
+                :to="{ name: 'EditDashboard', params: { dashboard: dashboard } }"
+                class="btn btn-sm btn-grey mr-auto">
+                <span class="fa fa-edit"/> Editar
+              </router-link>
             </div>
           </div>
         </div>
@@ -94,6 +91,7 @@ export default {
             default: ""
         }
     },
+
     computed: {
         ...mapGetters({ currentUser: "currentUser",
         }),
@@ -101,6 +99,7 @@ export default {
             return this.$store.getters.getDashboards(this.searchArg)
         }
     },
+
     beforeCreate(){
         this.$store.dispatch("loadDashboards")
     }

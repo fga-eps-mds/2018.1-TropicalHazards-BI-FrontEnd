@@ -35,12 +35,10 @@
 <script>
 // quinta dia 21 11hrs na sala meeting carla pre r2
 import Navbar from "@/components/Landing/Navbar"
-
 export default {
     components: {
         Navbar
     },
-
     data () {
         return {
             brandMotto: "Contribua. Compartilhe. Observ.",
@@ -63,26 +61,20 @@ export default {
     background-size: cover;
     color: $text-color;
     background-color: #909090;
-
-
     .filter {
       background-size: cover;
       background-color: rgba(112, 167, 225, 0.2);
     }
-
     .filter h1, .filter p, .filter .input-group {
       z-index: 1800;
     }
-
     .container-fluid {
       padding-bottom: 2.5em;
       padding-top: .5em;
-
       @media (min-width: 691px) {
         padding: 11em 2.5em;
         height: 100vh;
       }
-
     #search {
       transition: all 0.025s ease-in-out;
     }
@@ -90,26 +82,21 @@ export default {
         padding-top: 1em;
         padding-bottom: 0.5em;
       }
-
       .h3 {
         padding-bottom: 1.5em;
         font-style: italic;
         color: #333F;
       }
-
       .input-group {
         width: 50vw;
         margin-left: auto;
         margin-right: auto;
         z-index: 105;
-
-
         input {
           color: rgba(169, 18, 219, 0.2);
           // font-style: italic;
         }
       }
-
     }
   }
   button {

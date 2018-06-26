@@ -2,15 +2,15 @@
   <div class="container-fluid">
     <header>
       <h2>
-        Projetos
+        Explorar Projetos
       </h2>
     </header>
     <hr>
     <div class="row">
-      <h5 class="col col-md-4">
+      <h5 class="col col-md-3">
         Busca
       </h5>
-      <form class="col col-md-8">
+      <form class="col col-md-9">
         <div class="input-group">
           <input
             v-model="searchArgument"
@@ -27,24 +27,10 @@
           </div>
         </div>
       </form>
-      <!-- <ul class="list-inline">
-        <li class="list-inline-group">
-          <h5>
-            Tags
-          </h5>
-        </li>
-        <li
-          v-for="tag in tags"
-          :key="tag.id"
-          class="badge btn-blue"
-          @click="filterByTag()">
-          {{ tag.name }}
-        </li>
-      </ul> -->
       <hr>
     </div>
-    <div class="">
-      <transition-group name="fade">
+    <div class="row">
+      <!-- <transition-group name="fade"> -->
         <div
           v-for="project in filteredList"
           :key="project.id"
@@ -54,9 +40,6 @@
               {{ project.name }}
             </h5>
             <div class="card-body">
-              <h5 class="card-title">
-                <!-- {{ project.owner.name }} -->
-              </h5>
               <p>
                 {{ project.description }}
               </p>
@@ -68,7 +51,7 @@
             </div>
           </div>
         </div>
-      </transition-group>
+      <!-- </transition-group> -->
     </div>
   </div>
 </template>
@@ -91,7 +74,7 @@ export default {
         ...mapGetters({
             currentUser: "currentUser"
         }),
-        filteredList(){
+        filteredList () {
             return this.$store.getters.getProjects(this.searchArgument)
         }
     },
@@ -110,6 +93,7 @@ export default {
   .card {
     display: inline-block;
   }
+
   .row {
     margin: 0;
   }
@@ -122,6 +106,7 @@ export default {
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }
+
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }

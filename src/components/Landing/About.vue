@@ -69,40 +69,33 @@
 </template>
 
 <script>
-
 </script>
 
 <style lang="scss" scoped>
   @import '../styles/base.scss';
-
   section {
     padding-top: 3em;
     font-size: 1.15em;
-
     .container-fluid {
       margin-top: 3em;
       padding-top: 2em;
       padding-bottom: 5em;
       background-color: #e0e0e0;
     }
-
     .row {
       padding-top: 3em;
       margin-left: .01em;
     }
-
     .card {
       min-height: 26em;
       max-height: 26em;
       margin-top: 1em;
       margin-bottom: 1em;
-
       .card-title {
         font-size: 3em;
         min-height: 1em;
         color: $highlight-text-color;
       }
-
       .card-subtitle {
         color: $blue;
       }
