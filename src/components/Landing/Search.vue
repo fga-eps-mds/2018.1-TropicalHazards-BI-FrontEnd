@@ -40,17 +40,20 @@ export default {
 </script>
 
 <style>
+
     h2 {
       padding-left: 35%;
       padding-bottom: 5%;
       padding-top: 5%;
+      color:midnightblue;
+      font-family: Verdana, Geneva, Tahoma, sans-serif  
     }
 
-    #search-seaction {
-      padding-top: 60px;
-    }
+    
     .search {
         padding-bottom: 1.5em;
+        background-size: cover;
+        background-color: azure;
     }
 
     .input-group {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="register-form">
+  <div id="register-form" class="container" >
     <b-alert
       :variant="alert.variant"
      

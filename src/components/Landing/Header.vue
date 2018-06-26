@@ -27,11 +27,14 @@
         </div>-->
         
         <div class="action-button-register">
-          
-            <router-link id="btn-create-account"  :to="{ name: 'RegisterForm' }">
+          <b-button variant="primary" id="btn-create-account" href="#/auth">
+          Crie uma conta
+          </b-button>  
+
+            <!--<router-link id="btn-create-account"  :to="{ name: 'Auth' }">
               Crie uma conta    
-            </router-link> 
-                 
+            </router-link>--> 
+               
             
           
           <b-button 
