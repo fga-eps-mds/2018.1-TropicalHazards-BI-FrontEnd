@@ -7,6 +7,13 @@
     </header>
     <div class="row">
       <div class="col col-md-6 offset-md-3">
+        <b-alert
+          :variant="alert.status"
+          :show="alert.show"
+          dismissible
+          @dismissed="alert.show=false">
+          <p>{{ alert.text }}</p>
+        </b-alert>
         <form>
           <div class="form-group">
             <label for="p-name">
@@ -86,6 +93,11 @@ export default {
     },
     data () {
         return {
+            alert: {
+                variant: "",
+                text: "",
+                show: false
+            },
             question:{
                 name: "",
                 display: "table",
@@ -115,6 +127,7 @@ export default {
         },
         createQuestion() {
             this.splitQuestion()
+            console.log(this.question.query_filter)
             this.$http.post("metabase/" + this.id,
                 this.question,
                 {
@@ -124,7 +137,15 @@ export default {
                         "content-type": "application/json"
                     }
                 }
-            )
+            ).then(response=>{
+                this.alert.variant = "success"
+                this.alert.text = "Indicador criado com sucesso"
+                this.alert.show = true
+            }, err => {
+                this.alert.variant = "warning"
+                this.alert.text = "Houve uma falha ao criar o indicador"
+                this.alert.show = true
+            })
         }
     }
 }
