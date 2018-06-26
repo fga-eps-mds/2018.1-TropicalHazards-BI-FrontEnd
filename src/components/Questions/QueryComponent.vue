@@ -62,8 +62,7 @@ export default {
             // PROVAVELMENTE MELHOR DEIXAR OS ELEMENTOS DE FORA DA QUERY E DAR ASSIGN NELES ANTES DE ENVIAR
             // PRO PRÓXIMO PASSO
             query: {
-                filter: [ "AND",
-                    []],
+                filter: [],
                 aggregation: [],
                 breakout: [],
             },
@@ -89,18 +88,13 @@ export default {
             this.query.breakout = value
         },
         generateQuery(){
-            if(this.filter.length == 0){
-                delete this.query.filter
+            if(this.filter.length > 1){
+                this.query.filter.push("AND")
+                Array.prototype.push.apply(this.query.filter, this.filter)
             }else{
-                Array.prototype.push.apply(this.query.filter[1], this.filter)
+                Array.prototype.push.apply(this.query.filter, this.filter)
             }
-            if(this.query.aggregation == 0){
-                delete this.query.aggregation
-            }
-            if(this.query.breakout == 0){
-                delete this.query.breakout
-            }
-            this.$router.push({name: "AskQuestion", params: {query: this.query, id: this.id }})
+            this.$router.push({name: "AskQuestion", params: {query: this.query, id: this.id}})
         }
     }
 }
