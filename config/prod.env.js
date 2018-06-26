@@ -3,5 +3,6 @@
 module.exports = {
   NODE_ENV: '"production"',
   HOST: '"http://159.203.102.150"',
-  API_HOST: '"http://159.203.102.150/api"'
+  API_HOST: '"http://159.203.102.150/api"',
+  METABASE_HOST: '"http://159.203.102.150/metabase"'
 }

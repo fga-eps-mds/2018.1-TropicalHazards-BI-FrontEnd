@@ -143,7 +143,7 @@ import bJumbotron from "bootstrap-vue/es/components/jumbotron/jumbotron"
 
 export default {
     components: {
-      "b-jumbotron": bJumbotron,
+        "b-jumbotron": bJumbotron,
     },
 
     data () {
