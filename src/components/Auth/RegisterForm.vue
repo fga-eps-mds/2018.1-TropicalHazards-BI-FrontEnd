@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div class="container" id="register-form">
     <b-alert
       :variant="alert.variant"
-      :show="alert.show || ($v.$invalid && $v.$dirty)"
+     
       dismissible
       @dismissed="alert.show=false">
       <p class="text-center">{{ alert.text }}</p>
@@ -85,6 +85,7 @@
 <script>
 import { required, minLength, maxLength, email, sameAs} from "vuelidate/lib/validators"
 export default {
+    name: "RegisterForm",
     data(){
         return{
             user: {

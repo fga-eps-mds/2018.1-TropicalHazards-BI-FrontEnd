@@ -27,19 +27,19 @@
         </div>-->
         
         <div class="action-button-register">
-          <button
-            id="btn-create-account" 
-            class="btn btn-primary btn-blue"
-            @click="redirectRegisterAccount()"> 
-            Crie uma conta         
-          </button>  
           
-          <button
+            <router-link id="btn-create-account"  :to="{ name: 'RegisterForm' }">
+              Crie uma conta    
+            </router-link> 
+                 
+            
+          
+          <b-button 
+            variant="primary"
             id="btn-explore" 
-            class="btn btn-primary btn-dark-blue"
-            href="#search-seaction"> 
+            href="#search-section"> 
             Encontre dados         
-          </button> 
+          </b-button> 
         </div>           
       </div>
     </header>
@@ -50,10 +50,12 @@
 
 import Navbar from "@/components/Landing/Navbar"
 import VueRouter from 'vue-router'
+import Search from '@/components/Landing/Search'
+import RegisterForm from '@/components/Auth/RegisterForm'
 
 export default {
     components: {
-        Navbar
+        Navbar, Search, RegisterForm
     },
 
     data () {
@@ -66,7 +68,6 @@ export default {
 
     methods: {
         redirectRegisterAccount(){
-            console.log('ENTROU AQUI')
           router.push("RegisterForm")
         }
     }
@@ -84,14 +85,20 @@ export default {
     #btn-create-account {
       width: 15vw;
       height: 5vw;
-      font-size: 20px;
+      font-size: 1.5vw;
+      padding-top: 1.4%;
       margin-right: 35px;
     }
 
     #btn-explore {
       width: 15vw;
       height: 5vw;
-      font-size: 20px;
+      font-size: 1.5vw;
+      padding-top: 1.4%;
+    }
+
+    .action-button-register{
+      margin-top: 8%;
     }
 
     .filter {

@@ -15,8 +15,8 @@
               <div class="card-title ">
                 <span class="fa fa-pie-chart"/>
               </div>
-              <div class="card-subtitle  h2">
-                <h2>Dashboards</h2>
+              <div class="card-subtitle h2">
+                <h2 id="subtitle-dashboards">Dashboards</h2>
               </div>
               <div class="card-text align-middle">
                 <hr>
@@ -51,7 +51,7 @@
               <div class="card-title ">
                 <span class="fa fa-users"/>
               </div>
-              <div class="card-subtitle  h2">
+              <div class="card-subtitle h2">
                 <h2>Colaboradores</h2>
               </div>
               <div class="card-text align-middle">
@@ -105,6 +105,21 @@
 
       .card-subtitle {
         color: $blue;
+      }
+
+      #subtitle-dashboards {
+        font-size: 3vw;
+        margin-left: 20vw;
+      }
+
+      .card-subtitle {
+        font-size: 3vw;
+        margin-left: -1%;
+        text-align: left;
+      }
+
+      p {
+        font-size: 1.5vw;
       }
     }
   }
