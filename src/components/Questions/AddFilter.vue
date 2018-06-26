@@ -73,6 +73,7 @@
             size="sm"/>
         </b-form-group>
         <b-form-group
+          v-if="(operator != 'IS-NULL' || operator != 'NOT-NULL')"
           :state="valueState"
           horizontal
           class="mb-1"
@@ -118,12 +119,12 @@ export default {
             valueState: null,
             options: [],
             stringOptions: [
-                {text: "É nulo", value: "is-null"},
-                {text: "Não é nulo", value: "not-null"},
-                {text: "Começa com", value: "starts-with"},
-                {text: "Contem", value: "contains"},
-                {text: "Não contem", value: "does-not-contain"},
-                {text: "Termina com", value: "ends-with"}
+                {text: "É nulo", value: "IS-NULL"},
+                {text: "Não é nulo", value: "NOT-NULL"},
+                {text: "Começa com", value: "STARTS-WITH"},
+                {text: "Contem", value: "CONTAINS"},
+                {text: "Não contem", value: "DOES-NOT-CONTAIN"},
+                {text: "Termina com", value: "ENDS-WITH"}
             ],
             numOptions: [
                 {text: "Igual", value: "="},
@@ -171,7 +172,15 @@ export default {
             if (!this.value) { this.valueState = false}
             if (this.field && this.operator && this.value) {
                 this.onClose()
-                this.filterClause.push(this.operator, ["field-id", this.field.value], this.value)
+                if(this.field.type === "type/Text"){
+                    this.filterClause.push(this.operator, ["field-id", this.field.value ], this.value, {"case-sensitive":false})
+                }else{
+                    this.filterClause.push(this.operator, ["field-id", this.field.value ], Number(this.value))
+                }
+                this.$emit("createdFilter", this.filterClause)
+            }else if(this.operator === "IS-NULL" || this.operator === "NOT-NULL"){
+                this.onClose()
+                this.filterClause.push(this.operator, ["field-id", this.field.value ])
                 this.$emit("createdFilter", this.filterClause)
             }
         },
