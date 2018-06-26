@@ -1,7 +1,7 @@
 <template>
   <div>
     <iframe
-      :src="iframeUrl"
+      :src="iframe"
       frameborder="0"
       width="600"
       height="400"
@@ -17,8 +17,10 @@ export default {
             required: true
         }
     },
-    created (){
-        this.iframeUrl = process.env.METABASE_HOST + "/public/question/" + this.iframeUrl
+    computed: {
+        iframe(){
+            return process.env.METABASE_HOST + "/public/question/" + this.iframeUrl + this.iframeUrl
+        }
     }
 }
 </script>

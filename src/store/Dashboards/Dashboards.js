@@ -2,9 +2,11 @@
 /* eslint-disable */
 import Vue from 'vue'
 const SET_DASHBOARDS = 'SET_DASHBOARDS'
+const SET_IFRAMES = 'SET_IFRAMES'
 
 const state = {
-    dashboards: []
+    dashboards: [],
+    iframes: []
 }
 
 const getters = {
@@ -24,12 +26,19 @@ const getters = {
     getDashboardById: (state) => (id) => {
         return state.dashboards.find(dashboard => dashboard.id === id)
     },
+    getIframes: (state) => {
+        console.log(state.iframes)
+        return state.iframes
+    }
 }
 
 const mutations = {
     [SET_DASHBOARDS](state, payload){
         // Vue.set(state, projects, payload) - EVENTO PARA GERAR REATIVIDADE MAYBE
         state.dashboards = payload
+    },
+    [SET_IFRAMES](state, payload){
+        state.iframes = payload
     }
 }
 
@@ -95,7 +104,8 @@ const actions = {
                     "Content-type": "application/json",
                     "Authorization": localStorage.token
                 } }).then(response => {
-                resolve(response.data)
+                commit(SET_IFRAMES, response.data)
+                resolve()
             },
             error => {
                 reject()
@@ -111,4 +121,3 @@ export default {
     getters,
     actions
 }
-

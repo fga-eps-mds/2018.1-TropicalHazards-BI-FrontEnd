@@ -84,7 +84,9 @@
           </div>
         </div>
         <section>
-          <div class="row">
+          <div
+            v-if="iframes.length > 1"
+            class="row">
             <div
               v-for="iframe in iframes"
               :key="iframe.id"
@@ -117,20 +119,18 @@ export default {
     data () {
         return {
             showError: false,
-            iframes: []
         }
     },
     computed: {
-        ...mapGetters({ currentUser: "currentUser" }),
+        ...mapGetters({ currentUser: "currentUser", iframes: "getIframes"
+        }),
         dashboard(){
             return this.$store.getters.getDashboardById(parseInt(this.$route.params.id))
         }
     },
     beforeMount () {
         this.$store.dispatch("loadDashboards")
-        this.$store.dispatch("getIframes", this.$route.params.id).then(response=>{
-            this.iframes = response
-        })
+        this.$store.dispatch("getIframes", this.$route.params.id)
     },
 }
 </script>
