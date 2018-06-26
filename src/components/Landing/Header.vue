@@ -7,33 +7,23 @@
         <p class="h3 clearfix">
           {{ briefResume }}
         </p>
-        <div class="input-group">
-          <input
-            v-model="searchArg"
-            type="text"
-            name="search-dashes-field"
-            class="form-control"
-            placeholder="Descubra dashboards"
-            @keypress.enter="search">
-          <div class="input-group-append">
-            <button
-              id="search"
-              class="btn btn-primary btn-blue"
-              @click="search">
-              <p class="d-none d-md-inline-block">
-                Buscar
-              </p>
-              <span class="fa fa-search"/>
-            </button>
-          </div>
-        </div>
+        <router-link
+          :to="{ name: 'Auth' }"
+          class="btn btn-lg btn-secondary mt-2 mb-2">
+          Crie sua conta
+        </router-link>
+
+        <router-link
+          :to="{ name: 'DashboardList' }"
+          class="btn btn-lg btn-primary mt-2 mb-2">
+          Explorar dados
+        </router-link>
       </div>
     </header>
   </div>
 </template>
 
 <script>
-// quinta dia 21 11hrs na sala meeting carla pre r2
 import Navbar from "@/components/Landing/Navbar"
 
 export default {

@@ -44,32 +44,28 @@
           class="btn btn-blue btn-sm">
           <span class="fa fa-search"/> Nova Question
         </router-link>
-        <!-- <ul class="list-inline">
-          <li
-            v-for="tag in dashboard.project.tags"
-            :key="tag.id"
-            class="list-inline-item">
-            <span class="badge badge-primary btn-blue">
-              {{ tag.name }}
-            </span>
-          </li>
-        </ul> -->
       </header>
-      <div class="row">
+      <div class="row pt-4 pb-4">
         <div
-          class="card col col-md-6">
+          class="card col">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe
-              :src="dashboard.iframe"
-              class="embed-responsive-item"
-              frameborder="0"/>
+            <div
+              v-for="iframe in iframes"
+              :key="iframe.id"
+              class="col">
+              <div class="embed-responsive">
+                <custom-iframe
+                  :iframe-url="iframe.uuid"
+                  class="embed-responsive-item"/>
+              </div>
+            </div>
           </div>
           <div class="card-body">
             <h5 class="card-title">
               {{ dashboard.name }}
               <span
                 v-if="dashboard.owner == currentUser"
-                class="badge badge-secondary h6">
+                class="badge badge-secondary">
                 owner
               </span>
             </h5>
@@ -83,24 +79,6 @@
             </router-link>
           </div>
         </div>
-        <section>
-          <div class="row">
-            <div
-              v-for="iframe in iframes"
-              :key="iframe.id"
-              class="col">
-              <div class="card border-primary">
-                <custom-iframe
-                  :iframe-url="iframe.uuid" />
-              <!-- <div class="embed-responsive">
-                  <custom-iframe
-                    :iframe-url="iframe.uuid"
-                    class="embed-responsive-item"/>
-              </div> -->
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
     </section>
   </div>
